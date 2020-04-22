@@ -2,7 +2,7 @@ const express = require('express');
 
 const userRouter = express.Router();
 
-const userController = require('../controllers/userController.js');
+const userController = require('../controller/userController.js');
 
 userRouter.get('/:userCredential', (req, res) => userController.userLogIn(req, res));
 

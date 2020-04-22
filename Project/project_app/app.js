@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const userRouter = require('./routes/userRouter');
+const jobRouter = require('./routes/jobRouter');
 
 app.use(bodyParser.json());
 
@@ -19,6 +20,8 @@ app.get('/login', (req, res) => {
 });
 
 app.use('/login', userRouter);
+
+app.use('/job-search', jobRouter);
 
 app.listen(3000, () => {
     console.log('Sheltero is listening on port 3000!')
