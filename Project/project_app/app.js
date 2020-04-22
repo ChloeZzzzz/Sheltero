@@ -1,16 +1,25 @@
 const express = require('express')
+const bodyParser = require('body-parser');
 const app = express();
 
-//set up job routers
-const jobRouter = require('./routes/jobRouter');
+const userRouter = require('./routes/userRouter');
 
-app.get('/',(req,res) =>{
-    res.send('<h1> testing </h1>')
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true}));
+
+// GET home page
+app.get('/', (req, res) => {
+    res.send('<H1>Sheltero</H1>')
 });
 
-//set jobRouter as job search
-app.use('/job-search', jobRouter);
+// GET log in page
+app.get('/login', (req, res) => {
+    res.send('<H1>Login page</H1>')
+});
 
-app.listen(3000, ()=>{
-    console.log ('Sheltero listening on port 3000')
-})
+app.use('/login', userRouter);
+
+app.listen(3000, () => {
+    console.log('Sheltero is listening on port 3000!')
+});
