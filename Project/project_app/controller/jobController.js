@@ -7,7 +7,7 @@ const getAllJob = (req, res) => {
 }
 
 //function for getting a particular type of jobs
-const getJobByTag = (req, res) => {
+const getJobByKeyword = (req, res) => {
     const output = [];
 
     job_data.forEach(job => addJob(output, job, req));
@@ -20,16 +20,25 @@ const getJobByTag = (req, res) => {
     }
 }
 
+function findKeyword(job, req) {
+    for (var property in job) {
+        if (job[property].includes(req.params.keyword)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+
 function addJob(output, job, req) {
-    if (job.jobTag === req.params.jobTag) {
+    if (findKeyword(job, req)) {
         output.push(job);
     }
 }
 
 
-
 //export the functions
 module.exports = {
     getAllJob,
-    getJobByTag,
+    getJobByKeyword,
 }
