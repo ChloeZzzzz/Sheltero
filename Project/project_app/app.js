@@ -15,5 +15,5 @@ app.use('/', userRouter)
 app.use('/job-search', jobRouter);
 
 app.listen(PORT, () => {
-    console.log('Sheltero is listening on port 3000!')
+    console.log('Sheltero is listening on port ' + PORT)
 });

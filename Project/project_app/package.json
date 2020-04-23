@@ -2,9 +2,10 @@
   "name": "sheltero",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "goSheltero": "nodemon app.js"
+    "goSheltero": "nodemon app.js",
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
