@@ -1,0 +1,5 @@
+#!/bin/sh
+sudo npm install express
+sudo npm install password
+sudo npm install body-parser
+sudo npm install express-session --save
