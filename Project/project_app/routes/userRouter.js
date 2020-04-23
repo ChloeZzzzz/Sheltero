@@ -26,16 +26,46 @@ userRouter.use(session({
 userRouter.use(passport.initialize())
 userRouter.use(passport.session())
 
+// GET home page
+userRouter.get('/', (req, res) => {
+    // display different page according to the login state
+    if (req.user != null) {
+        res.render("home.ejs", {name: '<H2>'+ req.user.email+'</H2><br/><a href = "/logout">Logout</a>'})
+    } else {
+        res.render("home.ejs", {name: '<a href = "/login">Login</a><br/><a href = "/signup">Signup</a>'})
+    }
+})
 
 // GET log in page
 userRouter.get('/login', (req, res) => {
-    res.render("login.ejs")
+    // display different page according to the login state
+    if (req.user == null) {
+        res.render("login.ejs")
+    } else {
+        res.redirect("/")
+    }
 });
 
 // GET sign up page
 userRouter.get('/signup', (req, res) => {
-    res.render("signup.ejs")
+    // display different page according to the login state
+    if (req.user == null) {
+        res.render("signup.ejs")
+    } else {
+        res.redirect("/")
+    }
 });
+
+// GET log out
+userRouter.get('/logout', (req, res) => {
+    // only allow the logout when a user is logging in
+    if (req.user) {
+        req.logOut()
+        res.render("logout.ejs")
+    } else {
+        res.redirect('/')
+    }
+})
 
 // POST log in
 userRouter.post('/login', passport.authenticate('local', {
