@@ -6,7 +6,7 @@ function initPassport(passport, getUserByEmail, getUserById) {
         const user = getUserByEmail(email)
         if (!user) {
             console.log("invalid email")
-            return done(null, false, {message: "Invalid email address"})
+            return done(null, false)
         }
     
         try {
@@ -15,7 +15,7 @@ function initPassport(passport, getUserByEmail, getUserById) {
                 return done(null, user)
             } else {
                 console.log("invalid password")
-                return done(null, false, {message: "Invalid password"})
+                return done(null, false)
             }
         } catch (e) {
             return done(e)
