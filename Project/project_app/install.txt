@@ -1,8 +1,8 @@
 #!/bin/sh
-sudo npm install express
-sudo npm install password
-sudo npm install body-parser
-sudo npm install express-session --save
-sudo npm install password-local
-sudo npm install nodemon
-sudo npm install dotenv
+npm install express
+npm install passport
+npm install body-parser
+npm install express-session --save
+npm install passport-local
+npm install nodemon
+npm install bcrypt
