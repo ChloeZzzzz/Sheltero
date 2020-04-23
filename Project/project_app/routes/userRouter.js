@@ -32,7 +32,7 @@ userRouter.get('/', (req, res) => {
     if (req.user != null) {
         res.render("home.ejs", {name: '<H2>'+ req.user.email+'</H2><br/><a href = "/logout">Logout</a>'})
     } else {
-        res.render("home.ejs", {name: '<a href = "/login">Login</a><br/><a href = "/signup">Signup</a>'})
+        res.render("home.ejs", {name: '<a href = "/login">Login</a> <a href = "/signup">Signup</a>'})
     }
 })
 
