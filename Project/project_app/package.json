@@ -1,10 +1,10 @@
 {
-  "name": "wow",
+  "name": "sheltero",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon app.js"
+    "goSheltero": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",

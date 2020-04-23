@@ -6,7 +6,7 @@ const session = require('express-session')
 const users = require('../models/users.js') // get the array db
 const userController = require('../controllers/userController')
 
-const initPassport = require('../.config/passport')
+const initPassport = require('../config/passport')
 initPassport(passport, 
     email => users.find(user => user.email === email),
     id => users.find(user => user.id === id)

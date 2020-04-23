@@ -4,7 +4,7 @@ const express = require('express');
 const jobRouter = express.Router();
 
 //import the jobController
-const jobController = require('../controller/jobController');
+const jobController = require('../controllers/jobController');
 
 //handle the get request
 jobRouter.get('/', (req, res) => jobController.getAllJob(req, res));
