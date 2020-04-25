@@ -39,8 +39,7 @@ userRouter.post('/signup', userController.postUserSignup);
 
 userRouter.post('/login', 
     passport.authenticate("local", { successRedirect: './',
-                                     failureRedirect: '/login',
-                                     failureFlash: true}
+                                     failureRedirect: './login'}
 ))
 
 module.exports = userRouter;
