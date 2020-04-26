@@ -9,20 +9,19 @@ const getAllJob = (req, res) => {
 //function for getting a particular type of jobs
 const getJobByKeyword = (req, res) => {
     const output = [];
+    job_data.forEach(job => addJob(output, job, req, "keyword"));
 
-    job_data.forEach(job => addJob(output, job, req));
-
-    if (output) {
+    if (output.length != 0) {
         res.send(output);
     }
     else {
-        res.send("no records");
+        res.send("no records including " + req.query.keyword);
     }
 }
 
 function findKeyword(job, req) {
     for (var property in job) {
-        if (job[property].includes(req.params.keyword)) {
+        if (job[property].includes(req.query.keyword)) {
             return true;
         }
     }
@@ -30,10 +29,51 @@ function findKeyword(job, req) {
 }
 
 
-function addJob(output, job, req) {
-    if (findKeyword(job, req)) {
+function addJob(output, job, req, kwd) {
+
+    if ((kwd == "keyword") && findKeyword(job, req)) {
         output.push(job);
     }
+    else if (kwd == "jobTag") {
+        if (job.jobTag === req.query.jobTag) {
+            output.push(job);
+        }
+    }
+    else if (kwd == "jobArea") {
+         if (job.jobArea === req.query.jobArea) {
+            output.push(job);
+         }
+    }
+}
+
+
+//function for getting jobs by a tag
+const getJobByTag = (req, res) => {
+    const output = [];
+
+    job_data.forEach(job => addJob(output, job, req, "jobTag"));
+
+    if (output.length != 0) {
+        res.send(output);
+    }
+    else {
+        res.send("no records matching this tag: " + req.params.jobTag);
+    }
+}
+
+
+const getJobByArea = (req, res) => {
+    const output = [];
+
+    job_data.forEach(job => addJob(output, job, req, "jobArea"));
+
+    if (output.length != 0) {
+        res.send(output);
+    }
+    else {
+        res.send("no records in this area: " + req.params.jobArea);
+    }
+
 }
 
 
@@ -41,4 +81,6 @@ function addJob(output, job, req) {
 module.exports = {
     getAllJob,
     getJobByKeyword,
+    getJobByTag,
+    getJobByArea,
 }

@@ -1,0 +1,13 @@
+<H1>Welcome to Sheltero! </H1>
+<body>
+    <div>
+        <%- useremail %>
+        <a href = "./logout">Logout</a>
+        <a href = "./profile">Profile</a>
+    </div>
+
+    <form action = '/job-search/byKeyword/' method = "GET">
+        <input type = "text" placeholder = "search keyword" name = "keyword">
+    <button type = "submit">Search</button>
+    </form>
+</body>

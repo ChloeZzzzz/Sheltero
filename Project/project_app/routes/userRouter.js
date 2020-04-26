@@ -1,80 +1,45 @@
-const express = require('express');
+const express = require('express')
+const userRouter = express.Router()
+
 const passport = require('passport')
-const flash = require('express-flash')
 const session = require('express-session')
 
-const users = require('../models/users.js') // get the array db
-const userController = require('../controllers/userController')
-
 const initPassport = require('../config/passport')
-initPassport(passport, 
-    email => users.find(user => user.email === email),
-    id => users.find(user => user.id === id)
-)
+initPassport(passport);
 
-const userRouter = express.Router();
+userRouter.use(session({
+    secret: "sheltero",
+    resave: false,
+    saveUninitialized: false
+}))
+userRouter.use(passport.initialize())
+userRouter.use(passport.session())
+
+const userController = require('../controllers/userController')
 
 // make the form variable accessable by the get and post method
 userRouter.use(express.urlencoded( {extended: false}))
 
-userRouter.use(flash())
-userRouter.use(session({
-    secret: "secretkey",
-    resave: false,
-    saveUninitialized: false
-}) )
-userRouter.use(passport.initialize())
-userRouter.use(passport.session())
+// ======== GET request ========
 
-// GET home page
-userRouter.get('/', (req, res) => {
-    // display different page according to the login state
-    if (req.user != null) {
-        res.render("home.ejs", {name: '<H2>'+ req.user.email+'</H2><br/><a href = "/logout">Logout</a>'})
-    } else {
-        res.render("home.ejs", {name: '<a href = "/login">Login</a><br/><a href = "/signup">Signup</a>'})
-    }
-})
+// GET homepage-authorized
+userRouter.get('/', userController.getUserHomepage);
 
-// GET log in page
-userRouter.get('/login', (req, res) => {
-    // display different page according to the login state
-    if (req.user == null) {
-        res.render("login.ejs")
-    } else {
-        res.redirect("/")
-    }
-});
+// GET user signup
+userRouter.get('/signup', userController.getUserSignup);
 
-// GET sign up page
-userRouter.get('/signup', (req, res) => {
-    // display different page according to the login state
-    if (req.user == null) {
-        res.render("signup.ejs")
-    } else {
-        res.redirect("/")
-    }
-});
+// GET user lognin
+userRouter.get('/login', userController.getUserLogin);
 
-// GET log out
-userRouter.get('/logout', (req, res) => {
-    // only allow the logout when a user is logging in
-    if (req.user) {
-        req.logOut()
-        res.render("logout.ejs")
-    } else {
-        res.redirect('/')
-    }
-})
+// GET user logout
+userRouter.get('/logout', userController.getUserLogout)
 
-// POST log in
-userRouter.post('/login', passport.authenticate('local', {
-    successRedirect: '../',
-    failureRedirect: '/login',
-    failureFlash: true
-}))
+// ======== POST request ========
+userRouter.post('/signup', userController.postUserSignup);
 
-// POST sign up
-userRouter.post('/signup', userController.userSignup);
+userRouter.post('/login', 
+    passport.authenticate("local", { successRedirect: './',
+                                     failureRedirect: './login'}
+))
 
 module.exports = userRouter;
