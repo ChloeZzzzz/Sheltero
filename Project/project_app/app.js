@@ -18,7 +18,7 @@ app.use('/job-search', jobRouter);
 
 // GET homepage
 app.get('/', (req, res) => {
-    res.render("/views/home.ejs");
+    res.render("./views/home.ejs");
 })
 
 app.listen(process.env.PORT || 3000, () => {
