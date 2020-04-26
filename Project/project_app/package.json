@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "goSheltero": "nodemon app.js",
     "start": "node app.js"
+    "goSheltero": "nodemon app.js",
   },
   "author": "",
   "license": "ISC",

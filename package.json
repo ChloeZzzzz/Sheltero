@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "goSheltero": "nodemon Project/project_app/app.js"
+    "start": "node Project/project_app/app.js"
   },
   "author": "",
   "license": "ISC",
