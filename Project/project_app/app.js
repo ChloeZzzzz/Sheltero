@@ -9,8 +9,8 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 // get the user Router for login and signin
-const userRouter = require('Project/project_app/routes/userRouter');
-const jobRouter = require('Project/project_app/routes/jobRouter');
+const userRouter = require('/Project/project_app/routes/userRouter');
+const jobRouter = require('/Project/project_app/routes/jobRouter');
 
 app.use('/user', userRouter)
 
@@ -18,7 +18,7 @@ app.use('/job-search', jobRouter);
 
 // GET homepage
 app.get('/', (req, res) => {
-    res.render("Project/project_app/views/home.ejs");
+    res.render("/Project/project_app/views/home.ejs");
 })
 
 app.listen(process.env.PORT || 3000, () => {
