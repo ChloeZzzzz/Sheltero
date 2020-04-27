@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guessing Game</title>
+</head>
+<body>
+    <section id = 'display'>
+    </section>
+    <form>
+        <input type='text' id='input'/>
+        <input type='submit' onclick="submit_guess()"/>
+    </form>
+    
+    <script>
+        const words = ["zero", "one", "two", "three"]
+        const limit_guess = 10
+        var guess_words = []
+        var nums_guess = 0
+
+        function get_display(){
+            var text, i;
+            text = "<ul>";
+            for (i=0 ; i < guess_words.length; i++){
+
+            }
+            text +="</ul>";
+            
+            return text
+        }
+
+        function submit_guess(){
+            
+        }
+        
+        document.getElementById('display').innerHTML = get_display();
+
+    </script>
+
+</body>
+</html>
