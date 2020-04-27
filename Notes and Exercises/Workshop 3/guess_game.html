@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Guessing Game</title>
+        <link type="text/css" rel="stylesheet" href="guess_game.css">
+    </head>
+    <body>
+        <ul id=guess_word></ul>
+        <text>Word Length</text>
+        <text id="word_length">000</text>
+        <table>
+            <tr>
+                <td>Correct Guesses</td>
+                <td id="correct_id">000</td>
+            </tr>
+            <tr>
+                <td>Incorrect Guesses</td>
+                <td id="incorrect_id">000</td>
+            </tr>
+        </table>
+        <form>
+            <input type="text" id="guess"/>
+            <button type="button" onclick="guess_game()">Submit</button>
+        </form>
+        <button type="button" onclick="reset_game()">Reset Game</button>
+        <script src="guess_game.js"></script>
+    </body>
+</html>
