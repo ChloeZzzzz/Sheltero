@@ -1,0 +1,8 @@
+#!/bin/sh
+sudo npm install express
+sudo npm install passport
+sudo npm install body-parser
+sudo npm install express-session --save
+sudo npm install passport-local
+sudo npm install nodemon
+sudo npm install dotenv
