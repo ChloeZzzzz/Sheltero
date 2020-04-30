@@ -1,6 +1,12 @@
 # Sheltero
 Job finding App designed for everyone. Visit the website at shelteroinf.herokuapp.com. The app can be run under the folder **Project/project_app and found** at : https://github.com/SaintTan/Sheltero
 
+## To deploy app
+Since the root of the branch is not the app, please use the command:
+git subtree push --prefix Project/projectapp heroku master
+to deploy the app.
+
+
 ## Features
 **Sign up**
 We have implemented a sign up function which would allow candidates to sign up onto our website; the data is currently stored in the models folder, and is therefore not connected to a cloud database. However, the user is still allowed to signup. Candidates could pick whether they are an employee or employer. 
