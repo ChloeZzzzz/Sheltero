@@ -8,6 +8,7 @@ module.exports = [
             "companyID":"Delivero",
             "jobTag":"physical",
             "contact":"j_robbins@gmail.com",
+            "jobArea":"Southbank",
       },
       {
             "jobID":"10002",
@@ -18,5 +19,6 @@ module.exports = [
             "companyID":"Delivero",
             "jobTag":"physical",
             "contact":"j_robbins@gmail.com",
+            "jobArea":"Parkvile",
       }
   ]
