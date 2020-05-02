@@ -27,19 +27,19 @@ A field for users to search for jobs is implemented to allow users to search for
 
 There are three ways of job searching:
 
-- By keyword
+- **By keyword**
 This function enables users to find jobs with a few known keywords. It will return the job information of all jobs having that keywords in its information (all attributes in the database).
 This function could be accessed by type in "/keyword" after the url link below.
 
 URL Link: http://shelteroinf.herokuapp.com/job-search/byKeyword
 
-- By tag
+- **By tag**
 To limit the result from the byKeyword function, users could use byTag function to search job by their tags. This allows them to find jobs in a specific category. Tags are assigned by the employers.
 This function could be accessed by type in "/jobTag" after the url link below.
 
 URL Link: http://shelteroinf.herokuapp.com/job-search/byTag
 
-- By area
+- **By area**
 In order to let the users to choose jobs that are close to them, a byArea function could be used to return jobs that are in a particular area (suburb). This function could be accessed by type in "/jobArea" after the url link below.
 
 URL Link: http://shelteroinf.herokuapp.com/job-search/byArea
