@@ -61,7 +61,7 @@ const getJobByTag = (req, res) => {
     }
 }
 
-
+//function for getting jobs by area
 const getJobByArea = (req, res) => {
     const output = [];
 
