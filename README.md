@@ -3,8 +3,8 @@ Job finding App designed for everyone. Visit the website at shelteroinf.herokuap
 
 ## To deploy app
 Since the root of the branch is not the app, please use the command:
-```git subtree push --prefix Project/projectapp heroku master```
-to deploy the app.
+```git subtree push --prefix Project/project_app heroku master```
+to deploy the app on heroku.
 
 
 ## Features
@@ -34,17 +34,17 @@ There are three ways of job searching:
 This function enables users to find jobs with a few known keywords. It will return the job information of all jobs having that keywords in its information (all attributes in the database).
     This function could be accessed by type in "/keyword" after the url link below.
 
-    URL Link: http://shelteroinf.herokuapp.com/job-search/byKeyword
+    URL Link: http://shelteroinf.herokuapp.com/job-search/byKeyword/your_keyword
 
 - *By tag* - 
     To limit the result from the byKeyword function, users could use byTag function to search job by their tags. This allows them to find jobs in a specific category. Tags are assigned by the employers.
     This function could be accessed by type in "/jobTag" after the url link below.
 
-    URL Link: http://shelteroinf.herokuapp.com/job-search/byTag
+    URL Link: http://shelteroinf.herokuapp.com/job-search/byTag/your_tag
 
 - *By area* - 
     In order to let the users to choose jobs that are close to them, a byArea function could be used to return jobs that are in a particular area (suburb). This function could be accessed by type in "/jobArea" after the url link below.
 
-    URL Link: http://shelteroinf.herokuapp.com/job-search/byArea
+    URL Link: http://shelteroinf.herokuapp.com/job-search/byArea/your_area
 
 Additionally you can access the function after signing in (and sign up if you haven't done so).
