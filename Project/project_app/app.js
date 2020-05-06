@@ -1,6 +1,14 @@
-const express = require('express')
+const express = require('express');
+const mongoose = require('mongoose');
 //const flash = require('express-flash')
 const app = express();
+
+
+const mongoDB_url = "mongodb+srv://Shetero_20:sheltero20@cluster0-yekum.mongodb.net/test?retryWrites=true&w=majority";
+mongoose.connect(mongoDB_url, {useMongoClient: true});
+const database = mongoose.connection;
+
+database.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));

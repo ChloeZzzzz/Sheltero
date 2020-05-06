@@ -1,16 +1,12 @@
-module.exports = [
-    {
-        "id": "10001",
-        "first_name": "Jennifer",
-        "last_name": "Robbins",
-        "email": "sb@sb",
-        "password": "sunnydog",
-    },
-    {
-        "id": "10002",
-        "first_name": "Evan",
-        "last_name": "Hahn",
-        "email": "md@md",
-        "password": "shabby",
-    }
-]
+const mongoose = require("mongoose");
+
+const userSchema = mongoose.Schema({
+      _id = mongoose.Schema.Types.ObjectId,
+      first_name : String,
+      last_name : String,
+      email: String,
+      password: String,
+      resume: {jobs: String},
+})
+
+module.exports = mongoose.Model("User", userSchema);

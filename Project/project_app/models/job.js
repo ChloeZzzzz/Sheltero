@@ -1,24 +1,15 @@
-module.exports = [
-      {
-            "jobID":"10001",
-            "jobTitle":"delivery",
-            "salary":"80",
-            "credit_level":"1",
-            "jobDetail":"delivery package for 4 hours",
-            "companyID":"Delivero",
-            "jobTag":"physical",
-            "contact":"j_robbins@gmail.com",
-            "jobArea":"Southbank",
-      },
-      {
-            "jobID":"10002",
-            "jobTitle":"delivery",
-            "salary":"100",
-            "credit_level":"1",
-            "jobDetail":"delivery package for 5 hours",
-            "companyID":"Delivero",
-            "jobTag":"physical",
-            "contact":"j_robbins@gmail.com",
-            "jobArea":"Parkvile",
-      }
-  ]
+const mongoose = require("mongoose");
+
+const jobSchema = mongoose.Schema({
+      _id = mongoose.Schema.Types.ObjectId,
+      jobTitle: String,
+      salary: Number,
+      credit_level: Number,
+      jobdetail: String,
+      companyID: String,
+      jobTag: String,
+      contact_email: String,
+      jobArea: String,
+})
+
+module.exports = mongoose.model("Job", jobSchema);

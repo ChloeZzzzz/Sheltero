@@ -1,7 +1,8 @@
 const email_validator = require('email-validator')
 const bcrypt = require('bcrypt')
 
-const users = require('../models/users.js') // get the array db
+const users = require('../models/users.js')
+const mongoose = require('mongoose');
 
 const getUserHomepage = (req, res) => {
     if (req.user) {
@@ -71,6 +72,23 @@ const emailNotSignedUp = (email) => {
         return true
     }
     return false
+}
+
+//for testing, do for all this
+const test_add = () =>{
+    const user = new users({
+        _id = new mongoose.Types.ObjectId(),
+        first_name = "wow",
+        last_name = "wow",
+        email = "wow@wow.com",
+        password = "wowowow",
+        resume = {jobs: "wow"},
+    })
+    users.save().then(result => {
+        console.log(result);
+    }).catch(err => {
+        console.log(err);
+    })
 }
 
 module.exports = {
