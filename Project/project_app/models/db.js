@@ -3,7 +3,7 @@ const {MongoClient} = require("mongodb");
 const url = "mongodb+srv://Shetero_20:sheltero20@cluster0-yekum.mongodb.net/test?retryWrites=true&w=majority";
 const client = new MongoClient(url);
 
-async function connnect(){
+async function connect(){
     try{
         await client.connect();
     }
@@ -16,9 +16,9 @@ async function disconnect(){
     await client.close();
 }
 
-async function insert_data(data, db, collection){
+async function insert_data(data, database, collection){
     try{
-        const db = client.db(db);
+        const db = client.db(database);
         const col = db.collection(collection);
 
         const p = await col.insert(data);
@@ -28,12 +28,13 @@ async function insert_data(data, db, collection){
     }
 }
 
-async function get_data(db, collection){
+async function get_data(data, database, collection){
     try{
-        const db = client.db(db);
+        const db = client.db(database);
         const col = db.collection(collection);
 
-        const myDoc = await col.findOne();
+        const myDoc = await col.find(data);
+
         return mydoc;
     }
     catch(err){
@@ -41,6 +42,11 @@ async function get_data(db, collection){
     }
 }
 
-
-
 run().catch(console.dir);
+
+module.exports=[
+    insert_data,
+    get_data,
+    connect,
+    disconnect,
+]
