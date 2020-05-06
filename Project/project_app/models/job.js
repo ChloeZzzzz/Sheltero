@@ -12,4 +12,4 @@ const jobSchema = mongoose.Schema({
       jobArea: String,
 })
 
-module.exports = mongoose.model("Job", jobSchema, "Job");
+module.exports = mongoose.model("Job", jobSchema);
