@@ -37,7 +37,7 @@ const getUserLogout = (req, res) => {
     }
 }
 
-// post user sign up 
+// post user sign up
 // -> encrypt the user's password before store it into the database for security issues
 // -> has to use async since have to wait for encryption completet
 const postUserSignup = async (req, res) => {
@@ -77,12 +77,12 @@ const emailNotSignedUp = (email) => {
 //for testing, do for all this
 const test_add = () =>{
     const user = new users({
-        _id = new mongoose.Types.ObjectId(),
-        first_name = "wow",
-        last_name = "wow",
-        email = "wow@wow.com",
-        password = "wowowow",
-        resume = {jobs: "wow"},
+        _id : new mongoose.Types.ObjectId(),
+        first_name : "wow",
+        last_name : "wow",
+        email : "wow@wow.com",
+        password : "wowowow",
+        resume : {jobs: "wow"},
     })
     users.save().then(result => {
         console.log(result);

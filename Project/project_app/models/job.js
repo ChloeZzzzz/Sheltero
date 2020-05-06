@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const jobSchema = mongoose.Schema({
-      _id = mongoose.Schema.Types.ObjectId,
+      _id : mongoose.Schema.Types.ObjectId,
       jobTitle: String,
       salary: Number,
       credit_level: Number,
@@ -12,4 +12,4 @@ const jobSchema = mongoose.Schema({
       jobArea: String,
 })
 
-module.exports = mongoose.model("Job", jobSchema);
+module.exports = mongoose.model("Job", jobSchema, "Job");
