@@ -2,10 +2,10 @@ require('dotenv').config;
 const mongoose = require("mongoose");
 
 
-CONNECTION_STRING = "mongodb+srv://Shetero_20:<password>@cluster0-yekum.mongodb.net/test?retryWrites=true&w=majority";
+CONNECTION_STRING = "mongodb+srv://Sheltero_20:<password>@cluster0-yekum.mongodb.net/test?retryWrites=true&w=majority";
 MONGO_URL = CONNECTION_STRING.replace("<password>", process.env.MONGO_PASSWORD);
 
-mongoose.connect(MONGO_URL || "mongodb://localhost/info30005", {
+mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -13,7 +13,8 @@ mongoose.connect(MONGO_URL || "mongodb://localhost/info30005", {
   dbName: "Sheltero"
 });
 
-const db = mongoose.connection; db.on("error", err => {
+const db = mongoose.connection;
+db.on("error", err => {
   console.error(err);
   process.exit(1);
 });
