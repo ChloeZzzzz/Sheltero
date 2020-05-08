@@ -1,5 +1,6 @@
 const express = require('express');
 //const flash = require('express-flash')
+require('dotenv').config();
 const app = express();
 require('./models');
 
@@ -21,6 +22,18 @@ app.use('/job-search', jobRouter);
 // GET homepage
 app.get('/', (req, res) => {
     res.render("home.ejs");
+})
+
+// Error Handling
+app.use((req, res, next) => {
+    const error = new Error('Not Found');
+    error.status(404);
+    next(error);
+})
+
+app.use((error, req, res, next) => {
+    res.status(err.status);
+    res.log("gooodsofsdfsdfsdfsdfsdf 404 !!!");
 })
 
 app.listen(process.env.PORT || 3000, () => {

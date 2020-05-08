@@ -32,7 +32,7 @@ const getJobByTag = (req, res) => {
 
 //function for getting jobs by area
 const getJobByArea = (req, res) => {
-    job_data.find({"jobArea" : req.params.jobArea}});
+    job_data.find({"jobArea" : req.params.jobArea});
 
 }
 

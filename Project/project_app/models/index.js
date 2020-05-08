@@ -11,6 +11,12 @@ mongoose.connect(MONGO_URL || "mongodb://localhost/info30005", {
   useUnifiedTopology: true,
   useFindAndModify: false,
   dbName: "Sheltero"
+},function(err) {
+  if(!err) {
+    console.log("connected to mongo.");
+  } else {
+    console.log("Failed to connect to mongo!", err);
+  }
 });
 
 const db = mongoose.connection; db.on("error", err => {
