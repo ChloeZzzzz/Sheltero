@@ -6,8 +6,10 @@ const userSchema = mongoose.Schema({
       last_name : String,
       email: String,
       password: String,
+      type: String,
       resume: {jobs: String},
 });
 
 
-module.exports = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema, "User");
+module.exports = User;

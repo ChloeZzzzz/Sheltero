@@ -4,11 +4,11 @@ const jobSchema = mongoose.Schema({
       _id : mongoose.Schema.Types.ObjectId,
       jobTitle: String,
       salary: Number,
-      credit_level: Number,
-      jobdetail: String,
+      creditLevel: Number,
+      jobDetail: String,
       companyID: String,
       jobTag: String,
-      contact_email: String,
+      contactEmail: String,
       jobArea: String,
 })
 
