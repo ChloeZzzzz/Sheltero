@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 //app.use(flash())
 // set the view engine to ejs
-app.set('view engine', 'ejs');
+app.set('view engine', 'hbs');
 
 // get the user Router for login and signin
 const userRouter = require('./routes/userRouter');
@@ -24,7 +24,9 @@ app.get('/', (req, res) => {
     res.render("home.ejs");
 })
 
-// Error Handling
+// ==== Error Handling ====
+
+// 404 Not Found
 app.use((req, res, next) => {
     const error = new Error('Not Found');
     error.status(404);
@@ -32,8 +34,11 @@ app.use((req, res, next) => {
 })
 
 app.use((error, req, res, next) => {
-    res.status(err.status);
-    res.log("gooodsofsdfsdfsdfsdfsdf 404 !!!");
+    res.status(err.status || 500);
+    res.render('error', {
+        message: error.message,
+        error: error
+    })
 })
 
 app.listen(process.env.PORT || 3000, () => {
