@@ -11,4 +11,8 @@ authorRouter.get('/:id',(req,res)=>{
     authorController.getAuthorById(req,res);
 });
 
+authorRouter.post("/add_author", (req,res)=>{
+    authorController.addAuthor(req,res);
+})
+
 module.exports = authorRouter;

@@ -16,10 +16,11 @@ function getAuthorById(req,res){
 }
 
 function addAuthor(req,res){
-    
+    console.log(req.body.author_name);
 }
 
 module.exports = {
     getAllAuthors,
     getAuthorById,
+    addAuthor,
 };
