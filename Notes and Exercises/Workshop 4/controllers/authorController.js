@@ -16,7 +16,23 @@ function getAuthorById(req,res){
 }
 
 function addAuthor(req,res){
-    console.log(req.body.author_name);
+    const author = authors.find(author=> author.id ===req.body.author_id);
+
+    if(author){
+        author.first_name = req.body.author_fn;
+        author.last_name = req.body.author_ln;
+    }
+    else{
+        authors.push({
+            id:req.body.author_id,
+            first_name:req.body.author_fn,
+            last_name:req.body.author_ln
+        })
+    }
+
+    console.log(authors);
+
+    res.redirect('/');
 }
 
 module.exports = {
