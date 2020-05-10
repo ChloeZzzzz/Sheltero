@@ -1,11 +1,20 @@
 const express = require('express');
 const app = express();
+const fs = require("fs");
 
 const authorRouter = require('./routes/authorRouter');
 const bookRouter = require('./routes/bookRouter');
 
 app.get('/', (req, res)=>{
-    res.send("<H1> Library System </H1>");
+    fs.readFile("home.html", null, (err, data)=>{
+        if (err){
+            res.send("something went wrong :(");
+        }
+        else{
+            res.send(data);
+        }
+        res.end();
+    });
 });
 
 app.use('/author-management', authorRouter);

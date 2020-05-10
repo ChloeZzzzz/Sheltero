@@ -15,6 +15,10 @@ function getAuthorById(req,res){
     }
 }
 
+function addAuthor(req,res){
+    
+}
+
 module.exports = {
     getAllAuthors,
     getAuthorById,
