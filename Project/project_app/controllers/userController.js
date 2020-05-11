@@ -67,12 +67,12 @@ const postUserSignup = async (req, res) => {
 
 // a helper function, checks whether this email is exist in the database
 const emailNotSignedUp = (email) => {
-    var user = users.find(user => user.email === email);
-    if (user == null) {
-        return true
+    if (users.count({"email": email}) == 0) {
+        return true;
     }
-    return false
+    return false;
 }
+
 
 //for testing, do for all this
 const test_add = () =>{

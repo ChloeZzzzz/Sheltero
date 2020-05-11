@@ -11,5 +11,6 @@ const jobSchema = mongoose.Schema({
       contactEmail: String,
       jobArea: String,
 })
+jobSchema.index({ "$**": "text" });
 
 module.exports = mongoose.model("Job", jobSchema);

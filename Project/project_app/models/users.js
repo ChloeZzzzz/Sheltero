@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
       last_name : String,
       email: String,
       password: String,
-      type: String,
+      type: ['employee', 'employer'],
       resume: {jobs: String},
 });
 

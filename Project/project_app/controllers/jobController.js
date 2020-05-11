@@ -6,7 +6,7 @@ var job_data = require('../models/job');
 const getAllJob = (req, res) => {
     job_data.find({}, function(err, jobs) {
         if (err) {
-            res.send("cannot query any data");
+            res.send("database error");
         }
         res.json(jobs);
     });
@@ -14,12 +14,15 @@ const getAllJob = (req, res) => {
 
 //function for getting a particular type of jobs
 const getJobByKeyword = (req, res) => {
-    job_data.find({$text: {$search: {"$regex": req.params.keyword}}}, function(err, jobs) {
+    var keyword = req.params.keyword;
+    var regex = RegExp("." + keyword + ".");
+    job_data.find({$text : {$search : regex}}, function(err, jobs) {
         if (err) {
-            res.send("cannot query any data for this keyword");
+            res.send("database error");
         }
         res.json(jobs);
-    });
+    })
+
 }
 
 
@@ -28,7 +31,7 @@ const getJobByKeyword = (req, res) => {
 const getJobByTag = (req, res) => {
     job_data.find({"jobTag" : req.params.jobTag}, function(err, jobs) {
         if (err) {
-            res.send("cannot query any data for this jobTag");
+            res.send("database error");
         }
         res.json(jobs);
     });
@@ -38,7 +41,7 @@ const getJobByTag = (req, res) => {
 const getJobByArea = (req, res) => {
     job_data.find({"jobArea" : req.params.jobArea}, function(err, jobs) {
         if (err) {
-            res.send("cannot query any data for this jobArea");
+            res.send("database error");
         }
         res.json(jobs);
     });
