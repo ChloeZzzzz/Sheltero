@@ -44,6 +44,20 @@ const postUserSignup = async (req, res) => {
     try {
         if (email_validator.validate(req.body.email) && emailNotSignedUp(req.body.email)) {
             const cryptedpw = await bcrypt.hash(req.body.password, 10);
+            const user = new users({
+                "id" : Date.now().toString(),
+                "first_name" : req.body.first_name,
+                "last_name": req.body.last_name,
+                "role" : req.body.role,
+                "email" : req.body.email,
+                "password" : cryptedpw,
+                "resume": {job: 'programmer'}
+            })
+            users.save().then(result => {
+                console.log(result);
+            }).catch(err => {
+                console.log(err);
+            })
             users.push({
                 "id" : Date.now().toString(),
                 "first_name" : req.body.first_name,
@@ -67,12 +81,10 @@ const postUserSignup = async (req, res) => {
 
 // a helper function, checks whether this email is exist in the database
 const emailNotSignedUp = (email) => {
-    if (users.count({"email": email}) == 0) {
-        return true;
-    }
-    return false;
+    return users.findOne({'email': email}).then(function(result){
+        return result !== null;
+   });
 }
-
 
 //for testing, do for all this
 const test_add = () =>{
