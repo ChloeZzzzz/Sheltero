@@ -48,23 +48,15 @@ const postUserSignup = async (req, res) => {
                 "id" : Date.now().toString(),
                 "first_name" : req.body.first_name,
                 "last_name": req.body.last_name,
-                "role" : req.body.role,
                 "email" : req.body.email,
                 "password" : cryptedpw,
+                "type" : req.body.role,
                 "resume": {job: 'programmer'}
             })
-            users.save().then(result => {
+            user.save().then(result => {
                 console.log(result);
             }).catch(err => {
                 console.log(err);
-            })
-            users.push({
-                "id" : Date.now().toString(),
-                "first_name" : req.body.first_name,
-                "last_name": req.body.last_name,
-                "role" : req.body.role,
-                "email" : req.body.email,
-                "password" : cryptedpw
             })
             res.redirect('login');
         } else {
