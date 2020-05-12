@@ -1,0 +1,152 @@
+.App {
+  font-family: futura, sans-serif;
+  text-align: center;
+}
+
+*, *::after, *::before {
+  box-sizing: "border-box";
+  text-align: center;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display:flex;
+  letter-spacing: 2pt;
+  justify-content: center;
+  align-items: center;
+  background: #E8F2D8;
+  color: #002E18;
+  text-rendering: optimizeLegibility;
+}
+
+h1 {
+  font-size: 3rem;
+  letter-spacing: 10pt;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: futura, helvetica;
+  font-weight: bold;
+}
+
+h2 {
+  margin: 10vh 2vw 2vh 2vw;
+}
+
+input {
+  padding: 8px;
+  margin: 2px;
+  border-radius: 2px;
+  border: #f2f2f2 solid 1px;
+}
+
+nav {
+  background-color: #99C015;
+  font-family: futura, helvetica;
+  /* position: fixed; nav bar stay in place */
+  z-index: 1; /* fixed on top layer */
+  left: 0;
+  top: 0; /* position nav bar st the top */
+  width: 100vw;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  display: inline-block;
+}
+
+nav a:hover {
+  color: #E8F2D8;
+}
+
+nav a:active {
+  padding-bottom: 8px;
+  border-bottom: 2px solid #fff;
+}
+
+div {
+  text-align: center;
+}
+
+#titlePage {
+  /* set respondent div size for the title page */
+  width: 100vw;
+  height: 70vh;
+  /* background: whitesmoke; */
+
+  /* set div position for the title page */
+  left: center;
+  top: center;
+}
+#titlePage h1{
+  /* set heading position */
+  position: relative;
+  top: 50%;
+}
+
+
+.primButton {
+  /* display position */
+  display: inline-block;
+  margin: 2vh 3vw 2vh 3vw;
+
+  /* set button text style */
+  letter-spacing: 3pt;
+  font-family: futura, helvetica;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  color: #ffffff;
+
+  /* set button style */
+  border: none;
+  border-radius: 5px;
+  width: 20%;
+  height: 60px;
+  background: #C9DC86;
+}
+.primButton:hover{
+  font-size: 1.5rem;
+  background: #638709;
+}
+
+
+.defaultButton {
+  /* display position */
+  display: inline-block;
+  margin: 2vh 3vw 2vh 3vw;
+
+  /* set button text style */
+  letter-spacing: 2pt;
+  font-family: futura, helvetica;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1rem;
+  color: #ffffff;
+
+  /* set button style */
+  border: none;
+  border-radius: 3px;
+  width: auto;
+  height: auto;
+  background: #C9DC86;
+}
+.defaultButton:hover {
+  /* set button text style */
+  font-size: 1.2rem;
+
+  /* set button style */
+  width: auto;
+  height: auto;
+  background: #638709;
+}
+
+.formInput {
+  margin: 1vh 1vw 1vh 1vw;
+}
