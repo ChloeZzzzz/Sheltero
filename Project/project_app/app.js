@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 // 404 Not Found
 app.use((req, res, next) => {
     const error = new Error('Not Found');
-    error.status(404);
+    res.status(404);
     next(error);
 })
 
