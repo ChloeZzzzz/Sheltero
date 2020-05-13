@@ -3,11 +3,11 @@ import './App.css';
 import JobCard from './page/JobCard';
 
 
+
 class App extends Component {
   render() {
     return (
-            <JobCard/>
-
+        <JobCard/>
     );
   }
 }

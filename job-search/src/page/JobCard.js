@@ -12,8 +12,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
-// import Carousel from "./Carousel/Carousel";
-// import ComboBox from 'ComboBox';
+import CustomizedHook from '../components/hooker.js';
+//import SectionCarousel from '../components/Carousel/Carousel';
 
 function Copyright() {
     return (
@@ -27,6 +27,7 @@ function Copyright() {
         </Typography>
     );
 }
+
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -75,17 +76,12 @@ export default function Job() {
                     </Typography>
                 </Toolbar>
             </AppBar>
+            {/*<SectionCarousel/>*/}
             <main>
                 {/* Hero unit */}
                 <div className={classes.heroContent}>
-                    <Container maxWidth="sm">
-                        <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                            Sheltero
-                        </Typography>
-                        {/*<ComboBox/>*/}
-                        <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                            search bar here(working)
-                        </Typography>
+                    <Container maxWidth="lg">
+                        <CustomizedHook position="relative"/>
                     </Container>
                 </div>
                 <Container className={classes.cardGrid} maxWidth="md">
@@ -109,7 +105,7 @@ export default function Job() {
                                     </CardContent>
                                     <CardActions>
                                         <Button size="small" color="transparent">
-                                            DEtails
+                                            Details
                                         </Button>
                                         <Button size="small" color="transparent">
 
