@@ -42,10 +42,10 @@ const getUserLogout = (req, res) => {
 // -> has to use async since have to wait for encryption completet
 const postUserSignup = async (req, res) => {
     try {
-        if (email_validator.validate(req.body.email) && emailNotSignedUp(req.body.email)) {
+        if (await email_validator.validate(req.body.email) && await emailNotSignedUp(req.body.email)) {
             const cryptedpw = await bcrypt.hash(req.body.password, 10);
             const user = new users({
-                "id" : Date.now().toString(),
+                "_id" : new mongoose.Types.ObjectId(),
                 "first_name" : req.body.first_name,
                 "last_name": req.body.last_name,
                 "email" : req.body.email,
@@ -54,6 +54,7 @@ const postUserSignup = async (req, res) => {
                 "resume": {job: 'programmer'}
             })
             user.save().then(result => {
+                console.log("== SAVED TO DATABASE ==")
                 console.log(result);
             }).catch(err => {
                 console.log(err);
@@ -72,10 +73,22 @@ const postUserSignup = async (req, res) => {
 }
 
 // a helper function, checks whether this email is exist in the database
-const emailNotSignedUp = (email) => {
-    return users.findOne({'email': email}).then(function(result){
-        return result !== null;
-   });
+const emailNotSignedUp = async (email) => {
+    const user = await users.findOne({'email': email}, (err, result) => {
+        console.log("inside find function")
+        if (err) {
+            console.log("==ERROR==")
+            console.log(err)
+        }
+        console.log("==RESULT==")
+        console.log(result)
+    })
+    console.log("==USER==")
+    console.log(user)
+    if (user == null) {
+        return true;
+    }
+    return false;
 }
 
 //for testing, do for all this
