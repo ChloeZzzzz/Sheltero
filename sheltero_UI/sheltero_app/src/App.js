@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // import { GlobalStyles } from './global';
 // import {theme} from "./theme";
-import Nav from "./components/Nav/Nav";
+import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";

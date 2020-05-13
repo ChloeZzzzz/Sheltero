@@ -1,13 +1,35 @@
-import React from 'react';
-import { styled } from '@material-ui/core/styles';
+import { styled, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
-import TextField from '@material-ui/core/TextField';
-
-import { createMuiTheme } from '@material-ui/core/styles';
 
 
+
+export const theme = createMuiTheme({
+
+    palette: {
+        primary:
+        {
+            main: '#99C015',
+            light: '#E8F2D8',
+            dark: '#638709',
+        },
+        secondary: 
+        {
+            main: '#002E18',
+        },
+    },
+    typography: {
+        body1:
+        {
+            fontFamily:[
+                'avenir',
+                'helvetica',
+            ].join(','),
+            fontSize: 16,
+        }
+    }
+})
 // export const theme = {
 //     primaryDark: '#002E18',
 //     primaryLight: '#E8F2D8',
@@ -56,9 +78,10 @@ export const FormLabel = styled(Typography)({
 export const TextLink = styled(Link)({
     color: "#638709",
     fontFamily: [
+        'avenir',
         'roboto',
-        'futura',
     ].join(','),
     fontSize: 14,
     letterSpacing: 0,
 })
+

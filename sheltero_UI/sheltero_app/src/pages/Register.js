@@ -12,8 +12,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
 import { PrimButton, H2, TextLink } from '../theme';
-
-
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+// import RadioButton from '../components/Radiobutton.js';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -34,7 +37,16 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-}));
+  textField: {
+    margin: theme.spacing(.5, 0, .5),
+  },
+  positionLeft: {
+    display: 'flex',
+    alignItems: 'flex-start',
+  }
+  })
+)
+
 
 
 export default function SignUp() {
@@ -50,10 +62,41 @@ export default function SignUp() {
         <H2 component="h1" variant="h5">
           Sign up
         </H2>
+        
         <form className={classes.form} noValidate>
+
+          
           <Grid container spacing={2}>
+          <FormLabel component="legend" >Gender</FormLabel>
+            <Grid item xs={12} className={classes.positionLeft} >
+                  <FormControl component="fieldset">
+                      {/* <FormLabel component="legend" >Gender</FormLabel> */}
+                      <RadioGroup column name="position" defaultValue="top">
+                      <FormControlLabel
+                        value="Male"
+                        control={<Radio color="primary" />}
+                        label="Male"
+                        labelPlacement="end"
+                      />
+                      <FormControlLabel
+                        value="Female"
+                        control={<Radio color="primary" />}
+                        label="Female"
+                        labelPlacement="end"
+                      />
+                      <FormControlLabel
+                        value="X"
+                        control={<Radio color="primary" />}
+                        label="Prefer not to tell"
+                        labelPlacement="end"
+                      />
+                      </RadioGroup>
+                  </FormControl>
+            </Grid>
+
             <Grid item xs={12} sm={6}>
               <TextField
+                className={classes.textField}
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined" //add border to text field
@@ -64,8 +107,10 @@ export default function SignUp() {
                 autoFocus
               />
             </Grid>
+
             <Grid item xs={12} sm={6}>
               <TextField
+                className={classes.textField}
                 variant="outlined"
                 required
                 fullWidth
@@ -75,8 +120,10 @@ export default function SignUp() {
                 autoComplete="lname"
               />
             </Grid>
+
             <Grid item xs={12}>
               <TextField
+                className={classes.textField}
                 variant="outlined"
                 required
                 fullWidth
@@ -86,25 +133,44 @@ export default function SignUp() {
                 autoComplete="email"
               />
             </Grid>
+
             <Grid item xs={12}>
               <TextField
+                className={classes.textField}
                 variant="outlined"
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Create Password"
                 type="password"
                 id="password"
                 autoComplete="current-password"
               />
+              </Grid>
+
+              <Grid item xs={12}>
+              <TextField
+                className={classes.textField}
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="Confirm Password"
+                type="password"
+                id="createPassword"
+                autoComplete="current-password"
+              />
             </Grid>
+
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary"/>}
+                control={<Checkbox className={classes.checkbox} value="allowExtraEmails" color="primary"/>}
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
+
           </Grid>
+
           <PrimButton
             type="submit"
             fullWidth
@@ -112,6 +178,7 @@ export default function SignUp() {
             className={classes.submit}>
             Sign Up
           </PrimButton>
+
           <Grid container justify="flex-end">
             <Grid item>
               <TextLink href="#" variant="body2">
@@ -119,11 +186,14 @@ export default function SignUp() {
               </TextLink>
             </Grid>
           </Grid>
+
         </form>
       </div>
+
       <Box mt={5}>
         <Copyright />
       </Box>
+
     </Container>
   );
 }
