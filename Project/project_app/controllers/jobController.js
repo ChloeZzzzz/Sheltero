@@ -48,6 +48,33 @@ const getJobByArea = (req, res) => {
 
 }
 
+const getPostJob =  (req, res) => {
+    res.render("job-posting.ejs");
+}
+
+const postJob = async(req, res) => {
+    try {
+        const job = new job_data({
+            jobTitle: req.body.jobTitle,
+            salary: req.body.salary,
+            creditLevel: req.body.creditLevel,
+            jobDetail: req.body.jobDetail,
+            companyID: req.body.companyID,
+            jobTag: req.body.jobTag,
+            contactEmail: req.body.contactEmail,
+            jobArea: req.body.jobArea,
+        });
+        job_data.save().then(result => {
+            console.log(result);
+        }).catch(err => {
+            console.log(err);
+        });
+    } catch (e) {
+        console.log("job posting error");
+        res.redirect('home');
+    }
+
+}
 
 //export the functions
 module.exports = {
@@ -55,4 +82,6 @@ module.exports = {
     getJobByKeyword,
     getJobByTag,
     getJobByArea,
+    getPostJob,
+    postJob,
 }
