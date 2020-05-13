@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link as RouterLink} from "react-router-dom";
 import "../styles.css";
 
 export default function Home() {
@@ -9,12 +9,12 @@ export default function Home() {
         <h1>sheltero.</h1>
       </div>
       <div>
-        <Link to="/login">
+        <RouterLink to="/login">
           <button className="primButton">Sign In</button>
-        </Link>
-        <Link to="/register">
+        </RouterLink>
+        <RouterLink to="/register">
           <button className="primButton">Sign Up</button>
-        </Link>
+        </RouterLink>
       </div>
     </div>
   );
