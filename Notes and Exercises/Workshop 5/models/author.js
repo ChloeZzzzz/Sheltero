@@ -1,15 +1,15 @@
-// Some static data, an array of objects representing each author
-const authors = [
-  {
-    id: "10001",
-    first_name: "Jennifer",
-    last_name: "Robbins"
-  },
-  {
-    id: "10002",
-    first_name: "Evan",
-    last_name: "Hahn"
-  }
-];
+const mongoose = require('mongoose');
 
-module.exports = authors;
+const authorSchema = mongoose.Schema(
+  {
+    id: String,
+    first_name: String,
+    last_name: String
+  }
+)
+
+const Author = mongoose.Model("Author", authorSchema);
+
+module.exports= Author;
+
+require('./author');

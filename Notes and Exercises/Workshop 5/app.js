@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
+require('./models');
+
 const app = express();
 
 // use the body-parser middleware, which parses request bodies into req.body
