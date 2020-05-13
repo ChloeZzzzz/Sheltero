@@ -15,31 +15,42 @@ const getAllAuthors = async (req, res) => {
     return res.send("Database query failed");
   }
 };
-    
-  
-  
 
 // function to modify author by ID
 const updateAuthor = async (req, res) => {
-  res.send("Working on this feature");
+  try{
+    const new_author = await new Author.findOneAndUpdate({_id: req.params.id},{
+      first_name: req.query.first_name,
+      last_name: req.query.last_name,
+    });
+   }
+   catch(err){
+    res.status(400);
+    return res.send("Database query failed");
+   }
 };
 
 // function to add author
 const addAuthor = async (req, res) => {
- res.send("Working on this feature");
+ try{
+  const new_author =await new Author({
+    first_name: req.query.first_name,
+    last_name: req.query.last_name,
+  });
+  new_author.save;
+ }
+ catch(err){
+  res.status(400);
+  return res.send("Database query failed");
+ }
 };
 
 // function to get author by id
-const getAuthorByID = (req, res) => {
+const getAuthorByID = async (req, res) => {
   try{
-    const id = req.body.id;
-    const author = await Author.findById(id);
-    if(!author){
-      send("cannot find individual");
-    }
-    else{
-      send(author);
-    }
+    const search_id = req.params.id;
+    const author = await Author.findById(search_id);
+    return res.send(author);
   }
   catch(err){
     res.status(400);
