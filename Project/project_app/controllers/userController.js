@@ -6,7 +6,11 @@ const mongoose = require('mongoose');
 
 const getUserHomepage = (req, res) => {
     if (req.user) {
-        res.render('home-auth.ejs', {useremail: req.user.email})
+        console.log("== REQ.USER ==")
+        console.log(req.user)
+        console.log("++TEST++")
+        console.log(req.user._id)
+        res.render('home-auth.hbs', {useremail: req.user.email})
     } else {
         res.redirect('../');
     }

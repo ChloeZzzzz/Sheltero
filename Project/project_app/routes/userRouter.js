@@ -9,8 +9,8 @@ initPassport(passport);
 
 userRouter.use(session({
     secret: "sheltero",
-    resave: false,
-    saveUninitialized: false
+    resave: true,
+    saveUninitialized: true
 }))
 userRouter.use(passport.initialize())
 userRouter.use(passport.session())

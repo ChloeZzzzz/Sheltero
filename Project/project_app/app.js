@@ -4,6 +4,7 @@ require('dotenv').config();
 const app = express();
 require('./models');
 
+const morgan = require("morgan");
 
 const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
@@ -14,6 +15,8 @@ app.set('view engine', 'hbs');
 // get the user Router for login and signin
 const userRouter = require('./routes/userRouter');
 const jobRouter = require('./routes/jobRouter');
+
+app.use(morgan('dev'));
 
 app.use('/user', userRouter)
 
@@ -28,8 +31,8 @@ app.get('/', (req, res) => {
 
 // 404 Not Found
 app.use((req, res, next) => {
-    const error = new Error('Not Found');
-    error.status(404);
+    const error = new Error('404 Not Found');
+    error.status = 404;
     next(error);
 })
 

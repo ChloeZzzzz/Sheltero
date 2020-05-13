@@ -38,7 +38,7 @@ const initializePassport = (passport) => {
 
     passport.use(new LocalStrategy({usernameField : 'email'}, authenticateUser))
     passport.serializeUser((user, done) => {
-        done(null, user._id);
+        done(null, user);
     });
     passport.deserializeUser((_id, done) => {
         done(null, users.find({'_id': _id}));
