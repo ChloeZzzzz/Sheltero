@@ -61,7 +61,7 @@ export default function Job() {
                 <div  className={classes.Box}>
                     <Grid container spacing={8}>
                       <Grid item xs={6}>
-                        <SearchByCategory//>
+                        <SearchByCategory/>
                       </Grid>
                       <Grid item xs={6}>
                         <SearchByArea/>
