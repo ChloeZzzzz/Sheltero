@@ -12,6 +12,7 @@ import Container from '@material-ui/core/Container';
 import SearchByCategory from '../components/SearchBar.js';
 import { Link, Box } from '@material-ui/core';
 //import SectionCarousel from '../components/Carousel/Carousel';
+import SearchByArea from '../components/SearchArea';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -57,10 +58,16 @@ export default function Job() {
             {/*<SectionCarousel/>*/}
             <main>
                 {/* Hero unit */}
-                <div className={classes.heroContent}>
-                    <Container maxWidth="lg">
-                        <SearchByCategory position="relative"/>
-                    </Container>
+                <div  className={classes.Box}>
+                    <Grid container spacing={8}>
+                      <Grid item xs={6}>
+                        <CustomizedHook/>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <SearchByArea/>
+                        {/* <SearchLocationInput onChange={() => null} /> */}
+                      </Grid>
+                    </Grid> 
                 </div>
                 <Container className={classes.cardGrid} maxWidth="md">
                     {/* End hero unit */}
