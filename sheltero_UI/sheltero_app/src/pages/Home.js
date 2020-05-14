@@ -1,21 +1,28 @@
 import React from "react";
-import { Link as RouterLink} from "react-router-dom";
-import "../styles.css";
+// import "../styles.css";
+import { Box, Link } from "@material-ui/core";
+import Copyright from "../components/Copyright";
+import { useStyles, H1, PrimButton } from "../components/theme";
+
 
 export default function Home() {
+  const classes = useStyles();
   return (
     <div>
-      <div id="titlePage">
-        <h1>sheltero.</h1>
-      </div>
-      <div>
-        <RouterLink to="/login">
-          <button className="primButton">Sign In</button>
-        </RouterLink>
-        <RouterLink to="/register">
-          <button className="primButton">Sign Up</button>
-        </RouterLink>
-      </div>
+      <Box className={classes.titlePage}>
+        <H1 className={classes.title}>sheltero.</H1>
+      </Box>
+      <Box>
+        <Link href="/login">
+          <PrimButton>Sign In</PrimButton>
+        </Link>
+        <Link href="/register">
+          <PrimButton>Sign Up</PrimButton>
+        </Link>
+      </Box>
+      <Box className={classes.copyright}>
+        <Copyright />
+      </Box>
     </div>
   );
 }

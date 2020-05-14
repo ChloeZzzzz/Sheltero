@@ -78,9 +78,9 @@ nav a.active {
   height: 70vh;
   /* background: whitesmoke; */
 
-  /* set div position for the title page */
   left: center;
-  top: center;
+  top: center;  /* set div position for the title page */
+
 }
 #titlePage h1{
   /* set heading position */

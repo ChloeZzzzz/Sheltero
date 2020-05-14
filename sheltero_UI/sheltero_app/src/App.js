@@ -7,6 +7,7 @@ import Nav from "./components/Nav";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Job from "./pages/JobSearch";
 import "./styles.css";
 
 export default function App() {
@@ -39,7 +40,7 @@ export default function App() {
           <Route exact path="/login" render={props => <Login {...props} />} />
           <Route exact path="/register" render={props => <Register {...props} />} />
           <Route exact path="/" render={props => <Home {...props} />} />
-
+          <Route exact path="/job" render={props => <Job {...props} />} />
         </Switch>
       </div>
     </Router>

@@ -1,6 +1,7 @@
 import React from "react";
 import { UserOutlined } from '@ant-design/icons';
-import { PrimButton, H2, TextLink } from '../theme';
+import { PrimButton, H2, TextLink } from '../components/theme';
+import Copyright from '../components/Copyright';
 import { Link as RouterLink } from "react-router-dom";
 import { Avatar,
          CssBaseline,
@@ -121,17 +122,4 @@ const classes = useStyles();
 
     </Container>
   );
-}
-
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          SHELTERO.
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
 }

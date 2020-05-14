@@ -6,6 +6,8 @@
   "main": "src/index.js",
   "dependencies": {
     "@material-ui/core": "^4.9.14",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.53",
     "antd": "^4.2.2",
     "clsx": "^1.1.0",
     "dotenv": "8.2.0",

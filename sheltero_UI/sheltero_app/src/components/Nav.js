@@ -10,7 +10,7 @@ export default function Nav (){
         <NavLink exact to="/">
           Home
         </NavLink>
-        <NavLink to="/">
+        <NavLink to="/job">
           Job Search
         </NavLink>
       </span>
