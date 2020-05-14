@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require('path');
 
 require('./models');
 
@@ -13,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // GET home page
 app.get("/", (req, res) => {
-  res.send("<H1>Library System</H1>");
+  res.sendFile(path.join(__dirname + "/home.html"));
 });
 
 // handle author-management related requests

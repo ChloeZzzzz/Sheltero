@@ -3,10 +3,11 @@ const mongoose = require("mongoose");
 // import author model
 const Author = mongoose.model("author");
 
+const db = mongoose.connection;
+
     
 // function to handle a request to get all authors
 const getAllAuthors = async (req, res) => {
-    
   try {
     const all_authors = await Author.find();
     return res.send(all_authors);
@@ -20,29 +21,40 @@ const getAllAuthors = async (req, res) => {
 const updateAuthor = async (req, res) => {
   try{
     const new_author = await new Author.findOneAndUpdate({_id: req.params.id},{
-      first_name: req.query.first_name,
-      last_name: req.query.last_name,
+      first_name: req.body.author_fn,
+      last_name: req.body.author_ln,
     });
+    console.log(new_author);
    }
    catch(err){
     res.status(400);
     return res.send("Database query failed");
    }
+   res.redirect('/');
 };
 
 // function to add author
 const addAuthor = async (req, res) => {
  try{
-  const new_author =await new Author({
-    first_name: req.query.first_name,
-    last_name: req.query.last_name,
-  });
-  new_author.save;
+    db.once("open",()=>{
+      const new_author = new Author({
+        first_name: req.body.author_fn,
+        last_name: req.body.author_ln,
+      });
+      new_author.save((err,res)=>{
+        if(err){
+          console.log(err);
+          return res.send("Something went wrong :(");
+        }
+        console.log(new_author._id+"have been saved to DB");
+      });
+    })
  }
  catch(err){
   res.status(400);
   return res.send("Database query failed");
  }
+ res.redirect('/');
 };
 
 // function to get author by id
@@ -56,6 +68,7 @@ const getAuthorByID = async (req, res) => {
     res.status(400);
     return res.send("Database query failed");
   }
+
 };
 
 // remember to export the functions

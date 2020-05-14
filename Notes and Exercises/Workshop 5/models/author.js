@@ -10,5 +10,3 @@ const authorSchema = mongoose.Schema(
 const Author = mongoose.model("author", authorSchema, "author");
 
 module.exports= Author;
-
-require('./author');
