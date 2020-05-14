@@ -1,5 +1,6 @@
 //provide the controller a link to the job model for job data
 var job_data = require('../models/job');
+const mongoose = require('mongoose');
 
 
 //function for searching all jobs
@@ -55,25 +56,28 @@ const getPostJob =  (req, res) => {
 const postJob = async(req, res) => {
     try {
         const job = new job_data({
-            jobTitle: req.body.jobTitle,
-            salary: req.body.salary,
-            creditLevel: req.body.creditLevel,
-            jobDetail: req.body.jobDetail,
-            companyID: req.body.companyID,
-            jobTag: req.body.jobTag,
-            contactEmail: req.body.contactEmail,
-            jobArea: req.body.jobArea,
-        });
-        job_data.save().then(result => {
+            "_id" : new mongoose.Types.ObjectId(),
+            "jobTitle": req.body.jobTitle,
+            "salary": req.body.salary,
+            "creditLevel": req.body.creditLevel,
+            "jobDetail": req.body.jobDetail,
+            "companyID": req.body.companyID,
+            "jobTag": req.body.jobTag,
+            "contactEmail": req.body.contactEmail,
+            "jobArea": req.body.jobArea,
+        })
+        console.log("11111111");
+        job.save().then(result => {
             console.log(result);
+            console.log("job saved");
         }).catch(err => {
             console.log(err);
         });
     } catch (e) {
         console.log("job posting error");
-        res.redirect('home');
+        console.log(e);
     }
-
+    res.redirect('../');
 }
 
 //export the functions

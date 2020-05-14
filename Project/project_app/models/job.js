@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const jobSchema = mongoose.Schema({
+const JobSchema = new Schema({
       _id : mongoose.Schema.Types.ObjectId,
       jobTitle: String,
       salary: Number,
@@ -10,7 +11,8 @@ const jobSchema = mongoose.Schema({
       jobTag: String,
       contactEmail: String,
       jobArea: String,
-})
-jobSchema.index({ "$**": "text" });
+});
 
-module.exports = mongoose.model("Job", jobSchema);
+JobSchema.index({ "$**": "text" });
+
+module.exports = mongoose.model("Job", JobSchema);

@@ -6,7 +6,6 @@ const jobRouter = express.Router();
 //import the jobController
 const jobController = require('../controllers/jobController');
 
-
 jobRouter.use(express.urlencoded( {extended: false}));
 //handle the get request
 jobRouter.get('/', (req, res) => jobController.getAllJob(req, res));
