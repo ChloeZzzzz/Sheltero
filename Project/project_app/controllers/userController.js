@@ -95,23 +95,6 @@ const emailNotSignedUp = async (email) => {
     return false;
 }
 
-//for testing, do for all this
-const test_add = () =>{
-    const user = new users({
-        _id : new mongoose.Types.ObjectId(),
-        first_name : "wow",
-        last_name : "wow",
-        email : "wow@wow.com",
-        password : "wowowow",
-        resume : {jobs: "wow"},
-    })
-    users.save().then(result => {
-        console.log(result);
-    }).catch(err => {
-        console.log(err);
-    })
-}
-
 module.exports = {
     getUserHomepage,
     getUserSignup,
