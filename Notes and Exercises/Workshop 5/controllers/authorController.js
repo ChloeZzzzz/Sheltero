@@ -19,15 +19,18 @@ const getAllAuthors = async (req, res) => {
 
 // function to modify author by ID
 const updateAuthor = async (req, res) => {
+  console.log(req);
   try{
-    const new_author = await new Author.findOneAndUpdate({_id: req.params.id},{
+    const new_author = await Author.findOneAndUpdate({_id: req.params.id},{
       first_name: req.body.author_fn,
       last_name: req.body.author_ln,
     });
     console.log(new_author);
+    new_author.save();
    }
    catch(err){
     res.status(400);
+    console.log(err);
     return res.send("Database query failed");
    }
    res.redirect('/');
@@ -40,6 +43,9 @@ const addAuthor = async (req, res) => {
       first_name: req.body.author_fn,
       last_name: req.body.author_ln,
     });
+    if (!new_author.first_name||!new_author.last_name){
+      return res.send("Something went wrong :(");
+    }
     new_author.save((err,res)=>{
       if(err){
         console.log(err);

@@ -11,10 +11,17 @@
         <input type="text" name="author_ln">
         <button type="submit"> Submit </button>
     </form>
-    <form action = /author-management/:id method="post">
+    <script>
+        function update_action(){
+            const update_form = document.getElementById("update_form");
+            update_form.action="/author-management"+document.getElementsByName("author_id");
+            console.log(update_form.action);
+        }
+    </script>
+    <form>
         <input type="text" name="author_id">
         <input type="text" name="author_fn">
         <input type="text" name="author_ln">
-        <button type="submit"> Submit </button>
+        <button onclick="update_action()"> Submit </button>
     </form>
 </body>

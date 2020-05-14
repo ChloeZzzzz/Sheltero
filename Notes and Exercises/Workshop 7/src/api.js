@@ -8,9 +8,9 @@ function getAuthors() {
 
   // TODO
   // return fetch call that gets author list
-  return fetch(endpoint).then(res=>{
+  return fetch(endpoint).then((res) => {
     console.log(res);
-    return (res.json);
+    return (res.json());
   })
 }
 
@@ -20,14 +20,13 @@ export function getAuthor(id) {
   // TODO
   // return fetch statement to get an author by the id
   return fetch(endpoint).then(res=>{
-    console.log(res);
     return(res.json);
   })
 }
 
 export function addAuthor(author) {
-  const { id, first_name, last_name } = author;
-  if (!id || !first_name || !last_name) {
+  const {first_name, last_name } = author;
+  if (!first_name || !last_name) {
     alert("must include all fields");
     return;
   }
@@ -36,11 +35,22 @@ export function addAuthor(author) {
 
   // TODO
   // return fetch statement to add an author
+  console.log(first_name);
+  return fetch(endpoint,{
+    method:"POST",
+    headers:{
+      "Content-Type": "application/JSON"
+    },
+    body: JSON.stringify({
+      author_fn:first_name,
+      author_ln:last_name
+    })
+  }).then(res =>window.location.reload());
 }
 
 export function updateAuthor(author) {
-  const { id, first_name, last_name } = author;
-  if (!id) {
+  const { _id, first_name, last_name } = author;
+  if (!_id) {
     alert("must include an id");
     return;
   }
@@ -49,9 +59,20 @@ export function updateAuthor(author) {
     return;
   }
 
-  const endpoint = BASE_URL + `/author-management/${id}`;
+  const endpoint = BASE_URL + `/author-management/${author._id}`;
+  console.log(endpoint);
 
   // return fetch query to update an author
+  return fetch(endpoint, {
+    method:"POST",
+    headers:{
+      "Content-Type": "application/JSON"
+    },
+    body: JSON.stringify({
+      author_fn:first_name,
+      author_ln:last_name
+    })
+  }).then(res => window.location.reload());
 }
 
 export function deleteAuthor(id) {
@@ -66,8 +87,7 @@ export function useAuthors() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getAuthors()
-      .then(authors => {
+    getAuthors().then(authors => {
         setAuthors(authors);
         setLoading(false);
       })
