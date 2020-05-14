@@ -19,6 +19,10 @@ export function getAuthor(id) {
 
   // TODO
   // return fetch statement to get an author by the id
+  return fetch(endpoint).then(res=>{
+    console.log(res);
+    return(res.json);
+  })
 }
 
 export function addAuthor(author) {
