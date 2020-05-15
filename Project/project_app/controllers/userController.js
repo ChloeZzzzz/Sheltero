@@ -55,7 +55,7 @@ const postUserSignup = async (req, res) => {
                 "password" : cryptedpw,
                 "contact": req.body.contact,
                 "company_name": req.body.company_name,
-                "company_address": req.body.company_address,
+                "company_addr": req.body.company_addr,
                 "type" : req.body.role,
                 "resume": {job: 'programmer'}
             });
