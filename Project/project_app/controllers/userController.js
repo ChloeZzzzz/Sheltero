@@ -49,6 +49,7 @@ const postUserSignup = async (req, res) => {
         if (await email_validator.validate(req.body.email) && await emailNotSignedUp(req.body.email)) {
             const cryptedpw = await bcrypt.hash(req.body.password, 10);
             const user = new Users({
+                "_id" : new mongoose.Types.ObjectId(),
                 "first_name" : req.body.first_name,
                 "last_name": req.body.last_name,
                 "email" : req.body.email,
