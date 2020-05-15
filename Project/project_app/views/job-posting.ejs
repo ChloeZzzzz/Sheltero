@@ -3,7 +3,7 @@
 
 <H2>Job posting page</H2>
 <br/>
-<form action = "job-posting" method = "POST">
+<form action = "job-posting" method = "post" enctype="multipart/form-data">
     <div>
         <label for = "jobTitle">Job Title</label>
         <input type = "text" id = "jobTitle" name = "jobTitle" required>
@@ -28,6 +28,9 @@
         <br/>
         <label for = "jobArea">Job Area</label>
         <input type = "text" id = "jobArea" name = "jobArea" required>
+        <br/>
+        <label for = "jobImg"> Job Image</label>
+        <input type = "file" id = "jobImg" name = "jobImg">
         <br/>
     </div>
     <button type = "submit">Post</button>

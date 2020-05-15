@@ -11,6 +11,7 @@ const JobSchema = new Schema({
       jobTag: String,
       contactEmail: String,
       jobArea: String,
+      jobImg: String,
 });
 
 JobSchema.index({ "$**": "text" });

@@ -2,7 +2,6 @@
 var job_data = require('../models/job');
 const mongoose = require('mongoose');
 
-
 //function for searching all jobs
 const getAllJob = (req, res) => {
     job_data.find({}, function(err, jobs) {
@@ -65,8 +64,9 @@ const postJob = async(req, res) => {
             "jobTag": req.body.jobTag,
             "contactEmail": req.body.contactEmail,
             "jobArea": req.body.jobArea,
+            "jobImg": req.file.path,
         })
-        console.log("11111111");
+        console.log(req.jobImg);
         job.save().then(result => {
             console.log(result);
             console.log("job saved");
