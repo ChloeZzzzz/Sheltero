@@ -7,6 +7,9 @@ const User = new Schema({
     last_name : String,
     email: String,
     password: String,
+    contact: String,
+    company_name: String,
+    company_addr: String,
     type: ['employee', 'employer'],
     resume: {jobs: String},
 });
