@@ -1,4 +1,4 @@
-import { styled, createMuiTheme, ThemeProvider, makeStyles } from '@material-ui/core/styles';
+import { styled, createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';

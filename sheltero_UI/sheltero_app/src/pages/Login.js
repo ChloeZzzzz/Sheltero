@@ -10,11 +10,11 @@ import { Avatar,
          Grid,
          Box,
          Typography,
-         makeStyles,
+         withStyles,
          Container } from '@material-ui/core';
 
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -45,11 +45,34 @@ const useStyles = makeStyles((theme) => ({
   },
   
   })
-)
 
-export default function Login() {
-const classes = useStyles();
 
+export default withStyles(styles) (class Login extends React.Component {
+  state = {
+    open: false,
+    employerRegister: {
+        email: '',
+        password:'',
+    }
+  }
+
+  handleToggle = () => {
+    this.setState({
+        open: !this.state.open
+    })
+  }
+
+  handleChange = name => ({target: {value}}) => {
+    this.setState({
+        employerRegister: {
+            ...this.state.exercise,
+            [name]: value
+        }
+    })
+  }
+
+  render() {
+    const { classes } = this.props;
 
   return (
     <Container component="main" maxWidth="xs" >
@@ -123,3 +146,4 @@ const classes = useStyles();
     </Container>
   );
 }
+})

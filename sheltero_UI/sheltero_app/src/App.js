@@ -14,29 +14,12 @@ export default function App() {
   return (
     <Router>
       <div className="App">
-        <Nav />
-        
-        {/* the content */}
-        {/* A <Switch> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
+        <Nav /> {/* insert navigation bar from components on each page */}
+                
         <Switch>
-
-          {/* <Route exact path="/">
-            <Home />
-          </Route>
-
-          <Route path="/authors">
-            <Authors />
-          </Route>
-
-          <Route exact path="/login">
-            <Login />
-          </Route>
-
-          <Route exact path="/login">
-            <Register />
-          </Route> */}
-
+          {/* A <Switch> looks through its children <Route>s and
+          renders the first one that matches the current URL. */}
+          {/* Link each pages and specify components to render */}
           <Route exact path="/login" render={props => <Login {...props} />} />
           <Route exact path="/register" render={props => <Register {...props} />} />
           <Route exact path="/" render={props => <Home {...props} />} />

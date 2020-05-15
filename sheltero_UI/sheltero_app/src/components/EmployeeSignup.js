@@ -10,7 +10,7 @@ import {
          Checkbox,
          Grid,
          Box,
-         makeStyles,
+         withStyles,
          Container,
          FormControl,
          FormLabel,
@@ -18,7 +18,7 @@ import {
          RadioGroup} from '@material-ui/core';
 
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({    
     paper: {
       marginTop: theme.spacing(8),
       display: 'flex',
@@ -47,15 +47,42 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       alignItems: 'flex-start',
     },
-    
     })
-  )
   
   
-  
-  export default function EmployeeSignup() {
-    const classes = useStyles();
-  
+  export default withStyles(styles) (class EmployeeSignup extends React.Component {
+    
+  state = {
+    open: false,
+    employerRegister: {
+      gender: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      password:'',
+    }
+  }
+
+  handleToggle = () => {
+      this.setState({
+          open: !this.state.open
+      })
+  }
+
+  handleChange = name => ({target: {value}}) => {
+      this.setState({
+          employerRegister: {
+              ...this.state.exercise,
+              [name]: value
+          }
+      })
+  }
+    
+    
+    render () {
+      const { classes } = this.props;
+
+    
     return (
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
@@ -64,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
               <LockOutlined />
           </Avatar>
           <H2 component="h1" variant="h5">
-            Sign up
+            Employee Sign Up
           </H2>
           
           <form className={classes.form} noValidate>
@@ -111,7 +138,6 @@ const useStyles = makeStyles((theme) => ({
                   fullWidth
                   id="firstName"
                   label="First Name"
-                  autoFocus
                 />
               </Grid>
   
@@ -172,7 +198,7 @@ const useStyles = makeStyles((theme) => ({
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox className={classes.checkbox} value="allowExtraEmails" color="primary"/>}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  label="I want to receive new jobs posts and updates via email."
                 />
               </Grid>
   
@@ -204,3 +230,4 @@ const useStyles = makeStyles((theme) => ({
       </Container>
     );
   }
+})
