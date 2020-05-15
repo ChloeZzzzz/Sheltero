@@ -48,31 +48,22 @@ const styles = theme => ({
   
   
   export default withStyles(styles) (class EmployerSignup extends React.Component {
-
-    state = {
-        open: false,
-        employerRegister: {
-            firstName: '',
-            lastName: '',
-            email: '',
-            company:'',
-            password:'',
-        }
+    /* implement constructor() to bind event handler*/
+    constructor(props) { 
+      super(props);
+      this.state = {value: ''};
+  
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleToggle = () => {
-        this.setState({
-            open: !this.state.open
-        })
+    /* getting values from form*/
+    handleChange(event) {
+      this.setState({value: event.target.value});
     }
-
-    handleChange = name => ({target: {value}}) => {
-        this.setState({
-            employerRegister: {
-                ...this.state.exercise,
-                [name]: value
-            }
-        })
+    handleSubmit(event) {
+      alert('A form was submitted: ' + this.state.value);
+      event.preventDefault();
     }
     
     render() {
@@ -90,7 +81,7 @@ const styles = theme => ({
             Employer Sign Up
           </H2>
           
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={this.handleSubmit}>
   
             
             <Grid container spacing={2}>

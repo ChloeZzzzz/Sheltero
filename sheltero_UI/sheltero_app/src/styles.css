@@ -47,7 +47,8 @@ input {
 nav {
   background-color: #99C015;
   font-family: futura, helvetica;
-  position: fixed; /* nav bar stay in place */
+  /* nav bar stay in place */
+  position: fixed; 
   z-index: 1; /* fixed on top layer */
   left: 0;
   top: 0; /* position nav bar st the top */

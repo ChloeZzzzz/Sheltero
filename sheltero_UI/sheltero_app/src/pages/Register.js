@@ -10,7 +10,7 @@ export default function Register()
   {
         return (
           <Box>
-            <EmployerSignup />
+            <EmployeeSignup />
           </Box>
         );
 
