@@ -19,7 +19,7 @@ body {
   letter-spacing: 2pt;
   justify-content: center;
   align-items: center;
-  background: #E8F2D8;
+  /* background: #E8F2D8; */
   color: #002E18;
   text-rendering: optimizeLegibility;
 }

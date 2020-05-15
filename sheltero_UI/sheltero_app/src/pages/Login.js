@@ -23,7 +23,7 @@ const styles = theme => ({
     width: '100%',
   },
   avatar: {
-    margin: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     backgroundColor: '#99C015',
   },
   box: {
@@ -51,7 +51,7 @@ export default withStyles(styles) (class Login extends React.Component {
   /* implement constructor() to bind event handler*/
   constructor(props) { 
     super(props);
-    this.state = {value: ''};
+    this.state = {email: '', password: ''};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -62,12 +62,12 @@ export default withStyles(styles) (class Login extends React.Component {
     this.setState({value: event.target.value});
   }
   handleSubmit(event) {
-    alert('A form was submitted: ' + this.state.value);
     event.preventDefault();
   }
 
   render() {
     const { classes } = this.props;
+    const {email, password} = this.state;
 
   return (
     <Container component="main" maxWidth="xs" >
@@ -95,6 +95,7 @@ export default withStyles(styles) (class Login extends React.Component {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={this.state.email}
               />
             </Grid>
 
@@ -109,6 +110,7 @@ export default withStyles(styles) (class Login extends React.Component {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={this.state.password}
               />
             </Grid>
 
