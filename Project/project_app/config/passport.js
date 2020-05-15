@@ -41,7 +41,7 @@ const initializePassport = (passport) => {
         done(null, user);
     });
     passport.deserializeUser((_id, done) => {
-        done(null, Users.find({'_id': _id}));
+        done(null, Users.findOne({'_id': _id}));
     });
 }
 
