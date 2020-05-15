@@ -21,29 +21,7 @@ export default function Nav (){
         <NavLink to="/register">
           Sign Up
         </NavLink>
-      </span>
-      
-      
-      
-      {/* <Grid container spacing={3}> 
-        <Grid item xs={9} >
-          <NavLink exact to="/">
-            Home
-          </NavLink>
-          <NavLink to="/">
-            Job Search
-          </NavLink>
-        </Grid>
-
-        <Grid item xs >
-            <NavLink to="/login">
-              Sign In
-            </NavLink>
-            <NavLink to="/register">
-              Sign Up
-            </NavLink>
-          </Grid>
-        </Grid> */}
+      </span> 
     </nav>
   );
 }

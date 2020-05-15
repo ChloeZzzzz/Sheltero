@@ -1,19 +1,21 @@
 import React from 'react';
 import { LockOutlined } from '@ant-design/icons';
-import { PrimButton, H2, TextLink } from '../components/theme';
+import { PrimButton, H1, H2, TextLink } from '../components/theme';
 import EmployeeSignup from '../components/EmployeeSignup';
-import { Box } from '@material-ui/core';
+import EmployerSignup from '../components/EmployerSignup';
+import { Box, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 
 
+export default function Register()
+  {
+        return (
+          <Box>
+            <EmployerSignup />
+          </Box>
+        );
+
+  }
 
 
-export default function SignUp() {
-  // const classes = useStyles();
+  
 
-  return (
-    <Box>
-      <EmployeeSignup />
-    </Box>
-  );
-
-}
