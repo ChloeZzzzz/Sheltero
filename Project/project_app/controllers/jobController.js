@@ -22,10 +22,7 @@ const getJobByKeyword = (req, res) => {
         }
         res.json(jobs);
     })
-
 }
-
-
 
 //function for getting jobs by a tag
 const getJobByTag = (req, res) => {
@@ -80,6 +77,30 @@ const postJob = async(req, res) => {
     res.redirect('../');
 }
 
+const getJobID = (req, res) => {
+    job_data.find({"jobTitle": req.params.jobTitle}, function(err, jobs) {
+        if (err) {
+            res.send(err);
+        }
+        else {
+            res.json(jobs._id);
+        }
+    })
+}
+
+//the delete method is not yet tested and finished
+const deleteJob = (req, res) => {
+    job_data.findByIdAndRemove({"_id": req.params._id}, function (err) {
+        if (!err) {
+            res.send("successfully deleted");
+            //delete the image in uploads folder
+        }
+        else {
+            res.send(err);
+        }
+    });
+}
+
 //export the functions
 module.exports = {
     getAllJob,
@@ -88,4 +109,6 @@ module.exports = {
     getJobByArea,
     getPostJob,
     postJob,
+    getJobID,
+    deleteJob,
 }
