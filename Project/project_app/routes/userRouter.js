@@ -1,10 +1,10 @@
-const express = require('express')
-const userRouter = express.Router()
+const express = require('express');
+const userRouter = express.Router();
 
-const passport = require('passport')
-const session = require('express-session')
+const passport = require('passport');
+const session = require('express-session');
 
-const initPassport = require('../config/passport')
+const initPassport = require('../config/passport');
 initPassport(passport);
 
 userRouter.use(session({

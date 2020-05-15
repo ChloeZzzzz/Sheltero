@@ -1,6 +1,6 @@
 // reference: https://www.youtube.com/watch?v=-RCnNyD0L-s
-const LocalStrategy = require('passport-local').Strategy
-const bcrypt = require('bcrypt')
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
 const Users = require('../models/users.js');
 
 const initializePassport = (passport) => {
@@ -14,7 +14,7 @@ const initializePassport = (passport) => {
             }
             console.log("==RESULT==")
             console.log(result)
-        })
+        }).exec();
         if (!user) { // invalid email address
             console.log("Can't find email address")
             return done(null, false, { message: "Can't find email address"});
