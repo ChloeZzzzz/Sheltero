@@ -14,7 +14,8 @@ const initializePassport = (passport) => {
             }
             console.log("==RESULT==")
             console.log(result)
-        }).exec();
+        });
+        console.log(user);
         if (!user) { // invalid email address
             console.log("Can't find email address")
             return done(null, false, { message: "Can't find email address"});
@@ -40,8 +41,9 @@ const initializePassport = (passport) => {
     passport.serializeUser((user, done) => {
         done(null, user);
     });
-    passport.deserializeUser((_id, done) => {
-        done(null, Users.find({'_id': _id}));
+    passport.deserializeUser(async (_id, done) => {
+        const user = await Users.findById(_id);
+        done(null, user);
     });
 }
 

@@ -4,14 +4,13 @@ const bcrypt = require('bcrypt');
 const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
-const getUserHomepage = async (req, res) => {
+const getUserHomepage = (req, res) => {
     if (req.user) {
-        const user = await req.user.exec();
         console.log("== REQ.USER ==");
-        console.log(user);
+        console.log(req.user);
         console.log("++TEST++");
-        console.log(user._id);
-        res.render('home-auth.hbs', {useremail: user.email});
+        console.log(req.user._id);
+        res.render('home-auth.hbs', {useremail: req.user.email});
     } else {
         res.redirect('../');
     }
@@ -60,10 +59,12 @@ const postUserSignup = async (req, res) => {
                 "type" : req.body.role,
                 "resume": {job: 'programmer'}
             });
+            
             user.save().then(result => {
                 console.log("== SAVED TO DATABASE ==")
                 console.log(result);
             }).catch(err => {
+                console.log(user);
                 console.log(err);
             });
             res.redirect('login');
