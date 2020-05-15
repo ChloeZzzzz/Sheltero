@@ -10,11 +10,10 @@ const Label = styled('label')`
   line-height: 1.5;
   display: block;
   font-weight: bold;
-  font-size: 1em;
 `;
 
 const InputWrapper = styled('div')`
-  width: 50vw;
+  
   border: 1px solid #d9d9d9;
   border-radius: 4px;
   padding: 1px;
@@ -27,12 +26,10 @@ const InputWrapper = styled('div')`
     border-color: #343078;
     box-shadow: 0 0 0 2px rgb(223, 252, 3)
   }
-
   &.focused {
     border-color: #638709;
     ;
   }
-
   & input {
     font-size: 14px;
     height: 30px;
@@ -40,10 +37,10 @@ const InputWrapper = styled('div')`
     padding: 4px 6px;
     width: 0;
     min-width: 30px;
-    flex-grow: 1;
     border: 0;
     margin: 0;
     outline: 0;
+    
   }
 `;
 
@@ -65,13 +62,11 @@ const Tag = styled(({ label, onDelete, ...props }) => (
   padding: 0 4px 0 10px;
   outline: 0;
   overflow: hidden;
-
   &:focus {
     border-color: #638709;
     background-color: #e6f7ff;
     
   }
-
   & span {
     overflow: hidden;
     white-space: nowrap;
@@ -79,7 +74,6 @@ const Tag = styled(({ label, onDelete, ...props }) => (
     text-overflow: ellipsis;
     
   }
-
   & svg {
     font-size: 12px;
     cursor: pointer;
@@ -101,38 +95,32 @@ const Listbox = styled('ul')`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   z-index: 1;
   
-
   & li {
     padding: 5px 12px;
     display: flex;
-
     & span {
       flex-grow: 1;
     }
-
     & svg {
       color: transparent;
     }
   }
-
   & li[aria-selected='true'] {
     background-color: #fafafa;
     font-weight: 600;
-
     & svg {
       color: #638709;
     }
   }
-
   & li[data-focus='true'] {
     background-color: #DAE6AC;
     cursor: pointer;
-
     & svg {
       color: #638709;
     }
   }
 `;
+
 
 export default function SearchByArea() {
     const {
