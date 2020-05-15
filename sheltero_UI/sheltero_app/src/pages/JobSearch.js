@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState, useRef } from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,16 +13,18 @@ import SearchByCategory from '../components/SearchBar.js';
 import { Link, Box } from '@material-ui/core';
 //import SectionCarousel from '../components/Carousel/Carousel';
 import SearchByArea from '../components/SearchArea';
-
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    useParams
+} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     icon: {
         marginRight: theme.spacing(2),
     },
-    heroContent: {
-        backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(8, 0, 6),
-    },
+
     heroButtons: {
         marginTop: theme.spacing(4),
     },
@@ -45,12 +47,19 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(6),
     },
+    Box: {
+        width:'100vw',
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(8, 0, 6),
+
+    }
 }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Job() {
     const classes = useStyles();
+    const node = useRef();
 
     return (
         <React.Fragment>
@@ -59,11 +68,13 @@ export default function Job() {
             <main>
                 {/* Hero unit */}
                 <div  className={classes.Box}>
-                    <Grid container spacing={8}>
-                      <Grid item xs={6}>
+                    <Grid container spacing={12}>
+                      <Grid xs={1} />
+                      <Grid item xs={4} >
                         <SearchByCategory/>
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid xs={1} />
+                      <Grid item xs={4}>
                         <SearchByArea/>
                         {/* <SearchLocationInput onChange={() => null} /> */}
                       </Grid>
@@ -108,6 +119,17 @@ export default function Job() {
             </Box>
             {/* End footer */}
         </React.Fragment>
+        // <Router>
+        //     <Switch>
+        //         <Route exact path="/:jobID">
+        //             <JobManagement/>
+        //         </Route>
+        //     </switch>
+        // </Router>
+
+
+
+
     );
 }
 
@@ -122,4 +144,8 @@ function Copyright() {
         {'.'}
       </Typography>
     );
+}
+
+function JobManagement(){
+    let{ jobID }=useParams();
 }
