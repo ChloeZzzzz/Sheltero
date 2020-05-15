@@ -9,11 +9,11 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import SearchByCategory from '../components/SearchBar.js';
-import { Link, Box } from '@material-ui/core';
+import SearchByCategory from '../components/SearchBar/SearchByCategory';
+import { Box } from '@material-ui/core';
 //import SectionCarousel from '../components/Carousel/Carousel';
-import SearchByArea from '../components/SearchArea';
-
+import SearchByArea from '../components/SearchBar/SearchArea';
+import Copyright from '../components/Copyright';
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -45,6 +45,18 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
         padding: theme.spacing(6),
     },
+    title: {
+        flexGrow: 1,
+        color: "#DAE6AC"
+    },
+    BarButton: {
+        color: "#DAE6AC"
+    },
+    Box: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(8, 3, 6),
+        flexGrow: 1
+    }
 }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -60,14 +72,14 @@ export default function Job() {
                 {/* Hero unit */}
                 <div  className={classes.Box}>
                     <Grid container spacing={8}>
-                      <Grid item xs={6}>
-                        <SearchByCategory/>
-                      </Grid>
-                      <Grid item xs={6}>
-                        <SearchByArea/>
-                        {/* <SearchLocationInput onChange={() => null} /> */}
-                      </Grid>
-                    </Grid> 
+                        <Grid item xs={6}>
+                            <SearchByCategory/>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <SearchByArea/>
+                            {/* <SearchLocationInput onChange={() => null} /> */}
+                        </Grid>
+                    </Grid>
                 </div>
                 <Container className={classes.cardGrid} maxWidth="md">
                     {/* End hero unit */}
@@ -108,18 +120,5 @@ export default function Job() {
             </Box>
             {/* End footer */}
         </React.Fragment>
-    );
-}
-
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="/">
-          SHELTERO.
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
     );
 }
