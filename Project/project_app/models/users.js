@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require('passport-local-mongoose');
- 
+
 const User = new Schema({
     first_name : String,
     last_name : String,
@@ -14,7 +14,7 @@ const User = new Schema({
     resume: {jobs: String},
 });
 
- 
+
 User.plugin(passportLocalMongoose);
- 
+
 module.exports = mongoose.model('Users', User);
