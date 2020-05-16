@@ -51,7 +51,7 @@ export default withStyles(styles) (class Login extends React.Component {
   /* implement constructor() to bind event handler*/
   constructor(props) { 
     super(props);
-    this.state = {email: '', password: ''};
+    this.state = {login: {email: '', password: ''}};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
