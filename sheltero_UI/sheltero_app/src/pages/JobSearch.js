@@ -11,14 +11,18 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import SearchByCategory from '../components/SearchBar.js';
 import { Link, Box } from '@material-ui/core';
-//import SectionCarousel from '../components/Carousel/Carousel';
+
 import SearchByArea from '../components/SearchArea';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    useParams
-} from "react-router-dom";
+import Copyright from "../components/Copyright";
+// import List from '../List';
+// import {
+//     BrowserRouter as Router,
+//     Switch,
+//     Route,
+//     useParams
+// } from "react-router-dom";
+
+
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -64,9 +68,7 @@ export default function Job() {
     return (
         <React.Fragment>
             <CssBaseline />
-            {/*<SectionCarousel/>*/}
             <main>
-                {/* Hero unit */}
                 <div  className={classes.Box}>
                     <Grid container spacing={12}>
                       <Grid xs={1} />
@@ -113,19 +115,15 @@ export default function Job() {
                     </Grid>
                 </Container>
             </main>
+            {/*<div className="container">*/}
+            {/*    <List />*/}
+            {/*</div>*/}
             {/* Footer */}
             <Box mt={5} className={classes.box}>
                 <Copyright />
             </Box>
-            {/* End footer */}
+
         </React.Fragment>
-        // <Router>
-        //     <Switch>
-        //         <Route exact path="/:jobID">
-        //             <JobManagement/>
-        //         </Route>
-        //     </switch>
-        // </Router>
 
 
 
@@ -133,19 +131,3 @@ export default function Job() {
     );
 }
 
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="/">
-          SHELTERO.
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-}
-
-function JobManagement(){
-    let{ jobID }=useParams();
-}
