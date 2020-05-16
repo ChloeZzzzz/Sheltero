@@ -1,17 +1,66 @@
 import React from 'react';
-import { LockOutlined } from '@ant-design/icons';
-import { PrimButton, H1, H2, TextLink } from '../components/theme';
 import EmployeeSignup from '../components/EmployeeSignup';
 import EmployerSignup from '../components/EmployerSignup';
-import { Box, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
+import { makeStyles, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    minWidth: 200,
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing(3),
+  },
+  formLabel: {
+    marginBottom: theme.spacing(1),
+    fontWeight:'bold',
+  }
+}))
 
-export default function Register()
-  {
+export default function Register () {
+  const classes = useStyles(); /* to implement styles */
+  const [value, setValue] = React.useState('');
+
+  const handleRadioChange = (event) => {
+    setValue(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
         return (
-          <Box>
-            <EmployerSignup />
-          </Box>
+          <div>
+          <form onSubmit={handleSubmit} className={classes.form}>
+            <FormControl component="fieldset">
+              <FormLabel component="legend" className={classes.formLabel} >Select Your User Type</FormLabel>
+              <RadioGroup row name="userType" onChange={handleRadioChange}>
+                <FormControlLabel
+                  className={classes.formControl}
+                  value="employee"
+                  control={<Radio color="primary" />}
+                  label="Employee"
+                  labelPlacement="end"
+                />
+                <FormControlLabel
+                  className={classes.formControl}
+                  value="employer"
+                  control={<Radio color="primary" />}
+                  label="Employer"
+                  labelPlacement="end"
+                />
+              </RadioGroup>
+            </FormControl>
+          </form>
+          <div>
+            {(() => {
+            if (value === 'employer') {
+              return(<EmployerSignup />)
+            } else if (value === 'employee') {
+              return(<EmployeeSignup />)
+            } 
+          })()}
+          </div>
+          </div>
         );
 
   }

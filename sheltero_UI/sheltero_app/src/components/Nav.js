@@ -1,9 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Grid } from '@material-ui/core';
+import { Box } from '@material-ui/core';
+import { useStyles } from './theme';
 
 
-export default function Nav (){
+export function Nav (){
   return (
     <nav>
       <span id="functionPages">
@@ -23,5 +24,13 @@ export default function Nav (){
         </NavLink>
       </span> 
     </nav>
+  );
+}
+
+export function Header () {
+  const classes = useStyles()
+
+  return(
+    <Box className={classes.header}></Box>
   );
 }

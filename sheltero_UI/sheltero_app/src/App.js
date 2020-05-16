@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // import { GlobalStyles } from './global';
 // import {theme} from "./theme";
-import Nav from "./components/Nav";
+import { Nav, Header } from "./components/Nav";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -15,7 +15,7 @@ export default function App() {
     <Router>
       <div className="App">
         <Nav /> {/* insert navigation bar from components on each page */}
-                
+        <Header />   
         <Switch>
           {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}

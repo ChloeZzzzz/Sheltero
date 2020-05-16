@@ -1,5 +1,5 @@
 import React from 'react';
-import { LockOutlined } from '@ant-design/icons';
+import CreateIcon from '@material-ui/icons/Create';
 import { PrimButton, H2, TextLink } from './theme';
 import Copyright from './Copyright';
 import {  
@@ -11,18 +11,18 @@ import {
          Grid,
          Box,
          withStyles,
-         Container } from '@material-ui/core';
+         Container, } from '@material-ui/core';
 
 const styles = theme => ({
     paper: {
-      marginTop: theme.spacing(8),
+      marginTop: theme.spacing(4),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       width: '100%',
     },
     avatar: {
-      margin: theme.spacing(1),
+      marginBottom: theme.spacing(1.5),
       backgroundColor: '#99C015',
     },
     box: {
@@ -48,49 +48,46 @@ const styles = theme => ({
   
   
   export default withStyles(styles) (class EmployerSignup extends React.Component {
+    /* implement constructor() to bind event handler*/
+    constructor(props) { 
+      super(props);
+      this.state = {employerRegister: 
+                      { fname: '', 
+                        lname: '', 
+                        email: '', 
+                        contactNum: '',
+                        companyName: '',
+                        password: '' }};
 
-    state = {
-        open: false,
-        employerRegister: {
-            firstName: '',
-            lastName: '',
-            email: '',
-            company:'',
-            password:'',
-        }
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleToggle = () => {
-        this.setState({
-            open: !this.state.open
-        })
+    /* getting values from form*/
+    handleChange(event) {
+      this.setState({value: event.target.value});
     }
-
-    handleChange = name => ({target: {value}}) => {
-        this.setState({
-            employerRegister: {
-                ...this.state.exercise,
-                [name]: value
-            }
-        })
+    handleSubmit(event) {
+      alert('Hi' + this.state.fname + ', you have successfully signed up as an employer!');
+      event.preventDefault();
     }
     
     render() {
         const { classes } = this.props; //receive classes styles
-        const { open, employerRegister: {firstName, lastName, email, company, password } } = this.state
+        const { open, employerRegister: {fname, lname, email, contactNum, companyName, password } } = this.state
 
     return (
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-              <LockOutlined />
+              <CreateIcon />
           </Avatar>
           <H2 component="h1" variant="h5">
             Employer Sign Up
           </H2>
           
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={this.handleSubmit}>
   
             
             <Grid container spacing={2}>
@@ -98,37 +95,40 @@ const styles = theme => ({
               <Grid item xs={12} sm={6}>
                 <TextField
                   className={classes.textField}
+                  id="fname"
+                  label="First Name"
+                  value={this.state.fname}
                   autoComplete="fname"
-                  name="firstName"
+                  name="fname"
                   variant="outlined" //add border to text field
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
                 />
               </Grid>
   
               <Grid item xs={12} sm={6}>
                 <TextField
                   className={classes.textField}
+                  id="lname"
+                  label="Last Name"
+                  value={this.state.lname}
                   variant="outlined"
+                  name="lname"
+                  autoComplete="lname"
                   required
                   fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
                 />
               </Grid>
   
               <Grid item xs={12}>
                 <TextField
                   className={classes.textField}
+                  id="email"
+                  label="Email Address"
+                  value={this.state.email}
                   variant="outlined"
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
                   name="email"
                   autoComplete="email"
                 />
@@ -137,27 +137,43 @@ const styles = theme => ({
               <Grid item xs={12}>
                 <TextField
                   className={classes.textField}
+                  id="contactNum"
+                  label="Contact Number"
+                  value={this.state.email}
+                  variant="outlined"
+                  name="contactNum"
+                  autoComplete="contactNum"
+                  required
+                  fullWidth
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.textField}
+                  id="company"
+                  label="Company/Institution Name"
+                  value={this.state.companyName}
+                  name="companyName"
+                  autoComplete="companyName"
                   variant="outlined"
                   required
                   fullWidth
-                  id="company"
-                  label="Company/Institution Name"
-                  name="companyName"
-                  autoComplete="companyName"
                 />
               </Grid>
   
               <Grid item xs={12}>
                 <TextField
                   className={classes.textField}
+                  id="password"
+                  label="Create Password"
+                  value={this.state.password}
+                  type="password"
+                  autoComplete="current-password"
                   variant="outlined"
                   required
                   fullWidth
                   name="password"
-                  label="Create Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
                 />
                 </Grid>
   

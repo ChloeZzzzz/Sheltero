@@ -52,6 +52,10 @@ export const useStyles = makeStyles((theme) => ({
         /* set heading position */
         position: 'relative',
         top: '50%',
+    },
+    header: {
+        /* set header space under nav bar */
+        height: '8vh',
     }
 })
 )

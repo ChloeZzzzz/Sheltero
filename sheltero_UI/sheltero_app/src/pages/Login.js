@@ -23,7 +23,7 @@ const styles = theme => ({
     width: '100%',
   },
   avatar: {
-    margin: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     backgroundColor: '#99C015',
   },
   box: {
@@ -48,31 +48,26 @@ const styles = theme => ({
 
 
 export default withStyles(styles) (class Login extends React.Component {
-  state = {
-    open: false,
-    employerRegister: {
-        email: '',
-        password:'',
-    }
+  /* implement constructor() to bind event handler*/
+  constructor(props) { 
+    super(props);
+    this.state = {email: '', password: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleToggle = () => {
-    this.setState({
-        open: !this.state.open
-    })
+  /* getting values from form*/
+  handleChange(event) {
+    this.setState({value: event.target.value});
   }
-
-  handleChange = name => ({target: {value}}) => {
-    this.setState({
-        employerRegister: {
-            ...this.state.exercise,
-            [name]: value
-        }
-    })
+  handleSubmit(event) {
+    event.preventDefault();
   }
 
   render() {
     const { classes } = this.props;
+    const {email, password} = this.state;
 
   return (
     <Container component="main" maxWidth="xs" >
@@ -82,10 +77,10 @@ export default withStyles(styles) (class Login extends React.Component {
             <UserOutlined />
         </Avatar>
         <H2 component="h1" variant="h5">
-          Sign up
+          Sign in
         </H2>
         
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={this.handleSubmit} >
 
           
           <Grid container spacing={2}>
@@ -100,6 +95,7 @@ export default withStyles(styles) (class Login extends React.Component {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={this.state.email}
               />
             </Grid>
 
@@ -114,6 +110,7 @@ export default withStyles(styles) (class Login extends React.Component {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={this.state.password}
               />
             </Grid>
 

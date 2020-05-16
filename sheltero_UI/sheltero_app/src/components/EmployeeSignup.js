@@ -1,5 +1,5 @@
 import React from 'react';
-import { LockOutlined } from '@ant-design/icons';
+import CreateIcon from '@material-ui/icons/Create';
 import { PrimButton, H2, TextLink } from './theme';
 import Copyright from './Copyright';
 import {  
@@ -13,21 +13,21 @@ import {
          withStyles,
          Container,
          FormControl,
-         FormLabel,
-         Radio,
-         RadioGroup} from '@material-ui/core';
+         InputLabel,
+         Select,
+         MenuItem,} from '@material-ui/core';
 
 
 const styles = theme => ({    
     paper: {
-      marginTop: theme.spacing(8),
+      marginTop: theme.spacing(4),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       width: '100%',
     },
     avatar: {
-      margin: theme.spacing(1),
+      marginBottom: theme.spacing(2),
       backgroundColor: '#99C015',
     },
     box: {
@@ -47,84 +47,66 @@ const styles = theme => ({
       display: 'flex',
       alignItems: 'flex-start',
     },
+    formControl: {
+      minWidth: 120,
+    },
     })
   
   
   export default withStyles(styles) (class EmployeeSignup extends React.Component {
     
-  state = {
-    open: false,
-    employerRegister: {
-      gender: '',
-      firstName: '',
-      lastName: '',
-      email: '',
-      password:'',
+    /* implement constructor() to initialise state and bind event handler*/
+    constructor(props) { 
+      super(props);
+      this.state = {employeeRegister: { gender: '', fname: '', lname: '', email: '', password: '' }};
+  
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
     }
-  }
 
-  handleToggle = () => {
-      this.setState({
-          open: !this.state.open
-      })
-  }
-
-  handleChange = name => ({target: {value}}) => {
-      this.setState({
-          employerRegister: {
-              ...this.state.exercise,
-              [name]: value
-          }
-      })
-  }
-    
+    /* getting values from form*/
+    handleChange(event) {
+      this.setState({value: event.target.value});
+    }
+    handleSubmit(event) {
+      alert('Hi' + this.state.fname + ', you have successfully signed up as an employee!');
+      event.preventDefault();
+    }
     
     render () {
-      const { classes } = this.props;
-
+      const { classes } = this.props; /* to implement styles */
+      const {employeeRegister: {gender, fname, lname, email, password } } = this.state;
     
     return (
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
-              <LockOutlined />
+              <CreateIcon />
           </Avatar>
           <H2 component="h1" variant="h5">
             Employee Sign Up
           </H2>
           
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={this.handleSubmit}>
   
             
             <Grid container spacing={2}>
-            <FormLabel component="legend" >Gender</FormLabel> 
               <Grid item xs={12} className={classes.positionLeft} >
-                    <FormControl 
-                      component="fieldset"
-                      required>
-  
-                          <RadioGroup name="gender" >
-                          <FormControlLabel
-                            value="Male"
-                            control={<Radio color="primary" />}
-                            label="Male"
-                            labelPlacement="end"
-                          />
-                          <FormControlLabel
-                            value="Female"
-                            control={<Radio color="primary" />}
-                            label="Female"
-                            labelPlacement="end"
-                          />
-                          <FormControlLabel
-                            value="X"
-                            control={<Radio color="primary" />}
-                            label="Prefer not to tell"
-                            labelPlacement="end"
-                          />
-                          </RadioGroup>
-                        
+                    <FormControl variant="outlined" className={classes.formControl}>
+                      <InputLabel>Gender</InputLabel>
+                      <Select
+                        required
+                        labelId="gender"
+                        id="gender"
+                        value={this.state.gender}
+                        onChange={this.handleChange}
+                        label="Gender">
+                        <MenuItem value="" disabled>Gender</MenuItem>
+                        <MenuItem value={'m'}>Male</MenuItem>
+                        <MenuItem value={'f'}>Female</MenuItem>
+                        <MenuItem value={'x'}>Prefer Not To Tell</MenuItem>
+                      </Select>
                     </FormControl>
               </Grid>
   
@@ -132,12 +114,13 @@ const styles = theme => ({
                 <TextField
                   className={classes.textField}
                   autoComplete="fname"
-                  name="firstName"
+                  name="fname"
                   variant="outlined" //add border to text field
                   required
                   fullWidth
-                  id="firstName"
+                  id="fname"
                   label="First Name"
+                  value={this.state.fname}
                 />
               </Grid>
   
@@ -147,10 +130,11 @@ const styles = theme => ({
                   variant="outlined"
                   required
                   fullWidth
-                  id="lastName"
+                  id="lname"
                   label="Last Name"
-                  name="lastName"
+                  name="lname"
                   autoComplete="lname"
+                  value={this.state.lname}
                 />
               </Grid>
   
@@ -164,6 +148,7 @@ const styles = theme => ({
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={this.state.email}
                 />
               </Grid>
   
@@ -178,6 +163,7 @@ const styles = theme => ({
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  value={this.state.password}
                 />
                 </Grid>
   
