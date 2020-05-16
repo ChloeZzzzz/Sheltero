@@ -10,7 +10,7 @@ const getUserHomepage = (req, res) => {
         console.log(req.user);
         console.log("++TEST++");
         console.log(req.user._id);
-        res.render('home-auth.hbs', {useremail: req.user.email});
+        res.render('home-auth.ejs', {useremail: req.user.email});
     } else {
         res.redirect('../');
     }
@@ -50,14 +50,14 @@ const postUserSignup = async (req, res) => {
             const cryptedpw = await bcrypt.hash(req.body.password, 10);
             const user = new Users({
                 "_id" : new mongoose.Types.ObjectId(),
-                "first_name" : req.body.first_name,
-                "last_name": req.body.last_name,
+                "first_name" : req.body.firstName,
+                "last_name": req.body.lastName,
                 "email" : req.body.email,
                 "password" : cryptedpw,
                 "contact": req.body.contact,
                 "company_name": req.body.company_name,
                 "company_addr": req.body.company_addr,
-                "type" : req.body.role,
+                "role" : req.body.role,
                 "resume": {job: 'programmer'}
             });
             

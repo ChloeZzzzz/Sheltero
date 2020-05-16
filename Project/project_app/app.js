@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 //app.use(flash())
 // set the view engine to ejs
-app.set('view engine', 'hbs');
+app.set('view engine', 'ejs');
 
 // get the user Router for login and signin
 const userRouter = require('./routes/userRouter');

@@ -3,15 +3,32 @@ const Schema = mongoose.Schema;
 //const passportLocalMongoose = require('passport-local-mongoose');
 
 const User = new Schema({
-    _id : String,
-    first_name : String,
-    last_name : String,
-    email: String,
-    password: String,
-    contact: String,
-    company_name: String,
-    company_addr: String,
-    type: ['employee', 'employer'],
+    _id : {
+        type: String,
+        require: true},
+    role: ['employee', 'employer'],
+    gender: ['Male', 'Female', 'X'],
+    firstName : {
+        type: String,
+        require: true},
+    lastName : {
+        type: String,
+        require: true},
+    email: {
+        type: String,
+        require: true},
+    password: {
+        type: String,
+        require: true},
+    contact: {
+        type: String,
+        require: true},
+    company_name: {
+        type: String,
+        require: true},
+    company_addr: {
+        type: String,
+        require: true},
     resume: {jobs: String},
 });
 
