@@ -6,7 +6,7 @@ const User = new Schema({
     _id : {
         type: String,
         require: true},
-    role: ['Employee', 'Employer'],
+    type: ['Employee', 'Employer'],
     gender: ['m', 'f', 'x'],
     first_name : {
         type: String,
