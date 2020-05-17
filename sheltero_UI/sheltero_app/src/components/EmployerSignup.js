@@ -94,7 +94,6 @@ const styles = theme => ({
       postData('https://shelteroinf.herokuapp.com/user/signup', (this.state))
         .then(data => {
           console.log(data); 
-          <this.prop.history.push('/')>
         }).catch((error) => {
           console.log(error)});
 
