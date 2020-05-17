@@ -40,6 +40,9 @@ const InputWrapper = styled('div')`
     border: 0;
     margin: 0;
     outline: 0;
+    text-align:left;
+    flex-Grow:1;
+    color:grey;
     
   }
 `;
@@ -120,7 +123,6 @@ const Listbox = styled('ul')`
     }
   }
 `;
-
 
 export default function SearchByArea() {
     const {

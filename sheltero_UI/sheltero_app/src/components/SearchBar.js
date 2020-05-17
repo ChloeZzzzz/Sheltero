@@ -22,7 +22,6 @@ const InputWrapper = styled('div')`
   flex-wrap: wrap;
   color: white;
   
-  
   &:hover {
     border-color: #343078;
     box-shadow: 0 0 0 2px rgb(223, 252, 3)
@@ -41,7 +40,9 @@ const InputWrapper = styled('div')`
     border: 0;
     margin: 0;
     outline: 0;
-    
+    text-align:left;
+    flex-Grow:1;
+    color:grey;
   }
 `;
 
@@ -136,9 +137,9 @@ export default function SearchByCategory() {
         setAnchorEl,
     } = useAutocomplete({
         id: 'customized-hook-demo',
-        defaultValue: [Jobcatergries[1]],
         multiple: true,
-        options: Jobcatergries,
+        options:Jobcatergries,
+        defaultValue: [Jobcatergries[1]],
         getOptionLabel: (option) => option.category,
     });
 
