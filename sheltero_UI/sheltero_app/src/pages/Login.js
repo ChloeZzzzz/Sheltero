@@ -59,6 +59,35 @@ export default withStyles(styles) (class Login extends React.Component {
     this.setState({[e.target.name]: e.target.value});
   }
   handleSubmit(event) {
+    alert(this.state.email+ ', loged in');
+      
+    async function postData(url = '', data = {}) {
+      const response = await fetch(url, {
+        method: 'POST', 
+        mode: 'cors', 
+        cache: 'no-cache', 
+        credentials: 'same-origin', 
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer', 
+        body: JSON.stringify(data) 
+      });
+      return response.json(); 
+    }
+
+    fetch('https://shelteroinf.herokuapp.com/user/login', {
+      method: "POST",
+      body: JSON.stringify(this.state) /* convert react state to JSON ans send it as the POST body */
+    }).then(function(response){
+      console.log(response)
+      return response.json();
+    });
+    postData('https://shelteroinf.herokuapp.com/user/login', (this.state))
+      .then(data => {
+        console.log(data); 
+      });
 
     event.preventDefault();
 
