@@ -46,6 +46,7 @@ const getUserLogout = (req, res) => {
 // -> has to use async since have to wait for encryption completet
 const postUserSignup = async (req, res) => {
     try {
+        console.log(req)
         if (await email_validator.validate(req.body.email) && await emailNotSignedUp(req.body.email)) {
             const cryptedpw = await bcrypt.hash(req.body.password, 10);
             const user = new Users({
