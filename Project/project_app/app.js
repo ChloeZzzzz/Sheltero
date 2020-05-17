@@ -2,6 +2,9 @@ const express = require('express');
 //const flash = require('express-flash');
 //require('dotenv').config();
 const app = express();
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 require('./models');
 
 const morgan = require("morgan");
