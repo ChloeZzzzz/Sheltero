@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://5ebe69c3ec800c00160438fc.mockapi.io/api";
 
 // using axios to interact with Library API
 const axios = require('axios');
@@ -10,7 +10,7 @@ const axios = require('axios');
  * @return List of Objects, each containing author data.
  */
 export function getJobs() {
-    const endpoint = BASE_URL + `/job-management`;
+    const endpoint = BASE_URL + `/job`;
     console.log("getJobs");
     try{
         return axios.get(endpoint).then(res => res.data);
@@ -26,7 +26,7 @@ export function getJobs() {
  * @return Single Objects containing author data.
  */
 export function  getJob(jobID) {
-    const endpoint = BASE_URL + `/job-management/${jobID}`;
+    const endpoint = BASE_URL + `/job/${jobID}`;
 
     try{
         return axios.get(endpoint).then(res => res.data);
@@ -41,8 +41,8 @@ export function  getJob(jobID) {
  * @param {object} Job {jobID,jobTitle,salary,credit_level,jobDetail,companyID,jobTag,contact,jobArea}
  */
 export function updateJob(job) {
-    const { jobID,jobTitle,salary,credit_level,jobDetail,companyID,jobTag,contact,jobArea} = job;
-    const endpoint = BASE_URL + `/job-management/${jobID}`;
+    const { jobID,jobTitle,salary,credit_level,jobTag,contact,jobArea,companyID,jobDetail} = job;
+    const endpoint = BASE_URL + `/job/${jobID}`;
     // check the author id is present
     if (!jobID & jobTitle & jobArea) {
         alert("must include jobid, title and jobArea");
@@ -67,7 +67,7 @@ export function updateJob(job) {
     });
 
 
-    console.log("updateAuthor");
+    console.log("updateJob");
 
     return axios({
         url: endpoint,  // send a request to the API
