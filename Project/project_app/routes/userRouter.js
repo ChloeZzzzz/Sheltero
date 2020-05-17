@@ -41,8 +41,6 @@ userRouter.post('/signup', userController.postUserSignup);
 userRouter.post('/login', 
     passport.authenticate("local", { successRedirect: '/',
                                      failureRedirect: '/login'}
-), (req, res) => {
-    res.json("test");
-})
+))
 
 module.exports = userRouter;
