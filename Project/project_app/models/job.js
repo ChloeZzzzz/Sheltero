@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const JobSchema = new Schema({
-      _id : mongoose.Schema.Types.ObjectId,
+      _id : String,
       jobTitle: String,
       salary: Number,
       creditLevel: Number,
