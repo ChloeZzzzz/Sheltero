@@ -10,7 +10,7 @@
     "@material-ui/lab": "^4.0.0-alpha.53",
     "antd": "^4.2.2",
     "axios": "^0.19.2",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "clsx": "^1.1.0",
     "dotenv": "8.2.0",
     "react": "16.12.0",
@@ -18,8 +18,8 @@
     "react-router-dom": "5.1.2",
     "react-scripts": "^3.4.1",
     "styled-button-component": "^4.0.0",
-    "styled-components": "^5.1.0",
     "styled-card-component": "^4.0.0",
+    "styled-components": "^5.1.0",
     "styled-grid-system-component": "^4.0.0"
   },
   "devDependencies": {
