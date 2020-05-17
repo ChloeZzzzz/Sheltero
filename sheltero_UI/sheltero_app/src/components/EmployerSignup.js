@@ -72,7 +72,8 @@ const styles = theme => ({
     }
     
     handleSubmit(event) {
-      alert('Hi ' + JSON.stringify(this.state) + ', you have successfully signed up as an employer!');
+      alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');
+
       
       async function postData(url = '', data = {}) {
         const response = await fetch(url, {
@@ -89,11 +90,13 @@ const styles = theme => ({
         });
         return response.json(); 
       }
-      
+
       postData('https://shelteroinf.herokuapp.com/user/signup', (this.state))
         .then(data => {
           console.log(data); 
-        });
+          <this.prop.history.push('/')>
+        }).catch((error) => {
+          console.log(error)});
 
       event.preventDefault();
     }

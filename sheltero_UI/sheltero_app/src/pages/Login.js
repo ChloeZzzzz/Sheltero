@@ -126,7 +126,7 @@ export default withStyles(styles) (class Login extends React.Component {
 
           <Grid container justify="flex-end">
             <Grid item>
-                <TextLink variant="body2" href="/register" >
+                <TextLink variant="body2" href="/signup" >
                   Haven't registered yet? Sign up!
                 </TextLink>
             </Grid>
