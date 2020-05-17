@@ -22,13 +22,13 @@ const User = new Schema({
         require: true},
     contact: {
         type: String,
-        require: true},
+        require: false},
     company_name: {
         type: String,
-        require: true},
+        require: false},
     company_addr: {
         type: String,
-        require: true},
+        require: false},
     resume: {jobs: String},
 });
 
