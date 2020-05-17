@@ -76,10 +76,22 @@ export default withStyles(styles) (class Login extends React.Component {
       });
       return response.json(); 
     }
+    const res = postData('https://shelteroinf.herokuapp.com/user/login', (this.state));
+    console.log(res)
+    if (res) {
+      this.setState({redirect: '/'});
+    }
+
+    // The code below is the one that is right, but have to change the response
+    // of in the back end which is related to passport authentication
+    // and probably the flash message, where I (della) could not solve it yet.
+    // so the code above is used... (but they are wrong! they couldn't handle
+    // the redirect correctly when user authetication failed, it treats them all the same)
+    /*
     postData('https://shelteroinf.herokuapp.com/user/login', (this.state))
     .then(res => {
       console.log(res); 
-      if (res == 'success') {
+      if (res) {
         alert(this.state.email+ ', loged in');
         this.setState({ redirect: "/" });
       } else {
@@ -88,7 +100,7 @@ export default withStyles(styles) (class Login extends React.Component {
       }
     }).catch((error) => {
       console.log(error)});
-
+*/
     event.preventDefault();
 
   }
