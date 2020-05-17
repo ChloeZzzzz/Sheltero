@@ -27,9 +27,11 @@ const getUserSignup = (req, res) => {
 const getUserLogin = (req, res) => {
     if (req.user) {
         res.redirect('./');
-    } else {
+    } 
+    /*else {
         res.render("login.ejs");
     }
+    */
 }
 
 const getUserLogout = (req, res) => {
@@ -70,17 +72,17 @@ const postUserSignup = async (req, res) => {
                 console.log(user);
                 console.log(err);
             });
-            res.state.redirect = true;
-            res.redirect('login');
+
+            res.json('success');
         } else {
             console.log("Invalid email or email already signed up!");
-            res.redirect('signup');
+            //res.redirect('signup');
         }
 
     } catch (e) {
         console.log("Failed to Sign up");
         console.log(e);
-        res.redirect('signup');
+        //res.redirect('signup');
     }
 }
 
