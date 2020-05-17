@@ -91,17 +91,12 @@ const styles = theme => ({
         return response.json(); 
       }
 
-      fetch('https://shelteroinf.herokuapp.com/user/signup', {
-        method: "POST",
-        body: JSON.stringify(this.state) /* convert react state to JSON ans send it as the POST body */
-      }).then(function(response){
-        console.log(response)
-        return response.json();
-      });
       postData('https://shelteroinf.herokuapp.com/user/signup', (this.state))
         .then(data => {
           console.log(data); 
-        });
+          <this.prop.history.push('/')>
+        }).catch((error) => {
+          console.log(error)});
 
       event.preventDefault();
     }
