@@ -8,10 +8,10 @@ const User = new Schema({
         require: true},
     role: ['employee', 'employer'],
     gender: ['Male', 'Female', 'X'],
-    firstName : {
+    first_name : {
         type: String,
         require: true},
-    lastName : {
+    last_name : {
         type: String,
         require: true},
     email: {

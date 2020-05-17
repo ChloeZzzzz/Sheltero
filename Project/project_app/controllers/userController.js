@@ -50,6 +50,7 @@ const postUserSignup = async (req, res) => {
             const cryptedpw = await bcrypt.hash(req.body.password, 10);
             const user = new Users({
                 "_id" : new mongoose.Types.ObjectId(),
+                "gender" : req.body.gender,
                 "first_name" : req.body.firstName,
                 "last_name": req.body.lastName,
                 "email" : req.body.email,
