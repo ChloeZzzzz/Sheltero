@@ -48,7 +48,7 @@ export class JobTable extends React.Component {
             
               <Card active key={value._id}  style={{witdth:" 2.5vw"}}>
                 <CardImageHeader style={{Width: "2vw",
-                      Height: "1vw"}} src={"https://shelteroinf.herokuapp.com/"+value.jobImg} key={value._id}/>
+                      Height: "1vw"}} src={"https://picsum.photos/350/150"} key={value._id}/>
                 <CardBody >
                   <CardTitle >{value.jobTitle}</CardTitle>
                   <CardText >{value.jobDetail}</CardText>
