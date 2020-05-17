@@ -1,16 +1,38 @@
-module.exports = [
-    {
-        "id": "10001",
-        "first_name": "Jennifer",
-        "last_name": "Robbins",
-        "email": "sb@sb",
-        "password": "sunnydog",
-    },
-    {
-        "id": "10002",
-        "first_name": "Evan",
-        "last_name": "Hahn",
-        "email": "md@md",
-        "password": "shabby",
-    }
-]
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+//const passportLocalMongoose = require('passport-local-mongoose');
+
+const User = new Schema({
+    _id : {
+        type: String,
+        require: true},
+    role: ['employee', 'employer'],
+    gender: ['Male', 'Female', 'X'],
+    first_name : {
+        type: String,
+        require: true},
+    last_name : {
+        type: String,
+        require: true},
+    email: {
+        type: String,
+        require: true},
+    password: {
+        type: String,
+        require: true},
+    contact: {
+        type: String,
+        require: true},
+    company_name: {
+        type: String,
+        require: true},
+    company_addr: {
+        type: String,
+        require: true},
+    resume: {jobs: String},
+});
+
+
+//User.plugin(passportLocalMongoose);
+
+module.exports = mongoose.model('Users', User);

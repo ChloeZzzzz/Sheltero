@@ -1,11 +1,16 @@
-const email_validator = require('email-validator')
-const bcrypt = require('bcrypt')
+const email_validator = require('email-validator');
+const bcrypt = require('bcrypt');
 
-const users = require('../models/users.js') // get the array db
+const Users = require('../models/users.js');
+const mongoose = require('mongoose');
 
 const getUserHomepage = (req, res) => {
     if (req.user) {
-        res.render('home-auth.ejs', {useremail: req.user.email})
+        console.log("== REQ.USER ==");
+        console.log(req.user);
+        console.log("++TEST++");
+        console.log(req.user._id);
+        res.render('home-auth.ejs', {useremail: req.user.email});
     } else {
         res.redirect('../');
     }
@@ -29,28 +34,41 @@ const getUserLogin = (req, res) => {
 
 const getUserLogout = (req, res) => {
     if (req.user) {
-        req.logOut()
+        req.logOut();
         res.render("logout.ejs");
     } else {
         res.redirect('../')
     }
 }
 
-// post user sign up 
+// post user sign up
 // -> encrypt the user's password before store it into the database for security issues
 // -> has to use async since have to wait for encryption completet
 const postUserSignup = async (req, res) => {
     try {
-        if (email_validator.validate(req.body.email) && emailNotSignedUp(req.body.email)) {
+        if (await email_validator.validate(req.body.email) && await emailNotSignedUp(req.body.email)) {
             const cryptedpw = await bcrypt.hash(req.body.password, 10);
-            users.push({
-                "id" : Date.now().toString(),
+            const user = new Users({
+                "_id" : new mongoose.Types.ObjectId(),
+                "gender" : req.body.gender,
                 "first_name" : req.body.first_name,
                 "last_name": req.body.last_name,
-                "role" : req.body.role,
                 "email" : req.body.email,
-                "password" : cryptedpw
-            })
+                "password" : cryptedpw,
+                "contact": req.body.contact,
+                "company_name": req.body.company_name,
+                "company_addr": req.body.company_addr,
+                "role" : req.body.role,
+                "resume": {job: 'programmer'}
+            });
+            
+            user.save().then(result => {
+                console.log("== SAVED TO DATABASE ==")
+                console.log(result);
+            }).catch(err => {
+                console.log(user);
+                console.log(err);
+            });
             res.redirect('login');
         } else {
             console.log("Invalid email or email already signed up!");
@@ -58,19 +76,29 @@ const postUserSignup = async (req, res) => {
         }
 
     } catch (e) {
-        console.log("Failed to Sign up")
-        console.log(e)
+        console.log("Failed to Sign up");
+        console.log(e);
         res.redirect('signup');
     }
 }
 
 // a helper function, checks whether this email is exist in the database
-const emailNotSignedUp = (email) => {
-    var user = users.find(user => user.email === email);
+const emailNotSignedUp = async (email) => {
+    const user = await Users.findOne({'email': email}, (err, result) => {
+        console.log("inside find function");
+        if (err) {
+            console.log("==ERROR==");
+            console.log(err);
+        }
+        console.log("==RESULT==");
+        console.log(result);
+    })
+    console.log("==USER==");
+    console.log(user);
     if (user == null) {
-        return true
+        return true;
     }
-    return false
+    return false;
 }
 
 module.exports = {

@@ -1,5 +1,5 @@
 {
-  "name": "wow",
+  "name": "sheltero",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,7 +15,8 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "mongoose":"^5.7.9"
   },
   "devDependencies": {
     "dotenv": "^8.2.0",
