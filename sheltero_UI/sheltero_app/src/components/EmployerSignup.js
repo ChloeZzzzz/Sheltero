@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from "react-router-dom";
 import CreateIcon from '@material-ui/icons/Create';
 import { PrimButton, H2, TextLink } from './theme';
 import Copyright from './Copyright';
@@ -59,7 +60,8 @@ const styles = theme => ({
                     email: '', 
                     contact: '',
                     company_name: '',
-                    password: '' };
+                    password: '',
+                    redirect: null};
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -74,7 +76,7 @@ const styles = theme => ({
     handleSubmit(event) {
       alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');
 
-      
+      console.log("HAHAHAHAHAHAHHAHA");
       async function postData(url = '', data = {}) {
         const response = await fetch(url, {
           method: 'POST', 
@@ -88,14 +90,21 @@ const styles = theme => ({
           referrerPolicy: 'no-referrer', 
           body: JSON.stringify(data) 
         });
+        
         return response.json(); 
       }
-
+/*
       postData('https://shelteroinf.herokuapp.com/user/signup', (this.state))
         .then(data => {
           console.log(data); 
         }).catch((error) => {
           console.log(error)});
+      */
+      const res = postData('https://shelteroinf.herokuapp.com/user/signup', (this.state));
+      if (res) {
+        console.log("GOGOGOODGODGODOG");
+        this.setState({ redirect: "/login" });
+      }
 
       event.preventDefault();
     }
@@ -103,162 +112,166 @@ const styles = theme => ({
     render() {
         const { classes } = this.props; //receive classes styles
         const { first_name, last_name, email, contact, company_name, password } = this.state
-
-    return (
-      <Container component="main" maxWidth="xs" >
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-              <CreateIcon />
-          </Avatar>
-          <H2 component="h1" variant="h5">
-            Employer Sign Up
-          </H2>
-          
-          <form className={classes.form} onSubmit={this.handleSubmit} onChange={this.handleChange}>
+    if (this.state.redirect) {
+      console.log("signup in redirect"+this.state.redirect);
+      return <Redirect to={this.state.redirect} />
+    }else {
+      return (
+        <Container component="main" maxWidth="xs" >
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+                <CreateIcon />
+            </Avatar>
+            <H2 component="h1" variant="h5">
+              Employer Sign Up
+            </H2>
             
-            <Grid container spacing={2}>
-  
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  onChange={this.handleChange}
-                  className={classes.textField}
-                  name="first_name"
-                  id="first_name"
-                  label="First Name"
-                  value={this.state.first_name}
-                  autoComplete="first_name"
-                  variant="outlined" //add border to text field
-                  required
-                  fullWidth
-                />
-              </Grid>
-  
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  onChange={this.handleChange}
-                  className={classes.textField}
-                  id="last_name"
-                  label="Last Name"
-                  value={this.state.last_name}
-                  variant="outlined"
-                  name="last_name"
-                  autoComplete="last_name"
-                  required
-                  fullWidth
-                />
-              </Grid>
-  
-              <Grid item xs={12}>
-                <TextField
-                  onChange={this.handleChange}
-                  className={classes.textField}
-                  id="email"
-                  label="Email Address"
-                  value={this.state.email}
-                  type="email"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  onChange={this.handleChange}
-                  className={classes.textField}
-                  id="contact"
-                  label="Contact Number"
-                  value={this.state.contact}
-                  variant="outlined"
-                  name="contact"
-                  autoComplete="contact"
-                  required
-                  fullWidth
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  onChange={this.handleChange}
-                  className={classes.textField}
-                  id="company"
-                  label="Company/Institution Name"
-                  value={this.state.company_name}
-                  name="company_name"
-                  autoComplete="company_name"
-                  variant="outlined"
-                  required
-                  fullWidth
-                />
-              </Grid>
-  
-              <Grid item xs={12}>
-                <TextField
-                  onChange={this.handleChange}
-                  className={classes.textField}
-                  id="password"
-                  label="Create Password"
-                  value={this.state.password}
-                  type="password"
-                  autoComplete="current-password"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                />
+            <form className={classes.form} onSubmit={this.handleSubmit} onChange={this.handleChange}>
+              
+              <Grid container spacing={2}>
+    
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    onChange={this.handleChange}
+                    className={classes.textField}
+                    name="first_name"
+                    id="first_name"
+                    label="First Name"
+                    value={this.state.first_name}
+                    autoComplete="first_name"
+                    variant="outlined" //add border to text field
+                    required
+                    fullWidth
+                  />
                 </Grid>
-  
+    
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    onChange={this.handleChange}
+                    className={classes.textField}
+                    id="last_name"
+                    label="Last Name"
+                    value={this.state.last_name}
+                    variant="outlined"
+                    name="last_name"
+                    autoComplete="last_name"
+                    required
+                    fullWidth
+                  />
+                </Grid>
+    
                 <Grid item xs={12}>
-                <TextField
-                  onChange={this.handleChange}
-                  className={classes.textField}
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Confirm Password"
-                  type="password"
-                  id="createPassword"
-                  autoComplete="current-password"
-                />
+                  <TextField
+                    onChange={this.handleChange}
+                    className={classes.textField}
+                    id="email"
+                    label="Email Address"
+                    value={this.state.email}
+                    type="email"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="email"
+                    autoComplete="email"
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    onChange={this.handleChange}
+                    className={classes.textField}
+                    id="contact"
+                    label="Contact Number"
+                    value={this.state.contact}
+                    variant="outlined"
+                    name="contact"
+                    autoComplete="contact"
+                    required
+                    fullWidth
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    onChange={this.handleChange}
+                    className={classes.textField}
+                    id="company"
+                    label="Company/Institution Name"
+                    value={this.state.company_name}
+                    name="company_name"
+                    autoComplete="company_name"
+                    variant="outlined"
+                    required
+                    fullWidth
+                  />
+                </Grid>
+    
+                <Grid item xs={12}>
+                  <TextField
+                    onChange={this.handleChange}
+                    className={classes.textField}
+                    id="password"
+                    label="Create Password"
+                    value={this.state.password}
+                    type="password"
+                    autoComplete="current-password"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="password"
+                  />
+                  </Grid>
+    
+                  <Grid item xs={12}>
+                  <TextField
+                    onChange={this.handleChange}
+                    className={classes.textField}
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Confirm Password"
+                    type="password"
+                    id="createPassword"
+                    autoComplete="current-password"
+                  />
+                </Grid>
+    
+                <Grid item xs={12}>
+                  <FormControlLabel
+                    control={<Checkbox className={classes.checkbox} value="allowExtraEmails" color="primary"/>}
+                    label="I want to receive updates via email."
+                  />
+                </Grid>
+    
               </Grid>
-  
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox className={classes.checkbox} value="allowExtraEmails" color="primary"/>}
-                  label="I want to receive updates via email."
-                />
+    
+              <PrimButton
+                type="submit"
+                fullWidth
+                variant="contained"
+                className={classes.submit}>
+                Sign Up
+              </PrimButton>
+    
+              <Grid container justify="flex-end">
+                <Grid item>
+                    <TextLink variant="body2" href="/login">
+                      Already have an account? Sign in
+                    </TextLink>
+                </Grid>
               </Grid>
-  
-            </Grid>
-  
-            <PrimButton
-              type="submit"
-              fullWidth
-              variant="contained"
-              className={classes.submit}>
-              Sign Up
-            </PrimButton>
-  
-            <Grid container justify="flex-end">
-              <Grid item>
-                  <TextLink variant="body2" href="/login">
-                    Already have an account? Sign in
-                  </TextLink>
-              </Grid>
-            </Grid>
-  
-          </form>
-        </div>
-  
-        <Box mt={5} className={classes.box}>
-          <Copyright />
-        </Box>
-  
-      </Container>
-    );
-   }
+    
+            </form>
+          </div>
+    
+          <Box mt={5} className={classes.box}>
+            <Copyright />
+          </Box>
+    
+        </Container>
+      );
+    }
+  }
 })
