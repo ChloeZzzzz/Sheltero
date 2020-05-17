@@ -77,13 +77,6 @@ export default withStyles(styles) (class Login extends React.Component {
       return response.json(); 
     }
 
-    fetch('https://shelteroinf.herokuapp.com/user/login', {
-      method: "POST",
-      body: JSON.stringify(this.state) /* convert react state to JSON ans send it as the POST body */
-    }).then(function(response){
-      console.log(response)
-      return response.json();
-    });
     postData('https://shelteroinf.herokuapp.com/user/login', (this.state))
       .then(data => {
         console.log(data); 
