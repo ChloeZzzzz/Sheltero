@@ -46,14 +46,15 @@ export class JobTable extends React.Component {
           {jobs.map((value, index) => {
             return (<Column xl={6} >
             
-              <Card active key={index} >
-                <CardImageHeader key={index} src={value.jobImg} />
-                <CardBody>
-                  <CardTitle>{value.jobTitle}</CardTitle>
-                  <CardText>{value.jobDetail}</CardText>
-                  <CardFooter key={index}>
+              <Card active key={value._id}  style={{witdth:" 2.5vw"}}>
+                <CardImageHeader style={{Width: "2vw",
+                      Height: "1vw"}} src={"http://shelteroinf.herokuapp.com/"+value.jobImg} key={value._id}/>
+                <CardBody >
+                  <CardTitle >{value.jobTitle}</CardTitle>
+                  <CardText >{value.jobDetail}</CardText>
+                  <CardFooter >
                     Credit_level:{value.credit_level}
-                  </CardFooter>
+                  </CardFooter >
                   <Button primary style={{
                     backgroundColor:"#99C015", 
                     borderColor:"#99C015",

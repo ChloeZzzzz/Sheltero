@@ -37,6 +37,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "proxy": "https://5ebe69c3ec800c00160438fc.mockapi.io/"
+  ]
 }

@@ -144,6 +144,8 @@ export default function SearchByArea() {
         getOptionLabel: (option) => option.name,
     });
 
+    
+
     return (
         <NoSsr>
             <div>
