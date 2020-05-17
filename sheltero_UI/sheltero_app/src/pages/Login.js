@@ -77,17 +77,19 @@ export default withStyles(styles) (class Login extends React.Component {
       });
       return response.json(); 
     }
-/*
     postData('https://shelteroinf.herokuapp.com/user/login', (this.state))
-      .then(data => {
-        console.log(data); 
-      });
-*/
-    const res = postData('https://shelteroinf.herokuapp.com/user/login', (this.state));
-    console.log(res)
-    if (res) {
-      this.setState({redirect: '/'});
-    }
+    .then(res => {
+      console.log(res); 
+      if (res == 'success') {
+        alert(this.state.email+ ', loged in');
+        this.setState({ redirect: "/" });
+      } else {
+        alert('Opps, something went wrong so that u failed to log in!');
+        console.log("failed to log in")
+      }
+    }).catch((error) => {
+      console.log(error)});
+
     event.preventDefault();
 
   }
@@ -96,6 +98,7 @@ export default withStyles(styles) (class Login extends React.Component {
     const { classes } = this.props;
     const {email, password} = this.state;
   if (this.state.redirect) {
+    console.log("signup in redirect"+this.state.redirect);
     return <Redirect to={this.state.redirect} />
   } else {
     return (
