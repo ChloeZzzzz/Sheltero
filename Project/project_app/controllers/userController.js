@@ -76,12 +76,14 @@ const postUserSignup = async (req, res) => {
             res.json('success');
         } else {
             console.log("Invalid email or email already signed up!");
+            res.json('fail: invalid email or email already signed up');
             //res.redirect('signup');
         }
 
     } catch (e) {
         console.log("Failed to Sign up");
         console.log(e);
+        res.json('fail')
         //res.redirect('signup');
     }
 }

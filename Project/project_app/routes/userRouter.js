@@ -1,6 +1,6 @@
 const express = require('express');
 const userRouter = express.Router();
-
+const flash = require('connect-flash');
 const passport = require('passport');
 const session = require('express-session');
 
@@ -14,6 +14,7 @@ userRouter.use(session({
 }))
 userRouter.use(passport.initialize())
 userRouter.use(passport.session())
+userRouter.use(flash())
 
 const userController = require('../controllers/userController')
 
@@ -38,8 +39,8 @@ userRouter.get('/logout', userController.getUserLogout)
 userRouter.post('/signup', userController.postUserSignup);
 
 userRouter.post('/login', 
-    passport.authenticate("local", { successRedirect: './',
-                                     failureRedirect: './login'}
+    passport.authenticate("local", { successFlash: 'success',
+                                     failureFlash: 'fail'}
 ))
 
 module.exports = userRouter;
