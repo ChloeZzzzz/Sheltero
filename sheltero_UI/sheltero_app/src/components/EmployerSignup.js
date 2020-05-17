@@ -13,6 +13,7 @@ import {
          Box,
          withStyles,
          Container, } from '@material-ui/core';
+import { array } from 'prop-types';
 
 const styles = theme => ({
     paper: {
@@ -74,9 +75,7 @@ const styles = theme => ({
     }
     
     handleSubmit(event) {
-      alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');
 
-      console.log("HAHAHAHAHAHAHHAHA");
       async function postData(url = '', data = {}) {
         const response = await fetch(url, {
           method: 'POST', 
@@ -90,21 +89,22 @@ const styles = theme => ({
           referrerPolicy: 'no-referrer', 
           body: JSON.stringify(data) 
         });
-        
+
         return response.json(); 
       }
-/*
+
       postData('https://shelteroinf.herokuapp.com/user/signup', (this.state))
-        .then(data => {
-          console.log(data); 
+        .then(res => {
+          console.log(res); 
+          if (res == 'success') {
+            alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');
+            this.setState({ redirect: "/login" });
+          } else {
+            alert('Opps, something went wrong so that u failed to sign up!');
+            console.log("failed to sign up")
+          }
         }).catch((error) => {
           console.log(error)});
-      */
-      const res = postData('https://shelteroinf.herokuapp.com/user/signup', (this.state));
-      if (res) {
-        console.log("GOGOGOODGODGODOG");
-        this.setState({ redirect: "/login" });
-      }
 
       event.preventDefault();
     }
