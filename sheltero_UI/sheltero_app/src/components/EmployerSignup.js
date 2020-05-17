@@ -75,29 +75,22 @@ const styles = theme => ({
       alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');
 
       
-      // async function postData(url = '', data = {}) {
-      //   // Default options are marked with *
-      //   const response = await fetch(url, {
-      //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-      //     mode: 'cors', // no-cors, *cors, same-origin
-      //     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      //     credentials: 'same-origin', // include, *same-origin, omit
-      //     headers: {
-      //       'Content-Type': 'application/json'
-      //       // 'Content-Type': 'application/x-www-form-urlencoded',
-      //     },
-      //     redirect: 'follow', // manual, *follow, error
-      //     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-      //     body: JSON.stringify(data) // body data type must match "Content-Type" header
-      //   });
-      //   return response.json(); // parses JSON response into native JavaScript objects
-      // }
-      
-      // postData('https://example.com/answer', (this.state))
-      //   .then(data => {
-      //     console.log(data); // JSON data parsed by response.json() call
-      //   });
-      
+      async function postData(url = '', data = {}) {
+        const response = await fetch(url, {
+          method: 'POST', 
+          mode: 'cors', 
+          cache: 'no-cache', 
+          credentials: 'same-origin', 
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer', 
+          body: JSON.stringify(data) 
+        });
+        return response.json(); 
+      }
+
       fetch('https://shelteroinf.herokuapp.com/user/signup', {
         method: "POST",
         body: JSON.stringify(this.state) /* convert react state to JSON ans send it as the POST body */
@@ -105,6 +98,10 @@ const styles = theme => ({
         console.log(response)
         return response.json();
       });
+      postData('https://shelteroinf.herokuapp.com/user/signup', (this.state))
+        .then(data => {
+          console.log(data); 
+        });
 
       event.preventDefault();
     }

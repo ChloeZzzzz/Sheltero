@@ -80,6 +80,22 @@ const styles = theme => ({
     handleSubmit(event) {
       alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employee!');
       
+      async function postData(url = '', data = {}) {
+        const response = await fetch(url, {
+          method: 'POST', 
+          mode: 'cors', 
+          cache: 'no-cache', 
+          credentials: 'same-origin', 
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer', 
+          body: JSON.stringify(data) 
+        });
+        return response.json(); 
+      }
+
       fetch('https://shelteroinf.herokuapp.com/user/signup', {
         method: "POST",
         body: JSON.stringify(this.state) /* convert react state to JSON ans send it as the POST body */
@@ -87,6 +103,10 @@ const styles = theme => ({
         console.log(response)
         return response.json();
       });
+      postData('https://shelteroinf.herokuapp.com/user/signup', (this.state))
+        .then(data => {
+          console.log(data); 
+        });
 
       event.preventDefault();
     }
