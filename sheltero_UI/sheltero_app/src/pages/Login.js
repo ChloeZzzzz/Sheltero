@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
 import { PrimButton, H2, TextLink } from '../components/theme';
 import Copyright from '../components/Copyright';
@@ -76,12 +77,17 @@ export default withStyles(styles) (class Login extends React.Component {
       });
       return response.json(); 
     }
-
+/*
     postData('https://shelteroinf.herokuapp.com/user/login', (this.state))
       .then(data => {
         console.log(data); 
       });
-
+*/
+    const res = postData('https://shelteroinf.herokuapp.com/user/login', (this.state));
+    console.log(res)
+    if (res) {
+      this.setState({redirect: '/'});
+    }
     event.preventDefault();
 
   }
@@ -89,79 +95,82 @@ export default withStyles(styles) (class Login extends React.Component {
   render() {
     const { classes } = this.props;
     const {email, password} = this.state;
-
-  return (
-    <Container component="main" maxWidth="xs" >
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-            <UserOutlined />
-        </Avatar>
-        <H2 component="h1" variant="h5">
-          Sign in
-        </H2>
-        
-        <form className={classes.form} onSubmit={this.handleSubmit} onChange={this.handleChange}>
-
+  if (this.state.redirect) {
+    return <Redirect to={this.state.redirect} />
+  } else {
+    return (
+      <Container component="main" maxWidth="xs" >
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+              <UserOutlined />
+          </Avatar>
+          <H2 component="h1" variant="h5">
+            Sign in
+          </H2>
           
-          <Grid container spacing={2}>
+          <form className={classes.form} onSubmit={this.handleSubmit} onChange={this.handleChange}>
 
-            <Grid item xs={12}>
-              <TextField
-                className={classes.textField}
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={this.state.email}
-              />
+            
+            <Grid container spacing={2}>
+
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.textField}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  value={this.state.email}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.textField}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={this.state.password}
+                />
+              </Grid>
+
+
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                className={classes.textField}
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={this.state.password}
-              />
+            <PrimButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              className={classes.submit}>
+              Login
+            </PrimButton>
+
+            <Grid container justify="flex-end">
+              <Grid item>
+                  <TextLink variant="body2" href="/signup" >
+                    Haven't registered yet? Sign up!
+                  </TextLink>
+              </Grid>
             </Grid>
 
+          </form>
+        </div>
 
-          </Grid>
+        <Box mt={5} className={classes.box}>
+          <Copyright />
+        </Box>
 
-          <PrimButton
-            type="submit"
-            fullWidth
-            variant="contained"
-            className={classes.submit}>
-            Login
-          </PrimButton>
-
-          <Grid container justify="flex-end">
-            <Grid item>
-                <TextLink variant="body2" href="/signup" >
-                  Haven't registered yet? Sign up!
-                </TextLink>
-            </Grid>
-          </Grid>
-
-        </form>
-      </div>
-
-      <Box mt={5} className={classes.box}>
-        <Copyright />
-      </Box>
-
-    </Container>
-  );
+      </Container>
+    );
+  }
 }
 })
