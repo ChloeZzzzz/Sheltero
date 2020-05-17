@@ -69,6 +69,7 @@ const postUserSignup = async (req, res) => {
                 console.log(user);
                 console.log(err);
             });
+            res.state('test');
             res.redirect('login');
         } else {
             console.log("Invalid email or email already signed up!");
