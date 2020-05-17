@@ -24,7 +24,7 @@ To run it simply type:
 ## Features
 **Sign up**
 
-We have implemented a sign up function which would allow candidates to sign up onto our website; the data is currently stored in the models folder, and is therefore not connected to a cloud database. However, the user is still allowed to signup. Candidates could pick whether they are an employee or employer. To ensure protection of user's personal information, the user's password is encrypted before saving into the 'database'. 
+We have implemented a sign up function which would allow candidates to sign up onto our website; the data is currently stored using MongoDB Atlas. Candidates could pick whether they are an employee or employer. To ensure protection of user's personal information, the user's password is encrypted before saving into the 'database'. 
 
 To access the signup function, simply click on the url link below, or visit the homepage and click on the *signup button*
 
@@ -34,7 +34,7 @@ URL Link (Frontend): http://sheltero.herokuapp.com/signup
 
 **Sign in**
 
-The sign in feature has also been implemented and the identification of individuals is dealt with passport.js. It looks for the individual in the models folder and check to see if they are an existing user, and have the correct password. passport.js is responsible for rerouting users to the right direction, ie. if they are not the user signed in, they are redirected to a different page
+The sign in feature has also been implemented and the identification of individuals is dealt with passport.js. It looks for the individual in the MongoDb and check to see if they are an existing user, and have the correct password. passport.js is responsible for rerouting users to the right direction, ie. if they are not the user signed in, they are redirected to a different page
 
 To access the signin function, simply click on the url link below, or visit the homepage and click on the *signin button*
 
