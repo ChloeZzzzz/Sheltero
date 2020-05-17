@@ -24,9 +24,11 @@ const jobRouter = require('./routes/jobRouter');
 
 app.use(morgan('dev'));
 
-app.use('/user', userRouter)
+app.use('/user', userRouter);
 
 app.use('/job-search', jobRouter);
+
+app.use('/uploads', express.static('uploads'));
 
 // GET homepage
 app.get('/', (req, res) => {
