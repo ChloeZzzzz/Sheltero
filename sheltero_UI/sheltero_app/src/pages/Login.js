@@ -60,7 +60,6 @@ export default withStyles(styles) (class Login extends React.Component {
     this.setState({[e.target.name]: e.target.value});
   }
   handleSubmit(event) {
-    alert(this.state.email+ ', loged in');
       
     async function postData(url = '', data = {}) {
       const response = await fetch(url, {
