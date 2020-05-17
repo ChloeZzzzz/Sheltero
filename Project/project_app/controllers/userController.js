@@ -57,8 +57,8 @@ const postUserSignup = async (req, res) => {
             const user = new Users({
                 "_id" : new mongoose.Types.ObjectId(),
                 "gender" : req.body.gender,
-                "first_name" : req.body.first_name,
-                "last_name": req.body.last_name,
+                "first_name" : req.body.fname,
+                "last_name": req.body.lname,
                 "email" : req.body.email,
                 "password" : cryptedpw,
                 "contact": req.body.contact,
