@@ -54,28 +54,46 @@ const styles = theme => ({
   
   
   export default withStyles(styles) (class EmployeeSignup extends React.Component {
-    
-    /* implement constructor() to initialise state and bind event handler*/
+    /* implement constructor() to bind event handler*/
     constructor(props) { 
       super(props);
-      this.state = {employeeRegister: { gender: '', fname: '', lname: '', email: '', password: '' }};
-  
+      /* initialise this state */
+      this.state = {
+                    type: [this.props.workType],
+                    gender: '',
+                    first_name: '', 
+                    last_name: '', 
+                    email: '', 
+                    password: '' };
+
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    /* getting values from form*/
-    handleChange(event) {
-      this.setState({value: event.target.value});
+    handleChange (e) {
+      this.setState({ 
+        [e.target.name] : e.target.value
+      });
     }
+
+
     handleSubmit(event) {
-      alert('Hi' + this.state.fname + ', you have successfully signed up as an employee!');
+      alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employee!');
+      
+      fetch('https://shelteroinf.herokuapp.com/user/signup', {
+        method: "POST",
+        body: JSON.stringify(this.state) /* convert react state to JSON ans send it as the POST body */
+      }).then(function(response){
+        console.log(response)
+        return response.json();
+      });
+
       event.preventDefault();
     }
     
     render () {
       const { classes } = this.props; /* to implement styles */
-      const {employeeRegister: {gender, fname, lname, email, password } } = this.state;
+      const { type, gender, first_name, last_name, email, password  } = this.state;
     
     return (
       <Container component="main" maxWidth="xs" >
@@ -88,7 +106,7 @@ const styles = theme => ({
             Employee Sign Up
           </H2>
           
-          <form className={classes.form} onSubmit={this.handleSubmit}>
+          <form className={classes.form} onSubmit={this.handleSubmit} onChange={this.handleChange}>
   
             
             <Grid container spacing={2}>
@@ -96,11 +114,12 @@ const styles = theme => ({
                     <FormControl variant="outlined" className={classes.formControl}>
                       <InputLabel>Gender</InputLabel>
                       <Select
+                        onChange={this.handleChange}
+                        value={this.state.gender}
+                        name="gender"
                         required
                         labelId="gender"
                         id="gender"
-                        value={this.state.gender}
-                        onChange={this.handleChange}
                         label="Gender">
                         <MenuItem value="" disabled>Gender</MenuItem>
                         <MenuItem value={'m'}>Male</MenuItem>
@@ -113,62 +132,69 @@ const styles = theme => ({
               <Grid item xs={12} sm={6}>
                 <TextField
                   className={classes.textField}
-                  autoComplete="fname"
-                  name="fname"
+                  onChange={this.handleChange}
+                  value={this.state.first_name}
+                  name="first_name"
+                  autoComplete="first_name"
                   variant="outlined" //add border to text field
                   required
                   fullWidth
-                  id="fname"
+                  id="first_name"
                   label="First Name"
-                  value={this.state.fname}
                 />
               </Grid>
   
               <Grid item xs={12} sm={6}>
                 <TextField
                   className={classes.textField}
+                  onChange={this.handleChange}
+                  value={this.state.last_name}
+                  name="last_name"
                   variant="outlined"
                   required
                   fullWidth
-                  id="lname"
+                  id="last_name"
                   label="Last Name"
-                  name="lname"
-                  autoComplete="lname"
-                  value={this.state.lname}
+                  autoComplete="last_name"
                 />
               </Grid>
   
               <Grid item xs={12}>
                 <TextField
                   className={classes.textField}
+                  onChange={this.handleChange}
+                  value={this.state.email}
                   variant="outlined"
                   required
                   fullWidth
                   id="email"
+                  type="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  value={this.state.email}
                 />
               </Grid>
   
               <Grid item xs={12}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
+                  value={this.state.password}
+                  name="password"
                   variant="outlined"
                   required
                   fullWidth
-                  name="password"
                   label="Create Password"
                   type="password"
                   id="password"
                   autoComplete="current-password"
-                  value={this.state.password}
+                  
                 />
                 </Grid>
   
                 <Grid item xs={12}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
                   variant="outlined"
                   required

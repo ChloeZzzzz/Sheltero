@@ -51,30 +51,67 @@ const styles = theme => ({
     /* implement constructor() to bind event handler*/
     constructor(props) { 
       super(props);
-      this.state = {employerRegister: 
-                      { fname: '', 
-                        lname: '', 
-                        email: '', 
-                        contactNum: '',
-                        companyName: '',
-                        password: '' }};
+      /* initialise this state */
+      this.state = {
+                    type: [this.props.workType],
+                    first_name: '', 
+                    last_name: '', 
+                    email: '', 
+                    contact: '',
+                    company_name: '',
+                    password: '' };
 
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    /* getting values from form*/
-    handleChange(event) {
-      this.setState({value: event.target.value});
+    handleChange (e) {
+      this.setState({ 
+        [e.target.name] : e.target.value
+      });
     }
+    
     handleSubmit(event) {
-      alert('Hi' + this.state.fname + ', you have successfully signed up as an employer!');
+      alert('Hi ' + JSON.stringify(this.state) + ', you have successfully signed up as an employer!');
+
+      
+      // async function postData(url = '', data = {}) {
+      //   // Default options are marked with *
+      //   const response = await fetch(url, {
+      //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      //     mode: 'cors', // no-cors, *cors, same-origin
+      //     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      //     credentials: 'same-origin', // include, *same-origin, omit
+      //     headers: {
+      //       'Content-Type': 'application/json'
+      //       // 'Content-Type': 'application/x-www-form-urlencoded',
+      //     },
+      //     redirect: 'follow', // manual, *follow, error
+      //     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+      //     body: JSON.stringify(data) // body data type must match "Content-Type" header
+      //   });
+      //   return response.json(); // parses JSON response into native JavaScript objects
+      // }
+      
+      // postData('https://example.com/answer', (this.state))
+      //   .then(data => {
+      //     console.log(data); // JSON data parsed by response.json() call
+      //   });
+      
+      fetch('https://shelteroinf.herokuapp.com/user/signup', {
+        method: "POST",
+        body: JSON.stringify(this.state) /* convert react state to JSON ans send it as the POST body */
+      }).then(function(response){
+        console.log(response)
+        return response.json();
+      });
+
       event.preventDefault();
     }
     
     render() {
         const { classes } = this.props; //receive classes styles
-        const { open, employerRegister: {fname, lname, email, contactNum, companyName, password } } = this.state
+        const { first_name, last_name, email, contact, company_name, password } = this.state
 
     return (
       <Container component="main" maxWidth="xs" >
@@ -87,19 +124,19 @@ const styles = theme => ({
             Employer Sign Up
           </H2>
           
-          <form className={classes.form} onSubmit={this.handleSubmit}>
-  
+          <form className={classes.form} onSubmit={this.handleSubmit} onChange={this.handleChange}>
             
             <Grid container spacing={2}>
   
               <Grid item xs={12} sm={6}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
-                  id="fname"
+                  name="first_name"
+                  id="first_name"
                   label="First Name"
-                  value={this.state.fname}
-                  autoComplete="fname"
-                  name="fname"
+                  value={this.state.first_name}
+                  autoComplete="first_name"
                   variant="outlined" //add border to text field
                   required
                   fullWidth
@@ -108,13 +145,14 @@ const styles = theme => ({
   
               <Grid item xs={12} sm={6}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
-                  id="lname"
+                  id="last_name"
                   label="Last Name"
-                  value={this.state.lname}
+                  value={this.state.last_name}
                   variant="outlined"
-                  name="lname"
-                  autoComplete="lname"
+                  name="last_name"
+                  autoComplete="last_name"
                   required
                   fullWidth
                 />
@@ -122,10 +160,12 @@ const styles = theme => ({
   
               <Grid item xs={12}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
                   id="email"
                   label="Email Address"
                   value={this.state.email}
+                  type="email"
                   variant="outlined"
                   required
                   fullWidth
@@ -136,13 +176,14 @@ const styles = theme => ({
 
               <Grid item xs={12}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
-                  id="contactNum"
+                  id="contact"
                   label="Contact Number"
-                  value={this.state.email}
+                  value={this.state.contact}
                   variant="outlined"
-                  name="contactNum"
-                  autoComplete="contactNum"
+                  name="contact"
+                  autoComplete="contact"
                   required
                   fullWidth
                 />
@@ -150,12 +191,13 @@ const styles = theme => ({
 
               <Grid item xs={12}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
                   id="company"
                   label="Company/Institution Name"
-                  value={this.state.companyName}
-                  name="companyName"
-                  autoComplete="companyName"
+                  value={this.state.company_name}
+                  name="company_name"
+                  autoComplete="company_name"
                   variant="outlined"
                   required
                   fullWidth
@@ -164,6 +206,7 @@ const styles = theme => ({
   
               <Grid item xs={12}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
                   id="password"
                   label="Create Password"
@@ -179,6 +222,7 @@ const styles = theme => ({
   
                 <Grid item xs={12}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
                   variant="outlined"
                   required
