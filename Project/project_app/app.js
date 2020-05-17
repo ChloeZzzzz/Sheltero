@@ -1,6 +1,6 @@
 const express = require('express');
-//const flash = require('express-flash')
-require('dotenv').config();
+//const flash = require('express-flash');
+//require('dotenv').config();
 const app = express();
 require('./models');
 
