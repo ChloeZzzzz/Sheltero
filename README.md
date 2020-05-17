@@ -1,11 +1,25 @@
 # Sheltero
 Job finding App designed for everyone. Visit the website at shelteroinf.herokuapp.com. The app can be run under the folder **Project/project_app and found** at : https://github.com/SaintTan/Sheltero
 
-## To deploy app
+## To deploy backend
+*Please ensure that you are on **master branch** before running the code provided below!*
+
 Since the root of the branch is not the app, please use the command:
 ```git subtree push --prefix Project/project_app heroku master```
 to deploy the app on heroku.
 
+## To deploy frontend
+*Please ensure that you are on **frontend-dev branch** before running the code provided below!*
+
+Since the root of the branch is not the app, please use the command:
+```git subtree push --prefix sheltero_UI/sheltero_app heroku master```
+to deploy the app on heroku.
+
+To run it simply type:
+```cd sheltero_UI/sheltero_app``` and then ```npm start``` to run the app.
+
+*note you might run into some problems regarding react-start; if so delete node_modules and run the codes below to fix it and re-run the code above*
+```npm install``` and then ```npm audit fix```
 
 ## Features
 **Sign up**
