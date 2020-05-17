@@ -7,7 +7,7 @@ const User = new Schema({
         type: String,
         require: true},
     role: ['employee', 'employer'],
-    gender: ['Male', 'Female', 'X'],
+    gender: ['m', 'f', 'x'],
     first_name : {
         type: String,
         require: true},
