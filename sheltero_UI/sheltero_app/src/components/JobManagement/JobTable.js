@@ -48,12 +48,12 @@ export class JobTable extends React.Component {
             
               <Card active key={value._id}  style={{witdth:" 2.5vw"}}>
                 <CardImageHeader style={{Width: "2vw",
-                      Height: "1vw"}} src={"http://shelteroinf.herokuapp.com/"+value.jobImg} key={value._id}/>
+                      Height: "1vw"}} src={"https://shelteroinf.herokuapp.com/"+value.jobImg} key={value._id}/>
                 <CardBody >
                   <CardTitle >{value.jobTitle}</CardTitle>
                   <CardText >{value.jobDetail}</CardText>
                   <CardFooter >
-                    Credit_level:{value.credit_level}
+                    Credit_level:{value.creditLevel}
                   </CardFooter >
                   <Button primary style={{
                     backgroundColor:"#99C015", 

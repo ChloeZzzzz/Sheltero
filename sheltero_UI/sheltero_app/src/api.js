@@ -1,4 +1,4 @@
-const BASE_URL = "http://shelteroinf.herokuapp.com";
+const BASE_URL = "https://shelteroinf.herokuapp.com";
 
 // using axios to interact with Library API
 const axios = require('axios');
@@ -28,7 +28,7 @@ export function getJobs() {
  * @return Single Objects containing author data.
  */
 export function  getJob(_id) {
-    const endpoint = BASE_URL + `/job/${_id}`;
+    const endpoint = BASE_URL + `/job-search/${_id}`;
 
     try{
         return axios.get(endpoint).then(res => res.data);
