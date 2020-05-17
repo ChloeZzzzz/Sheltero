@@ -16,7 +16,7 @@ export default function Home() {
         <Link href="/login">
           <PrimButton>Sign In</PrimButton>
         </Link>
-        <Link href="/register">
+        <Link href="/signup">
           <PrimButton>Sign Up</PrimButton>
         </Link>
       </Box>

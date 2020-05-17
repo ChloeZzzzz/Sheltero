@@ -19,7 +19,7 @@ export function Nav (){
         <NavLink to="/login">
           Sign In
         </NavLink>
-        <NavLink to="/register">
+        <NavLink to="/signup">
           Sign Up
         </NavLink>
       </span> 

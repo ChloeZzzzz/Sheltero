@@ -2,14 +2,11 @@ import React from "react";
 import { UserOutlined } from '@ant-design/icons';
 import { PrimButton, H2, TextLink } from '../components/theme';
 import Copyright from '../components/Copyright';
-import { Link as RouterLink } from "react-router-dom";
 import { Avatar,
          CssBaseline,
          TextField,
-         Link,
-         Grid,
          Box,
-         Typography,
+         Grid,
          withStyles,
          Container } from '@material-ui/core';
 
@@ -51,18 +48,20 @@ export default withStyles(styles) (class Login extends React.Component {
   /* implement constructor() to bind event handler*/
   constructor(props) { 
     super(props);
-    this.state = {login: {email: '', password: ''}};
+    this.state = {email: '', password: ''};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   /* getting values from form*/
-  handleChange(event) {
-    this.setState({value: event.target.value});
+  handleChange(e) {
+    this.setState({[e.target.name]: e.target.value});
   }
   handleSubmit(event) {
+
     event.preventDefault();
+
   }
 
   render() {
@@ -80,7 +79,7 @@ export default withStyles(styles) (class Login extends React.Component {
           Sign in
         </H2>
         
-        <form className={classes.form} onSubmit={this.handleSubmit} >
+        <form className={classes.form} onSubmit={this.handleSubmit} onChange={this.handleChange}>
 
           
           <Grid container spacing={2}>

@@ -21,7 +21,7 @@ export default function App() {
           renders the first one that matches the current URL. */}
           {/* Link each pages and specify components to render */}
           <Route exact path="/login" render={props => <Login {...props} />} />
-          <Route exact path="/register" render={props => <Register {...props} />} />
+          <Route exact path="/signup" render={props => <Register {...props} />} />
           <Route exact path="/" render={props => <Home {...props} />} />
           <Route exact path="/job" render={props => <Job {...props} />} />
         </Switch>

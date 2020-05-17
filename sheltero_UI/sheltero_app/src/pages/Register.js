@@ -54,9 +54,9 @@ export default function Register () {
           <div>
             {(() => {
             if (value === 'employer') {
-              return(<EmployerSignup />)
+              return(<EmployerSignup workType="Employer"/>)
             } else if (value === 'employee') {
-              return(<EmployeeSignup />)
+              return(<EmployeeSignup workType="Employee"/>)
             } 
           })()}
           </div>
