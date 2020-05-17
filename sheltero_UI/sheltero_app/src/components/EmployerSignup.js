@@ -72,7 +72,7 @@ const styles = theme => ({
     }
     
     handleSubmit(event) {
-      alert('Hi ' + JSON.stringify(this.state) + ', you have successfully signed up as an employer!');
+      alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');
 
       
       // async function postData(url = '', data = {}) {
