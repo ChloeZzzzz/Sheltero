@@ -1,8 +1,7 @@
-import { styled, createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { styled, createMuiTheme, makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
-
 
 // ***************************CREATE THEME**************************** //
 
@@ -15,7 +14,7 @@ export const theme = createMuiTheme({
             light: '#E8F2D8',
             dark: '#638709',
         },
-        secondary: 
+        secondary:
         {
             main: '#FBDF3D',
         },
@@ -38,7 +37,7 @@ export const theme = createMuiTheme({
 // ***************************EXPORT STYLES FOR CLASSES**************************** //
 
 export const useStyles = makeStyles((theme) => ({
-    
+
     copyright: {
       margin: theme.spacing(20,0,5),
       width: '100%',
@@ -56,7 +55,20 @@ export const useStyles = makeStyles((theme) => ({
     header: {
         /* set header space under nav bar */
         height: '8vh',
-    }
+    },
+
+    titleAnimation: {
+      animation: `$titleAnimation 5s 1`
+    },
+
+    '@keyframes titleAnimation': {
+      '0%': {
+        color: "#fff",
+      },
+      '100%': {
+        color: "#002E18",
+      }
+    },
 })
 )
 
@@ -80,12 +92,10 @@ export const PrimButton = styled(Button)({
     '&:hover': {
         background: "#638709",
     },
-    
-
 });
 
 export const H1 = styled(Typography)({
-    color: "002E18",
+    color: "#002E18",
     fontFamily: [
         'futura',
         'serif',
@@ -124,4 +134,3 @@ export const TextLink = styled(Link)({
     fontSize: 14,
     letterSpacing: 0,
 })
-
