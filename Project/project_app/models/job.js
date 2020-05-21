@@ -7,9 +7,9 @@ const JobSchema = new Schema({
       salary: Number,
       creditLevel: Number,
       jobDetail: String,
-      companyID: String,
+      company_name: String,
       jobTag: String,
-      contactEmail: String,
+      contact: String,
       jobArea: String,
       jobImg: String,
 });

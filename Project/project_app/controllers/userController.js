@@ -27,7 +27,7 @@ const getUserSignup = (req, res) => {
 const getUserLogin = (req, res) => {
     if (req.user) {
         res.redirect('./');
-    } 
+    }
     /*else {
         res.render("login.ejs");
     }
@@ -64,7 +64,7 @@ const postUserSignup = async (req, res) => {
                 "type" : req.body.type,
                 "resume": {job: 'programmer'}
             });
-            
+
             user.save().then(result => {
                 console.log("== SAVED TO DATABASE ==")
                 console.log(result);
@@ -107,10 +107,46 @@ const emailNotSignedUp = async (email) => {
     return false;
 }
 
+const postUpdateUser = async(req, res) => {
+    if (req.user) {
+        const userData = await Users.find({"email": req.user.email}, (err, result) => {
+            if (err) {
+                console.log("==ERROR==");
+                console.log(err);
+            }
+            console.log("==RESULT==");
+            console.log(result);
+        });
+        if (req.body.contact != null) {
+            userData.contact = req.body.contact;
+        }
+        if (req.body.company_name != null) {
+            userData.company_name = req.body.company_name;
+        }
+        if (req.body.company_addr != null) {
+            userData.company_addr = req.body.company_addr;
+        }
+        userData.save();
+
+    }
+    else {
+      res.redirect("login.ejs");
+    }
+}
+
+const getUpdateUser = (req, res) => {
+    if (req.user) {
+        res.render('user-update.ejs', {useremail: req.user.email});
+    } else {
+        res.redirect('login.ejs');
+    }
+}
+
 module.exports = {
     getUserHomepage,
     getUserSignup,
     getUserLogin,
     getUserLogout,
-    postUserSignup
+    postUserSignup,
+    postUpdateUser,
 }

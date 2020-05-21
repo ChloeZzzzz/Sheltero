@@ -35,12 +35,17 @@ userRouter.get('/login', userController.getUserLogin);
 // GET user logout
 userRouter.get('/logout', userController.getUserLogout)
 
+// GET user update
+userRouter.get('/updateUser', (req, res) => userController.getUpdateUser(req, res));
+
 // ======== POST request ========
 userRouter.post('/signup', userController.postUserSignup);
 
-userRouter.post('/login', 
+userRouter.post('/login',
     passport.authenticate("local", { successRedirect: '/',
                                      failureRedirect: '/login'}
 ))
+
+userRouter.post('/updateUser', userController.postUpdateUser);
 
 module.exports = userRouter;
