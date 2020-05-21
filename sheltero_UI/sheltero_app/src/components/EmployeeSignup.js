@@ -80,7 +80,7 @@ const styles = theme => ({
 
 
     handleSubmit(event) {
-      
+
       async function postData(url = '', data = {}) {
         const response = await fetch(url, {
           method: 'POST',
@@ -99,8 +99,8 @@ const styles = theme => ({
 
       postData('https://shelteroinf.herokuapp.com/user/signup', (this.state))
         .then(res => {
-          console.log(res); 
-          if (res == 'success') {
+          console.log(res);
+          if (res === 'success') {
             alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');
             this.setState({ redirect: "/login" });
           } else {
