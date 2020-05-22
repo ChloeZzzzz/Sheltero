@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
 import { PrimButton, H2, TextLink } from '../components/theme';
 import Copyright from '../components/Copyright';
@@ -59,7 +60,6 @@ export default withStyles(styles) (class Login extends React.Component {
     this.setState({[e.target.name]: e.target.value});
   }
   handleSubmit(event) {
-    alert(this.state.email+ ', loged in');
       
     async function postData(url = '', data = {}) {
       const response = await fetch(url, {
@@ -76,12 +76,31 @@ export default withStyles(styles) (class Login extends React.Component {
       });
       return response.json(); 
     }
+    const res = postData('https://shelteroinf.herokuapp.com/user/login', (this.state));
+    console.log(res)
+    if (res) {
+      this.setState({redirect: '/'});
+    }
 
+    // The code below is the one that is right, but have to change the response
+    // of in the back end which is related to passport authentication
+    // and probably the flash message, where I (della) could not solve it yet.
+    // so the code above is used... (but they are wrong! they couldn't handle
+    // the redirect correctly when user authetication failed, it treats them all the same)
+    /*
     postData('https://shelteroinf.herokuapp.com/user/login', (this.state))
-      .then(data => {
-        console.log(data); 
-      });
-
+    .then(res => {
+      console.log(res); 
+      if (res) {
+        alert(this.state.email+ ', loged in');
+        this.setState({ redirect: "/" });
+      } else {
+        alert('Opps, something went wrong so that u failed to log in!');
+        console.log("failed to log in")
+      }
+    }).catch((error) => {
+      console.log(error)});
+*/
     event.preventDefault();
 
   }
@@ -89,79 +108,83 @@ export default withStyles(styles) (class Login extends React.Component {
   render() {
     const { classes } = this.props;
     const {email, password} = this.state;
-
-  return (
-    <Container component="main" maxWidth="xs" >
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-            <UserOutlined />
-        </Avatar>
-        <H2 component="h1" variant="h5">
-          Sign in
-        </H2>
-        
-        <form className={classes.form} onSubmit={this.handleSubmit} onChange={this.handleChange}>
-
+  if (this.state.redirect) {
+    console.log("signup in redirect"+this.state.redirect);
+    return <Redirect to={this.state.redirect} />
+  } else {
+    return (
+      <Container component="main" maxWidth="xs" >
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+              <UserOutlined />
+          </Avatar>
+          <H2 component="h1" variant="h5">
+            Sign in
+          </H2>
           
-          <Grid container spacing={2}>
+          <form className={classes.form} onSubmit={this.handleSubmit} onChange={this.handleChange}>
 
-            <Grid item xs={12}>
-              <TextField
-                className={classes.textField}
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                value={this.state.email}
-              />
+            
+            <Grid container spacing={2}>
+
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.textField}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  value={this.state.email}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  className={classes.textField}
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={this.state.password}
+                />
+              </Grid>
+
+
             </Grid>
 
-            <Grid item xs={12}>
-              <TextField
-                className={classes.textField}
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={this.state.password}
-              />
+            <PrimButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              className={classes.submit}>
+              Login
+            </PrimButton>
+
+            <Grid container justify="flex-end">
+              <Grid item>
+                  <TextLink variant="body2" href="/signup" >
+                    Haven't registered yet? Sign up!
+                  </TextLink>
+              </Grid>
             </Grid>
 
+          </form>
+        </div>
 
-          </Grid>
+        <Box mt={5} className={classes.box}>
+          <Copyright />
+        </Box>
 
-          <PrimButton
-            type="submit"
-            fullWidth
-            variant="contained"
-            className={classes.submit}>
-            Login
-          </PrimButton>
-
-          <Grid container justify="flex-end">
-            <Grid item>
-                <TextLink variant="body2" href="/signup" >
-                  Haven't registered yet? Sign up!
-                </TextLink>
-            </Grid>
-          </Grid>
-
-        </form>
-      </div>
-
-      <Box mt={5} className={classes.box}>
-        <Copyright />
-      </Box>
-
-    </Container>
-  );
+      </Container>
+    );
+  }
 }
 })

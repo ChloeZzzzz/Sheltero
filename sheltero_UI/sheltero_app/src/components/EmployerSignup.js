@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import CreateIcon from '@material-ui/icons/Create';
 import { PrimButton, H2, TextLink } from './theme';
 import Copyright from './Copyright';
-import {  
+import {
          Avatar,
          CssBaseline,
          TextField,
@@ -13,6 +13,7 @@ import {
          Box,
          withStyles,
          Container, } from '@material-ui/core';
+import { array } from 'prop-types';
 
 const styles = theme => ({
     paper: {
@@ -43,21 +44,21 @@ const styles = theme => ({
       display: 'flex',
       alignItems: 'flex-start',
     },
-    
+
     })
-  
-  
-  
+
+
+
   export default withStyles(styles) (class EmployerSignup extends React.Component {
     /* implement constructor() to bind event handler*/
-    constructor(props) { 
+    constructor(props) {
       super(props);
       /* initialise this state */
       this.state = {
                     type: [this.props.workType],
-                    first_name: '', 
-                    last_name: '', 
-                    email: '', 
+                    first_name: '',
+                    last_name: '',
+                    email: '',
                     contact: '',
                     company_name: '',
                     password: '',
@@ -68,47 +69,46 @@ const styles = theme => ({
     }
 
     handleChange (e) {
-      this.setState({ 
+      this.setState({
         [e.target.name] : e.target.value
       });
     }
-    
-    handleSubmit(event) {
-      alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');
 
-      console.log("HAHAHAHAHAHAHHAHA");
+    handleSubmit(event) {
+
       async function postData(url = '', data = {}) {
         const response = await fetch(url, {
-          method: 'POST', 
-          mode: 'cors', 
-          cache: 'no-cache', 
-          credentials: 'same-origin', 
+          method: 'POST',
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
           headers: {
             'Content-Type': 'application/json'
           },
           redirect: 'follow',
-          referrerPolicy: 'no-referrer', 
-          body: JSON.stringify(data) 
+          referrerPolicy: 'no-referrer',
+          body: JSON.stringify(data)
         });
-        
-        return response.json(); 
+
+        return response.json();
       }
-/*
+
       postData('https://shelteroinf.herokuapp.com/user/signup', (this.state))
-        .then(data => {
-          console.log(data); 
+        .then(res => {
+          console.log(res);
+          if (res === 'success') {
+            alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');
+            this.setState({ redirect: "/login" });
+          } else {
+            alert('Opps, something went wrong so that u failed to sign up!');
+            console.log("failed to sign up")
+          }
         }).catch((error) => {
           console.log(error)});
-      */
-      const res = postData('https://shelteroinf.herokuapp.com/user/signup', (this.state));
-      if (res) {
-        console.log("GOGOGOODGODGODOG");
-        this.setState({ redirect: "/login" });
-      }
 
       event.preventDefault();
     }
-    
+
     render() {
         const { classes } = this.props; //receive classes styles
         const { first_name, last_name, email, contact, company_name, password } = this.state
@@ -126,11 +126,11 @@ const styles = theme => ({
             <H2 component="h1" variant="h5">
               Employer Sign Up
             </H2>
-            
+
             <form className={classes.form} onSubmit={this.handleSubmit} onChange={this.handleChange}>
-              
+
               <Grid container spacing={2}>
-    
+
                 <Grid item xs={12} sm={6}>
                   <TextField
                     onChange={this.handleChange}
@@ -145,7 +145,7 @@ const styles = theme => ({
                     fullWidth
                   />
                 </Grid>
-    
+
                 <Grid item xs={12} sm={6}>
                   <TextField
                     onChange={this.handleChange}
@@ -160,7 +160,7 @@ const styles = theme => ({
                     fullWidth
                   />
                 </Grid>
-    
+
                 <Grid item xs={12}>
                   <TextField
                     onChange={this.handleChange}
@@ -206,7 +206,7 @@ const styles = theme => ({
                     fullWidth
                   />
                 </Grid>
-    
+
                 <Grid item xs={12}>
                   <TextField
                     onChange={this.handleChange}
@@ -222,7 +222,7 @@ const styles = theme => ({
                     name="password"
                   />
                   </Grid>
-    
+
                   <Grid item xs={12}>
                   <TextField
                     onChange={this.handleChange}
@@ -237,16 +237,16 @@ const styles = theme => ({
                     autoComplete="current-password"
                   />
                 </Grid>
-    
+
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox className={classes.checkbox} value="allowExtraEmails" color="primary"/>}
                     label="I want to receive updates via email."
                   />
                 </Grid>
-    
+
               </Grid>
-    
+
               <PrimButton
                 type="submit"
                 fullWidth
@@ -254,7 +254,7 @@ const styles = theme => ({
                 className={classes.submit}>
                 Sign Up
               </PrimButton>
-    
+
               <Grid container justify="flex-end">
                 <Grid item>
                     <TextLink variant="body2" href="/login">
@@ -262,14 +262,14 @@ const styles = theme => ({
                     </TextLink>
                 </Grid>
               </Grid>
-    
+
             </form>
           </div>
-    
+
           <Box mt={5} className={classes.box}>
             <Copyright />
           </Box>
-    
+
         </Container>
       );
     }
