@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import CreateIcon from '@material-ui/icons/Create';
 import { PrimButton, H2, TextLink } from './theme';
 import Copyright from './Copyright';
+import { postUser } from "../api.js";
 import {
          Avatar,
          CssBaseline,
@@ -80,31 +81,19 @@ const styles = theme => ({
 
 
     handleSubmit(event) {
-
-      async function postData(url = '', data = {}) {
-        const response = await fetch(url, {
-          method: 'POST',
-          mode: 'cors',
-          cache: 'no-cache',
-          credentials: 'same-origin',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          redirect: 'follow',
-          referrerPolicy: 'no-referrer',
-          body: JSON.stringify(data)
-        });
+      //use the api to postData
+      async function postData(data = {}) {
+        const response = await postUser();
         return response.json();
       }
-
-      postData('https://shelteroinf.herokuapp.com/user/signup', (this.state))
+      postData(this.state))
         .then(res => {
           console.log(res);
           if (res === 'success') {
             alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');
             this.setState({ redirect: "/login" });
           } else {
-            alert('Opps, something went wrong so that u failed to sign up!');
+            alert('Oops, something went wrong so that u failed to sign up!');
             console.log("failed to sign up")
           }
         }).catch((error) => {
