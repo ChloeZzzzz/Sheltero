@@ -1,4 +1,5 @@
 import React from 'react';
+import postUsersSignup from '../api';
 
 class SignupForm extends React.Component {
     constructor(props) {
@@ -23,25 +24,9 @@ class SignupForm extends React.Component {
     }
 
     handleSubmit(event) {
-        console.log("inside parent class!!!!!!!!!");
-        async function postData(url = '', data = {}) {
-          const response = await fetch(url, {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            redirect: 'follow',
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify(data)
-          });
-          return response.json();
-        }
   
-        postData('https://shelteroinf.herokuapp.com/user/signup', (this.state))
-          .then(res => {
+      postUsersSignup((this.state))
+        .then(res => {
             console.log(res);
             if (res === 'success') {
               alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');

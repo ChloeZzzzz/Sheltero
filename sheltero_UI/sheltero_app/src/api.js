@@ -3,6 +3,23 @@ const BASE_URL = "https://shelteroinf.herokuapp.com";
 // using axios to interact with Library API
 const axios = require('axios');
 
+export default async function postUsersSignup(data) {
+    const endpoint = BASE_URL + '/user/signup';
+    console.log("post user sign up");
+    const response = await fetch(endpoint, {
+        method: 'POST',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
+        body: JSON.stringify(data)
+    });
+    return response.json();
+}
 
 
 /**
