@@ -1,4 +1,5 @@
 import React from 'react';
+import SignupForm from './SignupForm';
 import { Redirect } from "react-router-dom";
 import CreateIcon from '@material-ui/icons/Create';
 import { PrimButton, H2, TextLink } from './theme';
@@ -18,7 +19,6 @@ import {
          Select,
          MenuItem,} from '@material-ui/core';
 
-
 const styles = theme => ({
     paper: {
       marginTop: theme.spacing(4),
@@ -29,7 +29,7 @@ const styles = theme => ({
     },
     avatar: {
       marginBottom: theme.spacing(2),
-      backgroundColor: '#99C015',
+      backgroundColor: '#99c040',
     },
     box: {
       margin: theme.spacing(8,0,2,0),
@@ -51,77 +51,22 @@ const styles = theme => ({
     formControl: {
       minWidth: 120,
     },
-    })
-
-
-  export default withStyles(styles) (class EmployeeSignup extends React.Component {
-    /* implement constructor() to bind event handler*/
-    constructor(props) {
-      super(props);
-      /* initialise this state */
-      this.state = {
-                    type: [this.props.workType],
-                    gender: '',
-                    first_name: '',
-                    last_name: '',
-                    email: '',
-                    password: '',
-                    redirect: null};
-
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
+  }
+)
+class EmployeeSignup extends SignupForm {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gender: '',
     }
+  }
 
-    handleChange (e) {
-      this.setState({
-        [e.target.name] : e.target.value
-      });
-    }
-
-
-    handleSubmit(event) {
-
-      async function postData(url = '', data = {}) {
-        const response = await fetch(url, {
-          method: 'POST',
-          mode: 'cors',
-          cache: 'no-cache',
-          credentials: 'same-origin',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          redirect: 'follow',
-          referrerPolicy: 'no-referrer',
-          body: JSON.stringify(data)
-        });
-        return response.json();
-      }
-
-      postData('https://shelteroinf.herokuapp.com/user/signup', (this.state))
-        .then(res => {
-          console.log(res);
-          if (res === 'success') {
-            alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');
-            this.setState({ redirect: "/login" });
-          } else {
-            alert('Opps, something went wrong so that u failed to sign up!');
-            console.log("failed to sign up")
-          }
-        }).catch((error) => {
-          console.log(error)});
-
-
-      event.preventDefault();
-    }
-
-    render () {
-      const { classes } = this.props; /* to implement styles */
-      const { type, gender, first_name, last_name, email, password  } = this.state;
-
+  render () {
+    const { classes } = this.props;
     if (this.state.redirect) {
-        return <Redirect to={this.state.redirect} />
-    }
-    else {
+      console.log("signup in redirect"+this.state.redirect);
+      return <Redirect to={this.state.redirect} />
+    } else {
       return (
         <Container component="main" maxWidth="xs" >
           <CssBaseline />
@@ -267,7 +212,9 @@ const styles = theme => ({
           </Box>
 
         </Container>
-      );
+      )
     }
   }
-})
+}
+
+  export default withStyles(styles) (EmployeeSignup)
