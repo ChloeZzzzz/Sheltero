@@ -4,6 +4,7 @@ import EmployerSignup from '../components/EmployerSignup';
 import { makeStyles, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
+
   formControl: {
     minWidth: 200,
   },
@@ -21,6 +22,7 @@ export default function Register () {
   const classes = useStyles(); /* to implement styles */
   const [value, setValue] = React.useState('');
 
+
   const handleRadioChange = (event) => {
     setValue(event.target.value);
   };
@@ -30,6 +32,7 @@ export default function Register () {
   };
         return (
           <div>
+            <br/>
           <form onSubmit={handleSubmit} className={classes.form}>
             <FormControl component="fieldset">
               <FormLabel component="legend" className={classes.formLabel} >Select Your User Type</FormLabel>

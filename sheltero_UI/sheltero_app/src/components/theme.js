@@ -43,6 +43,7 @@ export const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
 
+
     titlePage: {
       width: '100%',
       height: '70vh',
@@ -63,10 +64,10 @@ export const useStyles = makeStyles((theme) => ({
 
     '@keyframes titleAnimation': {
       '0%': {
-        color: "#fff",
+        color: "#002E18",
       },
       '100%': {
-        color: "#002E18",
+        color: "#fff",
       }
     },
 })
@@ -94,7 +95,6 @@ export const PrimButton = styled(Button)({
 });
 
 export const H1 = styled(Typography)({
-    color: "#002E18",
     fontFamily: [
         'futura',
         'serif',

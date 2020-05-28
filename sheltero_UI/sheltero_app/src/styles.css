@@ -8,21 +8,21 @@
   text-align: center;
 }
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-}
+/*html,*/
+/*body {*/
+/*  padding: 0;*/
+/*  margin: 0;*/
+/*}*/
 
-body {
-  display:flex;
-  letter-spacing: 2pt;
-  justify-content: center;
-  align-items: center;
-  /* background: #E8F2D8; */
-  color: #002E18;
-  text-rendering: optimizeLegibility;
-}
+/*body {*/
+/*  display:flex;*/
+/*  letter-spacing: 2pt;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  !* background: #E8F2D8; *!*/
+/*  color: #002E18;*/
+/*  text-rendering: optimizeLegibility;*/
+/*}*/
 
 h1 {
   font-size: 3rem;
@@ -73,21 +73,22 @@ nav a.active {
 }
 
 
-#titlePage {
-  /* set respondent div size for the title page */
-  width: 100vw;
-  height: 70vh;
-  /* background: whitesmoke; */
+/*#titlePage {*/
+/*  */
+/*  !* set respondent div size for the title page *!*/
+/*  width: 100vw;*/
+/*  height: 70vh;*/
+/*  !* background: whitesmoke; *!*/
 
-  left: center;
-  top: center;  /* set div position for the title page */
+/*  left: center;*/
+/*  top: center;  !* set div position for the title page *!*/
 
-}
-#titlePage h1{
-  /* set heading position */
-  position: relative;
-  top: 50%;
-}
+/*}*/
+/*#titlePage h1{*/
+/*  !* set heading position *!*/
+/*  position: relative;*/
+/*  top: 50%;*/
+/*}*/
 
 
 .primButton {
