@@ -8,9 +8,7 @@ const getUserHomepage = (req, res) => {
     if (req.user) {
         console.log("== REQ.USER ==");
         console.log(req.user);
-        console.log("++TEST++");
-        console.log(req.user._id);
-        res.render('home-auth.ejs', {useremail: req.user.email});
+        res.json(req.user);
     } else {
         res.redirect('../');
     }
