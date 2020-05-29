@@ -32,7 +32,9 @@ app.use('/uploads', express.static('uploads'));
 
 // GET homepage
 app.get('/', (req, res) => {
-    res.render("home.ejs");
+    if (req.user) {
+        res.json(req.user);
+    }
 })
 
 // ==== Error Handling ====
