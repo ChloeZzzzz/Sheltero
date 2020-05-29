@@ -13,6 +13,7 @@ import { Button } from 'styled-button-component';
 import { Column, Row } from 'styled-grid-system-component';
 
 
+
 export class JobTable extends React.Component {
   constructor(props) {
     super(props);
