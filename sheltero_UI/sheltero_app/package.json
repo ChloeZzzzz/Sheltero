@@ -5,6 +5,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@emotion/core": "^10.0.28",
     "@material-ui/core": "^4.9.14",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.53",
@@ -20,6 +21,8 @@
     "react-dom": "16.12.0",
     "react-router-dom": "5.1.2",
     "react-scripts": "^3.4.1",
+    "react-typist": "^2.0.5",
+    "react-welcome-page": "^0.2.1",
     "styled-button-component": "^4.0.0",
     "styled-card-component": "^4.0.0",
     "styled-components": "^5.1.0",

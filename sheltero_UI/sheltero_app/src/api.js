@@ -23,7 +23,7 @@ export default async function postUsersSignup(data) {
 
 
 /**
- * Retrieves the list of authors from Library API
+ * Retrieves the list of authors from API
  * @return List of Objects, each containing author data.
  */
 export function getJobs() {

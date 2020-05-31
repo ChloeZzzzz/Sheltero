@@ -8,6 +8,7 @@ import { Box } from "@material-ui/core";
 import SearchByArea from "../components/SearchArea";
 import {JobTable} from "../components/JobManagement/JobTable";
 import Copyright from "../components/Copyright";
+import Welcome from 'react-welcome-page';
 
 const useStyles = makeStyles(theme => ({
     icon: {
@@ -49,6 +50,22 @@ export default function Job() {
     return (
         <React.Fragment>
             <CssBaseline />
+            <div id='container'>
+                //The welcome page should be shown after the user signup not sure how to do for now.
+                <Welcome
+                    loopDuration={1000}
+                    data={
+                        [
+                            {
+                                "backgroundColor": "#638709",
+                                "textColor": "#FFFFFF",
+                                "text": "Welcome to Sheltero!",
+                                "image": require('../img/seedling.png')
+                            }
+                        ]
+                    }
+                />
+            </div>
 
             <main>
                 <div className={classes.Box}>
@@ -64,7 +81,7 @@ export default function Job() {
                         </Grid>
                     </Grid>
                 </div>
-                <Container maxWidth="md">
+                <Container flexGrow={1}  >
                     <JobTable />
                 </Container>
             </main>

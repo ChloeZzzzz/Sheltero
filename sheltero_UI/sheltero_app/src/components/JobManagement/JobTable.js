@@ -43,14 +43,15 @@ export class JobTable extends React.Component {
       return (
         <div>
           <Row >
-          
+
           {jobs.map((value, index) => {
-            return (<Column xl={6} >
-            
-              <Card active key={value._id}  style={{witdth:" 2.5vw"}}>
-                <CardImageHeader style={{Width: "2vw",
-                      Height: "1vw"}} src={"https://picsum.photos/350/150"} key={value._id}/>
-                <CardBody >
+            return (<Column xl={4} style={{paddingTop: "10pt",
+                  paddingBottom: "10pt"}}>
+
+              <Card active key={value._id} style={{height: "100%",
+                 flexDirection: "column"}} >
+                <CardImageHeader style={{height: "200pt"}}src={"https://picsum.photos/350/200"} key={value._id}/>
+                <CardBody>
                   <CardTitle >{value.jobTitle}</CardTitle>
                   <CardText >{value.jobDetail}</CardText>
                   <CardFooter >
@@ -67,7 +68,7 @@ export class JobTable extends React.Component {
 
             );
           })}
-          
+
         </Row>
         </div>
       );

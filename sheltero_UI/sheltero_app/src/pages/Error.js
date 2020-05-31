@@ -1,3 +1,4 @@
+/** @jsx jsx */
 import React from "react";
 import { jsx, css } from "@emotion/core";
 import Typist from "react-typist";
@@ -14,7 +15,7 @@ const mainStyles = css`
   background: rgb(255, 145, 150);
   background: linear-gradient(
     150deg,
-    rgba(99, 135, 9, 1) 65%,
+    rgba(255, 145, 150, 1) 65%,
     rgba(205, 190, 50, 0.5) 100%
   );
   color: white;
@@ -22,18 +23,18 @@ const mainStyles = css`
   font-size: 3em;
 `;
 
-const error = () => (
+const Main = () => (
     <div css={mainStyles}>
         <Typist
             cursor={{ hideWhenDone: true, hideWhenDoneDelay: 0 }}
             startDelay={750}
         >
-            <span>Oops!😯</span>
+            <span>oops! 😯</span>
             <Typist.Delay ms={700} />
             <br />
-            <span>something went wrong</span>
+            <span>Something went wrong</span>
         </Typist>
     </div>
 );
 
-export default error;
+export default Main;
