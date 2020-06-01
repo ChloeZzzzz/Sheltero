@@ -89,7 +89,7 @@ function JobCategories(props) {
     const images = [
         {
             url:
-                "https://images.unsplash.com/photo-1534081333815-ae5019106622?auto=format&fit=crop&w=400&q=80",
+                "https://images.unsplash.com/photo-1514395462725-fb4566210144?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80",
             title: "Melbourne - CBD",
             width: "40%"
         },

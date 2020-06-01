@@ -64,7 +64,7 @@ export default function Job() {
                         </Grid>
                     </Grid>
                 </div>
-                <Container maxWidth="md">
+                <Container flexGrow={1} >
                     <JobTable />
                 </Container>
             </main>

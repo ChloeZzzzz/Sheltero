@@ -38,6 +38,7 @@ export default withStyles(styles) (class ReadFile extends Component {
         }
         reader.readAsDataURL(event.target.files[0]);
     }
+    
     fileUploadHandler = () =>{
         //construct form data
         const formData = new FormData();

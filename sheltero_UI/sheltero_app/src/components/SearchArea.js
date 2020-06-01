@@ -4,6 +4,7 @@ import NoSsr from '@material-ui/core/NoSsr';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import styled from 'styled-components';
+import { getJobs } from "../api";
 
 const Label = styled('label')`
   padding: 0 0 4px;
@@ -124,6 +125,9 @@ const Listbox = styled('ul')`
   }
 `;
 
+
+
+
 export default function SearchByArea() {
     const {
         getRootProps,
@@ -143,8 +147,6 @@ export default function SearchByArea() {
         options: MelbourneArea,
         getOptionLabel: (option) => option.name,
     });
-
-    
 
     return (
         <NoSsr>

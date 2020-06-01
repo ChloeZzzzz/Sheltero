@@ -9,8 +9,11 @@ import {
   CardText,
   CardTitle
 } from "styled-card-component";
-import { Button } from 'styled-button-component';
+import Button from "../../components/CustomButtons/Button.js";
 import { Column, Row } from 'styled-grid-system-component';
+import Popup from '../Popup/Popup';
+
+import CardSaint from "../CardSaint/CardSaint";
 
 
 export class JobTable extends React.Component {
@@ -19,8 +22,25 @@ export class JobTable extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      jobs: []
+      jobs: [],
+      showPopup:false,
+      values: {
+        jobTitle:"",
+        salary:"",
+        creditLevel:"",
+        jobTag:"",
+        jobDetail:"",
+        contactEmail:"",
+        imgUrl:"",
+        jobArea:""
+      }
     };
+    this.togglePopup=this.togglePopup.bind(this);
+    this.updateInfo= this.updateInfo.bind(this);
+  }
+
+  togglePopup(){
+    this.setState({showPopup:!this.state.showPopup});
   }
 
   async fetchJobs() {
@@ -30,6 +50,22 @@ export class JobTable extends React.Component {
 
   componentDidMount() {
     this.fetchJobs();
+  }
+
+  updateInfo(info){
+    this.setState({
+      values:{
+        jobTitle:info.jobTitle,
+        salary:info.salary,
+        creditLevel:info.creditLevel,
+        jobTag:info.jobTag,
+        jobDetail:info.jobDetail,
+        contactEmail:info.contactEmail,
+        imgUrl:info.imgUrl,
+        jobArea:info.jobArea
+      }
+    });
+    this.togglePopup();
   }
 
   render() {
@@ -42,31 +78,28 @@ export class JobTable extends React.Component {
       return (
         <div>
           <Row >
-          
           {jobs.map((value, index) => {
-            return (<Column xl={6} >
-            
-              <Card active key={value._id}  style={{witdth:" 2.5vw"}}>
-                <CardImageHeader style={{Width: "2vw",
-                      Height: "1vw"}} src={"https://picsum.photos/350/150"} key={value._id}/>
-                <CardBody >
-                  <CardTitle >{value.jobTitle}</CardTitle>
-                  <CardText >{value.jobDetail}</CardText>
-                  <CardFooter >
-                    Credit_level:{value.creditLevel}
-                  </CardFooter >
-                  <Button primary style={{
-                    backgroundColor:"#99C015", 
-                    borderColor:"#99C015",
-                    fontSize: "14px"}}>
-                      More Info
-                      </Button>
-                </CardBody>
-              </Card></Column>
-
+            value.imgUrl ="https://picsum.photos/350/200";
+            return (
+              <Column xl={4} style={{paddingTop: "10pt", paddingBottom: "10pt"}}>
+                <CardSaint value={value} style = {{height: "100%", flexDirection: "column"}} updateInfo={this.updateInfo}/>
+                    {this.state.showPopup ?
+                        <Popup
+                            Title={this.state.values.jobTitle}
+                            salary={"salary:"+this.state.values.salary}
+                            credit_level={"credit_level:"+this.state.values.creditLevel}
+                            jobTag={"Tag:"+this.state.values.jobTag}
+                            jobDetails={"Details:"+this.state.values.jobDetail}
+                            contact={"company contact:"+this.state.values.contactEmail}
+                            img={"https://picsum.photos/350/200"}
+                            jobArea={"Area:"+value.jobArea}
+                            closePopup={this.togglePopup}
+                        />
+                        : null
+                    }
+              </Column>
             );
           })}
-          
         </Row>
         </div>
       );
