@@ -23,7 +23,7 @@ const mainStyles = css`
   font-size: 3em;
 `;
 
-const Main = () => (
+const error = () => (
     <div css={mainStyles}>
         <Typist
             cursor={{ hideWhenDone: true, hideWhenDoneDelay: 0 }}
@@ -37,4 +37,4 @@ const Main = () => (
     </div>
 );
 
-export default Main;
+export default error;

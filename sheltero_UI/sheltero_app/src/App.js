@@ -10,12 +10,12 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Job from "./pages/JobSearch";
 import "./styles.css";
-<<<<<<< HEAD
+
 import JobPost from "./components/JobPost";
-=======
+
 import User from "./pages/UserProfile";
 //the page of profile page should be shown after the user sign in. I have not done yet.
->>>>>>> c3631c51ef3fdea7bcec6c78e3a797eabe713ea0
+import error from './pages/Error';
 
 export default function App() {
   return (
@@ -32,11 +32,10 @@ export default function App() {
           <Route exact path="/signup" render={props => <Register {...props} />} />
           <Route exact path="/" render={props => <Home {...props} />} />
           <Route exact path="/job" render={props => <Job {...props} />} />
-<<<<<<< HEAD
+
           <Route exact path="/jobpost" render={props => <JobPost {...props} />} />
-=======
           <Route exact path="/user" render={props => <User {...props} />} />
->>>>>>> c3631c51ef3fdea7bcec6c78e3a797eabe713ea0
+          <Route exact path='/error' render={props => <error {...props} />}/>
         </Switch>
       </div>
     </Router>
