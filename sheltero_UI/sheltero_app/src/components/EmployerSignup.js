@@ -72,7 +72,7 @@ class EmployerSignup extends SignupForm {
           <Avatar className={classes.avatar}>
               <CreateIcon />
           </Avatar>
-          <H2 component="h1" variant="h5">
+          <H2>
             Employer Sign Up
           </H2>
 

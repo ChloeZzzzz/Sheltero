@@ -5,10 +5,12 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import {theme} from "./theme";
 import { Nav, Header } from "./components/Nav";
 import Home from "./pages/Home";
+import Hero from "./pages/Hero";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Job from "./pages/JobSearch";
 import "./styles.css";
+import JobPost from "./components/JobPost";
 
 export default function App() {
   return (
@@ -24,6 +26,7 @@ export default function App() {
           <Route exact path="/signup" render={props => <Register {...props} />} />
           <Route exact path="/" render={props => <Home {...props} />} />
           <Route exact path="/job" render={props => <Job {...props} />} />
+          <Route exact path="/jobpost" render={props => <JobPost {...props} />} />
         </Switch>
       </div>
     </Router>
