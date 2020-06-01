@@ -13,6 +13,8 @@ import Button from "../../components/CustomButtons/Button.js";
 import { Column, Row } from 'styled-grid-system-component';
 import Popup from '../Popup/Popup';
 
+import CardSaint from "../CardSaint/CardSaint";
+
 
 export class JobTable extends React.Component {
   constructor(props) {
@@ -21,8 +23,20 @@ export class JobTable extends React.Component {
       error: null,
       isLoaded: false,
       jobs: [],
-      showPopup:false
+      showPopup:false,
+      values: {
+        jobTitle:"",
+        salary:"",
+        creditLevel:"",
+        jobTag:"",
+        jobDetail:"",
+        contactEmail:"",
+        imgUrl:"",
+        jobArea:""
+      }
     };
+    this.togglePopup=this.togglePopup.bind(this);
+    this.updateInfo= this.updateInfo.bind(this);
   }
 
   togglePopup(){
@@ -38,6 +52,22 @@ export class JobTable extends React.Component {
     this.fetchJobs();
   }
 
+  updateInfo(info){
+    this.setState({
+      values:{
+        jobTitle:info.jobTitle,
+        salary:info.salary,
+        creditLevel:info.creditLevel,
+        jobTag:info.jobTag,
+        jobDetail:info.jobDetail,
+        contactEmail:info.contactEmail,
+        imgUrl:info.imgUrl,
+        jobArea:info.jobArea
+      }
+    });
+    this.togglePopup();
+  }
+
   render() {
     const { error, isLoaded, jobs } = this.state;
     if (error) {
@@ -48,43 +78,28 @@ export class JobTable extends React.Component {
       return (
         <div>
           <Row >
-
           {jobs.map((value, index) => {
-            return (<Column xl={4} style={{paddingTop: "10pt",
-                  paddingBottom: "10pt"}}>
-
-              <Card active key={value._id} style={{height: "100%",
-                 flexDirection: "column"}} >
-                <CardImageHeader style={{height: "200pt"}}src={"https://picsum.photos/350/200"} key={value._id}/>
-                <CardBody>
-                  <CardTitle >{value.jobTitle}</CardTitle>
-                  <CardText >{value.jobDetail}</CardText>
-                  <CardFooter >
-                    Credit_level:{value.creditLevel}
-                  </CardFooter >
-                  <Button color={"primary"} onClick={this.togglePopup.bind(this)}>
-                      More Info
-                      </Button>
-                  {this.state.showPopup ?
-                      <Popup
-                          Title={value.jobTitle}
-                          salary={"salary:"+value.salary}
-                          credit_level={"credit_level:"+value.creditLevel}
-                          jobTag={"Tag:"+value.jobTag}
-                          jobDetails={"Details:"+value.jobDetail}
-                          contact={"company contact:"+value.contactEmail}
-                          img={"https://picsum.photos/350/200"}
-                          jobArea={"Area:"+value.jobArea}
-                          closePopup={this.togglePopup.bind(this)}
-                      />
-                      : null
-                  }
-                </CardBody>
-              </Card></Column>
-
+            value.imgUrl ="https://picsum.photos/350/200";
+            return (
+              <Column xl={4} style={{paddingTop: "10pt", paddingBottom: "10pt"}}>
+                <CardSaint value={value} style = {{height: "100%", flexDirection: "column"}} updateInfo={this.updateInfo}/>
+                    {this.state.showPopup ?
+                        <Popup
+                            Title={this.state.values.jobTitle}
+                            salary={"salary:"+this.state.values.salary}
+                            credit_level={"credit_level:"+this.state.values.creditLevel}
+                            jobTag={"Tag:"+this.state.values.jobTag}
+                            jobDetails={"Details:"+this.state.values.jobDetail}
+                            contact={"company contact:"+this.state.values.contactEmail}
+                            img={"https://picsum.photos/350/200"}
+                            jobArea={"Area:"+value.jobArea}
+                            closePopup={this.togglePopup}
+                        />
+                        : null
+                    }
+              </Column>
             );
           })}
-
         </Row>
         </div>
       );
