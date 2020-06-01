@@ -36,7 +36,7 @@ userRouter.get('/login', userController.getUserLogin);
 userRouter.get('/logout', userController.getUserLogout)
 
 // GET user update
-userRouter.get('/updateUser', (req, res) => userController.getUpdateUser(req, res));
+//userRouter.get('/updateUser', (req, res) => userController.getUpdateUser(req, res));
 
 // ======== POST request ========
 userRouter.post('/signup', userController.postUserSignup);
@@ -46,6 +46,6 @@ userRouter.post('/login',
                                      failureRedirect: '/login'}
 ))
 
-userRouter.post('/updateUser', userController.postUpdateUser);
+//userRouter.post('/updateUser', userController.postUpdateUser);
 
 module.exports = userRouter;

@@ -1,6 +1,6 @@
 const express = require('express');
 //const flash = require('connect-flash');
-//require('dotenv').config();
+require('dotenv').config();
 const app = express();
 var bodyParser = require('body-parser');
 var cors = require('cors')
@@ -28,13 +28,14 @@ app.use('/user', userRouter);
 
 app.use('/job-search', jobRouter);
 
-app.use('/uploads', express.static('uploads'));
+//app.use('/uploads', express.static('uploads'));
 
 // GET homepage
 app.get('/', (req, res) => {
     if (req.user) {
         res.json(req.user);
     }
+    res.render("home.ejs");
 })
 
 // ==== Error Handling ====

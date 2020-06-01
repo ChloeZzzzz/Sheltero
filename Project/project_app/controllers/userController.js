@@ -26,10 +26,9 @@ const getUserLogin = (req, res) => {
     if (req.user) {
         res.redirect('./');
     }
-    /*else {
+    else {
         res.render("login.ejs");
     }
-    */
 }
 
 const getUserLogout = (req, res) => {
@@ -146,5 +145,5 @@ module.exports = {
     getUserLogin,
     getUserLogout,
     postUserSignup,
-    postUpdateUser,
+    //postUpdateUser,
 }
