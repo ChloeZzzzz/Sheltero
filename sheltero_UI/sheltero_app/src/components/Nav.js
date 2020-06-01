@@ -22,9 +22,6 @@ export function Nav (){
         <NavLink to="/signup">
           Sign Up
         </NavLink>
-        <NavLink to="/user">
-          Profile
-        </NavLink>
       </span> 
     </nav>
   );

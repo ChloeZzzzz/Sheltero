@@ -9,9 +9,9 @@ import {
   CardText,
   CardTitle
 } from "styled-card-component";
-import { Button } from 'styled-button-component';
+import Button from "../../components/CustomButtons/Button.js";
 import { Column, Row } from 'styled-grid-system-component';
-
+import Popup from '../Popup/Popup';
 
 
 export class JobTable extends React.Component {
@@ -20,8 +20,13 @@ export class JobTable extends React.Component {
     this.state = {
       error: null,
       isLoaded: false,
-      jobs: []
+      jobs: [],
+      showPopup:false
     };
+  }
+
+  togglePopup(){
+    this.setState({showPopup:!this.state.showPopup});
   }
 
   async fetchJobs() {
@@ -57,12 +62,23 @@ export class JobTable extends React.Component {
                   <CardFooter >
                     Credit_level:{value.creditLevel}
                   </CardFooter >
-                  <Button primary style={{
-                    backgroundColor:"#99C015", 
-                    borderColor:"#99C015",
-                    fontSize: "14px"}}>
+                  <Button color={"primary"} onClick={this.togglePopup.bind(this)}>
                       More Info
                       </Button>
+                  {this.state.showPopup ?
+                      <Popup
+                          Title={value.jobTitle}
+                          salary={"salary:"+value.salary}
+                          credit_level={"credit_level:"+value.creditLevel}
+                          jobTag={"Tag:"+value.jobTag}
+                          jobDetails={"Details:"+value.jobDetail}
+                          contact={"company contact:"+value.contactEmail}
+                          img={"https://picsum.photos/350/200"}
+                          jobArea={"Area:"+value.jobArea}
+                          closePopup={this.togglePopup.bind(this)}
+                      />
+                      : null
+                  }
                 </CardBody>
               </Card></Column>
 

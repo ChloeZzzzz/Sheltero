@@ -79,7 +79,7 @@ export default withStyles(styles) (class Login extends React.Component {
     const res = postData('https://shelteroinf.herokuapp.com/user/login', (this.state));
     console.log(res)
     if (res) {
-      this.setState({redirect: '/'});
+      this.setState({redirect: '/user'});
     }
 
     // The code below is the one that is right, but have to change the response

@@ -17,7 +17,7 @@ import {
   transition,
   container
 } from "../style";
-
+import Welcome from 'react-welcome-page';
 import Container from "@material-ui/core/Container";
 const avatar= "https://picsum.photos/id/237/400/400";
 
@@ -69,7 +69,24 @@ const useStyles = makeStyles(styles);
 export default function UserProfile() {
   const classes = useStyles();
   return (
+
     <section className={classes.container}>
+      <div id='container'>
+
+        <Welcome
+            loopDuration={1000}
+            data={
+              [
+                {
+                  "backgroundColor": "#638709",
+                  "textColor": "#FFFFFF",
+                  "text": "Welcome to Sheltero!",
+                  "image": require('../img/seedling.png')
+                }
+              ]
+            }
+        />
+      </div>
     <br />
     <br />
       <Container className={classes.container}>
