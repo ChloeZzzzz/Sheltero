@@ -1,7 +1,20 @@
-import { styled, createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { styled, createMuiTheme, makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import {
+    Avatar,
+    CssBaseline,
+    TextField,
+    FormControlLabel,
+    Checkbox,
+    Grid,
+    Box,
+    Container,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,} from '@material-ui/core';
 
 // ***************************CREATE THEME**************************** //
 
@@ -64,10 +77,10 @@ export const useStyles = makeStyles((theme) => ({
 
     '@keyframes titleAnimation': {
       '0%': {
-        color: "#002E18",
+        color: "#fff",
       },
       '100%': {
-        color: "#fff",
+        color: "#002E18",
       }
     },
 })
@@ -81,7 +94,7 @@ export const PrimButton = styled(Button)({
     background: '#99C015',
     border: 0,
     borderRadius: 3,
-    color: 'white',
+    color: '#fff',
     height: 48,
     padding: '0 30px',
     fontFamily: [
@@ -89,8 +102,29 @@ export const PrimButton = styled(Button)({
         'serif',
     ].join(','),
     margin: theme.spacing(2,4,2,4),
+    letterSpacing: 3,
+    fontSize:18,
     '&:hover': {
         background: "#638709",
+    },
+});
+
+export const SecButton = styled(Button)({
+    background: '#99C015',
+    border: 0,
+    borderRadius: 5,
+    color: '#fff',
+    height: 30,
+    fontSize: 12,
+    padding: '0 30px',
+    fontFamily: [
+        'futura',
+        'serif',
+    ].join(','),
+    margin: theme.spacing(2,2,2,2),
+    '&:hover': {
+        background: "#638709",
+        color: "#fff",
     },
 });
 
@@ -112,6 +146,7 @@ export const H2 = styled(Typography)({
         'serif',
     ].join(','),
     fontSize: 28,
+    fontWeight: 'bold',
     letterSpacing: 3,
 })
 
@@ -133,3 +168,21 @@ export const TextLink = styled(Link)({
     fontSize: 14,
     letterSpacing: 0,
 })
+
+// ***************************CLASS STYLE COMPONENTS**************************** //
+// export const Paper = withStyles({
+//     root: {
+//       marginTop: theme.spacing(4),
+//       display: 'flex',
+//       flexDirection: 'column',
+//       alignItems: 'center',
+//       width: '100%',
+//     },
+// })(Container)
+// export const StyledSelect = withStyles({
+//     root: {
+//         display: 'flex',
+//         alignItems: 'flex-start',
+//     }
+// }
+// )
