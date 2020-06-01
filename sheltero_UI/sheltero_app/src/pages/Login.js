@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect,Link } from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
 import { PrimButton, H2, TextLink } from '../components/theme';
 import Copyright from '../components/Copyright';
@@ -11,7 +11,7 @@ import { Avatar,
          withStyles,
          Container } from '@material-ui/core';
 
-
+import axios from 'axios';
 const styles = theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -49,7 +49,7 @@ export default withStyles(styles) (class Login extends React.Component {
   /* implement constructor() to bind event handler*/
   constructor(props) { 
     super(props);
-    this.state = {email: '', password: ''};
+    this.state = {email: '', password: '', errors:{}};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -76,18 +76,17 @@ export default withStyles(styles) (class Login extends React.Component {
       });
       return response.json(); 
     }
-    const res = postData('https://shelteroinf.herokuapp.com/user/login', (this.state))
-        .then(res => {
-          console.log(res);
-          if (res) {
-            alert(this.state.email+ ', loged in');
-            this.setState({ redirect: "/" });
-          } else {
-            alert('Opps, something went wrong so that u failed to log in!');
-            console.log("failed to log in")
+    const { email, password } = this.state;
+    axios.post('https://shelteroinf.herokuapp.com/user/login', {email,password})
+        .then((response) => {
+          this.setState({ error: '' });
+          this.props.history.push('/')
+        })
+        .catch((error) => {
+          if(error === 'Wrong password') {
+            this.setState({ error: 'Login failed. Username or password not match' });
           }
-        }).catch((error) => {
-          console.log(error)});
+        });
 
     event.preventDefault();
 
@@ -108,7 +107,7 @@ export default withStyles(styles) (class Login extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const {email, password} = this.state;
+    const {email, password, error} = this.state;
   if (this.state.redirect) {
     console.log("signup in redirect"+this.state.redirect);
     return <Redirect to={this.state.redirect} />

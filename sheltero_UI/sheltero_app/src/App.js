@@ -15,7 +15,7 @@ import JobPost from "./components/JobPost";
 
 import User from "./pages/UserProfile";
 //the page of profile page should be shown after the user sign in. I have not done yet.
-import error from './pages/Error';
+
 
 export default function App() {
   return (
@@ -35,7 +35,6 @@ export default function App() {
 
           <Route exact path="/jobpost" render={props => <JobPost {...props} />} />
           <Route exact path="/user" render={props => <User {...props} />} />
-          <Route exact path='/error' render={props => <error {...props} />}/>
         </Switch>
       </div>
     </Router>
