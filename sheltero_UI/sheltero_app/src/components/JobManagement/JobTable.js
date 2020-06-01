@@ -1,19 +1,10 @@
 import React from "react";
 
 import { getJobs } from "../../api";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardImageHeader,
-  CardText,
-  CardTitle
-} from "styled-card-component";
-import Button from "../../components/CustomButtons/Button.js";
 import { Column, Row } from 'styled-grid-system-component';
 import Popup from '../Popup/Popup';
 
-import CardSaint from "../CardSaint/CardSaint";
+import Card from "./Card";
 
 
 export class JobTable extends React.Component {
@@ -82,7 +73,7 @@ export class JobTable extends React.Component {
             value.imgUrl ="https://picsum.photos/350/200";
             return (
               <Column xl={4} style={{paddingTop: "10pt", paddingBottom: "10pt"}}>
-                <CardSaint value={value} style = {{height: "100%", flexDirection: "column"}} updateInfo={this.updateInfo}/>
+                <Card value={value} style = {{height: "100%", flexDirection: "column"}} updateInfo={this.updateInfo}/>
                     {this.state.showPopup ?
                         <Popup
                             Title={this.state.values.jobTitle}
