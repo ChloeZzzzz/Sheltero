@@ -24,7 +24,7 @@ const initializePassport = (passport) => {
             console.log("===user._id===");
             console.log(user._id);
             // valid email address -> check password
-            if (await !bcrypt.compare(password, user.password)) {
+            if (!(await bcrypt.compare(password, user.password))) {
                 console.log("Wrong password");
                 return done(null, false, { message: "Wrong password"});
             } else {

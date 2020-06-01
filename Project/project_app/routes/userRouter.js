@@ -43,7 +43,7 @@ userRouter.post('/signup', userController.postUserSignup);
 
 userRouter.post('/login',
     passport.authenticate("local", { successRedirect: '/',
-                                     failureRedirect: '/login'}
+                                     failureRedirect: './login'}
 ))
 
 //userRouter.post('/updateUser', userController.postUpdateUser);
