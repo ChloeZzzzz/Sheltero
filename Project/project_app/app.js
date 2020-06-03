@@ -15,6 +15,7 @@ const morgan = require("morgan");
 const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 //app.use(flash())
+
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
@@ -25,10 +26,23 @@ const jobRouter = require('./routes/jobRouter');
 app.use(morgan('dev'));
 
 app.use('/user', userRouter);
-
 app.use('/job-search', jobRouter);
 
 //app.use('/uploads', express.static('uploads'));
+
+//Authentication Packages
+const cookieSession = require('cookie-session');
+
+app.use(cookieSession({
+    maxAge: 24*60*60*1000,
+    keys:['sheltero_top_sec_keys']
+}));
+
+const passport = require('passport');
+
+app.use(passport.initialize()),
+app.use(passport.session()),
+
 
 // GET homepage
 app.get('/', (req, res) => {
