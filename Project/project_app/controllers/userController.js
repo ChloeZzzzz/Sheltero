@@ -10,27 +10,24 @@ const getUserHomepage = (req, res) => {
         console.log(req.user);
         res.json(req.user);
     } else {
-        res.redirect('http://sheltero.herokuapp.com/');
+        res.redirect('../');
     }
 }
 
 const getUserSignup = (req, res) => {
     if (req.user) {
-        res.redirect('http://sheltero.herokuapp.com/');
+        res.redirect('./');
     } else {
-        res.render("http://sheltero.herokuapp.com/signup");
+        res.render("signup.ejs");
     }
 }
 
 const getUserLogin = (req, res) => {
     if (req.user) {
-        res.status(200).json({msg: "LOGGED INTO BATTLENET~"});
         res.json(req.user);
-        res.redirect("http://sheltero.herokuapp.com/");
     }
     else {
         res.render("login.ejs");
-        res.redirect("http://sheltero.herokuapp.com/login");
     }
 }
 

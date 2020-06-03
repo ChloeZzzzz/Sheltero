@@ -42,8 +42,8 @@ userRouter.get('/logout', userController.getUserLogout)
 userRouter.post('/signup', userController.postUserSignup);
 
 userRouter.post('/login',
-    passport.authenticate("local", { successRedirect: 'http://sheltero.herokuapp.com/',
-                                     failureRedirect: 'http://sheltero.herokuapp.com/login'}
+    passport.authenticate("local", { successRedirect: '/',
+                                     failureRedirect: './login'}
 ))
 
 //userRouter.post('/updateUser', userController.postUpdateUser);
