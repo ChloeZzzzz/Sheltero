@@ -78,15 +78,25 @@ export default withStyles(styles) (class Login extends React.Component {
     }
     const { email, password } = this.state;
     axios.post('https://shelteroinf.herokuapp.com/user/login', {email,password})
-        .then((response) => {
-          this.setState({ error: '' });
-          this.props.history.push('/')
-        })
-        .catch((error) => {
-          if(error === 'Wrong password') {
-            this.setState({ error: 'Login failed. Username or password not match' });
+        .then((response) => {console.log(response);
+          if (response.status===200) {
+            alert('Hi ' + this.state.email + ', you have successfully logged in!');
+            this.setState({ redirect: "/user" });
+          } else {
+            alert('Opps, something went wrong so that u failed to log in!');
+            this.setState({ redirect: "/login" });
+            console.log("failed to sign up")
           }
-        });
+        }).catch((error) => {
+      console.log(error)});
+      //     this.setState({ error: '' });
+      //     this.props.history.push('/user');
+      //     console.log(response.data);
+      //     console.log(response.status);
+      //   },(error)=>{console.log(error.status);})
+      //   .catch((error) => {
+      //     this.props.history.push('/')
+      //   });
 
     event.preventDefault();
 
@@ -109,9 +119,10 @@ export default withStyles(styles) (class Login extends React.Component {
     const { classes } = this.props;
     const {email, password, error} = this.state;
   if (this.state.redirect) {
-    console.log("signup in redirect"+this.state.redirect);
     return <Redirect to={this.state.redirect} />
-  } else {
+  } else if (error) {
+    return <Redirect to={this.state.redirect} />}
+    else{
     return (
       <Container component="main" maxWidth="xs" >
         <CssBaseline />

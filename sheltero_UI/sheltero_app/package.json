@@ -23,6 +23,7 @@
     "react-scripts": "^3.4.1",
     "react-typist": "^2.0.5",
     "react-welcome-page": "^0.2.1",
+    "store": "^2.0.12",
     "styled-button-component": "^4.0.0",
     "styled-card-component": "^4.0.0",
     "styled-components": "^5.1.0",
