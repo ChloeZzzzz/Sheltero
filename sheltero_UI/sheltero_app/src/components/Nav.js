@@ -22,6 +22,9 @@ export function Nav (){
         <NavLink to="/signup">
           Sign Up
         </NavLink>
+        <NavLink to="/about">
+          About
+        </NavLink>
       </span> 
     </nav>
   );

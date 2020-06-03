@@ -82,10 +82,11 @@ export default withStyles(styles) (class Login extends React.Component {
           if (response.status===200) {
             alert('Hi ' + this.state.email + ', you have successfully logged in!');
             this.setState({ redirect: "/user" });
+            console.log(response.data)
           } else {
             alert('Opps, something went wrong so that u failed to log in!');
             this.setState({ redirect: "/login" });
-            console.log("failed to sign up")
+            console.log("failed to login")
           }
         }).catch((error) => {
       console.log(error)});
