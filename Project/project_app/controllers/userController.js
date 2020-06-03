@@ -24,7 +24,7 @@ const getUserSignup = (req, res) => {
 
 const getUserLogin = (req, res) => {
     if (req.user) {
-        res.redirect('./');
+        res.json(req.user);
     }
     else {
         res.render("login.ejs");
