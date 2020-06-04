@@ -5,6 +5,7 @@ const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
 const getUserHomepage = (req, res) => {
+    console.log(req);
     if (req.user) {
         res.json({"user":req.user,
                     "message": req.flash("loginMessage")});
@@ -32,7 +33,8 @@ const getUserLogin = (req, res) => {
         return res.end();
     }
     else {
-        return res.render("login.ejs");
+        res.json({"message": req.flash("loginMessage")});
+        return res.end();
     }
 }
 
