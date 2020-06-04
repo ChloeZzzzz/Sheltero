@@ -11,17 +11,18 @@ const getUserHomepage = (req, res) => {
         console.log(res);
         return res.end();
 
-    } else {
-        return res.redirect('../');
     }
 }
 
 const getUserSignup = (req, res) => {
     if (req.user) {
-        return res.redirect('./');
-    } else {
+        res.json(req.user);
+        return res.end();
+        //return res.redirect('./');
+    }/* else {
         return res.render("signup.ejs");
     }
+    */
 }
 
 const getUserLogin = (req, res) => {
@@ -29,18 +30,22 @@ const getUserLogin = (req, res) => {
         res.json(req.user);
         return res.end();
     }
+    /*
     else {
         return res.render("login.ejs");
     }
+    */
 }
 
 const getUserLogout = (req, res) => {
     if (req.user) {
-        req.logOut();
-        return res.render("logout.ejs");
-    } else {
+        return req.logOut();
+        //return res.render("logout.ejs");
+    } 
+    /*else {
         return res.redirect('../')
     }
+    */
 }
 
 // a helper function, checks whether this email is exist in the database

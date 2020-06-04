@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
         res.json(req.user);
         return res.end();
     }
-    return res.render("home.ejs");
+    //return res.render("home.ejs");
 });
 
 // ==== Error Handling ====
