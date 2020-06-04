@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import {theme} from "./theme";
 import { Header } from "./components/Nav";
 import Nav from "./components/Nav";
-import Hero from "./pages/Hero";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -33,7 +32,7 @@ export default function App() {
           {/* Link each pages and specify components to render */}
           <Route exact path="/login" render={props => <Login {...props} />} />
           <Route exact path="/signup" render={props => <Register {...props} />} />
-          <Route exact path="/" render={props => <Hero {...props} />} />
+          <Route exact path="/" render={props => <Home {...props} />} />
           <Route exact path="/job" render={props => <Job {...props} />} />
           <Route exact path="/jobpost" render={props => <JobPost {...props} />} />
           <Route exact path="/user" render={props => <User {...props} />} />

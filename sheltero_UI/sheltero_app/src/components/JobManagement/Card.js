@@ -1,9 +1,8 @@
 import React from 'react';
 
 import { makeStyles } from "@material-ui/core/styles";
-
+import CardBody from "../Card/CardBody.js";
 import {
-    CardBody,
     CardFooter,
     CardImageHeader,
     CardText,
@@ -37,17 +36,17 @@ export default class CardSaint extends React.Component{
         return(
             <div>
                 <Card active key={this.props.value._id}>
-                    <CardImageHeader style={{height: "200pt"}}src={this.props.value.imgUrl} key={this.props._id}/>
+                    <CardImageHeader style={{height: "180px", width: "100%", display: "block"}}src={this.props.value.imgUrl} key={this.props._id}/>
                     <CardBody>
-                        <CardTitle>{this.props.value.jobTitle}</CardTitle>
-                        <CardText>{this.props.value.jobDetail}</CardText>
-                        <CardFooter>
-                        Credit_level:{this.props.value.creditLevel}
-                        </CardFooter >
+                        <h3 style={{textTransform:'uppercase'}}>{this.props.value.jobTitle}</h3>
+                        <small>
+                            Credit level:{this.props.value.creditLevel}
+                        </small>
+                        <p>{this.props.value.jobDetail}</p>
+                        <Button onClick={this.updateInfo} style={buttonStyle.primary}>
+                            More info
+                        </Button>
                     </CardBody>
-                    <Button onClick={this.updateInfo} style={buttonStyle.primary}>
-                        More info:
-                    </Button>
                 </Card>
             </div>
         );  

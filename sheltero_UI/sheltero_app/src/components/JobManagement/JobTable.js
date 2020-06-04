@@ -72,7 +72,7 @@ export class JobTable extends React.Component {
           {jobs.map((value, index) => {
             value.imgUrl ="https://picsum.photos/350/200";
             return (
-              <Column xl={4} style={{paddingTop: "10pt", paddingBottom: "10pt"}}>
+              <Column xl={4} xs={12} sm={12} md={6} style={{paddingTop: "10pt", paddingBottom: "10pt"}}>
                 <Card value={value} style = {{height: "100%", flexDirection: "column"}} updateInfo={this.updateInfo}/>
                     {this.state.showPopup ?
                         <Popup
