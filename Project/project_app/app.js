@@ -5,10 +5,7 @@ const app = express();
 var bodyParser = require('body-parser');
 var cors = require('cors')
 
-app.use(cors({
-    credentials:true,
-    origin:"http://sheltero.herokuapp.com",
-}))
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 require('./models');
@@ -27,7 +24,7 @@ const userRouter = require('./routes/userRouter');
 const jobRouter = require('./routes/jobRouter');
 
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://sheltero.herokuapp');
+    res.header('Access-Control-Allow-Origin', 'http://sheltero.herokuapp.com');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
