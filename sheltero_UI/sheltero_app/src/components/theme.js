@@ -83,39 +83,6 @@ export const useStyles = makeStyles((theme) => ({
         color: "#002E18",
       }
     },
-
-
-    // style for nav bar
-    root: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginRight: theme.spacing(1),
-        color: '#fff',
-        fontFamily:[
-            'avenir',
-            'helvetica',
-        ].join(','),
-        fontSize: 14,
-        fontWeight: 'bold',
-    },
-    logo: {
-        marginLeft: theme.spacing(1),
-        flexGrow: 1,
-        color: '#fff',
-        fontSize: 24,
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-        fontFamily: [
-            'futura',
-            'serif',
-        ].join(','),
-        letterSpacing: 2,
-        '&:hover': {
-            textDecoration: 'none',
-        },
-
-    },
 })
 )
 
@@ -131,12 +98,13 @@ export const PrimButton = styled(Button)({
     height: 48,
     padding: '0 30px',
     fontFamily: [
-        'futura',
-        'serif',
+        'avenir',
+        'roboto',
     ].join(','),
     margin: theme.spacing(2,4,2,4),
     letterSpacing: 3,
     fontSize:18,
+    fontWeight: 'bold',
     '&:hover': {
         background: "#638709",
     },
@@ -151,8 +119,8 @@ export const SecButton = styled(Button)({
     fontSize: 12,
     padding: '0 30px',
     fontFamily: [
-        'futura',
-        'serif',
+        'avenir',
+        'roboto',
     ].join(','),
     margin: theme.spacing(2,2,2,2),
     '&:hover': {

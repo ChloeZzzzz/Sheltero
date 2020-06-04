@@ -1,6 +1,4 @@
-import React from "react";
-import { Link, Box } from '@material-ui/core';
-import { useStyles } from './theme';
+
 // export function Nav (){
 //   return (
 //     <nav>
@@ -23,24 +21,114 @@ import { useStyles } from './theme';
 //     </nav>
 //   );
 // }
-
-
-
-
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Component } from "react";
+import { Link, Box, withStyles, Button } from '@material-ui/core';
+import { useStyles } from './theme';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import axios from "axios";
 
-export function Nav() {
-  const classes = useStyles();
 
-  return (
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  navBar: {
+    backgroundColor: '#f6f6f6',
+    position: 'fixed',
+  },
+  menuButton: {
+      marginRight: theme.spacing(1),
+      color: '#002E18',
+      fontFamily:[
+          'avenir',
+          'helvetica',
+      ].join(','),
+      fontSize: 14,
+      fontWeight: 'bold',
+  },
+  logo: {
+      marginLeft: theme.spacing(1),
+      flexGrow: 1,
+      color: '#002E18',
+      fontSize: 24,
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+      fontFamily: [
+          'futura',
+          'serif',
+      ].join(','),
+      letterSpacing: 2,
+      '&:hover': {
+          textDecoration: 'none',
+      },
+
+  },
+
+})
+
+
+export default withStyles(styles) (class Nav extends Component  {
+  constructor() {
+    super();
+
+    this.state = {
+      loggedInStatus: "false",
+      user: {}
+    };
+
+    this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  checkLoginStatus() {
+    axios
+      .get("https://shelteroinf.herokuapp.com/login", {withCredentials: true})
+      .then(res => {
+        if (
+          res.data.login && this.state.loggedInStatus === "false"
+        ) {
+          this.setState({
+            loggedInStatus: "true",
+            user: res.data.user
+          });
+        } else if (
+          !res.data.login & (this.state.loggedInStatus === "true")
+        ) {
+          this.setState({
+            loggedInStatus: "false",
+            user: {}
+          });
+        }
+      })
+      .catch(error => {
+        console.log("check login error", error);
+      });
+  }
+
+  componentDidMount() {
+    this.checkLoginStatus();
+  }
+
+  handleLogout(){
+    this.setStatus({
+      loggedInStatus:"false",
+      user: {}
+    });
+  }
+  handleLogin(data) {
+    this.setState({
+      loggedInStatus: "true",
+      user: data.user
+    });
+  }
+
+
+  render () {
+    const { classes } = this.props;
+    return(
     <div className={classes.root}>
-      <AppBar position="fixed">
+      <AppBar className={classes.navBar}>
         <Toolbar>
           <Link className={classes.logo} href="/">
             Sheltero.
@@ -51,8 +139,8 @@ export function Nav() {
         </Toolbar>
       </AppBar>
     </div>
-  );
-}
+    )};
+})
 
 export function Header () {
   const classes = useStyles()
