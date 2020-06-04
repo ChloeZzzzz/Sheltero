@@ -1,12 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-// import { GlobalStyles } from './global';
-// import {theme} from "./theme";
 import { Header } from "./components/Nav";
 import Nav from "./components/Nav";
 import Hero from "./pages/Home/Sections/Hero";
 import Home from "./pages/Home/Home";
+import ViewArea from "./pages/Home/ViewJobByArea";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Job from "./pages/JobSearch";
@@ -20,7 +19,8 @@ import Welcome from "./pages/Welcome";
 import About from "./pages/About/About";
 import Employee from "./pages/employeeProfile";
 import Employer from"./pages/employerProfile";
-export default function App() {
+export default class App extends Component {
+  render() {
   return (
     <Router>
       <div className="App">
@@ -31,6 +31,7 @@ export default function App() {
           {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
           {/* Link each pages and specify components to render */}
+          {/* <Route exact path="/" render={props => <Nav {...props} loggedInStatus={this.state.loggedInStatus} />} /> */}
           <Route exact path="/login" render={props => <Login {...props} />} />
           <Route exact path="/signup" render={props => <Register {...props} />} />
           <Route exact path="/" render={props => <Home {...props} />} />
@@ -41,8 +42,9 @@ export default function App() {
           <Route exact path="/employer" render={props => <Employer {...props} />} />
           <Route exact path="/employee" render={props => <Employee {...props} />} />
           <Route exact path="/about" render={props => <About {...props} />} />
+          <Route exact path="/viewarea" render={props => <ViewArea {...props} />} />
         </Switch>
       </div>
     </Router>
-  );
+  );}
 }

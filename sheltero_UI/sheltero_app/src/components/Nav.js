@@ -27,6 +27,7 @@ import { useStyles } from './theme';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import axios from "axios";
+import CheckLogin from '../components/CheckLoginStatus';
 
 
 const styles = theme => ({
@@ -66,83 +67,51 @@ const styles = theme => ({
       },
 
   },
-
 })
 
 
-export default withStyles(styles) (class Nav extends Component  {
-  constructor() {
-    super();
-
-    this.state = {
-      loggedInStatus: "false",
-      user: {}
-    };
-
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
-  }
-
-  checkLoginStatus() {
-    axios
-      .get("https://shelteroinf.herokuapp.com/login", {withCredentials: true})
-      .then(res => {
-        if (
-          res.data.login && this.state.loggedInStatus === "false"
-        ) {
-          this.setState({
-            loggedInStatus: "true",
-            user: res.data.user
-          });
-        } else if (
-          !res.data.login & (this.state.loggedInStatus === "true")
-        ) {
-          this.setState({
-            loggedInStatus: "false",
-            user: {}
-          });
-        }
-      })
-      .catch(error => {
-        console.log("check login error", error);
-      });
-  }
-
-  componentDidMount() {
-    this.checkLoginStatus();
-  }
-
-  handleLogout(){
-    this.setStatus({
-      loggedInStatus:"false",
-      user: {}
-    });
-  }
-  handleLogin(data) {
-    this.setState({
-      loggedInStatus: "true",
-      user: data.user
-    });
+export default withStyles(styles) (class Nav extends CheckLogin  {
+  constructor(props) {
+    super(props);
+    
   }
 
 
   render () {
     const { classes } = this.props;
-    return(
-    <div className={classes.root}>
-      <AppBar className={classes.navBar}>
-        <Toolbar>
-          <Link className={classes.logo} href="/">
-            Sheltero.
-          </Link>
-          <Button className={classes.menuButton} href="/job">Job search</Button>
-          <Button className={classes.menuButton} href="/about">Work with us</Button>
-          <Button className={classes.menuButton} href="/login">Login</Button>
-          <Button className={classes.menuButton} href="/signup">Sign up</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-    )};
+    if (this.state.loggedInStatus === "not_logged_in"){
+      return(
+        <div className={classes.root}>
+          <AppBar className={classes.navBar}>
+            <Toolbar>
+              <Link className={classes.logo} href="/">
+                Sheltero.
+              </Link>
+              <Button className={classes.menuButton} href="/job">Job search</Button>
+              <Button className={classes.menuButton} href="/about">Work with us</Button>
+              <Button className={classes.menuButton} href="/login">Login</Button>
+              <Button className={classes.menuButton} href="/signup">Sign up</Button>
+            </Toolbar>
+          </AppBar>
+        </div>
+        )
+    } else if (this.state.loggedInStatus === "logged_in"){
+      return(
+        <div className={classes.root}>
+          <AppBar className={classes.navBar}>
+            <Toolbar>
+              <Link className={classes.logo} href="/">
+                Sheltero.
+              </Link>
+              <Button className={classes.menuButton} href="/job">Job search</Button>
+              <Button className={classes.menuButton} href="/about">Work with us</Button>
+              <Button className={classes.menuButton} href="/employer">My Account</Button>
+            </Toolbar>
+          </AppBar>
+        </div>
+      )
+    }
+    };
 })
 
 export function Header () {
