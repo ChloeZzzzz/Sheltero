@@ -8,7 +8,7 @@ const getUserHomepage = (req, res) => {
     console.log(req);
     const message = req.flash("loginMessage");
     console.log(message);
-    console.log(message == "Successful login");
+    console.log(message === "Successful login");
     if (message == "Successful login") {
         res.json({"user":req.user,
                     "message": message});
