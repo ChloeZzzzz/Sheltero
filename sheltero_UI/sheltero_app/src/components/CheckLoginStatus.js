@@ -6,7 +6,7 @@ export default class CheckLogin extends React.Component {
         super();
     
         this.state = {
-          loggedInStatus: "not_logged_in",
+          loggedInStatus: "logged_in",
           // user: {}
         };
     

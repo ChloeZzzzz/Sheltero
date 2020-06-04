@@ -73,7 +73,25 @@ const styles = theme => ({
 export default withStyles(styles) (class Nav extends CheckLogin  {
   constructor(props) {
     super(props);
-    
+
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+  }
+
+  // handleLogoutClick() {
+  //   axios
+  //     .delete("https://shelteroinf.herokuapp.com/user/logout", { withCredentials: true })
+  //     .then(response => {
+  //       this.props.handleLogout();
+  //     })
+  //     .catch(error => {
+  //       console.log("logout error", error);
+  //     });
+  // }
+
+  handleLogoutClick(e) {
+    this.setState({
+      loggedInStatus : "not_logged_in"
+    });
   }
 
 
@@ -106,6 +124,7 @@ export default withStyles(styles) (class Nav extends CheckLogin  {
               <Button className={classes.menuButton} href="/job">Job search</Button>
               <Button className={classes.menuButton} href="/about">Work with us</Button>
               <Button className={classes.menuButton} href="/employer">My Account</Button>
+              <Button className={classes.menuButton} onClick={() => this.handleLogoutClick()}>Log Out</Button>
             </Toolbar>
           </AppBar>
         </div>
