@@ -77,19 +77,24 @@ export default withStyles(styles) (class Login extends React.Component {
       return response.json(); 
     }
     const { email, password } = this.state;
-    axios.post('https://shelteroinf.herokuapp.com/user/login', {email,password})
-        .then((response) => {console.log(response);
-          if (response.status===200) {
+    // axios.post('https://shelteroinf.herokuapp.com/user/login', {email,password})
+    //     .then((response) => {console.log(response);
+          if (this.state.email==="61@gmail.com"&this.state.password==="61") {
             alert('Hi ' + this.state.email + ', you have successfully logged in!');
-            this.setState({ redirect: "/user" });
-            console.log(response.data)
-          } else {
-            alert('Opps, something went wrong so that u failed to log in!');
-            this.setState({ redirect: "/login" });
+            this.setState({ redirect: "/employee" });
+            // console.log(response.data)
+          } else if (this.state.email==="31@gmail.com"&this.state.password==="31"){alert('Hi ' + this.state.email + ', you have successfully logged in!');
+            this.setState({ redirect: "/employer" });}
+          else {
+            alert('Opps, your email address/password might be wrong, try again!');
+            this.state.email="";
+            this.state.password="";
             console.log("failed to login")
-          }
-        }).catch((error) => {
-      console.log(error)});
+          };
+      //   }).catch((error) => {
+      // console.log(error)});
+
+
       //     this.setState({ error: '' });
       //     this.props.history.push('/user');
       //     console.log(response.data);

@@ -3,16 +3,14 @@ import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 
 import {
-    Card,
     CardBody,
     CardFooter,
     CardImageHeader,
     CardText,
     CardTitle
   } from "styled-card-component";
-
+import Card from "../Card/Card";
 import Button from "../CustomButtons/Button.js";
-
 import buttonStyle from '../CustomButtons/buttonStyle';
 
 export default class CardSaint extends React.Component{

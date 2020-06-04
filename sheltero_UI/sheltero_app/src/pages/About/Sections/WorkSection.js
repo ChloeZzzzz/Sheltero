@@ -22,9 +22,9 @@ export default function WorkSection() {
         <GridItem cs={12} sm={12} md={8}>
           <h2 className={classes.title}>Work with us</h2>
           <h4 className={classes.description}>
-            Divide details about your product or agency work into parts. Write a
-            few lines about each one and contact us about any further
-            collaboration. We will responde get back to you in a couple of
+            We plan to design a web application which would act as an assistant platform for the homeless to find jobs by connecting them with job opportunities that are posted by companies;
+            In addition, we would also implement a credit system as an ancillary service for employers.
+            Contact us. We will get back to you in a couple of
             hours.
           </h4>
           <form>

@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { ArrowDownwardIcon } from "@material-ui/icons";
 import HeroLayout from "./HeroLayout";
-import { Box, Link } from "@material-ui/core";
-import Copyright from "../components/Copyright";
-import { useStyles, H1, PrimButton} from "../components/theme";
+import { Box} from "@material-ui/core";
+import Copyright from "../../../components/Copyright";
+import { useStyles, H1, PrimButton} from "../../../components/theme";
 import JobCategories from "./JobCategories";
 import classNames from "classnames";
 
@@ -68,14 +68,6 @@ function ProductHero(props) {
             <Box>
                 <H1 className={classNames(classes.titleAnimation, classes.title)}>sheltero.</H1>
 
-            </Box>
-            <Box>
-                <Link href="/login">
-                    <PrimButton>Sign In</PrimButton>
-                </Link>
-                <Link href="/signup">
-                    <PrimButton>Sign Up</PrimButton>
-                </Link>
             </Box>
 
         </HeroLayout>
