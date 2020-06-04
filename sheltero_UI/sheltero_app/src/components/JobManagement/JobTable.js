@@ -60,11 +60,12 @@ export class JobTable extends React.Component {
   }
 
   render() {
+
     const { error, isLoaded, jobs } = this.state;
     if (error) {
       return <div> ERROR:{error.message}</div>;
     } else if (!isLoaded) {
-      return <div>Loading..</div>;
+      return <div style = {{textAlign: "center"}}>Loading..</div>;
     } else {
       return (
         <div>
