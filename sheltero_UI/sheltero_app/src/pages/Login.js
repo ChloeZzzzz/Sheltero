@@ -67,7 +67,7 @@ export default withStyles(styles) (class Login extends React.Component {
     axios.post('https://shelteroinf.herokuapp.com/user/login', {"email":email,"password":password},{withCredentials:true})
         .then((response) => {
           console.log(response.data);
-          if (response.data.message === "Successful login") {
+          if (response.data.message === "successLogin") {
             alert('Hi ' + this.state.email + ', you have successfully logged in!');
             this.setState({ redirect: "/user" });
             console.log(response.data);
