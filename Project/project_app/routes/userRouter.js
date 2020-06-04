@@ -26,8 +26,6 @@ userRouter.use(express.urlencoded( {extended: false}))
 // GET homepage-authorized
 userRouter.get('/', userController.getUserHomepage);
 
-userRouter.get('/loginfail', userController.getFail); // temp
-
 // GET user signup
 userRouter.get('/signup', userController.getUserSignup);
 
@@ -35,10 +33,10 @@ userRouter.get('/signup', userController.getUserSignup);
 userRouter.get('/login', userController.getUserLogin);
 
 // GET user logout
-userRouter.get('/logout', userController.getUserLogout)
+userRouter.get('/logout', userController.getUserLogout);
 
-userRouter.get('/successlogin', userController.successLogin)
-userRouter.get('/failurelogin', userController.failureLogin)
+userRouter.get('/successlogin', userController.successLogin);
+userRouter.get('/failurelogin', userController.failureLogin);
 
 // GET user update
 //userRouter.get('/updateUser', (req, res) => userController.getUpdateUser(req, res));
