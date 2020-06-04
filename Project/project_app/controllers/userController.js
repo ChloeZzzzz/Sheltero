@@ -6,14 +6,16 @@ const mongoose = require('mongoose');
 
 const getUserHomepage = (req, res) => {
     console.log(req);
-    const message = req.flash("loginMessage")
-    if (message === "Successful login") {
+    const message = req.flash("loginMessage");
+    console.log(message);
+    console.log(message == "Successful login");
+    if (message == "Successful login") {
         res.json({"user":req.user,
                     "message": message});
         return res.end();
     }
     else{
-        res.json({"message": "something went wrong :("})
+        res.json({"message": message})
         return res.end();
     }
 }
