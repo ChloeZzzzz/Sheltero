@@ -32,7 +32,10 @@ userRouter.get('/logout', userController.getUserLogout)
 //userRouter.get('/updateUser', (req, res) => userController.getUpdateUser(req, res));
 
 // ======== POST request ========
-userRouter.post('/signup', userController.postUserSignup);
+userRouter.post('/signup', passport.authenticate("local-signup",
+                                    { successRedirect:'/',
+                                    failureFlash:true
+                                    }));
 
 userRouter.post('/login', passport.authenticate("cookie-login", 
                                     { successRedirect: '/',

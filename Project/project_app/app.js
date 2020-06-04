@@ -53,8 +53,9 @@ app.use('/job-search', jobRouter);
 app.get('/', (req, res) => {
     if (req.user) {
         res.json(req.user);
+        return res.end();
     }
-    res.render("home.ejs");
+    return res.render("home.ejs");
 });
 
 // ==== Error Handling ====

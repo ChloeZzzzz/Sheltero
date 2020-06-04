@@ -7,79 +7,37 @@ const mongoose = require('mongoose');
 const getUserHomepage = (req, res) => {
     if (req.user) {
         res.json(req.user);
+        return res.end();
+
     } else {
-        res.redirect('../');
+        return res.redirect('../');
     }
 }
 
 const getUserSignup = (req, res) => {
     if (req.user) {
-        res.redirect('./');
+        return res.redirect('./');
     } else {
-        res.render("signup.ejs");
+        return res.render("signup.ejs");
     }
 }
 
 const getUserLogin = (req, res) => {
     if (req.user) {
         res.json(req.user);
+        return res.end();
     }
     else {
-        res.render("login.ejs");
+        return res.render("login.ejs");
     }
 }
 
 const getUserLogout = (req, res) => {
     if (req.user) {
         req.logOut();
-        res.render("logout.ejs");
+        return res.render("logout.ejs");
     } else {
-        res.redirect('../')
-    }
-}
-
-// post user sign up
-// -> encrypt the user's password before store it into the database for security issues
-// -> has to use async since have to wait for encryption completet
-const postUserSignup = async (req, res) => {
-    console.log(req);
-    try {
-        if (await email_validator.validate(req.body.email) && await emailNotSignedUp(req.body.email)) {
-            const cryptedpw = await bcrypt.hash(req.body.password, 10);
-            const user = new Users({
-                "_id" : new mongoose.Types.ObjectId(),
-                "gender" : req.body.gender,
-                "first_name" : req.body.first_name,
-                "last_name": req.body.last_name,
-                "email" : req.body.email,
-                "password" : cryptedpw,
-                "contact": req.body.contact,
-                "company_name": req.body.company_name,
-                "company_addr": req.body.company_addr,
-                "type" : req.body.type,
-                "resume": {job: 'programmer'}
-            });
-
-            user.save().then(result => {
-                console.log("== SAVED TO DATABASE ==")
-                console.log(result);
-            }).catch(err => {
-                console.log(user);
-                console.log(err);
-            });
-
-            res.json('success');
-        } else {
-            console.log("Invalid email or email already signed up!");
-            res.json('fail: invalid email or email already signed up');
-            //res.redirect('signup');
-        }
-
-    } catch (e) {
-        console.log("Failed to Sign up");
-        console.log(e);
-        res.json('fail')
-        //res.redirect('signup');
+        return res.redirect('../')
     }
 }
 
@@ -125,15 +83,15 @@ const postUpdateUser = async(req, res) => {
 
     }
     else {
-      res.redirect("login.ejs");
+      return res.redirect("login.ejs");
     }
 }
 
 const getUpdateUser = (req, res) => {
     if (req.user) {
-        res.render('user-update.ejs', {useremail: req.user.email});
+        return res.render('user-update.ejs', {useremail: req.user.email});
     } else {
-        res.redirect('login.ejs');
+        return res.redirect('login.ejs');
     }
 }
 
@@ -142,6 +100,5 @@ module.exports = {
     getUserSignup,
     getUserLogin,
     getUserLogout,
-    postUserSignup,
     //postUpdateUser,
 }
