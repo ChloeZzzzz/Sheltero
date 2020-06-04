@@ -1,5 +1,5 @@
 const express = require('express');
-//const flash = require('connect-flash');
+const {flash} = require('express-flash-message');
 //require('dotenv').config();
 const app = express();
 var bodyParser = require('body-parser');
@@ -17,7 +17,7 @@ const morgan = require("morgan");
 
 const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
-//app.use(flash())
+app.use(flash());
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');

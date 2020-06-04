@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 //const passportLocalMongoose = require('passport-local-mongoose');
 
 const User = new Schema({
@@ -31,6 +32,14 @@ const User = new Schema({
         require: false},
     resume: {jobs: String},
 });
+
+User.methods.generateHash = function(pass){
+    return bcrypt.hashSync(pass, bcrypt.genSaltSync(10));
+}
+
+User.methods.validatePassword = function(pass){
+    return bcrypt.compareSync(pass, this.password);
+}
 
 
 //User.plugin(passportLocalMongoose);

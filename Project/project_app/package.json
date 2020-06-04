@@ -18,6 +18,7 @@
     "email-validator": "^2.0.4",
     "express": "^4.17.1",
     "express-flash": "0.0.2",
+    "express-flash-message": "^1.0.6",
     "express-session": "^1.17.1",
     "hbs": "^4.1.1",
     "methods": "^1.1.2",
@@ -27,6 +28,7 @@
     "multer": "^1.4.2",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
+    "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
     "path-to-regexp": "^6.1.0"

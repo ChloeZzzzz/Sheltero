@@ -1,9 +1,9 @@
-//require('dotenv').config;
+require('dotenv').config;
 const mongoose = require("mongoose");
 
 
 CONNECTION_STRING = "mongodb+srv://Shetero_20:<password>@cluster0-yekum.mongodb.net/test?retryWrites=true&w=majority";
-MONGO_URL = CONNECTION_STRING.replace("<password>", process.env.MONGO_PASSWORD);
+MONGO_URL = CONNECTION_STRING.replace("<password>", "sheltero20"/*process.env.MONGO_PASSWORD*/);
 
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,

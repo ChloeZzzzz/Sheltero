@@ -16,9 +16,9 @@ const getUserHomepage = (req, res) => {
 }
 
 const successLogin = (req, res) => {
-    console.log(req.user);
-    if (req.user) {
-        res.json(req.user);
+    console.log(req.session);
+    if (req.session) {
+        res.json(req.session);
         return res.end();
     } else {
         res.json("successLogin no req.user");
@@ -40,8 +40,9 @@ const getUserSignup = (req, res) => {
 }
 
 const getUserLogin = (req, res) => {
-    if (req.user) {
-        res.json(req.user);
+    console.log(req.session);
+    if (req.session) {
+        res.json(req.session);
     }
     else {
         res.render("login.ejs");

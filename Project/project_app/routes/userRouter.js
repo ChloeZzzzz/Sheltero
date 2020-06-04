@@ -45,8 +45,8 @@ userRouter.get('/failurelogin', userController.failureLogin);
 userRouter.post('/signup', userController.postUserSignup);
 
 userRouter.post('/login',
-    passport.authenticate("local", { successRedirect: './successlogin',
-                                     failureRedirect: './failurelogin'}
+    passport.authenticate("cookie-login", { successRedirect: './successlogin',
+                                            failureRedirect: './failurelogin'}
 ))
 
 //userRouter.post('/updateUser', userController.postUpdateUser);
