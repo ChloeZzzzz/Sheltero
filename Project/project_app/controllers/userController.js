@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 
 const getUserHomepage = (req, res) => {
     console.log(req);
+    console.log("HELP ME PLEASE");
+    console.log(res);
     const message = req.flash("loginMessage");
     console.log(message);
     console.log(message === "Successful login");
