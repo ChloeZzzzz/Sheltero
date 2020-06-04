@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect,Link } from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
 import { PrimButton, H2, TextLink } from '../components/theme';
 import Copyright from '../components/Copyright';
@@ -11,7 +11,7 @@ import { Avatar,
          withStyles,
          Container } from '@material-ui/core';
 
-
+import axios from 'axios';
 const styles = theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -49,7 +49,7 @@ export default withStyles(styles) (class Login extends React.Component {
   /* implement constructor() to bind event handler*/
   constructor(props) { 
     super(props);
-    this.state = {email: '', password: ''};
+    this.state = {email: '', password: '', errors:{}};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -61,57 +61,38 @@ export default withStyles(styles) (class Login extends React.Component {
   }
   handleSubmit(event) {
       
-    async function postData(url = '', data = {}) {
-      const response = await fetch(url, {
-        method: 'POST', 
-        mode: 'cors', 
-        cache: 'no-cache', 
-        credentials: 'same-origin', 
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer', 
-        body: JSON.stringify(data) 
-      });
-      return response.json(); 
-    }
-    const res = postData('https://shelteroinf.herokuapp.com/user/login', (this.state));
-    console.log(res)
-    if (res) {
-      this.setState({redirect: '/user'});
-    }
 
-    // The code below is the one that is right, but have to change the response
-    // of in the back end which is related to passport authentication
-    // and probably the flash message, where I (della) could not solve it yet.
-    // so the code above is used... (but they are wrong! they couldn't handle
-    // the redirect correctly when user authetication failed, it treats them all the same)
-    /*
-    postData('https://shelteroinf.herokuapp.com/user/login', (this.state))
-    .then(res => {
-      console.log(res); 
-      if (res) {
-        alert(this.state.email+ ', loged in');
-        this.setState({ redirect: "/" });
-      } else {
-        alert('Opps, something went wrong so that u failed to log in!');
-        console.log("failed to log in")
-      }
-    }).catch((error) => {
+    const { email, password } = this.state;
+
+    axios.post('https://shelteroinf.herokuapp.com/user/login', {email,password})
+        .then((response) => {
+          console.log(response);
+          console.log(response.data);
+          if (response.status===200) {
+            alert('Hi ' + this.state.email + ', you have successfully logged in!');
+            this.setState({ redirect: "/user" });
+            console.log(response.data);
+          } else {
+            alert('Opps, something went wrong so that u failed to log in!');
+            this.setState({ redirect: "/login" });
+            console.log("failed to login")
+          }
+        }).catch((error) => {
       console.log(error)});
-*/
+
     event.preventDefault();
 
   }
 
+
   render() {
     const { classes } = this.props;
-    const {email, password} = this.state;
+    const {email, password, error} = this.state;
   if (this.state.redirect) {
-    console.log("signup in redirect"+this.state.redirect);
     return <Redirect to={this.state.redirect} />
-  } else {
+  } else if (error) {
+    return <Redirect to={this.state.redirect} />}
+    else{
     return (
       <Container component="main" maxWidth="xs" >
         <CssBaseline />

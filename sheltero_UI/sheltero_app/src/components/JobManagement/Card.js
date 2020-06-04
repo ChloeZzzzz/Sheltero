@@ -3,15 +3,15 @@ import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 
 import {
-    Card,
     CardBody,
     CardFooter,
     CardImageHeader,
     CardText,
     CardTitle
   } from "styled-card-component";
-
-import Button from "../../components/CustomButtons/Button.js";
+import Card from "../Card/Card";
+import Button from "../CustomButtons/Button.js";
+import buttonStyle from '../CustomButtons/buttonStyle';
 
 export default class CardSaint extends React.Component{
     constructor(props){
@@ -38,12 +38,14 @@ export default class CardSaint extends React.Component{
             <div>
                 <Card active key={this.props.value._id}>
                     <CardImageHeader style={{height: "200pt"}}src={this.props.value.imgUrl} key={this.props._id}/>
-                    <CardTitle>{this.props.value.jobTitle}</CardTitle>
-                    <CardText>{this.props.value.jobDetail}</CardText>
-                    <CardFooter>
-                      Credit_level:{this.props.value.creditLevel}
-                    </CardFooter >
-                    <Button onClick={this.updateInfo}>
+                    <CardBody>
+                        <CardTitle>{this.props.value.jobTitle}</CardTitle>
+                        <CardText>{this.props.value.jobDetail}</CardText>
+                        <CardFooter>
+                        Credit_level:{this.props.value.creditLevel}
+                        </CardFooter >
+                    </CardBody>
+                    <Button onClick={this.updateInfo} style={buttonStyle.primary}>
                         More info:
                     </Button>
                 </Card>

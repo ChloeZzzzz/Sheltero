@@ -1,6 +1,7 @@
 // this js file is the basic ui for job posting page
 import React from 'react';
-import { PrimButton, H2 } from './theme';
+import Button from "./CustomButtons/Button";
+import { H2 } from './theme';
 import ReadFile from './ReadFile';
 import Copyright from './Copyright';
 import {
@@ -100,7 +101,9 @@ export default withStyles(styles) (class JobPost extends React.Component {
     render() {
         const { classes } = this.props;
         return(
+
         <Container component="main"  className={classes.paper}>
+
             <CssBaseline/>
             <div>
                 <H2 className={classes.positionLeft}>Post New Job</H2>
@@ -211,7 +214,7 @@ export default withStyles(styles) (class JobPost extends React.Component {
                         <ReadFile />
                     </Grid>
                     <br/><br/>
-                    <PrimButton className={classes.formItem}>Post Job</PrimButton>
+                    <Button color="primary" className={classes.formItem}>Post Job</Button>
                 </Grid>
             </form>
 

@@ -1,6 +1,6 @@
-const BASE_URL = "https://shelteroinf.herokuapp.com";
+const BASE_URL = "http://shelteroinf.herokuapp.com";
 
-// using axios to interact with Library API
+// using axios to interact with API
 const axios = require('axios');
 
 export default async function postUsersSignup(data) {

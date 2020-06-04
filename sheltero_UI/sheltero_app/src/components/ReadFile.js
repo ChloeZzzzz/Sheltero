@@ -14,6 +14,7 @@ const styles = theme => ({
     },
     imgPreview: {
         width: '80%',
+        height: '100%',
     }
 })
 
