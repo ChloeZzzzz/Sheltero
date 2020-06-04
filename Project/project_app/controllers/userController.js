@@ -4,17 +4,15 @@ const bcrypt = require('bcrypt');
 const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
-const getUserHomepage = (req, res) => {
-    const message = res.flash("loginMessage");
-    console.log(message);
-    console.log(message === "Successful login");
-    if (message == "Successful login") {
-        res.json({"user":req.user,
-                    "message": message});
+const getUserHomepage = async (req, res) => {
+    if (req.session.passport.user) {
+        const user = await Users.findById(req.session.passport.user);
+        res.json({"user":user,
+                    "message": req.session.flash});
         return res.end();
     }
     else{
-        res.json({"message": message})
+        res.json({"message": "something went wrong :("})
         return res.end();
     }
 }
@@ -35,8 +33,9 @@ const getUserLogin = (req, res) => {
         return res.end();
     }
     else {
-        res.json({"message": req.flash("loginMessage")});
-        return res.end();
+        return(res.render("login"));
+        // res.json({"message": req.flash("loginMessage")});
+        // return res.end();
     }
 }
 
