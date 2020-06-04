@@ -85,7 +85,7 @@ export default withStyles(styles) (class Nav extends Component  {
 
   checkLoginStatus() {
     axios
-      .get("https://shelteroinf.herokuapp.com/login", {withCredentials: true})
+      .get("https://shelteroinf.herokuapp.com/user/login")
       .then(res => {
         if (
           res.data.login && this.state.loggedInStatus === "false"
