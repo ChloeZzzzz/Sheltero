@@ -1,7 +1,7 @@
 import React from "react";
 // @material-ui/core components
 import TextField from '@material-ui/core/TextField';
-import { withStyles } from "@material-ui/core";
+import { Link, withStyles } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "../components/Grid/GridItem.js";
@@ -189,9 +189,7 @@ export default withStyles(styles) (class employer extends React.Component {
                                         </GridItem>
                                     </GridContainer>
                                 </CardBody>
-                                <CardFooter>
-                                    <Button color="primary">Update Profile</Button>
-                                </CardFooter>
+                                <Link href={'/jobpost'}><Button color="primary">Post Job</Button></Link>
                             </Card>
                         </GridItem>
                         <GridItem xs={12} sm={12} md={4}>

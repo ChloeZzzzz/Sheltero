@@ -151,6 +151,7 @@ function JobCategories(props) {
             <div className={classes.images}>
                 {images.map(image => (
                     <ButtonBase
+                        href="/viewarea"
                         key={image.title}
                         className={classes.imageWrapper}
                         style={{

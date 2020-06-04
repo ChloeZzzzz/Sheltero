@@ -3,10 +3,7 @@ import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import CardBody from "../Card/CardBody.js";
 import {
-    CardFooter,
     CardImageHeader,
-    CardText,
-    CardTitle
   } from "styled-card-component";
 import Card from "../Card/Card";
 import Button from "../CustomButtons/Button.js";

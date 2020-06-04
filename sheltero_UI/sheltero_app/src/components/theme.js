@@ -91,11 +91,11 @@ export const useStyles = makeStyles((theme) => ({
 // ***************************STYLED COMPONENTS**************************** //
 
 export const PrimButton = styled(Button)({
-    background: '#99C015',
-    border: 2,
+    background: 'transparent',
+    border: '2px solid',
     borderColor:'#99C015',
     borderRadius: 3,
-    color: '#fff',
+    color: '#99C015',
     height: 48,
     padding: '0 30px',
     fontFamily: [
@@ -108,6 +108,7 @@ export const PrimButton = styled(Button)({
     fontWeight: 'bold',
     '&:hover': {
         background: "#638709",
+        color: '#fff',
     },
 });
 

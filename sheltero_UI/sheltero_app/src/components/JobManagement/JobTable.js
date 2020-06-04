@@ -60,17 +60,18 @@ export class JobTable extends React.Component {
   }
 
   render() {
+
     const { error, isLoaded, jobs } = this.state;
     if (error) {
       return <div> ERROR:{error.message}</div>;
     } else if (!isLoaded) {
-      return <div>Loading..</div>;
+      return <div style = {{textAlign: "center"}}>Loading..</div>;
     } else {
       return (
         <div>
           <Row >
           {jobs.map((value, index) => {
-            value.imgUrl ="https://picsum.photos/350/200";
+            value.imgUrl ="https://picsum.photos/1080/400";
             return (
               <Column xl={4} xs={12} sm={12} md={6} style={{paddingTop: "10pt", paddingBottom: "10pt"}}>
                 <Card value={value} style = {{height: "100%", flexDirection: "column"}} updateInfo={this.updateInfo}/>
@@ -82,7 +83,7 @@ export class JobTable extends React.Component {
                             jobTag={"Tag:"+this.state.values.jobTag}
                             jobDetails={"Details:"+this.state.values.jobDetail}
                             contact={"company contact:"+this.state.values.contactEmail}
-                            img={"https://picsum.photos/350/200"}
+                            img={this.state.values.imgUrl}
                             jobArea={"Area:"+value.jobArea}
                             closePopup={this.togglePopup}
                         />
