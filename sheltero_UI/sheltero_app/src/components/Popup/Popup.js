@@ -16,7 +16,7 @@ class Popup extends React.Component {
                     <img src={this.props.img}/>
                     <p>{this.props.jobDetails}</p>
                     <Button color="primary" onClick={this.props.closePopup}>close</Button>
-                    <Button color="rose"className='closeButton'>apply</Button>
+                    <Button color="rose" >apply</Button>
                     <Button color="info">save</Button>
                 </div>
             </div>

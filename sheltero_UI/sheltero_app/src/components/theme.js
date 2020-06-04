@@ -92,18 +92,20 @@ export const useStyles = makeStyles((theme) => ({
 
 export const PrimButton = styled(Button)({
     background: '#99C015',
-    border: 0,
+    border: 2,
+    borderColor:'#99C015',
     borderRadius: 3,
     color: '#fff',
     height: 48,
     padding: '0 30px',
     fontFamily: [
-        'futura',
-        'serif',
+        'avenir',
+        'roboto',
     ].join(','),
     margin: theme.spacing(2,4,2,4),
     letterSpacing: 3,
     fontSize:18,
+    fontWeight: 'bold',
     '&:hover': {
         background: "#638709",
     },
@@ -118,8 +120,8 @@ export const SecButton = styled(Button)({
     fontSize: 12,
     padding: '0 30px',
     fontFamily: [
-        'futura',
-        'serif',
+        'avenir',
+        'roboto',
     ].join(','),
     margin: theme.spacing(2,2,2,2),
     '&:hover': {

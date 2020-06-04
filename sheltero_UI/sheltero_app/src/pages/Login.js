@@ -70,7 +70,7 @@ export default withStyles(styles) (class Login extends React.Component {
           if (response.data.message === "Successful login") {
             alert('Hi ' + this.state.email + ', you have successfully logged in!');
             this.setState({ redirect: "/user" });
-            console.log(response.data)
+            console.log(response.data);
           } else {
             alert('Opps, something went wrong so that u failed to log in!');
             this.setState({ redirect: "/login" });

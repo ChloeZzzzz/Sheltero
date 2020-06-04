@@ -1,6 +1,6 @@
 import React from "react";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "../components/Grid/GridItem.js";
@@ -64,10 +64,14 @@ cardCategoryWhite: {
   }
 });
 
-const useStyles = makeStyles(styles);
 
-export default function UserProfile() {
-  const classes = useStyles();
+export default withStyles(styles) (class UserProfile extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+  render(){
+    const { classes } = this.props;
   return (
 
     <section className={classes.container}>
@@ -94,7 +98,7 @@ export default function UserProfile() {
         <GridItem xs={12} sm={12} md={8}>
           <Card>
             <CardHeader color="primary" >
-              <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
+              <h4 className={classes.cardTitleWhite}>Profile</h4>
               <p className={classes.cardCategoryWhite}>Complete your profile</p>
             </CardHeader>
             <CardBody>
@@ -213,5 +217,5 @@ export default function UserProfile() {
       </GridContainer>
     </Container>
     </section>
-  );
-}
+  );}
+})
