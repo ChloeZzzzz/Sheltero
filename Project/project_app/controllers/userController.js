@@ -6,8 +6,6 @@ const mongoose = require('mongoose');
 
 const getUserHomepage = (req, res) => {
     if (req.user) {
-        console.log("== REQ.USER ==");
-        console.log(req.user);
         res.json(req.user);
     } else {
         res.redirect('../');

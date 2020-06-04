@@ -7,13 +7,6 @@ const session = require('express-session');
 const initPassport = require('../config/passport');
 initPassport(passport);
 
-userRouter.use(session({
-    secret: "sheltero",
-    resave: true,
-    saveUninitialized: true
-}))
-userRouter.use(passport.initialize())
-userRouter.use(passport.session())
 //userRouter.use(flash())
 
 const userController = require('../controllers/userController')
@@ -41,9 +34,10 @@ userRouter.get('/logout', userController.getUserLogout)
 // ======== POST request ========
 userRouter.post('/signup', userController.postUserSignup);
 
-userRouter.post('/login',
-    passport.authenticate("local", { successRedirect: '/',
-                                     failureRedirect: './login'}
+userRouter.post('/login', passport.authenticate("cookie-login", 
+                                    { successRedirect: '/',
+                                    failureRedirect: './login',
+                                    failureFlash:true}
 ))
 
 //userRouter.post('/updateUser', userController.postUpdateUser);
