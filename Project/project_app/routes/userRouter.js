@@ -36,7 +36,10 @@ userRouter.post('/signup', passport.authenticate("local-signup",
                                     {failureFlash:true}));
 
 userRouter.post('/login', passport.authenticate("cookie-login", 
-                                    {failureFlash:true}));
+                                    { successRedirect: '/',
+                                    failureRedirect: './login',
+                                    failureFlash:true}
+))
 
 //userRouter.post('/updateUser', userController.postUpdateUser);
 
