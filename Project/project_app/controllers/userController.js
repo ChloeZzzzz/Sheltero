@@ -4,11 +4,6 @@ const bcrypt = require('bcrypt');
 const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
-const getFail = (req, res) => {
-    res.json("fail!");
-    return res.end();
-}
-
 const getUserHomepage = (req, res) => {
     if (req.user) {
         console.log("== REQ.USER ==");
@@ -21,6 +16,7 @@ const getUserHomepage = (req, res) => {
 }
 
 const successLogin = (req, res) => {
+    console.log(req.user);
     if (req.user) {
         res.json(req.user);
         return res.end();
@@ -37,7 +33,7 @@ const failureLogin = (req, res) => {
 
 const getUserSignup = (req, res) => {
     if (req.user) {
-        res.redirect('./');
+        res.json("getUserSignup req.user true!");
     } else {
         res.render("signup.ejs");
     }
