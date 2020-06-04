@@ -14,7 +14,7 @@ const session = require("express-session");
 
 app.use(cors({
     credentials:true,
-    origin: 'http://localhost:3000',
+    origin: '^(https?://(?:.+\.)?herokuapp\.com(?::\d{1,5})?)$',
 }))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
