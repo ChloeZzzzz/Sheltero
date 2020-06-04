@@ -4,47 +4,105 @@ const bcrypt = require('bcrypt');
 const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
-const getUserHomepage = async (req, res) => {
-    if (req.session.passport.user) {
-        const user = await Users.findById(req.session.passport.user);
-        res.json({"user":user,
-                    "message": req.session.flash});
+const getFail = (req, res) => {
+    res.json("fail!");
+    return res.end();
+}
+
+const getUserHomepage = (req, res) => {
+    if (req.user) {
+        console.log("== REQ.USER ==");
+        console.log(req.user);
+        res.json("happy");
         return res.end();
+    } else {
+        res.redirect('../');
     }
-    else{
-        res.json({"message": "something went wrong :("})
+}
+
+const successLogin = (req, res) => {
+    if (req.user) {
+        res.json(req.user);
+        return res.end();
+    } else {
+        res.json("successLogin no req.user");
         return res.end();
     }
 }
 
+const failureLogin = (req, res) => {
+    res.json("failureLogin")
+    return res.end();
+}
+
 const getUserSignup = (req, res) => {
     if (req.user) {
-        res.json(req.user);
-        return res.end();
-    }
-    else {
-        return res.render("signup.ejs");
+        res.redirect('./');
+    } else {
+        res.render("signup.ejs");
     }
 }
 
 const getUserLogin = (req, res) => {
     if (req.user) {
         res.json(req.user);
-        return res.end();
     }
     else {
-        return(res.render("login"));
-        // res.json({"message": req.flash("loginMessage")});
-        // return res.end();
+        res.render("login.ejs");
     }
 }
 
 const getUserLogout = (req, res) => {
     if (req.user) {
-        return req.logOut();
-    } 
-    else {
-        return res.redirect('../')
+        req.logOut();
+        res.render("logout.ejs");
+    } else {
+        res.redirect('../')
+    }
+}
+
+// post user sign up
+// -> encrypt the user's password before store it into the database for security issues
+// -> has to use async since have to wait for encryption completet
+const postUserSignup = async (req, res) => {
+    console.log(req);
+    try {
+        if (await email_validator.validate(req.body.email) && await emailNotSignedUp(req.body.email)) {
+            const cryptedpw = await bcrypt.hash(req.body.password, 10);
+            const user = new Users({
+                "_id" : new mongoose.Types.ObjectId(),
+                "gender" : req.body.gender,
+                "first_name" : req.body.first_name,
+                "last_name": req.body.last_name,
+                "email" : req.body.email,
+                "password" : cryptedpw,
+                "contact": req.body.contact,
+                "company_name": req.body.company_name,
+                "company_addr": req.body.company_addr,
+                "type" : req.body.type,
+                "resume": {job: 'programmer'}
+            });
+
+            user.save().then(result => {
+                console.log("== SAVED TO DATABASE ==")
+                console.log(result);
+            }).catch(err => {
+                console.log(user);
+                console.log(err);
+            });
+
+            res.json('success');
+        } else {
+            console.log("Invalid email or email already signed up!");
+            res.json('fail: invalid email or email already signed up');
+            //res.redirect('signup');
+        }
+
+    } catch (e) {
+        console.log("Failed to Sign up");
+        console.log(e);
+        res.json('fail')
+        //res.redirect('signup');
     }
 }
 
@@ -90,15 +148,15 @@ const postUpdateUser = async(req, res) => {
 
     }
     else {
-      return res.redirect("login.ejs");
+      res.redirect("login.ejs");
     }
 }
 
 const getUpdateUser = (req, res) => {
     if (req.user) {
-        return res.render('user-update.ejs', {useremail: req.user.email});
+        res.render('user-update.ejs', {useremail: req.user.email});
     } else {
-        return res.redirect('login.ejs');
+        res.redirect('login.ejs');
     }
 }
 
@@ -107,5 +165,8 @@ module.exports = {
     getUserSignup,
     getUserLogin,
     getUserLogout,
+    postUserSignup,
     //postUpdateUser,
+    successLogin,
+    failureLogin,
 }

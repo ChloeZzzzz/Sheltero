@@ -2,39 +2,19 @@ const express = require('express');
 //const flash = require('connect-flash');
 //require('dotenv').config();
 const app = express();
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const cookieParser = require("cookie-parser");
-const flash = require('connect-flash-plus');
-const jwt = require('jsonwebtoken');
-const morgan = require("morgan");
-const passport = require("passport");
-const session = require("express-session");
+var bodyParser = require('body-parser');
+var cors = require('cors')
 
-
-app.use(cors({
-    credentials:true,
-    origin:["http://sheltero.herokuapp.com", "localhost:3000"],
-}));
-
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 require('./models');
 
-const PORT = process.env.PORT || 3000;
+const morgan = require("morgan");
+
+const PORT = process.env.PORT || 5000;
 app.use(express.static('public'));
-
-//cookies parsing
-app.use(session({
-    secret:"sheltero_inf_top_secret_secret_code"
-}))
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(flash());
-
+//app.use(flash())
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -54,12 +34,10 @@ app.use('/job-search', jobRouter);
 // GET homepage
 app.get('/', (req, res) => {
     if (req.user) {
-        res.json({"user":req.user,
-                    "message": req.flash("loginMessage")});
-        return res.end();
+        res.json(req.user);
     }
-    return res.render("home.ejs");
-});
+    res.render("home.ejs");
+})
 
 // ==== Error Handling ====
 
@@ -68,16 +46,16 @@ app.use((req, res, next) => {
     const error = new Error('404 Not Found');
     error.status = 404;
     next(error);
-});
+})
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500);
     res.render('error', {
         message: error.message,
         error: error
-    });
-});
+    })
+})
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 5000, () => {
     console.log('Sheltero is listening on port ' + PORT)
 });
