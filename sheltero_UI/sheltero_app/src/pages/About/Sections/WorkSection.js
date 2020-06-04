@@ -29,7 +29,7 @@ export default function WorkSection() {
           </h4>
           <form>
             <GridContainer>
-              <GridItem xs={12} sm={12} md={6}>
+              <GridItem xs={12} sm={8} md={6}>
                 <CustomInput
                   labelText="Your Name"
                   id="name"
@@ -38,7 +38,7 @@ export default function WorkSection() {
                   }}
                 />
               </GridItem>
-              <GridItem xs={12} sm={12} md={6}>
+              <GridItem xs={12} sm={8} md={6}>
                 <CustomInput
                   labelText="Your Email"
                   id="email"
@@ -60,7 +60,7 @@ export default function WorkSection() {
                 }}
               />
               <GridContainer justify="center">
-                <GridItem xs={12} sm={12} md={4} className={classes.textCenter}>
+                <GridItem xs={12} sm={8} md={4} className={classes.textCenter}>
                   <Button color="primary">Send Message</Button>
                 </GridItem>
               </GridContainer>
