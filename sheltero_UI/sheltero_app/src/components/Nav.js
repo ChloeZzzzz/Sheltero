@@ -38,14 +38,16 @@ const styles = theme => ({
     position: 'fixed',
   },
   menuButton: {
-      marginRight: theme.spacing(1),
+      marginRight: theme.spacing(2),
       color: '#002E18',
       fontFamily:[
           'avenir',
           'helvetica',
       ].join(','),
-      fontSize: 14,
-      fontWeight: 'bold',
+      fontSize: 12,
+      textTransform: 'uppercase',
+      letterSpacing: 2,
+      // fontWeight: 'bold',
   },
   logo: {
       marginLeft: theme.spacing(1),
@@ -134,6 +136,7 @@ export default withStyles(styles) (class Nav extends Component  {
             Sheltero.
           </Link>
           <Button className={classes.menuButton} href="/job">Job search</Button>
+          <Button className={classes.menuButton} href="/about">Work with us</Button>
           <Button className={classes.menuButton} href="/login">Login</Button>
           <Button className={classes.menuButton} href="/signup">Sign up</Button>
         </Toolbar>
