@@ -38,7 +38,7 @@ userRouter.post('/signup', passport.authenticate("local-signup",
                                     }));
 
 userRouter.post('/login', passport.authenticate("cookie-login", 
-                                    { successRedirect: '/',
+                                    { successRedirect: './',
                                     failureRedirect: './login',
                                     failureFlash:true}
 ))

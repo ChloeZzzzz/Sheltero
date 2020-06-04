@@ -37,9 +37,9 @@ module.exports = (passport)=>{
         usernameField: "email",
         passwordField: "password",
         passReqToCallback: true},
-        async (req, email, password, done)=>{
+        (req, email, password, done)=>{
             try{
-                await Users.findOne({'email': email}).then((err, existsuser)=>{
+                Users.findOne({'email': email}).then((err, existsuser)=>{
                     if(err){
                         return done(err);
                     }
