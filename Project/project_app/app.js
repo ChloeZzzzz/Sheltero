@@ -52,10 +52,11 @@ app.use('/job-search', jobRouter);
 // GET homepage
 app.get('/', (req, res) => {
     if (req.user) {
-        res.json(req.user);
+        res.json({"user":req.user,
+                    "message": req.flash("loginMessage")});
         return res.end();
     }
-    //return res.render("home.ejs");
+    return res.render("home.ejs");
 });
 
 // ==== Error Handling ====
