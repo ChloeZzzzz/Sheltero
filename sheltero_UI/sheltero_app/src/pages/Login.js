@@ -61,26 +61,12 @@ export default withStyles(styles) (class Login extends React.Component {
   }
   handleSubmit(event) {
       
-    async function postData(url = '', data = {}) {
-      const response = await fetch(url, {
-        method: 'POST', 
-        mode: 'cors', 
-        cache: 'no-cache', 
-        credentials: 'same-origin', 
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer', 
-        body: JSON.stringify(data) 
-      });
-      return response.json(); 
-    }
+
     const { email, password } = this.state;
+
     axios.post('https://shelteroinf.herokuapp.com/user/login', {email,password})
         .then((response) => {
           console.log(response);
-          console.log(response.flash);
           if (response.status===200) {
             alert('Hi ' + this.state.email + ', you have successfully logged in!');
             this.setState({ redirect: "/user" });
@@ -92,30 +78,10 @@ export default withStyles(styles) (class Login extends React.Component {
           }
         }).catch((error) => {
       console.log(error)});
-      //     this.setState({ error: '' });
-      //     this.props.history.push('/user');
-      //     console.log(response.data);
-      //     console.log(response.status);
-      //   },(error)=>{console.log(error.status);})
-      //   .catch((error) => {
-      //     this.props.history.push('/')
-      //   });
 
     event.preventDefault();
 
   }
-    //     postData('https://shelteroinf.herokuapp.com/user/login', (this.state));
-    // console.log(res)
-    // if (res) {
-    //   this.setState({redirect: '/user'});
-    // }
-
-    // The code below is the one that is right, but have to change the response
-    // of in the back end which is related to passport authentication
-    // and probably the flash message, where I (della) could not solve it yet.
-    // so the code above is used... (but they are wrong! they couldn't handle
-    // the redirect correctly when user authetication failed, it treats them all the same)
-
 
 
   render() {
