@@ -24,7 +24,7 @@ const userRouter = require('./routes/userRouter');
 const jobRouter = require('./routes/jobRouter');
 
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', 'http://sheltero.herokuapp');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 });
