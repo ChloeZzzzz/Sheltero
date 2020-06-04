@@ -5,7 +5,10 @@ const app = express();
 var bodyParser = require('body-parser');
 var cors = require('cors')
 
-app.use(cors())
+app.use(cors({
+    credentials:true,
+    origin:"http://sheltero.herokuapp.com",
+}))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 require('./models');
