@@ -14,8 +14,9 @@ const session = require("express-session");
 
 app.use(cors({
     credentials:true,
-    origin:"http://localhost",
-}))
+    origin:["http://sheltero.herokuapp.com", "localhost:3000"],
+}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
