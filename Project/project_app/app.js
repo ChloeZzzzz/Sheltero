@@ -12,7 +12,7 @@ require('./models');
 
 const morgan = require("morgan");
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 //app.use(flash())
 
@@ -56,6 +56,6 @@ app.use((error, req, res, next) => {
     })
 })
 
-app.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Sheltero is listening on port ' + PORT)
 });
