@@ -60,8 +60,6 @@ export default withStyles(styles) (class Login extends React.Component {
     this.setState({[e.target.name]: e.target.value});
   }
   handleSubmit(event) {
-      
-
     const { email, password } = this.state;
 
     axios.post('https://shelteroinf.herokuapp.com/user/login', {"email":email,"password":password},{withCredentials:true})
@@ -80,7 +78,6 @@ export default withStyles(styles) (class Login extends React.Component {
       console.log(error)});
 
     event.preventDefault();
-
   }
 
 
