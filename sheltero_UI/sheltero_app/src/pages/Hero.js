@@ -69,15 +69,7 @@ function ProductHero(props) {
                 <H1 className={classNames(classes.titleAnimation, classes.title)}>sheltero.</H1>
 
             </Box>
-            <Box>
-                <Link href="/login">
-                    <PrimButton>Sign In</PrimButton>
-                </Link>
-                <Link href="/signup">
-                    <PrimButton>Sign Up</PrimButton>
-                </Link>
-            </Box>
-
+        
         </HeroLayout>
     );
 }

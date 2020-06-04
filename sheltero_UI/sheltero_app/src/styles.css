@@ -1,11 +1,9 @@
 .App {
   font-family: futura, sans-serif;
-  text-align: center;
 }
 
 *, *::after, *::before {
   box-sizing: "border-box";
-  text-align: center;
 }
 
 /*html,*/

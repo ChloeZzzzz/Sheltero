@@ -19,7 +19,7 @@ export default function App() {
     <Router>
       <div className="App">
         <Nav /> {/* insert navigation bar from components on each page */}
-
+        <Header />
 
         <Switch>
           {/* A <Switch> looks through its children <Route>s and

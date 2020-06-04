@@ -83,6 +83,39 @@ export const useStyles = makeStyles((theme) => ({
         color: "#002E18",
       }
     },
+
+
+    // style for nav bar
+    root: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginRight: theme.spacing(1),
+        color: '#fff',
+        fontFamily:[
+            'avenir',
+            'helvetica',
+        ].join(','),
+        fontSize: 14,
+        fontWeight: 'bold',
+    },
+    logo: {
+        marginLeft: theme.spacing(1),
+        flexGrow: 1,
+        color: '#fff',
+        fontSize: 24,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        fontFamily: [
+            'futura',
+            'serif',
+        ].join(','),
+        letterSpacing: 2,
+        '&:hover': {
+            textDecoration: 'none',
+        },
+
+    },
 })
 )
 
