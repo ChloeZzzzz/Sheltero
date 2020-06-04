@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import {theme} from "./theme";
 import { Header } from "./components/Nav";
 import Nav from "./components/Nav";
+import Hero from "./pages/Home/Sections/Hero";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";

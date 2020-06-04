@@ -92,7 +92,8 @@ export const useStyles = makeStyles((theme) => ({
 
 export const PrimButton = styled(Button)({
     background: '#99C015',
-    border: 0,
+    border: 2,
+    borderColor:'#99C015',
     borderRadius: 3,
     color: '#fff',
     height: 48,
