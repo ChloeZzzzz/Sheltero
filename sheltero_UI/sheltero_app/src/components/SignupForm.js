@@ -7,7 +7,7 @@ class SignupForm extends React.Component {
         super(props);
         /* initialise this state */
         this.state = {
-                      type: '',
+                      type: this.props.workType,
                       first_name: '',
                       last_name: '',
                       email: '',
@@ -19,9 +19,9 @@ class SignupForm extends React.Component {
     }
 
     handleChange (e) {
-        this.setState({
-          [e.target.name] : e.target.value
-        });
+      this.setState({
+        [e.target.name] : e.target.value
+      });
     }
 
     handleSubmit(event) {
@@ -31,7 +31,7 @@ class SignupForm extends React.Component {
           let res = response.data.flash["signupMessage"];
           if(!res){
             alert('Hi ' + this.state.first_name + ', you have successfully signed up as an '+this.state.type+'!');
-            this.setState({ redirect: "/login" });
+            this.setState({ redirect: "/welcome" });
           }
           else if (res[res.length-1] == "Successful signup") {
             alert('Opps, something went wrong!');
