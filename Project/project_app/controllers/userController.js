@@ -28,7 +28,7 @@ const successLogin = (req, res) => {
 }
 
 const failureLogin = (req, res) => {
-    res.json("failureLogin")
+    res.json(req.session.flash["loginMessage"]);
     return res.end();
 }
 
