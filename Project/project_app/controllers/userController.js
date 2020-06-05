@@ -47,11 +47,7 @@ const failureLogin = (req, res) => {
 }
 
 const getUserSignup = (req, res) => {
-    if (req.user) {
-        res.json("getUserSignup req.user true!");
-    } else {
-        res.render("signup.ejs");
-    }
+    res.render("signup.ejs");
 }
 
 const getUserLogin = (req, res) => {

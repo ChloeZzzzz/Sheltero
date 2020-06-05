@@ -48,9 +48,6 @@ app.use('/job-search', jobRouter);
 
 // GET homepage
 app.get('/', (req, res) => {
-    if (req.user) {
-        res.json(req.user);
-    }
     res.render("home.ejs");
 })
 
