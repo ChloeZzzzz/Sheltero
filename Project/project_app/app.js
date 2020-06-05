@@ -11,7 +11,7 @@ require('./config/passport')(passport);
 
 app.use(cors({origin:["http://sheltero.herokuapp\.com$/","http://localhost:3000", "http://sheltero.herokuapp.com"],
             credentials:true,
-            allowedHeaders:['Origin','X-Requested-With','Content-Type','Accept', 'Access-Control-Allow-Origin'],
+            allowedHeaders:['Origin','X-Requested-With','Content-Type','Accept', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Headers', 'Access-Control-Request-Method'],
             methods:['GET','PUT','POST','DELETE','OPTIONS'],
             preflightContinue:true}));
             
@@ -32,6 +32,15 @@ app.use(session({secret:"bestest_coolest_secretest_key",
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+// cors preflight header
+app.use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+    res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
+    next();
+})
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
