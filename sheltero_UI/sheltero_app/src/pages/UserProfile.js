@@ -20,6 +20,7 @@ import {
 } from "../style";
 import Welcome from 'react-welcome-page';
 import Container from "@material-ui/core/Container";
+import CheckLogin from '../components/CheckLoginStatus';
 const avatar= "https://picsum.photos/id/237/400/400";
 
 
@@ -65,23 +66,45 @@ cardCategoryWhite: {
   }
 });
 
-
 export default withStyles(styles) (class UserProfile extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      type: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: ''};
     this.getUserInfo = this.getUserInfo.bind(this);
   }
-
-  getUserInfo = ()=>{
+  //CheckLogin.componentDidMount();
+  
+  getUserInfo = () =>{
+    console.log("INSIDE GET USER INFO");
     axios.get('https://shelteroinf.herokuapp.com/user', {withCredentials:true})
         .then((response) => {
-          let res = res.data;
-          console.log(res);
+          console.log("below response");
+          console.log(response);
+          console.log("above response");
+          const res = response.data.flash["message"];
+          //console.log(res);
+          if (res[res.length-1] == "User Info,") {
+            this.setState({ type: response.user.type,
+                            first_name: response.user.first_name,
+                            last_name: response.user.last_name,
+                            email: response.user.email });
+          }
         }).catch((error) => {
           console.log(error)});
   }
 
+
   render(){
+    //console.log("getuserinfo:")
+    //console.log(this.state.first_name);
+    //this.getUserInfo();
+    //console.log(this.state.first_name);
+      //console.log(this.getUserInfo);
     const { classes } = this.props;
   return (
 
