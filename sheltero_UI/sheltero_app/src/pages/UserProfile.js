@@ -81,7 +81,7 @@ export default withStyles(styles) (class UserProfile extends React.Component {
   
   getUserInfo = () =>{
     console.log("INSIDE GET USER INFO");
-    axios.get('https://shelteroinf.herokuapp.com/user', {withCredentials:true})
+    axios.get('https://shelteroinf.herokuapp.com/user', {withCredentials:true, crossDomain: true})
         .then((response) => {
           console.log("below response");
           console.log(response);
