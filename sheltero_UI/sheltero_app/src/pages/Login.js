@@ -61,24 +61,20 @@ export default withStyles(styles) (class Login extends React.Component {
   }
   handleSubmit(event) {
     const { email, password } = this.state;
-
     axios.post('https://shelteroinf.herokuapp.com/user/login', {"email":email,"password":password},{withCredentials:true,crossdomain:true})
         .then((response) => {
           let res = response.data.flash["loginMessage"];
-          console.log(this.props);
+          console.log(res);
           if(!res){
             alert('Opps, something went wrong so that u failed to log in!');
             this.setState({ redirect: "/login" });
-            this.props.handleLogin(false);
             console.log("failed to login");
           }
           else if (res[res.length-1] == "Successful login") {
             alert('Hi ' + this.state.email + ', you have successfully logged in!');
-            this.props.handleLogin(true);
             this.setState({ redirect: "/user" });
           }
           else{
-            this.props.handleLogin(false);
             alert("beep beep boop something went really wrong");
           }
         }).catch((error) => {
