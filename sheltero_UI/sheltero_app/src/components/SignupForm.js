@@ -24,7 +24,7 @@ class SignupForm extends React.Component {
     }
 
     handleSubmit(event) {
-      axios.post('https://shelteroinf.herokuapp.com/user/login', this.state,{withCredentials:true})
+      axios.post('https://shelteroinf.herokuapp.com/user/signup', this.state,{withCredentials:true})
         .then((response) => {
           let res = response.data.flash["signupMessage"];
           if(!res){
