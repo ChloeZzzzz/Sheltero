@@ -26,12 +26,17 @@ userRouter.get('/logout', userController.getUserLogout);
 
 userRouter.get('/successlogin', userController.successLogin);
 userRouter.get('/failurelogin', userController.failureLogin);
+userRouter.get('/successsignup', userController.successSignup);
+userRouter.get('/failuresignup', userController.failureSignup);
 
 // GET user update
 //userRouter.get('/updateUser', (req, res) => userController.getUpdateUser(req, res));
 
 // ======== POST request ========
-userRouter.post('/signup', userController.postUserSignup);
+userRouter.post('/signup', 
+    passport.authenticate("local-signup", { successRedirect: './successsignup',
+                                            failureRedirect: './failuresignup',
+                                            failureFlash:true}));
 
 userRouter.post('/login',
     passport.authenticate("cookie-login", { successRedirect: './successlogin',
