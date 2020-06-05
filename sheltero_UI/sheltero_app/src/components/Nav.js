@@ -3,8 +3,6 @@ import { Link, Box, withStyles, Button } from '@material-ui/core';
 import { useStyles } from './theme';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import axios from "axios";
-import CheckLogin from '../components/CheckLoginStatus';
 
 
 const styles = theme => ({
@@ -47,29 +45,20 @@ const styles = theme => ({
 })
 
 
-export default withStyles(styles) (class Nav extends CheckLogin  {
+export default withStyles(styles) (class Nav extends React.Component  {
   constructor(props) {
     super(props);
 
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleLogoutClick(e) {
-    this.setState({
-      loggedInStatus : false,
-    });
-  }
-
-  handleLogin(status){
-    this.setState({
-      loggedInStatus: status,
-    });
+  handleLogoutClick() {
+    this.props.user_signout();
   }
 
   render () {
     const { classes } = this.props;
-    if (!this.state.loggedInStatus){
+    if (!this.props.getuser_info()){
       return(
         <div className={classes.root}>
           <AppBar className={classes.navBar}>
@@ -85,7 +74,7 @@ export default withStyles(styles) (class Nav extends CheckLogin  {
           </AppBar>
         </div>
         )
-    } else if (this.state.loggedInStatus){
+    } else if (this.props.getuser_info()){
       return(
         <div className={classes.root}>
           <AppBar className={classes.navBar}>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import { Header } from "./components/Nav";
@@ -20,30 +20,51 @@ import About from "./pages/About/About";
 import Employee from "./pages/employeeProfile";
 import Employer from"./pages/employerProfile";
 export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      signed_in = false,
+    }
+    this.user_signin = this.user_signin.bind(this);
+    this.user_signout = this.user_signout.bind(this);
+    this.getuser_info = this.getuser_info.bind(this);
+  }
+  user_signin = () =>{
+    this.setState({signed_in:true});
+  }
+
+  user_signout = () =>{
+    this.setState({signed_in:false})
+  }
+
+  getuser_info = ()=>{
+    return(this.state.signed_in);
+  }
+
   render() {
   return (
     <Router>
       <div className="App">
-        <Nav /> {/* insert navigation bar from components on each page */}
-        <Header />
+        <Nav getuser_info={this.getuser_info} user_signout={this.user_signout}/> {/* insert navigation bar from components on each page */}
+          <Header />
 
-        <Switch>
-          {/* A <Switch> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
-          {/* Link each pages and specify components to render */}
-          {/* <Route exact path="/" render={props => <Nav {...props} loggedInStatus={this.state.loggedInStatus} />} /> */}
-          <Route exact path="/login" render={props => <Login {...props} />} />
-          <Route exact path="/signup" render={props => <Register {...props} />} />
-          <Route exact path="/" render={props => <Home {...props} />} />
-          <Route exact path="/job" render={props => <Job {...props} />} />
-          <Route exact path="/jobpost" render={props => <JobPost {...props} />} />
-          <Route exact path="/user" render={props => <User {...props} />} />
-          <Route exact path="/welcome" render={props => <Welcome {...props} />} />
-          <Route exact path="/employer" render={props => <Employer {...props} />} />
-          <Route exact path="/employee" render={props => <Employee {...props} />} />
-          <Route exact path="/about" render={props => <About {...props} />} />
-          <Route exact path="/viewarea" render={props => <ViewArea {...props} />} />
-        </Switch>
+          <Switch>
+            {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+            {/* Link each pages and specify components to render */}
+            {/* <Route exact path="/" render={props => <Nav {...props} loggedInStatus={this.state.loggedInStatus} />} /> */}
+            <Route exact path="/login" render={props => <Login {...props} />} />
+            <Route exact path="/signup" render={props => <Register {...props} />} />
+            <Route exact path="/" render={props => <Home {...props} />} />
+            <Route exact path="/job" render={props => <Job {...props} />} />
+            <Route exact path="/jobpost" render={props => <JobPost {...props} />} />
+            <Route exact path="/user" render={props => <User {...props} />} />
+            <Route exact path="/welcome" render={props => <Welcome {...props} />} />
+            <Route exact path="/employer" render={props => <Employer {...props} />} />
+            <Route exact path="/employee" render={props => <Employee {...props} />} />
+            <Route exact path="/about" render={props => <About {...props} />} />
+            <Route exact path="/viewarea" render={props => <ViewArea {...props} />} />
+          </Switch>
       </div>
     </Router>
   );}
