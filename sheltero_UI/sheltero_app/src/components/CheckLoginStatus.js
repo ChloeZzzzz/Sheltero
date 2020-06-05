@@ -2,33 +2,18 @@ import React from 'react';
 import axios from "axios";
 
 export default class CheckLogin extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
     
         this.state = {
           loggedInStatus: "logged_in",
-          // user: {}
+          // user: {},
+          redirect: null
         };
     
         this.handleLogin = this.handleLogin.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
       }
-
-      // checkLoginStatus() {
-      //   if (
-      //     this.state.loggedInStatus === "not_logged_in"
-      //   ) {
-      //     this.setState({
-      //       loggedInStatus: "logged_in",
-      //     });
-      //   } else if (
-      //     this.state.loggedInStatus === "logged_in"
-      //   ) {
-      //     this.setState({
-      //       loggedInStatus: "not_logged_in"
-      //     })
-      //   }
-      // }
     
       checkLoginStatus() {
         axios
@@ -39,14 +24,14 @@ export default class CheckLogin extends React.Component {
             ) {
               this.setState({
                 loggedInStatus: "logged_in",
-                user: res.data.user
+                // user: res.data.user
               });
             } else if ( // the case when the current state is logged in but the user is not actually authenticated
               !res.data.login & (this.state.loggedInStatus === "logged_in")
             ) {
               this.setState({
                 loggedInStatus: "not_logged_in",
-                user: {}
+                // user: {}
               });
             }
           })

@@ -28,7 +28,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import axios from "axios";
 import CheckLogin from '../components/CheckLoginStatus';
-
+import { Redirect } from "react-router-dom";
 
 const styles = theme => ({
   root: {
@@ -77,26 +77,30 @@ export default withStyles(styles) (class Nav extends CheckLogin  {
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
   }
 
-  // handleLogoutClick() {
-  //   axios
-  //     .delete("https://shelteroinf.herokuapp.com/user/logout", { withCredentials: true })
-  //     .then(response => {
-  //       this.props.handleLogout();
-  //     })
-  //     .catch(error => {
-  //       console.log("logout error", error);
-  //     });
-  // }
-
-  handleLogoutClick(e) {
-    this.setState({
-      loggedInStatus : "not_logged_in"
-    });
+  handleLogoutClick() {
+    axios
+      .get("https://shelteroinf.herokuapp.com/user/logout", { withCredentials: true })
+      .then(response => {
+        this.props.handleLogout();
+      })
+      .catch(error => {
+        console.log("logout error", error);
+      });
   }
+
+  // handleLogoutClick(e) {
+  //   this.setState({
+  //     loggedInStatus : "not_logged_in",
+  //     // redirect: "/",
+  //   });
+  // }
 
 
   render () {
     const { classes } = this.props;
+    // if (this.state.redirect) {
+    //   return <Redirect to={this.state.redirect} />
+    // } else 
     if (this.state.loggedInStatus === "not_logged_in"){
       return(
         <div className={classes.root}>
