@@ -1,26 +1,3 @@
-
-// export function Nav (){
-//   return (
-//     <nav>
-//       <span id="functionPages">
-//         <NavLink exact to="/">
-//           Home
-//         </NavLink>
-//         <NavLink to="/job">
-//           Job Search
-//         </NavLink>
-//       </span>
-//       <span id="userPages">
-//         <NavLink to="/login">
-//           Sign In
-//         </NavLink>
-//         <NavLink to="/signup">
-//           Sign Up
-//         </NavLink>
-//       </span> 
-//     </nav>
-//   );
-// }
 import React, { Component } from "react";
 import { Link, Box, withStyles, Button } from '@material-ui/core';
 import { useStyles } from './theme';
@@ -75,29 +52,24 @@ export default withStyles(styles) (class Nav extends CheckLogin  {
     super(props);
 
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
-
-  // handleLogoutClick() {
-  //   axios
-  //     .delete("https://shelteroinf.herokuapp.com/user/logout", { withCredentials: true })
-  //     .then(response => {
-  //       this.props.handleLogout();
-  //     })
-  //     .catch(error => {
-  //       console.log("logout error", error);
-  //     });
-  // }
 
   handleLogoutClick(e) {
     this.setState({
-      loggedInStatus : "not_logged_in"
+      loggedInStatus : false,
     });
   }
 
+  handleLogin(status){
+    this.setState({
+      loggedInStatus: status,
+    });
+  }
 
   render () {
     const { classes } = this.props;
-    if (this.state.loggedInStatus === "not_logged_in"){
+    if (!this.state.loggedInStatus){
       return(
         <div className={classes.root}>
           <AppBar className={classes.navBar}>
@@ -113,7 +85,7 @@ export default withStyles(styles) (class Nav extends CheckLogin  {
           </AppBar>
         </div>
         )
-    } else if (this.state.loggedInStatus === "logged_in"){
+    } else if (this.state.loggedInStatus){
       return(
         <div className={classes.root}>
           <AppBar className={classes.navBar}>
