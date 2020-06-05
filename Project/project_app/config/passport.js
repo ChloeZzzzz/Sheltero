@@ -41,11 +41,11 @@ module.exports = (passport)=>{
         passReqToCallback: true},
        async  (req, email, password, done)=>{
             let session = req.session;
-           if (session.passport) {
+            if (session.passport) {
                console.log("user already logged in");
                let user = await Users.findById(session.passport.user);
                return done(null, user, req.flash("signupMessage", "User already logged in"));
-           }
+            }
             try{
                 await Users.findOne({'email': email}).then((existsuser)=>{
                     if(existsuser){
@@ -80,6 +80,18 @@ module.exports = (passport)=>{
             }
         })
     );
+
+    passport.use("check session", new LocalStrategy({passReqToCallback:true},
+        (req,done)=>{
+            let session = req.session;
+            if(session.passport){
+                return done(null,user, req.flash("Session check","Checked info"));
+            }
+            else{
+                return done(null, null, req.flash("Session check", "Wrong info :("))
+            }
+        }
+    ));
     
     passport.serializeUser((user, done) => {
         done(null, user._id);

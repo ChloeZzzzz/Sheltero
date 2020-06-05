@@ -12,7 +12,6 @@ const getUserHomepage = async (req, res) => {
                 if (err) throw err;
                 console.log(result);
             });
-            req.flash({"message": "User Info:"})
             res.json(user);
             return res.end();
         } catch(e) {
@@ -21,7 +20,6 @@ const getUserHomepage = async (req, res) => {
         return res.end();
     }
     else{
-        res.json({"message":"Invalid User :("});
         return res.end()
     }
 }
