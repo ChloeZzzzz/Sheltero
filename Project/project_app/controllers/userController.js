@@ -10,10 +10,14 @@ const getUserHomepage = async (req, res) => {
     console.log(req);
     if (session.passport.user) {
         res.json("finding user...");
-        let user = await Users.findOne({"_id": user.passport.useer}, (err, result) => {
-            if (err) throw err;
-            console.log(result);
-        });
+        try {
+            let user = await Users.findOne({"_id": user.passport.useer}, (err, result) => {
+                if (err) throw err;
+                console.log(result);
+            });
+        } catch(e) {
+            console.log(e);
+        }
         res.flash({"message": "User Info:"})
         res.json(user);
         return res.end();
