@@ -64,14 +64,18 @@ export default withStyles(styles) (class Login extends React.Component {
 
     axios.post('https://shelteroinf.herokuapp.com/user/login', {"email":email,"password":password},{withCredentials:true})
         .then((response) => {
-          console.log(response.data.flash);
-          if (response.data.flash === "Successful Login") {
-            alert('Hi ' + this.state.email + ', you have successfully logged in!');
-            this.setState({ redirect: "/user" });
-          } else {
+          let res = response.data.flash["loginMessage"];
+          if(!res){
             alert('Opps, something went wrong so that u failed to log in!');
             this.setState({ redirect: "/login" });
-            console.log("failed to login")
+            console.log("failed to login");
+          }
+          else if (res[res.length-1] == "Successful login") {
+            alert('Hi ' + this.state.email + ', you have successfully logged in!');
+            this.setState({ redirect: "/user" });
+          }
+          else{
+            alert("beep beep boop something went really wrong");
           }
         }).catch((error) => {
       console.log(error)});
