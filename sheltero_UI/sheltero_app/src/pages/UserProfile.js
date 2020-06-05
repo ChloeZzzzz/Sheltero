@@ -81,10 +81,8 @@ export default withStyles(styles) (class UserProfile extends React.Component {
   
   getUserInfo = () =>{
     console.log("INSIDE GET USER INFO");
-    axios.get('https://shelteroinf.herokuapp.com/user', 
-          {headers: {
-                    withCredentials: true,
-                    crossDomain: true,}})
+    const proxyurl = "https://young-bayou-05183.herokuapp.com/";
+    axios.get('https://shelteroinf.herokuapp.com/user')
         .then((response) => {
           console.log("below response");
           console.log(response);
