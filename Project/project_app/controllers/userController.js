@@ -10,11 +10,24 @@ const getUserHomepage = async (req, res) => {
         let user = await Users.findById(user.passport.user);
         console.log(user);
         res.json(user);
-        return res.end();
-    } else {
         res.json("No users found :(")
         return res.end();
     }
+}
+
+const successSignup = (req, res) => {
+    if (req.session) {
+        res.json(req.session);
+        return res.end();
+    } else {
+        res.json(req.session);
+        return res.end();
+    }
+}
+
+const failureSignup = (req, res) => {
+    res.json("failureSignup")
+    return res.end();
 }
 
 const successLogin = (req, res) => {
@@ -22,7 +35,7 @@ const successLogin = (req, res) => {
         res.json(req.session);
         return res.end();
     } else {
-        res.json("successLogin no req.user");
+        res.json(req.session);
         return res.end();
     }
 }
@@ -161,4 +174,6 @@ module.exports = {
     //postUpdateUser,
     successLogin,
     failureLogin,
+    successSignup,
+    failureSignup,
 }
