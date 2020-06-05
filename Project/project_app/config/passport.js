@@ -40,6 +40,7 @@ module.exports = (passport)=>{
                         return done(null, false, req.flash("signupMessage", "Email already taken"));
                     }
                     else if(req.user){
+                        console.log(req.user);
                         var user = req.user;
                         user.email = email;
                         user.password = user.generateHash(password);
