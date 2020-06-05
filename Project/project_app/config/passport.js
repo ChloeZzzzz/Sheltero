@@ -69,7 +69,7 @@ module.exports = (passport)=>{
                             if(err){
                                 throw err;
                             }
-                            return done(null, user);
+                            return done(null, user, req.flash("signupMessage", "Signup Success"));
                         });
                         req.session.email=email;
                     }
