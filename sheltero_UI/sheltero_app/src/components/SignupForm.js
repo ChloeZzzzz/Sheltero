@@ -1,5 +1,5 @@
 import React from 'react';
-import postUsersSignup from '../api';
+import axios from 'axios';
 
 class SignupForm extends React.Component {
     constructor(props) {
