@@ -9,7 +9,7 @@ var cors = require('cors')
 const passport = require('passport');
 require('./config/passport')(passport);
 
-app.use(cors({origin:"http://sheltero.herokuapp.com",
+app.use(cors({origin:["http://sheltero.herokuapp.com","http://localhost:3000"],
             credentials:true,
             allowedHeaders:'Origin, X-Requested-With, Content-Type, Accept',
             methods:'GET,PUT,POST,DELETE,OPTIONS'}));
