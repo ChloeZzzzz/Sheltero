@@ -59,6 +59,7 @@ class EmployeeSignup extends SignupForm {
     this.state = {
       gender: '',
     }
+    this.state = {type : 'employee'};
   }
 
   render () {
