@@ -16,7 +16,7 @@ export default class CheckLogin extends React.Component {
     
       checkLoginStatus() {
         axios
-          .get("http://shelteroinf.herokuapp.com/user", {withCredentials: true})
+          .get("http://shelteroinf.herokuapp.com/user", {withCredentials: true, crossdomain:true})
           .then(res => {
             console.log(res);
             if ( // the case when response data is logged in but the current state is not logged in
