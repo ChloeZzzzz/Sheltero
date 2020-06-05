@@ -30,6 +30,21 @@ const failureLogin = (req, res) => {
     return res.end();
 }
 
+const successSignup = (req, res) => {
+    if (req.session) {
+        res.json(req.session);
+        return res.end();
+    } else {
+        res.json("successSignup no req.user");
+        return res.end();
+    }
+}
+
+const failureSignup = (req, res) => {
+    res.json("failureSignup")
+    return res.end();
+}
+
 const getUserSignup = (req, res) => {
     if (req.user) {
         res.json("getUserSignup req.user true!");
@@ -159,4 +174,6 @@ module.exports = {
     //postUpdateUser,
     successLogin,
     failureLogin,
+    successSignup,
+    failureSignup,
 }
