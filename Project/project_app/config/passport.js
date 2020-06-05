@@ -34,23 +34,15 @@ module.exports = (passport)=>{
         passwordField: "password",
         passReqToCallback: true},
        async  (req, email, password, done)=>{
+           if (req.user) {
+               console.log("user already logged in");
+               console.log(req.user);
+               return done(null, user, req.flash("signupMessage", "User already logged in"));
+           }
             try{
                 await Users.findOne({'email': email}).then((existsuser)=>{
                     if(existsuser){
                         return done(null, false, req.flash("signupMessage", "Email already taken"));
-                    }
-                    else if(req.user){
-                        console.log(req.user);
-                        var user = req.user;
-                        user.email = email;
-                        user.password = user.generateHash(password);
-                        user.save((err)=>{
-                            if(err){
-                                throw err;
-                            }
-                            return done(null, user);
-                        });
-                        req.session.email=email;
                     }
                     else{
                         var user = new Users({
