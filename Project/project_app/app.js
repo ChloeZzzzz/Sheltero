@@ -1,11 +1,15 @@
 const express = require('express');
-const {flash} = require('express-flash-message');
+const flash = require('connect-flash-plus');
 //require('dotenv').config();
+const session = require("express-session");
 const app = express();
 var bodyParser = require('body-parser');
 var cors = require('cors')
 
-app.use(cors({origin:"http://sheltero.herokuapp.com",
+const passport = require('passport');
+require('./config/passport')(passport);
+
+app.use(cors({origin:["http://sheltero.herokuapp.com","http://localhost:3000"],
             credentials:true,
             allowedHeaders:'Origin, X-Requested-With, Content-Type, Accept',
             methods:'GET,PUT,POST,DELETE,OPTIONS'}));
@@ -18,6 +22,14 @@ const morgan = require("morgan");
 const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 app.use(flash());
+
+//sessions 
+app.use(session({secret:"bestest_coolest_secretest_key",
+                resave:true,
+                saveUninitialized: true}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
@@ -32,7 +44,6 @@ app.use('/user', userRouter);
 app.use('/job-search', jobRouter);
 
 //app.use('/uploads', express.static('uploads'));
-
 
 // GET homepage
 app.get('/', (req, res) => {
@@ -53,6 +64,7 @@ app.use((req, res, next) => {
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500);
+    console.log(error);
     res.render('error', {
         message: error.message,
         error: error

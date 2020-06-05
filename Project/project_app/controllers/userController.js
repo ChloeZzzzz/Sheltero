@@ -16,7 +16,6 @@ const getUserHomepage = (req, res) => {
 }
 
 const successLogin = (req, res) => {
-    console.log(req.session);
     if (req.session) {
         res.json(req.session);
         return res.end();
@@ -40,17 +39,11 @@ const getUserSignup = (req, res) => {
 }
 
 const getUserLogin = (req, res) => {
-    console.log(req.session);
-    if (req.session) {
-        res.json(req.session);
-    }
-    else {
-        res.render("login.ejs");
-    }
+    res.render("login.ejs");
 }
 
 const getUserLogout = (req, res) => {
-    if (req.user) {
+    if (req.session.passport.user) {
         req.logOut();
         res.render("logout.ejs");
     } else {
