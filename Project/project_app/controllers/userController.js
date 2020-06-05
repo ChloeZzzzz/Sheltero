@@ -8,9 +8,7 @@ const getUserHomepage = async (req, res) => {
     let session = req.session;
     if (session.passport.user) {
         let user = await Users.findById(user.passport.user);
-        console.log(user);
         res.json(user);
-        res.json("No users found :(")
         return res.end();
     }
 }
