@@ -9,9 +9,10 @@ module.exports = (passport)=>{
         passwordField: "password",
         passReqToCallback: true},
         async (req, email, password, done)=>{
-            if(req.user) {
+            let session = req.session;
+            if(session.passport) {
                 console.log("user already logged in");
-                console.log(req.user);
+                let user = await Users.findById(session.passport.user);
                 return done(null, user, req.flash("loginMessage", "User already logged in"));
             }
             try{
@@ -39,8 +40,10 @@ module.exports = (passport)=>{
         passwordField: "password",
         passReqToCallback: true},
        async  (req, email, password, done)=>{
-           if (req.user) {
+            let session = req.session;
+           if (session.passport) {
                console.log("user already logged in");
+               let user = await Users.findById(session.passport.user);
                return done(null, user, req.flash("signupMessage", "User already logged in"));
            }
             try{
