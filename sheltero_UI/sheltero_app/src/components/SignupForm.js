@@ -27,15 +27,13 @@ class SignupForm extends React.Component {
     handleSubmit(event) {
       axios.post('https://shelteroinf.herokuapp.com/user/signup', this.state,{withCredentials:true})
         .then((response) => {
-          console.log(res);
           let res = response.data.flash["signupMessage"];
           if(!res){
-            alert('Hi ' + this.state.first_name + ', you have successfully signed up as an '+this.state.type+'!');
-            this.setState({ redirect: "/welcome" });
+            alert("beep beep boop something went really wrong");
           }
-          else if (res[res.length-1] == "Successful signup") {
-            alert('Opps, something went wrong!');
-            console.log("failed to sign up")
+          else if (res[res.length-1] == "Signup Success") {
+            alert('Hi ' + this.state.first_name + ', you have successfully signed up as an '+this.state.type+'!');
+            this.setState({ redirect: "/user" });
           }
           else{
             alert("beep beep boop something went really wrong");
