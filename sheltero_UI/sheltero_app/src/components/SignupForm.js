@@ -13,7 +13,7 @@ class SignupForm extends React.Component {
                       email: '',
                       password: '',
                       redirect: null};
-  
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -27,9 +27,10 @@ class SignupForm extends React.Component {
     handleSubmit(event) {
       axios.post('https://shelteroinf.herokuapp.com/user/signup', this.state,{withCredentials:true})
         .then((response) => {
-          let res = response.data.flash["signupMessage"];
-          if(!res){
-            alert("beep beep boop something went really wrong");
+          let res = response.data.flash['signupMessage'];
+          console.log(res);
+          if(res[res.length-1] == "Signup Failure"){
+            alert("Oops, something went wrong");
           }
           else if (res[res.length-1] == "Signup Success") {
             alert('Hi ' + this.state.first_name + ', you have successfully signed up as an '+this.state.type+'!');
