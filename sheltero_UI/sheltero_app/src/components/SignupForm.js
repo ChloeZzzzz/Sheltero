@@ -7,7 +7,7 @@ class SignupForm extends React.Component {
         super(props);
         /* initialise this state */
         this.state = {
-                      type: '',
+                      type: this.props.workType,
                       first_name: '',
                       last_name: '',
                       email: '',
@@ -19,9 +19,9 @@ class SignupForm extends React.Component {
     }
 
     handleChange (e) {
-        this.setState({
-          [e.target.name] : e.target.value
-        });
+      this.setState({
+        [e.target.name] : e.target.value
+      });
     }
 
     handleSubmit(event) {
