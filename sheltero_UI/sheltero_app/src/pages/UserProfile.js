@@ -68,6 +68,16 @@ cardCategoryWhite: {
 export default withStyles(styles) (class UserProfile extends React.Component {
   constructor(props){
     super(props);
+    this.getUserInfo = this.getUserInfo.bind(this);
+  }
+
+  getUserInfo = ()=>{
+    axios.get('https://shelteroinf.herokuapp.com/user', {withCredentials:true})
+        .then((response) => {
+          let res = res.data;
+          console.log(res);
+        }).catch((error) => {
+          console.log(error)});
   }
 
   render(){
