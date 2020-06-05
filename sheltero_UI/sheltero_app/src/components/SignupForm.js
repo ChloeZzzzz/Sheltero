@@ -1,4 +1,5 @@
 import React from 'react';
+import postUsersSignup from '../api';
 import axios from 'axios';
 
 class SignupForm extends React.Component {
@@ -31,7 +32,7 @@ class SignupForm extends React.Component {
             alert('Hi ' + this.state.first_name + ', you have successfully signed up as an employer!');
             this.setState({ redirect: "/login" });
           }
-          else if (res[res.length-1] == "Successful login") {
+          else if (res[res.length-1] == "Successful signup") {
             alert('Opps, something went wrong!');
             console.log("failed to sign up")
           }

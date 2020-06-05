@@ -66,6 +66,7 @@ export default withStyles(styles) (class Login extends React.Component {
         .then((response) => {
           console.log(response);
           let res = response.data.flash["loginMessage"];
+          console.log(res[res.length-1]);
           if(!res){
             alert('Opps, something went wrong so that u failed to log in!');
             this.setState({ redirect: "/login" });
