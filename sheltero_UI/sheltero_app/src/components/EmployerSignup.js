@@ -57,7 +57,6 @@ class EmployerSignup extends SignupForm {
       contact: '',
       company_name: '',
    }
-   this.state = {type : 'employer'};
  }
 
  render() {
