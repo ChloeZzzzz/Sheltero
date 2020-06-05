@@ -8,7 +8,10 @@ const getUserHomepage = async (req, res) => {
     let session = req.session;
     if (session.passport.user) {
         res.json("finding user...");
-        let user = await Users.findById(user.passport.user);
+        let user = await Users.findOne({"_id": user.passport.useer}, (err, result) => {
+            if (err) throw err;
+            console.log(result);
+        });
         res.flash({"message": "User Info:"})
         res.json(user);
         return res.end();
