@@ -81,7 +81,10 @@ export default withStyles(styles) (class UserProfile extends React.Component {
   
   getUserInfo = () =>{
     console.log("INSIDE GET USER INFO");
-    axios.get('https://shelteroinf.herokuapp.com/user', {withCredentials:true, crossDomain: true})
+    axios.get('https://shelteroinf.herokuapp.com/user', 
+          {headers: {
+                    withCredentials: true,
+                    crossDomain: true,}})
         .then((response) => {
           console.log("below response");
           console.log(response);
@@ -102,7 +105,7 @@ export default withStyles(styles) (class UserProfile extends React.Component {
   render(){
     //console.log("getuserinfo:")
     //console.log(this.state.first_name);
-    //this.getUserInfo();
+    this.getUserInfo();
     //console.log(this.state.first_name);
       //console.log(this.getUserInfo);
     const { classes } = this.props;
