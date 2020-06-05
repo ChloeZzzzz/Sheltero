@@ -14,7 +14,7 @@ app.use(cors({origin:["http://sheltero.herokuapp\.com$/","http://localhost:3000"
             allowedHeaders:['Origin','X-Requested-With','Content-Type','Accept', 'Access-Control-Allow-Origin', 'Access-Control-Allow-Headers', 'Access-Control-Request-Method'],
             methods:['GET','PUT','POST','DELETE','OPTIONS'],
             preflightContinue:true}));
-            
+app.options('/user', cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 require('./models');
