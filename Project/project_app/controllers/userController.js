@@ -39,7 +39,7 @@ const successLogin = (req, res) => {
 }
 
 const failureLogin = (req, res) => {
-    res.json(req.session.flash["loginMessage"]);
+    res.json(req.session);
     return res.end();
 }
 
