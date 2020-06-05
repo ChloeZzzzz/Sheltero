@@ -4,15 +4,30 @@ const bcrypt = require('bcrypt');
 const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
-const getUserHomepage = (req, res) => {
-    if (req.user) {
-        console.log("== REQ.USER ==");
-        console.log(req.user);
-        res.json("happy");
+const getUserHomepage = async (req, res) => {
+    let session = req.session;
+    if (session.passport.user) {
+        let user = await Users.findById(user.passport.user);
+        console.log(user);
+        res.json(user);
+        res.json("No users found :(")
+        return res.end();
+    }
+}
+
+const successSignup = (req, res) => {
+    if (req.session) {
+        res.json(req.session);
         return res.end();
     } else {
-        res.redirect('../');
+        res.json(req.session);
+        return res.end();
     }
+}
+
+const failureSignup = (req, res) => {
+    res.json("failureSignup")
+    return res.end();
 }
 
 const successLogin = (req, res) => {
@@ -20,7 +35,7 @@ const successLogin = (req, res) => {
         res.json(req.session);
         return res.end();
     } else {
-        res.json("successLogin no req.user");
+        res.json(req.session);
         return res.end();
     }
 }
@@ -159,4 +174,6 @@ module.exports = {
     //postUpdateUser,
     successLogin,
     failureLogin,
+    successSignup,
+    failureSignup,
 }
