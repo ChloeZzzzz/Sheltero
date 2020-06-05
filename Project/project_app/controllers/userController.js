@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const getUserHomepage = async (req, res) => {
     let session = req.session;
     console.log("=============");
-    console.log(session.user);
+    console.log(session);
     if (session.passport.user) {
         res.json("finding user...");
         try {
