@@ -12,7 +12,8 @@ require('./config/passport')(passport);
 app.use(cors({origin:["http://sheltero.herokuapp\.com$/","http://localhost:3000", "http://sheltero.herokuapp.com"],
             credentials:true,
             allowedHeaders:['Origin','X-Requested-With','Content-Type','Accept'],
-            methods:['GET','PUT','POST','DELETE','OPTIONS']}));
+            methods:['GET','PUT','POST','DELETE','OPTIONS'],
+            preflightContinue:true}));
             
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
