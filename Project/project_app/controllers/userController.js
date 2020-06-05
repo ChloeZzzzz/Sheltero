@@ -4,16 +4,14 @@ const bcrypt = require('bcrypt');
 const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
-const getUserHomepage = async (req, res) => {
-    let session = req.session;
-    if (session.passport.user) {
-        let user = await Users.findById(user.passport.user);
-        console.log(user);
-        res.json(user);
+const getUserHomepage = (req, res) => {
+    if (req.user) {
+        console.log("== REQ.USER ==");
+        console.log(req.user);
+        res.json("happy");
         return res.end();
     } else {
-        res.json("No users found :(")
-        return res.end();
+        res.redirect('../');
     }
 }
 
