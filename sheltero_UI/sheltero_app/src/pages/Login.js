@@ -82,7 +82,8 @@ export default withStyles(styles) (class Login extends React.Component {
             alert("beep beep boop something went really wrong");
           }
         }).catch((error) => {
-      console.log(error)});
+          this.setState({loggingIn:false});
+          console.log(error)});
     }
     
 
