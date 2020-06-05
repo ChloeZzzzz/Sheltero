@@ -30,7 +30,7 @@ class SignupForm extends React.Component {
           let res = response.data.flash["signupMessage"];
           if(!res){
             alert('Hi ' + this.state.first_name + ', you have successfully signed up as an '+this.state.type+'!');
-            this.setState({ redirect: "/login" });
+            this.setState({ redirect: "/welcome" });
           }
           else if (res[res.length-1] == "Successful signup") {
             alert('Opps, something went wrong!');
