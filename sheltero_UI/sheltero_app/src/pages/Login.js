@@ -61,7 +61,7 @@ export default withStyles(styles) (class Login extends React.Component {
   }
   handleSubmit(event) {
     const { email, password } = this.state;
-    axios.post('https://shelteroinf.herokuapp.com/user/login', {"email":email,"password":password},{withCredentials:true, crossDomain:true})
+    axios.post('https://shelteroinf.herokuapp.com/user/login', {"email":email,"password":password},{withCredentials:true, crossdomain:true})
         .then((response) => {
           let res = response.data.flash["loginMessage"];
           console.log(res);

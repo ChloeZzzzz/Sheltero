@@ -81,12 +81,12 @@ export default withStyles(styles) (class UserProfile extends React.Component {
   
   getUserInfo = () =>{
     console.log("INSIDE GET USER INFO");
-    const proxyurl = "https://young-bayou-05183.herokuapp.com/";
     axios.get('https://shelteroinf.herokuapp.com/user')
         .then((response) => {
           console.log("below response");
           console.log(response);
           console.log("above response");
+          console.log(response.json);
           const res = response.data.flash["message"];
           //console.log(res);
           if (res[res.length-1] == "User Info,") {
