@@ -88,7 +88,7 @@ class EmployerEdit extends React.Component {
         const BASEURL = "https://shelteroinf.herokuapp.com/user";
         // + '/' + this.props.searchname;
         axios
-            .get(BASEURL, {withCredentials: true})
+            .get(BASEURL,{withCredentials: true})
             .then(response => {
                 let res=response.data;
                 console.log(res);
