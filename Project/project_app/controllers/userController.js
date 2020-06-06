@@ -86,15 +86,17 @@ const postUpdateUser = async(req, res) => {
         if (req.body.description != null) {
             userData.description = req.body.description;
         }
+        if (req.file != null) {
+            userData.userImg = req.file.path;
+        }
         userData.first_name = req.body.first_name;
         userData.last_name = req.body.last_name;
-        userData.userImg = req.file.path;
         userData.save();
         res.json("user profile updated");
         return res.end();
     }
     else {
-      res.redirect("login.ejs");
+      res.json("user haven't login");
     }
 }
 
