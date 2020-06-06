@@ -3,7 +3,8 @@ import { Link, Box, withStyles, Button } from '@material-ui/core';
 import { useStyles } from './theme';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Cookies from "js-cookie";
+
+//import Cookies from "js-cookie";
 
 
 const styles = theme => ({
@@ -67,6 +68,7 @@ export default withStyles(styles) (class Nav extends React.Component  {
 
   handleLogout = ()=>{
     window.sessionStorage.setItem("loggedIn", false);
+    this.setState({currentStatus:false});
   }
 
   render () {
