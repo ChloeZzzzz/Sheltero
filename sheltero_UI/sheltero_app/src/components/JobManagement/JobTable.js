@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getJobsByTag } from "../../api";
+import { getJobsByTag , getJobsByArea} from "../../api";
 import { Column, Row } from 'styled-grid-system-component';
 import Popup from '../Popup/Popup';
 
@@ -24,7 +24,9 @@ export class JobTable extends React.Component {
         contactEmail:"",
         imgUrl:"",
         jobArea:""
-      }
+      },
+      area_tags:[],
+      cat_tags:[],
     };
     this.togglePopup=this.togglePopup.bind(this);
     this.updateInfo= this.updateInfo.bind(this);
@@ -36,16 +38,37 @@ export class JobTable extends React.Component {
 
   async fetchJobsByTag(tag) {
     const data = await getJobsByTag(tag);
-    this.setState({ jobs: data, isLoaded: true });
+    return data;
   }
 
-  componentDidMount() {
-    /*
-    area= this.props.area_tag[0];
-    cat = this.props.cat_tag[0];
-    */
-    const tag = this.state.jobTag;
-    this.fetchJobsByTag(tag);
+  async fetchJobsByArea(area){
+    const data = await getJobsByArea(area);
+    return data
+  }
+
+  async fetchJobs(){
+    for(let i=0; i<this.state.area_tags.length; i++){
+      let job = await this.fetchJobsByArea(this.state.area_tags[i]);
+      this.setState({jobs:[...this.state.jobs, job]});
+    }
+    for(let i=0; i<this.state.cat_tags.length; i++){
+      let job = await this.fetchJobsByTag(this.state.cat_tags[i]);
+      this.setState({jobs:[...this.state.jobs, job]});
+    }
+    this.setState({isLoaded:true});
+  }
+
+  componentDidUpdate(){
+    if(this.state.area_tags!=this.props.area_tag){
+      this.setState({area_tags:this.props.area_tag});
+    }
+    if(this.state.cat_tags!=this.props.cat_tag){
+      this.setState({cat_tags:this.props.cat_tag});
+    }
+    if(!this.state.area_tags || !this.state.cat_tags){
+      return
+    }
+    this.fetchJobs();
   }
 
   updateInfo(info){
@@ -69,9 +92,11 @@ export class JobTable extends React.Component {
     const { error, isLoaded, jobs } = this.state;
     if (error) {
       return <div> ERROR:{error.message}</div>;
-    } else if (!isLoaded) {
+    } 
+    else if (!isLoaded) {
       return <div style = {{textAlign: "center"}}>Loading..</div>;
-    } else {
+    } 
+    else {
       return (
         <div>
           <Row >

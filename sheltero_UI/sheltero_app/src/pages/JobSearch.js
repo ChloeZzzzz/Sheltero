@@ -48,7 +48,8 @@ export default class Job extends Component {
         super(props);
         this.state={
             area_tag:[],
-            cat_tag:[]
+            cat_tag:[],
+            showtable:false,
         }
         this.search_Area = this.search_Area.bind(this);
         this.search_Cat = this.search_Cat.bind(this);
@@ -64,7 +65,6 @@ export default class Job extends Component {
             this.setState({cat_tag:[...this.state.cat_tag, info]});
         }
     }
-
 
     render(){
         const classes = useStyles;
