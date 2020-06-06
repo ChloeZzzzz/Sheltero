@@ -55,7 +55,7 @@ const getUserLogout = (req, res) => {
 }
 
 const postUpdateUser = async(req, res) => {
-    console.log(req.body);
+    console.log(req);
     if (req.user) {
         if (req.body.contact != null) {
             userData.contact = req.body.contact;
