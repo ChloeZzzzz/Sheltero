@@ -38,7 +38,17 @@ const passport = require('passport');
 const userController = require('../controllers/userController')
 
 // make the form variable accessable by the get and post method
-userRouter.use(express.urlencoded( {extended: false}))
+userRouter.use(express.urlencoded( {extended: false}));
+
+isAuthenticated = (req,res,next)=>{
+    if(req.user)
+       return next();
+    else
+       return res.status(401).json({
+         error: 'User not authenticated'
+       })
+ 
+ }
 
 // ======== GET request ========
 
@@ -47,7 +57,7 @@ userRouter.use(express.urlencoded( {extended: false}))
 userRouter.get('/',
     passport.authenticate("check session", {failureFlash:true},userController.getUserHomepage));
 */
-userRouter.get('/', userController.getUserHomepage);
+userRouter.get('/', isAuthenticated, userController.getUserHomepage);
 // GET user signup
 userRouter.get('/signup', userController.getUserSignup);
 

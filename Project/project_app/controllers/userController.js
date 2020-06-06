@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const getUserHomepage = async (req, res) => {
     let session = req.session;
+    console.log(req.user);
     console.log("==session==");
     console.log(session);
     if (session.passport) {
@@ -67,6 +68,7 @@ const getUserLogout = (req, res) => {
 
 const postUpdateUser = async(req, res) => {
     let session = req.session;
+    
     console.log(req.body);
     if (session.passport) {
         const userData = await Users.findOne({"_id": session.passport.user}, (err, result) => {
@@ -123,7 +125,7 @@ const getUpdateUser = async (req, res) => {
             console.log(e);
         }
     } else {
-        res.redirect('login');
+        res.redirect('./login');
     }
 }
 
