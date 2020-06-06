@@ -78,7 +78,7 @@ class EmployerEdit extends React.Component {
             contact: '',
             company_name: '',
             company_address: '',
-            about: '',
+            description: '',
         };
         this.renderProfile = this.renderProfile.bind(this); 
     }
@@ -100,7 +100,9 @@ class EmployerEdit extends React.Component {
                         contact: res.contact,
                         company_name: res.company_name,
                         company_address:res.company_address,
-                        about: res.about,
+                        description: res.description,
+                        userImg: res.userImg,
+
                     });
                 }
                 else{
@@ -159,7 +161,7 @@ class EmployerEdit extends React.Component {
                                                 name="first_name"
                                                 id="first_name"
                                                 label="First Name"
-                                                // value={this.state.first_name}
+                                                value={this.state.first_name}
                                                 autoComplete="first_name"
                                                 fullWidth
                                                 />
@@ -172,7 +174,7 @@ class EmployerEdit extends React.Component {
                                                 name="last_name"
                                                 id="last_name"
                                                 label="Last Name"
-                                                // value={this.state.first_name}
+                                                value={this.state.last_name}
                                                 autoComplete="last_name"
                                                 fullWidth
                                                 />
@@ -187,7 +189,7 @@ class EmployerEdit extends React.Component {
                                                 name="contact"
                                                 id="contact"
                                                 label="Contact Number"
-                                                // value={this.state.first_name}
+                                                value={this.state.contact}
                                                 fullWidth
                                                 />
                                         </GridItem>
@@ -198,13 +200,39 @@ class EmployerEdit extends React.Component {
                                                 className={classes.textField}
                                                 id="email"
                                                 label="Email Address"
-                                                // value={this.state.email}
+                                                value={this.state.email}
                                                 type="email"
                                                 disabled
                                                 fullWidth
                                                 name="email"
                                                 autoComplete="email"
                                                 helperText="You cannot change your email address by yourself. Please contact us via Sheltero@gmail.com."
+                                                />
+                                        </GridItem>
+                                    </GridContainer>
+                                    <GridContainer className={classes.inputField}>
+                                        <GridItem xs={12} sm={12} md={4}>
+                                            <h4 className={classes.inputLabel}>Company Name</h4>
+                                            <TextField
+                                                // onChange={this.handleChange}
+                                                className={classes.textField}
+                                                name="company_name"
+                                                id="company_name"
+                                                label="Company Name"
+                                                value={this.state.company_name}
+                                                fullWidth
+                                                />
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={4}>
+                                            <h4 className={classes.inputLabel}>Company Address</h4>
+                                            <TextField
+                                                // onChange={this.handleChange}
+                                                className={classes.textField}
+                                                id="company_address"
+                                                label="Company Address"
+                                                value={this.state.company_address}
+                                                fullWidth
+                                                name="company_address"
                                                 />
                                         </GridItem>
                                     </GridContainer>
@@ -219,8 +247,8 @@ class EmployerEdit extends React.Component {
                                                 // onChange={this.handleChange}
                                                 className={classes.textField}
                                                 id="about"
-                                                label="Add description here"
-                                                // value={this.state.email}
+                                                label="Add self description here"
+                                                value={this.state.description}
                                                 type="about"
                                                 required
                                                 fullWidth
@@ -231,6 +259,14 @@ class EmployerEdit extends React.Component {
                                                 />
                                         </GridItem>
                                     </GridContainer>
+
+
+
+
+
+
+
+
                                 </CardBody>
                                 <Button color="primary" style={{alignSelf:"center", marginBottom:theme.spacing(3)}}>Update My Profile</Button>
                             </Card>

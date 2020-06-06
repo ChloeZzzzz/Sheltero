@@ -70,6 +70,7 @@ const styles = theme => ({
         fontSize: 16,
         letterSpacing: 0,
         marginBottom: "3px",
+        textTransform: "capitalize",
     }
 });
 
@@ -88,8 +89,7 @@ class Employer extends React.Component {
         };
         this.renderProfile = this.renderProfile.bind(this); 
     }
-
-
+    
     renderProfile() {
         const BASEURL = "https://shelteroinf.herokuapp.com/user";
         // + '/' + this.props.searchname;
@@ -161,10 +161,16 @@ class Employer extends React.Component {
                                                 <img src={avatar} alt="..." />
                                             </a>
                                     </CardAvatar>
-                                    <h4 className={classes.label}>{this.state.first_name} {this.state.last_name}</h4>
-                                    <h4 className={classes.label}>email</h4>
-                                    <h4 className={classes.label}>contact</h4>
-                                    <h4 className={classes.label}>company</h4>
+                                    <h4 className={classes.label}>Name</h4>
+                                    <p className={classes.description}>{this.state.first_name} {this.state.last_name}</p>
+                                    <h4 className={classes.label}>Email</h4>
+                                    <p className={classes.description}>{this.state.email}</p>
+                                    <h4 className={classes.label}>Contact</h4>
+                                    <p className={classes.description}>{this.state.contact}</p>
+                                    <h4 className={classes.label}>Company Name</h4>
+                                    <p className={classes.description}>{this.state.company_name}</p>
+                                    <h4 className={classes.label}>Company Address</h4>
+                                    <p className={classes.description}>{this.state.company_address}</p>
                                     <h4 className={classes.label}>About Me</h4>
                                     <p className={classes.description}>
                                         Don{"'"}t be scared of the truth because we need to restart the

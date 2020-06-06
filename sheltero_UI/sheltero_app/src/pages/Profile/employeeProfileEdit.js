@@ -115,7 +115,6 @@ class EmployerEdit extends React.Component {
 
             <section className={classes.container}>
                 <div id='container'>
-                    <Nav />
                     <Welcome
                         loopDuration={1000}
                         data={
@@ -138,7 +137,7 @@ class EmployerEdit extends React.Component {
                     <GridContainer className={classes.container} >
                         <GridItem xs={12} sm={12} md={8}>
                             <Card>
-                                <CardHeader color="primary" >
+                                <CardHeader color="secondary" >
                                     <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
                                     <p className={classes.cardCategoryWhite}>Complete your profile</p>
                                 </CardHeader>
