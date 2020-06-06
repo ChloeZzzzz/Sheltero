@@ -1,8 +1,7 @@
 import React from "react";
-// @material-ui/core components
 import TextField from '@material-ui/core/TextField';
+import { Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
-// core components
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
 import Button from "../../components/CustomButtons/Button.js";
@@ -79,6 +78,7 @@ class EmployerEdit extends React.Component {
             company_name: '',
             company_address: '',
             description: '',
+            redirect: null,
         };
         this.renderProfile = this.renderProfile.bind(this); 
         this.handleChange = this.handleChange.bind(this);
@@ -104,7 +104,6 @@ class EmployerEdit extends React.Component {
                         company_address:res.company_address,
                         description: res.description,
                         userImg: res.userImg,
-
                     });
                 }
                 else{
@@ -124,30 +123,33 @@ class EmployerEdit extends React.Component {
           [e.target.name] : e.target.value
         });
     }
-    handleSubmit(event) {
-        // const { first_name, last_name, email, contact } = this.state; 
-        axios
+    async handleSubmit(event) {
+        await axios
             .post('https://shelteroinf.herokuapp.com/user/updateUser', 
-                    this.state, {
-                        first_name: this.state.first_name,
+                    {first_name: this.state.first_name,
                         last_name: this.state.last_name,
                         contact: this.state.contact,
-                        description: this.state.description}, {withCredentials:true, crossdomain:true})
+                        description: this.state.description}, {withCredentials:true}
+                            // , crossdomain:true}
+                    )
             .then(response => {
                 //handle success
                 console.log(response.data);
+                this.setState({redirect:"/employer"});
             })
             .catch(error => {
                 console.log(error);
-                event.preventDefault();
             });
+            event.preventDefault();
       }
 
     render(){
-        
         const { classes } = this.props;
+        if (this.state.redirect) {
+            console.log("user profile updated");
+            return <Redirect to={this.state.redirect} />
+        } else {
         return (
-
             <section className={classes.container}>
                 <div id='container'>
                     <Nav />
@@ -315,7 +317,8 @@ class EmployerEdit extends React.Component {
                     </GridContainer>
                 </form>
             </section>
-        );}
-}
+        )
+    }
+}}
 
-export default withStyles(styles) (EmployerEdit);
+export default withStyles(styles) (EmployerEdit)
