@@ -5,8 +5,12 @@ const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
 const getUserHomepage = async (req, res) => {
+    console.log("==req in user homepage==");
+    console.log(req);
     let session = req.session;
     console.log(req.user);
+    console.log("==session==");
+    console.log(session);
     if (session.passport) {
         try {
             let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
