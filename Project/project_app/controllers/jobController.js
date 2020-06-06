@@ -51,31 +51,51 @@ const getPostJob =  (req, res) => {
 }
 
 const postJob = async(req, res) => {
-    try {
-        const job = new job_data({
-            "_id" : new mongoose.Types.ObjectId(),
-            "jobTitle": req.body.jobTitle,
-            "salary": req.body.salary,
-            "creditLevel": req.body.creditLevel,
-            "jobDetail": req.body.jobDetail,
-            "companyID": req.body.companyID,
-            "jobTag": req.body.jobTag,
-            "contactEmail": req.body.contactEmail,
-            "jobArea": req.body.jobArea,
-            "jobImg": req.file.path,
-        })
-        console.log(req.jobImg);
-        job.save().then(result => {
-            console.log(result);
-            console.log("job saved");
-        }).catch(err => {
-            console.log(err);
+    let session = req.session;
+    if (session.passport) {
+        // an user logged in as an employer -> able to post
+        const userData = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+            if (err) {
+                console.log(err);
+            }
         });
-    } catch (e) {
-        console.log("job posting error");
-        console.log(e);
+        if (userData.type[0] == 'Employer') {
+            try {
+                const job = new job_data({
+                    "_id" : new mongoose.Types.ObjectId(),
+                    "jobTitle": req.body.jobTitle,
+                    "salary": req.body.salary,
+                    "creditLevel": req.body.creditLevel,
+                    "jobDetail": req.body.jobDetail,
+                    "companyID": req.body.companyID,
+                    "jobTag": req.body.jobTag,
+                    "contactEmail": req.body.contactEmail,
+                    "jobArea": req.body.jobArea,
+                    "jobImg": req.file.path,
+                })
+                console.log(req.jobImg);
+                job.save().then(result => {
+                    console.log(result);
+                    console.log("job saved");
+                }).catch(err => {
+                    console.log(err);
+                });
+                userData.postedJob.push(job._id);
+                userData.save();
+                return res.end();
+            } catch (e) {
+                console.log("job posting error");
+                console.log(e);
+            }
+        } else {
+            res.json("you can't post a job as an employee");
+            return res.end();
+        }
+        
+    } else {
+        // no user logged in -> redirect to login
+        res.redirect('../user/login');
     }
-    res.redirect('../');
 }
 
 const getJobID = (req, res) => {
@@ -129,10 +149,6 @@ const postApplyJob = async (req, res) => {
             console.log("==RESULT==");
             console.log(result);
         });
-        console.log("=========");
-        console.log(req.body.id);
-        console.log("t----- ype -----");
-        console.log(userData.type);
         if (userData.type[0] == "Employee") {
             // save applied job id to the user database
             userData.applyingJobId.push(req.body.id);

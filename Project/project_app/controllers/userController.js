@@ -122,8 +122,13 @@ const getApplyingJob = async (req, res) => {
                 if (err) throw err;
                 console.log(result);
             });
-            res.json(user.applyingJobId);
-            return res.end();
+            if (user.type[0] == 'Employee') {
+                res.json(user.applyingJobId);
+                return res.end();
+            } else {
+                res.json("You don't have applying job as an employer");
+                return res.end();
+            }
         } catch(e) {
             console.log(e);
         }
