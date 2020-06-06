@@ -5,8 +5,6 @@ const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
 const getUserHomepage = async (req, res) => {
-    console.log("==req in user homepage==");
-    console.log(req);
     let session = req.session;
     console.log("==session==");
     console.log(session);
@@ -94,8 +92,12 @@ const postUpdateUser = async(req, res) => {
         if (req.file != null) {
             userData.userImg = req.file.path;
         }
-        userData.first_name = req.body.first_name;
-        userData.last_name = req.body.last_name;
+        if (req.body.first_name != null) {
+            userData.first_name = req.body.first_name;
+        }
+        if (req.body.last_name != null) {
+            userData.last_name = req.body.last_name;
+        }
         userData.save();
         res.json("user profile updated");
         return res.end();
