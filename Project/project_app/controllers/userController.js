@@ -1,6 +1,6 @@
 const email_validator = require('email-validator');
 const bcrypt = require('bcrypt');
-
+var job_data = require('../models/job');
 const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
@@ -109,6 +109,39 @@ const getUpdateUser = async (req, res) => {
     }
 }
 
+const getPostedJob = async (req, res) => {
+    let session = req.session;
+    if (session.passport) {
+        try {
+            let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+                if (err) throw err;
+                console.log(result);
+            });
+            if (user.type[0] == 'Employer') {
+                console.log(user.postedJob);
+                var jobs = [];
+                for (i = 0; i < user.postedJob.length; i++) {
+                    let job = await job_data.find({_id: user.postedJob[i]}, (err, result) => {
+                        if (err) throw err;
+                        console.log(result);
+                    })
+                    console.log(job);
+                    jobs.push(job);
+                }
+                res.json(jobs);
+                return res.end();
+            } else {
+                res.json("You don't have posted job as an employee");
+                return res.end();
+            }
+        } catch(e) {
+            console.log(e);
+        }
+    } else {
+        res.redirect('login');
+    }
+}
+
 const getApplyingJob = async (req, res) => {
     let session = req.session;
     if (session.passport) {
@@ -118,7 +151,17 @@ const getApplyingJob = async (req, res) => {
                 console.log(result);
             });
             if (user.type[0] == 'Employee') {
-                res.json(user.applyingJobId);
+                console.log(user.applyingJobId);
+                var jobs = [];
+                for (i = 0; i < user.applyingJobId.length; i++) {
+                    let job = await job_data.find({_id: user.applyingJobId[i]}, (err, result) => {
+                        if (err) throw err;
+                        console.log(result);
+                    })
+                    console.log(job);
+                    jobs.push(job);
+                }
+                res.json(jobs);
                 return res.end();
             } else {
                 res.json("You don't have applying job as an employer");
@@ -130,6 +173,10 @@ const getApplyingJob = async (req, res) => {
     } else {
         res.redirect('login');
     }
+}
+
+const getApproveApplication = (req, res) => {
+    
 }
 
 module.exports = {
@@ -145,4 +192,6 @@ module.exports = {
     getUpdateUser,
     postUpdateUser,
     getApplyingJob,
+    getPostedJob,
+    getApproveApplication,
 }

@@ -73,6 +73,8 @@ userRouter.get('/successsignup', userController.successSignup);
 userRouter.get('/failuresignup', userController.failureSignup);
 userRouter.get('/updateUser', userController.getUpdateUser);
 userRouter.get('/applyingJob', userController.getApplyingJob);
+userRouter.get('/postedJob', userController.getPostedJob);
+userRouter.get('/approveApplication', userController.getApproveApplication)
 
 // GET user update
 //userRouter.get('/updateUser', (req, res) => userController.getUpdateUser(req, res));
