@@ -60,6 +60,7 @@ export default withStyles(styles) (class Nav extends React.Component  {
 
   componentDidMount(){
     let session = window.sessionStorage.getItem("loggedIn");
+    console.log(window.sessionStorage);
     if(!session){
       this.setState({currentStatus:false});
     }
@@ -73,8 +74,6 @@ export default withStyles(styles) (class Nav extends React.Component  {
     const url = "https://shelteroinf.herokuapp.com/user/logout";
     axios.get(url, {withCredentials:true, crossdomain:true})
           .then((response) => {
-            let res = response.data.flash['error'];
-            console.log(res);
             if(response == "logged out"){
               console.log("change loggedIn state to false");
               window.sessionStorage.setItem("loggedIn", false);

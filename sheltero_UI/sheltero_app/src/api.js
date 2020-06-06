@@ -1,61 +1,68 @@
 const BASE_URL = "https://shelteroinf.herokuapp.com";
 
 // using axios to interact with API
-const axios = require('axios');
+const axios = require("axios");
 
 export async function postUsersSignup(data) {
-    const endpoint = BASE_URL + '/user/signup';
-    console.log("post user sign up");
-    const response = await fetch(endpoint, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
-        body: JSON.stringify(data)
-    });
-    return response.json();
+  const endpoint = BASE_URL + "/user/signup";
+  console.log("post user sign up");
+  const response = await fetch(endpoint, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(data)
+  });
+  return response.json();
 }
 
 export async function updateUserState() {
-    const url = "https://shelteroinf.herokuapp.com/user";
-    axios.get(url, {withCredentials:true, crossdomain:true})
-          .then((response) => {
-            if (response.data.flash['error']) {
-                let res = response.data.flash['error'];
-                if(res[res.length-1] == "User not authenticated"){
-                    console.log("change loggedIn state to false");
-                    window.sessionStorage.setItem("loggedIn", false);
-                }
-            }
-            else if (response) {
-              console.log("change loggedIn state to true");
-              window.sessionStorage.setItem("loggedIn", true);
-            }
-          }).catch((error) => {
-            console.log(error)});
+  const url = "https://shelteroinf.herokuapp.com/user";
+  try {
+    axios
+      .get(url, { withCredentials: true, crossdomain: true })
+      .then(response => {
+          console.log(response.data);
+        if (response.data.flash) {
+          let res = response.data.flash["error"];
+          if (res[res.length - 1] == "User not authenticated") {
+            console.log("change loggedIn state to false");
+            window.sessionStorage.setItem("loggedIn", false);
+          }
+        } else if (response) {
+          console.log("change loggedIn state to true");
+          window.sessionStorage.setItem("loggedIn", true);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  } catch (e) {
+    console.log(e);
   }
+}
 
 export async function updateUserProfile(data) {
-    const endpoint = BASE_URL + '/user/updateUser';
-    console.log("update user profile");
-    const response = await fetch(endpoint, {
-        method: 'POST',
-        mode: 'cors',
-        cache: 'no-cache',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        redirect: 'follow',
-        referrerPolicy: 'no-referrer',
-        body: JSON.stringify(data)
-    });
-    return response.json();
+  const endpoint = BASE_URL + "/user/updateUser";
+  console.log("update user profile");
+  const response = await fetch(endpoint, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(data)
+  });
+  return response.json();
 }
 
 /**
@@ -94,32 +101,41 @@ export function  getJob(_id) {
 }
 */
 
-export function  getJobsByTag(tag) {
-    let sanitize_tag= tag.replace(' ', '_').replace('/','').replace(',', '');
-    const endpoint = BASE_URL + `/job-search/byTag/${sanitize_tag}`;
-    console.log(endpoint);
+export function getJobsByTag(tag) {
+  let sanitize_tag = tag
+    .replace(" ", "_")
+    .replace("/", "")
+    .replace(",", "");
+  const endpoint = BASE_URL + `/job-search/byTag/${sanitize_tag}`;
+  console.log(endpoint);
 
-    try{
-        return axios.get(endpoint).then(res => res.data).catch((e)=>{});
-    } catch (e) {
-        return e;
-
-    }
+  try {
+    return axios
+      .get(endpoint)
+      .then(res => res.data)
+      .catch(e => {});
+  } catch (e) {
+    return e;
+  }
 }
 
-export function  getJobsByArea(area) {
-    let sanitize_area= area.replace(' ', '_').replace('/','').replace(',', '');
-    const endpoint = BASE_URL + `/job-search/byArea/${sanitize_area}`;
-    console.log(endpoint);
+export function getJobsByArea(area) {
+  let sanitize_area = area
+    .replace(" ", "_")
+    .replace("/", "")
+    .replace(",", "");
+  const endpoint = BASE_URL + `/job-search/byArea/${sanitize_area}`;
+  console.log(endpoint);
 
-    try{
-        return axios.get(endpoint).then(res => res.data).catch((e)=>{});
-    } catch (e) {
-        return e;
-
-    }
+  try {
+    return axios
+      .get(endpoint)
+      .then(res => res.data)
+      .catch(e => {});
+  } catch (e) {
+    return e;
+  }
 }
-
 
 /**
  * Updates the details of an author; changes only the first and last name
