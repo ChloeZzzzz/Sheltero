@@ -151,6 +151,7 @@ const getApplyingJob = async (req, res) => {
             if (user.type[0] == 'Employee') {
                 console.log(user.applyingJobId);
                 var jobs = [];
+                var i = 0;
                 for (i = 0; i < user.applyingJobId.length; i++) {
                     let job = await job_data.find({_id: user.applyingJobId[i]}, (err, result) => {
                         if (err) throw err;
@@ -234,12 +235,53 @@ const postApproveApplication = async (req, res) => {
     }
 }
 
+const getJobNotification = async (req, res) => {
+    let session = req.session;
+    // if this user is logged in
+    if (session.passport) {
+        try {
+            let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+                if (err) throw err;
+                console.log(result);
+            });
+            // only employee could get job notification
+            if (user.type[0] == 'Employee') {
+                var jobs = [];
+                var i = 0;
+                for (i = 0; i < user.approvedJobId.length; i++) {
+                    let job = await job_data.find({_id: user.approvedJobId[i]}, (err, result) => {
+                        if (err) throw err;
+                        console.log(result);
+                    })
+                    console.log(job);
+                    jobs.push(job);
+                }
+                // if there are approved job, notify the client
+                if (jobs.length == 0) {
+                    res.json("no job to notify");
+                    return res.end();
+                } else {
+                    res.json(jobs);
+                    return res.end();
+                }
+            } else {
+                res.json("You are an employer so don't have job notification");
+                return res.end();
+            }
+        } catch(e) {
+            console.log(e);
+        }
+    } else {
+        // user not logged in
+        res.json("user not logged in");
+    }
+}
+
 module.exports = {
     getUserHomepage,
     getUserSignup,
     getUserLogin,
     getUserLogout,
-    //postUpdateUser,
     successLogin,
     failureLogin,
     successSignup,
@@ -250,4 +292,5 @@ module.exports = {
     getPostedJob,
     getApproveApplication,
     postApproveApplication,
+    getJobNotification,
 }

@@ -75,6 +75,7 @@ userRouter.get('/updateUser', userController.getUpdateUser);
 userRouter.get('/applyingJob', userController.getApplyingJob);
 userRouter.get('/postedJob', userController.getPostedJob);
 userRouter.get('/approveApplication', userController.getApproveApplication);
+userRouter.get('/jobNotification', userController.getJobNotification);
 
 // GET user update
 //userRouter.get('/updateUser', (req, res) => userController.getUpdateUser(req, res));
