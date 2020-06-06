@@ -88,7 +88,7 @@ const postUpdateUser = async(req, res) => {
         }
         userData.userImg = req.file.path;
         userData.save();
-
+        return res.end();
     }
     else {
       res.redirect("login.ejs");
