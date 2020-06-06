@@ -3,9 +3,8 @@ import { Link, Box, withStyles, Button } from '@material-ui/core';
 import { useStyles } from './theme';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import axios from "axios";
-import CheckLogin from '../components/CheckLoginStatus';
-import { Redirect } from "react-router-dom";
+import Cookies from "js-cookie";
+
 
 const styles = theme => ({
   root: {
@@ -47,27 +46,32 @@ const styles = theme => ({
 })
 
 
-export default withStyles(styles) (class Nav extends CheckLogin  {
+export default withStyles(styles) (class Nav extends React.Component  {
   constructor(props) {
     super(props);
-
-    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = {
+      currentStatus: false,
+    }
+    this.handleLogout = this.handleLogout.bind();
   }
 
-  handleLogoutClick() {
-    axios
-      .get("https://shelteroinf.herokuapp.com/user/logout", { withCredentials: true })
-      .then(response => {
-        this.props.handleLogout();
-      })
-      .catch(error => {
-        console.log("logout error", error);
-      });
+  componentDidMount(){
+    let session = window.sessionStorage.getItem("loggedIn");
+    if(!session){
+      this.setState({currentStatus:false});
+    }
+    else{
+      this.setState({currentStatus:true});
+    }
+  }
+
+  handleLogout = ()=>{
+    window.sessionStorage.setItem("loggedIn", false);
   }
 
   render () {
     const { classes } = this.props;
-    if (this.state.loggedInStatus === "not_logged_in"){
+    if (!this.state.currentStatus){
       return(
         <div className={classes.root}>
           <AppBar className={classes.navBar}>
@@ -83,7 +87,7 @@ export default withStyles(styles) (class Nav extends CheckLogin  {
           </AppBar>
         </div>
         )
-    } else if (this.state.loggedInStatus === "logged_in"){
+    } else if (this.state.currentStatus){
       return(
         <div className={classes.root}>
           <AppBar className={classes.navBar}>
@@ -94,7 +98,7 @@ export default withStyles(styles) (class Nav extends CheckLogin  {
               <Button className={classes.menuButton} href="/job">Job search</Button>
               <Button className={classes.menuButton} href="/about">Work with us</Button>
               <Button className={classes.menuButton} href="/employer">My Account</Button>
-              <Button className={classes.menuButton} onClick={() => this.handleLogoutClick()}>Log Out</Button>
+              <Button className={classes.menuButton} onClick={this.handleLogout}>Log Out</Button>
             </Toolbar>
           </AppBar>
         </div>

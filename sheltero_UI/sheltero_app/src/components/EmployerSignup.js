@@ -77,9 +77,10 @@ class EmployerSignup extends SignupForm {
           </H2>
 
           <form className={classes.form} onSubmit={this.handleSubmit} onChange={this.handleChange}>
-
+          <div>
+            <p>{this.state.msg}</p>
+          </div>
             <Grid container spacing={2}>
-
               <Grid item xs={12} sm={6}>
                 <TextField
                   onChange={this.handleChange}
@@ -140,7 +141,6 @@ class EmployerSignup extends SignupForm {
                   fullWidth
                 />
               </Grid>
-
               <Grid item xs={12}>
                 <TextField
                   onChange={this.handleChange}
@@ -179,10 +179,10 @@ class EmployerSignup extends SignupForm {
                   variant="outlined"
                   required
                   fullWidth
-                  name="password"
+                  name="confirmpw"
                   label="Confirm Password"
                   type="password"
-                  id="createPassword"
+                  id="confirmpw"
                   autoComplete="current-password"
                 />
               </Grid>

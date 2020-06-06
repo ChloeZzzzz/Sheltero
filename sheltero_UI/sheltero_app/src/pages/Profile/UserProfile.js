@@ -3,20 +3,21 @@ import React from "react";
 import { withStyles } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 // core components
-import GridItem from "../components/Grid/GridItem.js";
-import GridContainer from "../components/Grid/GridContainer.js";
-import CustomInput from "../components/CustomInput/CustomInput.js";
-import Button from "../components/CustomButtons/Button.js";
-import Card from "../components/Card/Card.js";
-import CardHeader from "../components/Card/CardHeader.js";
-import CardAvatar from "../components/Card/CardAvatar.js";
-import CardBody from "../components/Card/CardBody.js";
-import CardFooter from "../components/Card/CardFooter.js";
+import GridItem from "../../components/Grid/GridItem.js";
+import GridContainer from "../../components/Grid/GridContainer.js";
+import CustomInput from "../../components/CustomInput/CustomInput.js";
+import Button from "../../components/CustomButtons/Button.js";
+import Card from "../../components/Card/Card.js";
+import CardHeader from "../../components/Card/CardHeader.js";
+import CardAvatar from "../../components/Card/CardAvatar.js";
+import CardBody from "../../components/Card/CardBody.js";
+import CardFooter from "../../components/Card/CardFooter.js";
+import axios from 'axios';
 import {
   drawerWidth,
   transition,
   container
-} from "../style";
+} from "../../style";
 import Welcome from 'react-welcome-page';
 import Container from "@material-ui/core/Container";
 const avatar= "https://picsum.photos/id/237/400/400";
@@ -64,13 +65,40 @@ cardCategoryWhite: {
   }
 });
 
-
 export default withStyles(styles) (class UserProfile extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      type: '',
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: ''};
+    this.getUserInfo = this.getUserInfo.bind(this);
+  }
+  
+  getUserInfo = () =>{
+    console.log("INSIDE GET USER INFO");
+    axios.get('https://shelteroinf.herokuapp.com/user', {withCredentials: true})
+        .then((response) => {
+          console.log("below response");
+          console.log(response);
+          console.log("above response");
+          console.log(response.json);
+          const res = response.data.flash["message"];
+          if (res[res.length-1] == "User Info,") {
+            this.setState({ type: response.user.type,
+                            first_name: response.user.first_name,
+                            last_name: response.user.last_name,
+                            email: response.user.email });
+          }
+        }).catch((error) => {
+          console.log(error)});
   }
 
+
   render(){
+    this.getUserInfo();
     const { classes } = this.props;
   return (
 
@@ -85,7 +113,7 @@ export default withStyles(styles) (class UserProfile extends React.Component {
                   "backgroundColor": "#638709",
                   "textColor": "#FFFFFF",
                   "text": "Welcome to Sheltero!",
-                  "image": require('../img/seedling.png')
+                  "image": require('../../img/seedling.png')
                 }
               ]
             }

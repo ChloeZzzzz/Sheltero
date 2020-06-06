@@ -2,6 +2,8 @@
 import React from "react";
 import { jsx, css } from "@emotion/core";
 import Typist from "react-typist";
+import {Link} from '@material-ui/core';
+import Button from '../components/CustomButtons/Button'
 
 const mainStyles = css`
   display: flex;
@@ -34,6 +36,12 @@ const Welcome = () => (
             <Typist.Delay ms={500} />
             <br />
             <span>New User!</span>
+            <br/>
+            <span>Now you can edit your <Link color='black' href={'/user'}>profile</Link></span>
+            <br/>
+            <span>or</span>
+            <br/>
+            <span>hit to the <Link color='black' href={'/'}>homepage</Link>!</span>
         </Typist>
     </div>
 );

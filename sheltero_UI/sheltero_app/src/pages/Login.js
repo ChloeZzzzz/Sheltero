@@ -53,7 +53,7 @@ export default withStyles(styles) (class Login extends React.Component {
   /* implement constructor() to bind event handler*/
   constructor(props) { 
     super(props);
-    this.state = {email: '', password: '', errors:{}};
+    this.state = {email: '', password: '', errors:{}, loggingIn: false};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -63,31 +63,32 @@ export default withStyles(styles) (class Login extends React.Component {
   handleChange(e) {
     this.setState({[e.target.name]: e.target.value});
   }
+
   handleSubmit(event) {
     const { email, password } = this.state;
-
-    axios.post('https://shelteroinf.herokuapp.com/user/login', {"email":email,"password":password},{withCredentials:true})
-        .then((response) => {
-          let res = response.data.flash["loginMessage"];
-          if(!res){
-            alert('Opps, something went wrong so that u failed to log in!');
-            this.setState({ redirect: "/login" });
-            console.log("failed to login");
-          }
-          else if (res[res.length-1] == "Successful login") {
-            alert('Hi ' + this.state.email + ', you have successfully logged in!');
-            this.setState({ redirect: "/user" });
-          }
-          else{
-            alert("beep beep boop something went really wrong");
-          }
-        }).catch((error) => {
-      console.log(error)});
-
-    event.preventDefault();
-  }
-
-
+    axios.post('https://shelteroinf.herokuapp.com/user/login', {"email":email,"password":password},{withCredentials:true,crossdomain:true})
+      .then((response) => {
+        let res = response.data.flash["loginMessage"];
+        this.setState({loggingIn:false});
+        console.log(res);
+        if(!res){
+          window.sessionStorage.setItem("loggedIn", false);
+          alert('Opps, something went wrong so that u failed to log in!');
+          console.log("failed to login");
+        }
+        else if (res[res.length-1] == "Successful login") {
+          window.sessionStorage.setItem("loggedIn", true);
+          alert('Hi ' + this.state.email + ', you have successfully logged in!');
+          this.setState({redirect:'/employer'})
+        }
+        else{
+          alert("beep beep boop something went really wrong");
+        }
+      }).catch((error) => {
+        console.log(error)});
+        event.preventDefault();
+    }
+    
   render() {
     const { classes } = this.props;
     const {email, password, error} = this.state;
