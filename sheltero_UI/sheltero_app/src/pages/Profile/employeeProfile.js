@@ -12,40 +12,28 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardAvatar from "../../components/Card/CardAvatar.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
-import {
-    drawerWidth,
-    transition,
-    container
-} from "../../style";
 import Welcome from 'react-welcome-page';
 import Container from "@material-ui/core/Container";
+import axios from 'axios';
+import { theme } from "../../components/theme.js";
 const avatar= "https://picsum.photos/id/237/400/400";
 
 
 
 const styles = theme => ({
-    root: {
-        color: theme.palette.common.white,
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        [theme.breakpoints.up("sm")]: {
-            height: "80vh",
-            minHeight: 500,
-            maxHeight: 1300
-        }
-    },
-    content: {
-        marginTop: "70px",
-        padding: "30px 15px",
-        minHeight: "calc(100vh - 123px)"
-    },
     container: {
         marginTop: theme.spacing(3),
-        marginBottom: theme.spacing(14),
+        marginBottom: theme.spacing(3),
         display: "flex",
         flexDirection: "column",
         alignItems: "center"
+    },
+    containerColumn: {
+        marginTop: theme.spacing(4),
+        marginBottom: theme.spacing(3),
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start"
     },
     cardCategoryWhite: {
         color: "rgba(255,255,255,.62)",
@@ -61,16 +49,56 @@ const styles = theme => ({
         fontWeight: "300",
         marginBottom: "3px",
         textDecoration: "none"
-    }
+    },
+    button: {
+        color: "primary",
+        marginTop: theme.spacing(3),
+        alignSelf: "center",
+    },
 });
 
 
-export default withStyles(styles) (class employee extends React.Component {
-    constructor(props){
+class Employee extends React.Component {
+    constructor(props) {
         super(props);
+        this.state = {
+            first_name: '',
+            last_name: '',
+            email: '',
+            contact: '',
+            gender: '',
+            about: '',
+        };
+        this.renderProfile = this.renderProfile.bind(this); 
     }
-    routeChange() {
-        this.setState({ redirect: "/user" });
+    renderProfile() {
+        const BASEURL = "https://shelteroinf.herokuapp.com/user";
+        // + '/' + this.props.searchname;
+        axios
+            .get(BASEURL, {withCredentials: true})
+            .then(response => {
+                let res=response.data;
+                console.log(res);
+                if(res) {
+                    this.setState({
+                        first_name: res.first_name,
+                        last_name: res.last_name,
+                        email: res.email,
+                        contact: res.contact,
+                        gender: res.gender,
+                        about: res.about,
+                    });
+                }
+                else{
+                    alert("beep beep boop something went really wrong");
+                }
+            }).catch(error => {
+                console.log("check fetch data error", error);
+            });
+    }
+
+    componentDidMount() {
+        this.renderProfile();
     }
 
     render(){
@@ -79,7 +107,6 @@ export default withStyles(styles) (class employee extends React.Component {
 
             <section className={classes.container}>
                 <div id='container'>
-
                     <Welcome
                         loopDuration={1000}
                         data={
@@ -94,147 +121,35 @@ export default withStyles(styles) (class employee extends React.Component {
                         }
                     />
                 </div>
+
                 <br />
                 <br />
-                <Container className={classes.container}>
-                    <GridContainer className={classes.container} >
-                        <GridItem xs={12} sm={12} md={8}>
+                <Container className={classes.containerColumn}>
+                    <GridContainer className={classes.containerColumn} >
+                        <GridItem xs={12} sm={12} md={9} style={{alignSelf:'center'}}>
                             <Card>
-                                <CardHeader color="primary" >
-                                    <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
-                                    <p className={classes.cardCategoryWhite}>Complete your profile</p>
+                                <CardHeader color="primary" className={classes.containerRow} >
+                                    <h4 className={classes.cardTitleWhite}>Employer Name</h4>
+                                    <p className={classes.cardCategoryWhite}>Rating: 4.5/5</p>
                                 </CardHeader>
-                                <CardBody>
-                                    <GridContainer>
-                                        <GridItem xs={12} sm={12} md={3}>
-                                            <CustomInput
-                                                labelText="Username: happy61"
-                                                id="username"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    disabled: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={12} sm={12} md={4}>
-                                            <CustomInput
-                                                labelText="Email address: 61@gmail.com"
-                                                id="email-address"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    disabled: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                    </GridContainer>
-                                    <GridContainer>
-                                        <GridItem xs={12} sm={12} md={6}>
-                                            <CustomInput
-                                                labelText="Education Level: High Scholl"
-                                                id="education"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    disabled: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={12} sm={12} md={6}>
-                                            <CustomInput
-                                                labelText="Age: 21"
-                                                id="age"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    disabled: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                    </GridContainer>
-                                    <GridContainer>
-                                        <GridItem xs={12} sm={12} md={4}>
-                                            <CustomInput
-                                                labelText="City: Melbourne"
-                                                id="city"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    disabled: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={12} sm={12} md={4}>
-                                            <CustomInput
-                                                labelText="Country: Australia"
-                                                id="country"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    disabled: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                        <GridItem xs={12} sm={12} md={4}>
-                                            <CustomInput
-                                                labelText="Postal Code: 3000"
-                                                id="postal-code"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    disabled: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                    </GridContainer>
-                                    <GridContainer>
-                                        <GridItem xs={12} sm={12} md={12}>
-                                            <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
-                                            <CustomInput
-                                                labelText="introduce yourself"
-                                                id="about-me"
-                                                formControlProps={{
-                                                    fullWidth: true
-                                                }}
-                                                inputProps={{
-                                                    multiline: true,
-                                                    rows: 5,
-                                                    disabled: true
-                                                }}
-                                            />
-                                        </GridItem>
-                                    </GridContainer>
-                                </CardBody>
-                                <CardFooter>
-                                   <Button color="primary" >edit Profile</Button>
-                                </CardFooter>
-                            </Card>
-                        </GridItem>
-                        <GridItem xs={12} sm={12} md={4}>
-                            <Card profile>
-                                <CardAvatar profile>
-                                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                                        <img src={avatar} alt="..." />
-                                    </a>
-                                </CardAvatar>
-                                <CardBody profile>
-                                    <h6 className={classes.cardCategory}>Credit level：</h6>
-                                    <h4 className={classes.cardTitle}>UserName</h4>
+                                <CardBody profile className={classes.containerColumn}>
+                                    <CardAvatar profile style={{marginTop: theme.spacing(2)}}>
+                                            <a href="#pablo" onClick={e => e.preventDefault()}>
+                                                <img src={avatar} alt="..." />
+                                            </a>
+                                    </CardAvatar>
+                                    <h4 className={classes.label}>{this.state.first_name} {this.state.last_name}</h4>
+                                    <h4 className={classes.label}>email</h4>
+                                    <h4 className={classes.label}>contact</h4>
+                                    <h4 className={classes.label}>gender</h4>
+                                    <h4 className={classes.label}>About Me</h4>
                                     <p className={classes.description}>
                                         Don{"'"}t be scared of the truth because we need to restart the
                                         human foundation in truth And I love you like Kanye loves Kanye
                                         I love Rick Owens’ bed design but the back is...
                                     </p>
-                                    <Button color="primary" round>
-                                        update Profile picture
+                                    <Button color="primary" round className={classes.button} href="/employeeedit">
+                                        edit my profile
                                     </Button>
                                 </CardBody>
                             </Card>
@@ -243,4 +158,6 @@ export default withStyles(styles) (class employee extends React.Component {
                 </Container>
             </section>
         );}
-})
+}
+
+export default withStyles(styles) (Employee)
