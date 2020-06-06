@@ -109,6 +109,7 @@ class EmployerEdit extends React.Component {
                         email: res.email,
                         contact: res.contact,
                         company_name: res.company_name,
+                        company_addr: res.company_addr,
                         description: res.description,
                         userImg: res.userImg,
                     });
@@ -136,7 +137,11 @@ class EmployerEdit extends React.Component {
             .then(response => {
                 //handle success
                 console.log(response.data);
-                // this.setState({redirect:"/employer"});
+                if (response.data == "user profile updated") {
+                    this.setState({redirect:"/employer"});
+                } else {
+                    console.log("?");
+                }
             })
             .catch(error => {
                 console.log(error);

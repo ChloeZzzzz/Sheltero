@@ -47,16 +47,25 @@ export default class Job extends Component {
     constructor(props){
         super(props);
         this.state={
-            tag:"",
+            area_tag:[],
+            cat_tag:[],
+            showtable:false,
         }
         this.search_Area = this.search_Area.bind(this);
+        this.search_Cat = this.search_Cat.bind(this);
     }
     search_Area(info){
-        console.log(info);
-        if(this.state.tag!=info){
-            this.setState({tag: info})
+        if(this.state.area_tag.indexOf(info)<0){
+            this.setState({area_tag:[...this.state.area_tag, info]});
         }
     }
+
+    search_Cat(info){
+        if(this.state.cat_tag.indexOf(info)<0){
+            this.setState({cat_tag:[...this.state.cat_tag, info]});
+        }
+    }
+
     render(){
         const classes = useStyles;
         return (
@@ -67,7 +76,7 @@ export default class Job extends Component {
                         <Grid container spacing={12}>
                             <Grid xs={1} />
                             <Grid item xs={4}>
-                                <SearchByCategory />
+                                <SearchByCategory search_Cat={this.search_Cat}/>
                             </Grid>
                             <Grid xs={1} />
                             <Grid item xs={4}>
@@ -77,7 +86,7 @@ export default class Job extends Component {
                         </Grid>
                     </div>
                     <Container flexGrow={1} >
-                        <JobTable />
+                        <JobTable area_tag={this.state.area_tag} cat_tag={this.state.cat_tag}/>
                     </Container>
                 </main>
     

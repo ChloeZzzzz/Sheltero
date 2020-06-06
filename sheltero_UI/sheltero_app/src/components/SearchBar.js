@@ -124,7 +124,7 @@ const Listbox = styled('ul')`
   }
 `;
 
-export default function SearchByCategory() {
+export default function SearchByCategory(props) {
     const {
         getRootProps,
         getInputLabelProps,
@@ -155,7 +155,7 @@ export default function SearchByCategory() {
                     </Label>
                     <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
                         {value.map((option, index) => (
-                            <Tag label={option.category} {...getTagProps({ index })} />
+                            <Tag label={option.category} {...getTagProps({ index })} onClick={props.search_Cat(option.category)} />
                         ))}
 
                         <input {...getInputProps()} />
