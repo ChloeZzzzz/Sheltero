@@ -77,7 +77,7 @@ class EmployerEdit extends React.Component {
             email: '',
             contact: '',
             gender: '',
-            about: '',
+            description: '',
         };
         this.renderProfile = this.renderProfile.bind(this); 
     }
@@ -96,7 +96,7 @@ class EmployerEdit extends React.Component {
                         email: res.email,
                         contact: res.contact,
                         gender: res.gender,
-                        about: res.about,
+                        description: res.description,
                     });
                 }
                 else{
@@ -151,7 +151,7 @@ class EmployerEdit extends React.Component {
                                                 name="first_name"
                                                 id="first_name"
                                                 label="First Name"
-                                                // value={this.state.first_name}
+                                                value={this.state.first_name}
                                                 autoComplete="first_name"
                                                 fullWidth
                                                 />
@@ -164,7 +164,7 @@ class EmployerEdit extends React.Component {
                                                 name="last_name"
                                                 id="last_name"
                                                 label="Last Name"
-                                                // value={this.state.first_name}
+                                                value={this.state.last_name}
                                                 autoComplete="last_name"
                                                 fullWidth
                                                 />
@@ -178,7 +178,7 @@ class EmployerEdit extends React.Component {
                                                 id="gender"
                                                 label="Gender"
                                                 disabled
-                                                // value={this.state.first_name}
+                                                value={this.state.gender}
                                                 fullWidth
                                                 />
                                         </GridItem>
@@ -192,7 +192,7 @@ class EmployerEdit extends React.Component {
                                                 name="contact"
                                                 id="contact"
                                                 label="Contact Number"
-                                                // value={this.state.first_name}
+                                                value={this.state.contact}
                                                 fullWidth
                                                 />
                                         </GridItem>
@@ -203,7 +203,7 @@ class EmployerEdit extends React.Component {
                                                 className={classes.textField}
                                                 id="email"
                                                 label="Email Address"
-                                                // value={this.state.email}
+                                                value={this.state.email}
                                                 type="email"
                                                 disabled
                                                 fullWidth
@@ -225,7 +225,7 @@ class EmployerEdit extends React.Component {
                                                 className={classes.textField}
                                                 id="about"
                                                 label="Add description here"
-                                                // value={this.state.email}
+                                                value={this.state.description}
                                                 type="about"
                                                 required
                                                 fullWidth
@@ -241,25 +241,6 @@ class EmployerEdit extends React.Component {
                             </Card>
                         </GridItem>
                         <GridItem xs={12} sm={12} md={8}>
-                            {/* <Card profile>
-                                <CardAvatar profile>
-                                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                                        <img src={avatar} alt="..." />
-                                    </a>
-                                </CardAvatar>
-                                <CardBody profile>
-                                    <h6 className={classes.cardCategory}>Credit level：</h6>
-                                    <h4 className={classes.cardTitle}>UserName</h4>
-                                    <p className={classes.description}>
-                                        Don{"'"}t be scared of the truth because we need to restart the
-                                        human foundation in truth And I love you like Kanye loves Kanye
-                                        I love Rick Owens’ bed design but the back is...
-                                    </p>
-                                    <Button color="primary" round>
-                                        update Profile picture
-                                    </Button>
-                                </CardBody>
-                            </Card> */}
                             <ReadFile />
                         </GridItem>
                     </GridContainer>

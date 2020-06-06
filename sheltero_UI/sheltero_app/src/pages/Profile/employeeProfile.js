@@ -64,7 +64,7 @@ class Employee extends React.Component {
             email: '',
             contact: '',
             gender: '',
-            about: '',
+            description: '',
         };
         this.renderProfile = this.renderProfile.bind(this); 
     }
@@ -83,7 +83,7 @@ class Employee extends React.Component {
                         email: res.email,
                         contact: res.contact,
                         gender: res.gender,
-                        about: res.about,
+                        description: res.description,
                     });
                 }
                 else{
@@ -135,15 +135,17 @@ class Employee extends React.Component {
                                                 <img src={avatar} alt="..." />
                                             </a>
                                     </CardAvatar>
-                                    <h4 className={classes.label}>{this.state.first_name} {this.state.last_name}</h4>
+                                    <h4 className={classes.label}>Name</h4>
+                                    <p className={classes.description}>{this.state.first_name} {this.state.last_name}</p>
                                     <h4 className={classes.label}>email</h4>
+                                    <p className={classes.description}>{this.state.email}</p>
                                     <h4 className={classes.label}>contact</h4>
+                                    <p className={classes.description}>{this.state.contact}</p>
                                     <h4 className={classes.label}>gender</h4>
+                                    <p className={classes.description}>{this.state.gender}</p>
                                     <h4 className={classes.label}>About Me</h4>
                                     <p className={classes.description}>
-                                        Don{"'"}t be scared of the truth because we need to restart the
-                                        human foundation in truth And I love you like Kanye loves Kanye
-                                        I love Rick Owens’ bed design but the back is...
+                                        {this.state.description}
                                     </p>
                                     <Button color="primary" round className={classes.button} href="/employeeedit">
                                         edit my profile
