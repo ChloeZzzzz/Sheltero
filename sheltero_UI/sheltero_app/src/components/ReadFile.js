@@ -51,12 +51,12 @@ const styles = theme => ({
 
 export default withStyles(styles) (class ReadFile extends Component {
     state = {
-        selectedFile: null,
+        userImg: null,
         imgPreview: 'http://www.sangathipl.com/wp-content/uploads/2016/07/no-image-avaliable.jpg',
     }
     fileSelectedHandler = event => {
         this.setState({
-            selectedFile: event.target.files[0]
+            userImg: event.target.files[0]
         })
         console.log(event.target.files[0]); //log the file information (e.g., name, size...) in the console
 
@@ -73,8 +73,8 @@ export default withStyles(styles) (class ReadFile extends Component {
     fileUploadHandler = () =>{
         //construct form data
         const formData = new FormData();
-        formData.append('image', this.state.selectedFile.name);
-        axios.post('https://shelteroinf.herokuapp.com', formData)
+        formData.append('image', this.state.userImg.name);
+        axios.post('https://shelteroinf.herokuapp.com/user/updateUser', formData)
             .then(res => {
                 console.log(res);
             })
@@ -83,7 +83,7 @@ export default withStyles(styles) (class ReadFile extends Component {
     fileRemoveHandler = (event) =>{
         //set handler to remove selected file 
         this.setState({
-            selectedFile: event.target.value=null,
+            userImg: event.target.value=null,
             imgPreview: 'http://www.sangathipl.com/wp-content/uploads/2016/07/no-image-avaliable.jpg',
         })
     }
@@ -119,7 +119,7 @@ export default withStyles(styles) (class ReadFile extends Component {
                                         </GridItem>
                                         <GridItem xs={12} sm={12} md={12}>
                                             <SecButton onClick={()=>this.fileInput.click()} round>Choose File</SecButton>
-                                            {/* <SecButton onClick={this.fileUploadHandler}>Upload</SecButton> */}
+                                            <SecButton onClick={this.fileUploadHandler}>Upload</SecButton>
                                             <SecButton onClick={this.fileRemoveHandler} round>Remove</SecButton>
                                         </GridItem>
                                     </GridContainer>

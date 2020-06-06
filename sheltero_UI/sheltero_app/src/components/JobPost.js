@@ -4,6 +4,7 @@ import Button from "./CustomButtons/Button";
 import { H2 } from './theme';
 import ReadFile from './ReadFile';
 import Copyright from './Copyright';
+import axios from 'axios';
 import {
     CssBaseline,
     TextField,
@@ -20,6 +21,7 @@ import {
     InputLabel,
     Select,
     MenuItem,} from '@material-ui/core';
+import GridContainer from './Grid/GridContainer';
 
 const styles = theme => ({
     paper: {
@@ -62,41 +64,45 @@ const styles = theme => ({
 )
 
 export default withStyles(styles) (class JobPost extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         job_title: '',
-    //         credit_level: {},
-    //         salary: {},
-    //         job_description: '',
-    //     };
-    //     this.handleChange = this.handleChange.bind(this);
-    //     this.handleClick = this.handleClick.bind(this);
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            jobTitle: '',
+            creditLevel: 0,
+            salary: 0,
+            jobDetail: '',
+            jobTag: '',
+            jobArea: '',
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
     
-    // handleChange (e) {
-    //     this.setState({
-    //         [e.target.name] : e.target.value
-    //     });
-    // }
+    handleChange (e) {
+        this.setState({
+            [e.target.name] : e.target.value
+        });
+    }
 
-    // handleSubmit(event) {
-    //     postNewJob((this.state))
-    //         .then(res => {
-    //             console.log(res);
-    //             if (res === 'success') {
-    //                 alert('You have successfully posted a new job: ' + this.state.job_title);
-    //                 this.setState({ redirect: "/" });
-    //               } else {
-    //                 alert('Opps, something went wrong. Post job again.');
-    //                 console.log("failed to post job")
-    //               }
-    //         }).catch((error) => {
-    //             console.log(error)});
+    handleSubmit(event) {
+        axios
+            .post('https://shelteroinf.herokuapp.com/job-search/job-posting', this.state, {withCredentials:true, crossdomain:true})
+            .then(response => {
+                console.log(response.data);
+                if (response) {
+                    alert('You have successfully posted a new job: ' + this.state.jobTitle);
+                    // this.setState({ redirect: "/employer" });
+                } else {
+                    alert('Opps, something went wrong. Post job again.');
+                    console.log("failed to post job");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+            event.preventDefault();
             
-    //             event.preventDefault();
-            
-    // }
+    }
 
     render() {
         const { classes } = this.props;
@@ -108,33 +114,36 @@ export default withStyles(styles) (class JobPost extends React.Component {
             <div>
                 <H2 className={classes.positionLeft}>Post New Job</H2>
 
-            <form className={classes.form}>
+            <form className={classes.form} onChange={this.handleChange} onSubmit={this.handleSubmit}>
                 <Grid container sm={8} direction="column">
                     <Grid item sm={6} xs={3}>
                         <TextField
                             className={classes.formItem}
-                            // value={this.state.job_title}
-                            name="job_title"
+                            onChange={this.handleChange}
+                            value={this.state.jobTitle}
+                            name="jobTitle"
                             variant="outlined" //add border to text field
                             required
                             fullWidth
-                            id="job_title"
+                            id="jobTitle"
                             label="Job Title"
                         />
                     </Grid>
                     
-
-                    <Grid item sm={6} xs={3}>
-                        <TextField
-                            className={classes.formItem}
-                            // value={this.state.salary}
-                            name="salary"
-                            variant="outlined" //add border to text field
-                            fullWidth
-                            id="salary" //需要设置定义域
-                            label="Salary"
-                            type="number"
-                        />
+                    <Grid container xs={12} sm={12} md={12}>
+                        <Grid item sm={6} xs={3}>
+                            <TextField
+                                className={classes.formItem}
+                                onChange={this.handleChange}
+                                value={this.state.salary}
+                                name="salary"
+                                variant="outlined" //add border to text field
+                                fullWidth
+                                id="salary" //需要设置定义域
+                                label="Salary: $ per day"
+                                type="number"
+                            />
+                        </Grid>
                     </Grid>
 
                     <Grid item sm={6} className={`${classes.positionLeft} ${classes.formItem}`}>
@@ -142,11 +151,11 @@ export default withStyles(styles) (class JobPost extends React.Component {
                             {/* <FormLabel component="legend">Credit Level</FormLabel> */}
                             <InputLabel>Credit Level</InputLabel>
                             <Select
-                            // value={this.state.credit_level}
-                            name="credit_level"
+                            value={this.state.creditLevel}
+                            name="creditLevel"
                             required
-                            // fullWidth
-                            id="credit_level"
+                            onChange={this.handleChange}
+                            id="creditLevel"
                             label="Credit Level">
                             <MenuItem value="" disabled>Credit Level</MenuItem>
                             <MenuItem value={1}>1</MenuItem>
@@ -161,14 +170,15 @@ export default withStyles(styles) (class JobPost extends React.Component {
                     <Grid item xs={10} >
                         <TextField
                             className={classes.formItem}
-                            // value={this.state.job_description}
-                            name="job_description"
+                            onChange={this.handleChange}
+                            value={this.state.jobDetail}
+                            name="jobDetail"
                             variant="outlined" //add border to text field
                             required
                             fullWidth
                             multiline
                             rows={10} //set long answer text field
-                            id="job_description"
+                            id="jobDetail"
                             label="Job Description"
                         />
                     </Grid>
@@ -177,9 +187,11 @@ export default withStyles(styles) (class JobPost extends React.Component {
                         <FormControl variant="outlined" className={classes.formControl}>
                             <InputLabel>Select a Job Type</InputLabel>
                             <Select
-                            name="job_type"
+                            name="jobTag"
+                            value={this.state.jobTag}
                             required
-                            id="job_type"
+                            onChange={this.handleChange}
+                            id="jobTag"
                             label="Job Type">
                             <MenuItem value="" disabled>Job Type</MenuItem>
                             <MenuItem value="food">Agriculture, Food and Natural Resources</MenuItem>
@@ -194,27 +206,35 @@ export default withStyles(styles) (class JobPost extends React.Component {
                         </FormControl>
                     </Grid>
 
-                    {/* <Grid item xs={12} className={`${classes.positionLeft} ${classes.field}`}>
-                        <FormControl component="fieldset" className={classes.formControl}>
-                            <FormLabel component="legend">Select a Job Type</FormLabel>
-                                <RadioGroup name="job_type">
-                                    <FormControlLabel value="food" control={<Radio />} label="Agriculture, Food and Natural Resources" />
-                                    <FormControlLabel value="arts" control={<Radio />} label="Arts, Audio/Video Technology and Communications" />
-                                    <FormControlLabel value="education" control={<Radio />} label="Education and Training" />
-                                    <FormControlLabel value="administration" control={<Radio />} label="Government and Public Administration" />
-                                    <FormControlLabel value="tourism" control={<Radio />} label="Hospitality and Tourism" />
-                                    <FormControlLabel value="IT" control={<Radio />} label="Information Technology" />
-                                    <FormControlLabel value="manufacturing" control={<Radio />} label="Manufacturing" />
-                                    <FormControlLabel value="science" control={<Radio />} label="Science, Technology, Engineering and Mathematics" />
-                                </RadioGroup>
+                    <Grid item sm={12} className={`${classes.positionLeft} ${classes.formItem}`}>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel>Select a Job Area</InputLabel>
+                            <Select
+                            name="jobArea"
+                            value={this.state.jobArea}
+                            onChange={this.handleChange}
+                            required
+                            id="jobArea"
+                            label="Job Area">
+                            <MenuItem value="" disabled>Job Area</MenuItem>
+                            <MenuItem value="CBD">Melbourne - CBD</MenuItem>
+                            <MenuItem value="st_kilda">St Kilda</MenuItem>
+                            <MenuItem value="north_melbourne">North Melbourne</MenuItem>
+                            <MenuItem value="docklands">Docklands</MenuItem>
+                            <MenuItem value="east_melbourne">East Melbourne</MenuItem>
+                            <MenuItem value="carlton">Carlton</MenuItem>
+                            <MenuItem value="parkville">Parkville</MenuItem>
+                            <MenuItem value="southbank">Southbank</MenuItem>
+                            <MenuItem value="south_yarra">South Yarra</MenuItem>
+                            </Select>
                         </FormControl>
-                    </Grid> */}
+                    </Grid>
 
                     <Grid item xs={12}>
                         <ReadFile />
                     </Grid>
                     <br/><br/>
-                    <Button color="primary" className={classes.formItem}>Post Job</Button>
+                    <Button type="submit" color="primary" className={classes.formItem}>Post Job</Button>
                 </Grid>
             </form>
 
