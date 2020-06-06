@@ -81,6 +81,11 @@ export default withStyles(styles) (class Login extends React.Component {
           alert('Hi ' + this.state.email + ', you have successfully logged in!');
           this.setState({redirect:'/employer'})
         }
+        else if (res[res.length-1]=="User already logged in"){
+          window.sessionStorage.setItem("loggedIn", true);
+          alert('Hi ' + this.state.email + ', you are already logged in');
+          this.setState({redirect:'/employer'})
+        }
         else{
           alert("beep beep boop something went really wrong");
         }

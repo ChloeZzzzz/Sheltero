@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from 'axios';
 import { Header } from "./components/Nav";
@@ -25,7 +25,17 @@ export default class App extends Component {
     super(props);
     this.state={
       searchname: 'first_name',
+      search_Area: '',
     }
+    this.search_Area=this.search_Area.bind();
+  }
+
+  search_Area(word){
+    if (!word){
+      return;
+    }
+    this.setState({search_Area:word});
+    console.log(this.state.search_Area);
   }
 
   render() {
@@ -43,7 +53,7 @@ export default class App extends Component {
             <Route exact path="/login" render={props => <Login {...props}/>} />
             <Route exact path="/signup" render={props => <Register {...props} />} />
             <Route exact path="/" render={props => <Home {...props} />} />
-            <Route exact path="/job" render={props => <Job {...props} />} />
+            <Route exact path="/job" render={props => <Job {...props} search_Area={this.search_Area()}/>} />
             <Route exact path="/jobpost" render={props => <JobPost {...props} />} />
             <Route exact path="/user" render={props => <User {...props} />} />
             <Route exact path="/welcome" render={props => <Welcome {...props} />} />

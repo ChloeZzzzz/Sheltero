@@ -157,7 +157,7 @@ export default function SearchByArea() {
                     </Label>
                     <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
                         {value.map((option, index) => (
-                            <Tag label={option.name} {...getTagProps({ index })} />
+                            <Tag label={option.name} {...getTagProps({ index })} onClick={this.props.search_Area(option.name)}/>
                         ))}
 
                         <input {...getInputProps()} />
