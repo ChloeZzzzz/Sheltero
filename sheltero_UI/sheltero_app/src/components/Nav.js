@@ -4,7 +4,7 @@ import { useStyles } from './theme';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import Cookies from "js-cookie";
+//import Cookies from "js-cookie";
 
 
 const styles = theme => ({
