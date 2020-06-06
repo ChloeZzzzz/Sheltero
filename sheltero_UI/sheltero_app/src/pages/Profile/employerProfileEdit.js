@@ -129,10 +129,10 @@ class EmployerEdit extends React.Component {
         axios
             .post('https://shelteroinf.herokuapp.com/user/updateUser', 
                     this.state, {
-                        "first_name": this.state.first_name,
-                        "last_name": this.state.last_name,
-                        "email": this.state.email,
-                        "contact": this.state.contact}, {withCredentials:true, crossdomain:true})
+                        first_name: this.state.first_name,
+                        last_name: this.state.last_name,
+                        contact: this.state.contact,
+                        description: this.state.description}, {withCredentials:true, crossdomain:true})
             .then(response => {
                 //handle success
                 console.log(response.data);
