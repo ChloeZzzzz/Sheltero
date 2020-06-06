@@ -173,8 +173,65 @@ const getApplyingJob = async (req, res) => {
     }
 }
 
-const getApproveApplication = (req, res) => {
-    
+const getApproveApplication = async (req, res) => {
+    let session = req.session;
+    if (session.passport) {
+        // user logged in (only Employer could do this) -> add 
+        try {
+            let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+                if (err) throw err;
+                console.log(result);
+            });
+            if (user.type[0] == 'Employer') {
+                res.render("approveApplication");
+                return res.end();
+            } else {
+                res.json("You are an employee so can't approve for application");
+                return res.end();
+            }
+        } catch(e) {
+            console.log(e);
+        }
+    }else {
+        // user not logged in
+        res.json("user not logged in");
+    }
+}
+
+const postApproveApplication = async (req, res) => {
+    let session = req.session;
+    if (session.passport) {
+        // user logged in -> add 
+        try {
+            let user = await Users.findOne({"_id": req.body.employeeid}, (err, result) => {
+                if (err) throw err;
+                console.log(result);
+            });
+            let job = await job_data.findOne({"_id": req.body.jobid}, (err, result) => {
+                if (err) throw err;
+                console.log(result);
+            });
+            // only employee could be approved (only employee could apply for job as well)
+            if (user.type[0] == 'Employee') {
+                user.approvedJobId.push(req.body.jobid);
+                user.applyingJobId.pull(req.body.jobid);
+                job.approvedEmployee.push([user._id, user.email]);
+                job.applyingEmployee.pull([user._id, user.email]);
+                user.save();
+                job.save();
+                res.json("application approved");
+                return res.end();
+            } else {
+                res.json("You are an employee so can't approve for application");
+                return res.end();
+            }
+        } catch(e) {
+            console.log(e);
+        }
+    }else {
+        // user not logged in
+        res.json("user not logged in");
+    }
 }
 
 module.exports = {
@@ -192,4 +249,5 @@ module.exports = {
     getApplyingJob,
     getPostedJob,
     getApproveApplication,
+    postApproveApplication,
 }

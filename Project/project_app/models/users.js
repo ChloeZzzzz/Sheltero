@@ -42,6 +42,10 @@ const User = new Schema({
     postedJob: {
         type: Array,
         "default": []},
+    approvedJobId: {
+        type: Array,
+        "default": [],
+    },
 });
 
 User.methods.generateHash = function(pass){

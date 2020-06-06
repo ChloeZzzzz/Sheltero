@@ -74,7 +74,7 @@ userRouter.get('/failuresignup', userController.failureSignup);
 userRouter.get('/updateUser', userController.getUpdateUser);
 userRouter.get('/applyingJob', userController.getApplyingJob);
 userRouter.get('/postedJob', userController.getPostedJob);
-userRouter.get('/approveApplication', userController.getApproveApplication)
+userRouter.get('/approveApplication', userController.getApproveApplication);
 
 // GET user update
 //userRouter.get('/updateUser', (req, res) => userController.getUpdateUser(req, res));
@@ -92,5 +92,6 @@ userRouter.post('/login',
 ))
 
 userRouter.post('/updateUser', isAuthenticated,(req, res) => {upload.single('userImg');userController.postUpdateUser(req, res)});
+userRouter.post('/approveApplication', userController.postApproveApplication);
 
 module.exports = userRouter;

@@ -15,7 +15,11 @@ const JobSchema = new Schema({
       applyingEmployee: {
           type: Array,
           "default": []
-      }
+      },
+      approvedEmployee: {
+          type: Array,
+          "default": [],
+      },
 });
 
 JobSchema.index({ "$**": "text" });
