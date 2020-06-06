@@ -1,5 +1,6 @@
 //provide the controller a link to the job model for job data
 var job_data = require('../models/job');
+const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
 //function for searching all jobs
@@ -87,6 +88,44 @@ const getJobID = (req, res) => {
         }
     })
 }
+const getApplyJob = async (req, res) => {
+    let session = req.session;
+    if (session.passport) {
+        // an user logged in -> able to apply
+        const userData = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+            if (err) {
+                console.log("==ERROR==");
+                console.log(err);
+            }
+            console.log("==RESULT==");
+            console.log(result);
+        });
+        res.json(userData);
+    } else {
+        // no user logged in -> redirect to login
+        res.redirect('../user/login');
+    }
+}
+
+
+const postApplyJob = async (req, res) => {
+    let session = req.session;
+    if (session.passport) {
+        // an user logged in -> able to apply
+        const userData = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+            if (err) {
+                console.log("==ERROR==");
+                console.log(err);
+            }
+            console.log("==RESULT==");
+            console.log(result);
+        });
+        
+    } else {
+        // no user logged in -> redirect to login
+        res.redirect('../user/login');
+    }
+}
 
 //the delete method is not yet tested and finished
 const deleteJob = (req, res) => {
@@ -111,4 +150,6 @@ module.exports = {
     postJob,
     getJobID,
     deleteJob,
+    getApplyJob,
+    postApplyJob,
 }
