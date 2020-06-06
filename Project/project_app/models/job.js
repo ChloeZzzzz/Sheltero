@@ -12,7 +12,7 @@ const JobSchema = new Schema({
       contactEmail: String,
       jobArea: String,
       jobImg: String,
-      applyingEmployeeEmail: {
+      applyingEmployee: {
           type: Array,
           "default": []
       }

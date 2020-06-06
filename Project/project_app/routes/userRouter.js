@@ -38,7 +38,17 @@ const passport = require('passport');
 const userController = require('../controllers/userController')
 
 // make the form variable accessable by the get and post method
-userRouter.use(express.urlencoded( {extended: false}))
+userRouter.use(express.urlencoded( {extended: false}));
+
+isAuthenticated = (req,res,next)=>{
+    if(req.user)
+       return next();
+    else
+       return res.status(401).json({
+         error: 'User not authenticated'
+       })
+ 
+ }
 
 // ======== GET request ========
 
@@ -47,7 +57,7 @@ userRouter.use(express.urlencoded( {extended: false}))
 userRouter.get('/',
     passport.authenticate("check session", {failureFlash:true},userController.getUserHomepage));
 */
-userRouter.get('/', userController.getUserHomepage);
+userRouter.get('/', isAuthenticated, userController.getUserHomepage);
 // GET user signup
 userRouter.get('/signup', userController.getUserSignup);
 
@@ -62,6 +72,7 @@ userRouter.get('/failurelogin', userController.failureLogin);
 userRouter.get('/successsignup', userController.successSignup);
 userRouter.get('/failuresignup', userController.failureSignup);
 userRouter.get('/updateUser', userController.getUpdateUser);
+userRouter.get('/applyingJob', userController.getApplyingJob);
 
 // GET user update
 //userRouter.get('/updateUser', (req, res) => userController.getUpdateUser(req, res));
@@ -78,6 +89,6 @@ userRouter.post('/login',
                                             failureFlash:true}
 ))
 
-userRouter.post('/updateUser', upload.single('userImg'), (req, res) => userController.postUpdateUser(req, res));
+userRouter.post('/updateUser', isAuthenticated,(req, res) => {upload.single('userImg');userController.postUpdateUser(req, res)});
 
 module.exports = userRouter;

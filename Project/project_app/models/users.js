@@ -38,7 +38,10 @@ const User = new Schema({
         "default": []},
     userImg: {
         type: String,
-        require: false}
+        require: false},
+    postedJob: {
+        type: Array,
+        "default": []},
 });
 
 User.methods.generateHash = function(pass){

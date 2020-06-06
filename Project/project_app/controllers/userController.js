@@ -5,18 +5,9 @@ const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
 const getUserHomepage = async (req, res) => {
-    let session = req.session;
-    if (session.passport) {
-        try {
-            let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
-                if (err) throw err;
-                console.log(result);
-            });
-            res.json(user);
-            return res.end();
-        } catch(e) {
-            console.log(e);
-        }
+    console.log(req.user);
+    if (req.user) {
+        res.json(req.user)
         return res.end();
     }
     else{
@@ -54,7 +45,7 @@ const getUserLogin = (req, res) => {
 }
 
 const getUserLogout = (req, res) => {
-    if (req.session.passport.user) {
+    if (req.session) {
         req.logOut();
         req.session.destroy();
         res.render("logout.ejs");
@@ -64,16 +55,8 @@ const getUserLogout = (req, res) => {
 }
 
 const postUpdateUser = async(req, res) => {
-    let session = req.session;
-    if (session.passport) {
-        const userData = await Users.findOne({"_id": session.passport.user}, (err, result) => {
-            if (err) {
-                console.log("==ERROR==");
-                console.log(err);
-            }
-            console.log("==RESULT==");
-            console.log(result);
-        });
+    let userData = await Users.findById(req.session.passport.user);
+    if (req.user) {
         if (req.body.contact != null) {
             userData.contact = req.body.contact;
         }
@@ -86,12 +69,22 @@ const postUpdateUser = async(req, res) => {
         if (req.body.description != null) {
             userData.description = req.body.description;
         }
-        userData.userImg = req.file.path;
+        if (req.file != null) {
+            userData.userImg = req.file.path;
+        }
+        if (req.body.first_name != null) {
+            userData.first_name = req.body.first_name;
+        }
+        if (req.body.last_name != null) {
+            userData.last_name = req.body.last_name;
+        }
         userData.save();
-
+        res.json("user profile updated");
+        return res.end();
     }
     else {
-      res.redirect("login.ejs");
+      res.json("user haven't login");
+      return res.end();
     }
 }
 
@@ -106,6 +99,29 @@ const getUpdateUser = async (req, res) => {
             res.render('user-update.ejs', {useremail: user.email});
             //res.json(user);
             return res.end();
+        } catch(e) {
+            console.log(e);
+        }
+    } else {
+        res.redirect('./login');
+    }
+}
+
+const getApplyingJob = async (req, res) => {
+    let session = req.session;
+    if (session.passport) {
+        try {
+            let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+                if (err) throw err;
+                console.log(result);
+            });
+            if (user.type[0] == 'Employee') {
+                res.json(user.applyingJobId);
+                return res.end();
+            } else {
+                res.json("You don't have applying job as an employer");
+                return res.end();
+            }
         } catch(e) {
             console.log(e);
         }
@@ -126,4 +142,5 @@ module.exports = {
     failureSignup,
     getUpdateUser,
     postUpdateUser,
+    getApplyingJob,
 }

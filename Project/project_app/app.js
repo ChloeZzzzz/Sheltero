@@ -1,6 +1,6 @@
 const express = require('express');
 const flash = require('connect-flash-plus');
-require('dotenv').config();
+//require('dotenv').config();
 const session = require("express-session");
 var bodyParser = require('body-parser');
 var cors = require('cors')
