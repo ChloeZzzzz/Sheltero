@@ -55,6 +55,7 @@ const getUserLogin = (req, res) => {
 const getUserLogout = (req, res) => {
     if (req.session.passport.user) {
         req.logOut();
+        req.session.destroy();
         res.render("logout.ejs");
     } else {
         res.redirect('../')

@@ -31,6 +31,10 @@ const User = new Schema({
         type: String,
         require: false},
     resume: {jobs: String},
+    applyingJobId: {
+        type: Array,
+        "default": []
+    }
 });
 
 User.methods.generateHash = function(pass){
