@@ -114,6 +114,24 @@ const getUpdateUser = async (req, res) => {
     }
 }
 
+const getApplyingJob = async (req, res) => {
+    let session = req.session;
+    if (session.passport) {
+        try {
+            let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+                if (err) throw err;
+                console.log(result);
+            });
+            res.json(user.applyingJobId);
+            return res.end();
+        } catch(e) {
+            console.log(e);
+        }
+    } else {
+        res.redirect('login');
+    }
+}
+
 module.exports = {
     getUserHomepage,
     getUserSignup,
@@ -126,4 +144,5 @@ module.exports = {
     failureSignup,
     getUpdateUser,
     postUpdateUser,
+    getApplyingJob,
 }
