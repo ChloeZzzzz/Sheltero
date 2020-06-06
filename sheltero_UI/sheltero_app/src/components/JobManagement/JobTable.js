@@ -39,7 +39,10 @@ export class JobTable extends React.Component {
     this.setState({ jobs: data, isLoaded: true });
   }
 
-  componentDidMount(tag) {
+  componentDidMount() {
+    area= this.props.area_tag[0];
+    cat = this.props.cat_tag[0];
+    tag = area;
     this.fetchJobsByTag(tag);
   }
 
