@@ -3,7 +3,6 @@ import { Redirect,Link } from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
 import { PrimButton, H2, TextLink } from '../components/theme';
 import Copyright from '../components/Copyright';
-import CheckLogin from '../components/CheckLoginStatus';
 import { Avatar,
          CssBaseline,
          TextField,
