@@ -64,8 +64,9 @@ const getUserLogout = (req, res) => {
 }
 
 const postUpdateUser = async(req, res) => {
-    if (req.user) {
-        const userData = await Users.find({"email": req.user.email}, (err, result) => {
+    let session = req.session;
+    if (session.passport) {
+        const userData = await Users.findOne({"_id": session.passport.user}, (err, result) => {
             if (err) {
                 console.log("==ERROR==");
                 console.log(err);
@@ -82,12 +83,10 @@ const postUpdateUser = async(req, res) => {
         if (req.body.company_addr != null) {
             userData.company_addr = req.body.company_addr;
         }
-        if (req.body.userImg != null) {
-            userData.userImg = req.file.path;
-        }
         if (req.body.description != null) {
             userData.description = req.body.description;
         }
+        userData.userImg = req.file.path;
         userData.save();
 
     }

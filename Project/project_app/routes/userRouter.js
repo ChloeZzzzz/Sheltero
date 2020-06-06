@@ -78,6 +78,6 @@ userRouter.post('/login',
                                             failureFlash:true}
 ))
 
-userRouter.post('/updateUser', upload.single('userImg'), (req, res) => userController.postupdateUser(req, res));
+userRouter.post('/updateUser', upload.single('userImg'), (req, res) => userController.postUpdateUser(req, res));
 
 module.exports = userRouter;
