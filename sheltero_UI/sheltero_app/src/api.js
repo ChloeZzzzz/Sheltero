@@ -27,16 +27,14 @@ export async function updateUserState() {
     axios
       .get(url, { withCredentials: true, crossdomain: true })
       .then(response => {
+        console.log(response.data);
+        if (response.data == "no user session") {
+          console.log("change isLogIn state to false");
+          window.sessionStorage.setItem("isLogIn", false);
+        } else {
+          console.log("change isLogIn state to true");
           console.log(response.data);
-        if (response.data.flash) {
-          let res = response.data.flash["error"];
-          if (res[res.length - 1] == "User not authenticated") {
-            console.log("change loggedIn state to false");
-            window.sessionStorage.setItem("loggedIn", false);
-          }
-        } else if (response) {
-          console.log("change loggedIn state to true");
-          window.sessionStorage.setItem("loggedIn", true);
+          window.sessionStorage.setItem("isLogIn", true);
         }
       })
       .catch(error => {
