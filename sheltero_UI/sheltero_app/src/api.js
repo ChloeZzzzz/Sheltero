@@ -21,6 +21,24 @@ export async function postUsersSignup(data) {
     return response.json();
 }
 
+export async function updateUserState() {
+    const url = "https://shelteroinf.herokuapp.com/user";
+    axios.get(url, {withCredentials:true, crossdomain:true})
+          .then((response) => {
+            if (response.data.flash['error']) {
+                let res = response.data.flash['error'];
+                if(res[res.length-1] == "User not authenticated"){
+                    console.log("change loggedIn state to false");
+                    window.sessionStorage.setItem("loggedIn", false);
+                }
+            }
+            else if (response) {
+              console.log("change loggedIn state to true");
+              window.sessionStorage.setItem("loggedIn", true);
+            }
+          }).catch((error) => {
+            console.log(error)});
+  }
 
 export async function updateUserProfile(data) {
     const endpoint = BASE_URL + '/user/updateUser';

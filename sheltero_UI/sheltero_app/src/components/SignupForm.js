@@ -1,6 +1,7 @@
 import React from 'react';
 import postUsersSignup from '../api';
 import axios from 'axios';
+import {updateUserState} from '../api';
 class SignupForm extends React.Component {
     constructor(props) {
         super(props);
@@ -45,6 +46,7 @@ class SignupForm extends React.Component {
               //alert("This email address is already taken. Please choose another one :)");
               this.setState({ msg: "This email address is already taken. Please choose another one :)"});
             }
+            updateUserState();
           }).catch((error) => {
             console.log(error)});
       }

@@ -3,6 +3,8 @@ import { Link, Box, withStyles, Button } from '@material-ui/core';
 import { useStyles } from './theme';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import axios from 'axios';
+import {updateUserState} from '../api';
 
 //import Cookies from "js-cookie";
 
@@ -66,12 +68,30 @@ export default withStyles(styles) (class Nav extends React.Component  {
     }
   }
 
-  handleLogout = ()=>{
-    window.sessionStorage.setItem("loggedIn", false);
-    this.setState({currentStatus:false});
+  
+  handleLogout = async ()=>{
+    const url = "https://shelteroinf.herokuapp.com/user/logout";
+    axios.get(url, {withCredentials:true, crossdomain:true})
+          .then((response) => {
+            let res = response.data.flash['error'];
+            console.log(res);
+            if(response == "logged out"){
+              console.log("change loggedIn state to false");
+              window.sessionStorage.setItem("loggedIn", false);
+            }
+            else if (response == "log out failed") {
+              console.log("change loggedIn state to true");
+              window.sessionStorage.setItem("loggedIn", true);
+            } else {
+              console.log("something wrong happended");
+            }
+          }).catch((error) => {
+            console.log(error)});
+    updateUserState();
   }
 
   render () {
+    console.log(this.state.currentStatus);
     const { classes } = this.props;
     if (!this.state.currentStatus){
       return(
