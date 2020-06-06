@@ -76,14 +76,11 @@ class EmployerEdit extends React.Component {
             last_name: '',
             email: '',
             contact: '',
-            company_name: '',
-            company_address: '',
+            gender: '',
             about: '',
         };
         this.renderProfile = this.renderProfile.bind(this); 
     }
-
-
     renderProfile() {
         const BASEURL = "https://shelteroinf.herokuapp.com/user";
         // + '/' + this.props.searchname;
@@ -98,8 +95,7 @@ class EmployerEdit extends React.Component {
                         last_name: res.last_name,
                         email: res.email,
                         contact: res.contact,
-                        company_name: res.company_name,
-                        company_address:res.company_address,
+                        gender: res.gender,
                         about: res.about,
                     });
                 }
@@ -111,9 +107,6 @@ class EmployerEdit extends React.Component {
             });
     }
 
-    componentDidMount() {
-        this.renderProfile();
-    }
 
     render(){
         
@@ -174,6 +167,19 @@ class EmployerEdit extends React.Component {
                                                 label="Last Name"
                                                 // value={this.state.first_name}
                                                 autoComplete="last_name"
+                                                fullWidth
+                                                />
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={3}>
+                                            <h4 className={classes.inputLabel}>gender</h4>
+                                            <TextField
+                                                // onChange={this.handleChange}
+                                                className={classes.textField}
+                                                name="gender"
+                                                id="gender"
+                                                label="Gender"
+                                                disabled
+                                                // value={this.state.first_name}
                                                 fullWidth
                                                 />
                                         </GridItem>

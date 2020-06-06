@@ -19,6 +19,7 @@ import Welcome from "./pages/Welcome";
 import About from "./pages/About/About";
 import Employee from "./pages/Profile/employeeProfile";
 import EmployerEdit from"./pages/Profile/employerProfileEdit";
+import EmployeeEdit from"./pages/Profile/employeeProfileEdit";
 import Employer from"./pages/Profile/employerProfile";
 export default class App extends Component {
   constructor(props){
@@ -26,6 +27,7 @@ export default class App extends Component {
     this.state={
       searchname: 'first_name',
       search_Area: '',
+      searchname: 'email',
     }
     this.search_Area=this.search_Area.bind();
   }
@@ -57,9 +59,10 @@ export default class App extends Component {
             <Route exact path="/jobpost" render={props => <JobPost {...props} />} />
             <Route exact path="/user" render={props => <User {...props} />} />
             <Route exact path="/welcome" render={props => <Welcome {...props} />} />
-            <Route exact path="/employer" render={props => <Employer {...props} searchname={this.state.first_name}/>} />
-            <Route exact path="/employee" render={props => <Employee {...props} />} />
+            <Route exact path="/employer" render={props => <Employer {...props} searchname={this.state.email}/>} />
+            <Route exact path="/employee" render={props => <Employee {...props} searchname={this.state.email}/>} />
             <Route exact path="/employeredit" render={props => <EmployerEdit {...props} />} />
+            <Route exact path="/employeeedit" render={props => <EmployeeEdit {...props} />} />
             <Route exact path="/about" render={props => <About {...props} />} />
             <Route exact path="/viewarea" render={props => <ViewArea {...props} />} />
           </Switch>
