@@ -60,32 +60,62 @@ const postJob = async(req, res) => {
             }
         });
         if (userData.type[0] == 'Employer') {
-            try {
-                const job = new job_data({
-                    "_id" : new mongoose.Types.ObjectId(),
-                    "jobTitle": req.body.jobTitle,
-                    "salary": req.body.salary,
-                    "creditLevel": req.body.creditLevel,
-                    "jobDetail": req.body.jobDetail,
-                    "companyID": req.body.companyID,
-                    "jobTag": req.body.jobTag,
-                    "contactEmail": req.body.contactEmail,
-                    "jobArea": req.body.jobArea,
-                    "jobImg": req.file.path,
-                })
-                console.log(req.jobImg);
-                job.save().then(result => {
-                    console.log(result);
-                    console.log("job saved");
-                }).catch(err => {
-                    console.log(err);
-                });
-                userData.postedJob.push(job._id);
-                userData.save();
-                return res.end();
-            } catch (e) {
-                console.log("job posting error");
-                console.log(e);
+            if (req.file) { // if there is an img uploaded
+                try {
+                    const job = new job_data({
+                        "_id" : new mongoose.Types.ObjectId(),
+                        "jobTitle": req.body.jobTitle,
+                        "salary": req.body.salary,
+                        "creditLevel": req.body.creditLevel,
+                        "jobDetail": req.body.jobDetail,
+                        "companyID": req.body.companyID,
+                        "jobTag": req.body.jobTag,
+                        "contactEmail": req.body.contactEmail,
+                        "jobArea": req.body.jobArea,
+                        "jobImg": req.file.path,
+                    })
+                    console.log(req.jobImg);
+                    job.save().then(result => {
+                        console.log(result);
+                        console.log("job saved");
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    userData.postedJob.push(job._id);
+                    userData.save();
+                    return res.end();
+                } catch (e) {
+                    console.log("job posting error");
+                    console.log(e);
+                }
+            } else { // no img uploaded
+                try {
+                    const job = new job_data({
+                        "_id" : new mongoose.Types.ObjectId(),
+                        "jobTitle": req.body.jobTitle,
+                        "salary": req.body.salary,
+                        "creditLevel": req.body.creditLevel,
+                        "jobDetail": req.body.jobDetail,
+                        "companyID": req.body.companyID,
+                        "jobTag": req.body.jobTag,
+                        "contactEmail": req.body.contactEmail,
+                        "jobArea": req.body.jobArea,
+                        "jobImg": '',
+                    })
+                    console.log(req.jobImg);
+                    job.save().then(result => {
+                        console.log(result);
+                        console.log("job saved");
+                    }).catch(err => {
+                        console.log(err);
+                    });
+                    userData.postedJob.push(job._id);
+                    userData.save();
+                    return res.end();
+                } catch (e) {
+                    console.log("job posting error");
+                    console.log(e);
+                }
             }
         } else {
             res.json("you can't post a job as an employee");
@@ -181,6 +211,19 @@ const deleteJob = (req, res) => {
     });
 }
 
+// get job by url input id
+const getJobById = async (req, res) => {
+    console.log("=== retrieved url id ===");
+    console.log(req.params._id);
+    const job = await job_data.findOne({"_id": req.params._id}, (err, result) => {
+        if (err) throw err;
+        console.log("== job result ==");
+        console.log(result);
+    });
+    res.json(job);
+    return res.end();
+}
+
 //export the functions
 module.exports = {
     getAllJob,
@@ -193,4 +236,5 @@ module.exports = {
     deleteJob,
     getApplyJob,
     postApplyJob,
+    getJobById,
 }

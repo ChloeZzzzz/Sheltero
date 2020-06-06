@@ -43,6 +43,7 @@ jobRouter.get('/byArea/:jobArea?', (req, res) => jobController.getJobByArea(req,
 jobRouter.get('/job-posting', (req, res) => jobController.getPostJob(req, res));
 jobRouter.post('/job-posting', upload.single('jobImg'), (req, res) => jobController.postJob(req, res));
 jobRouter.get('/job-deleting/:_id?', (req, res) => jobController.deleteJob(req, res));
+jobRouter.get('/jobInfo/:_id?', jobController.getJobById);
 
 // applying for job
 jobRouter.get('/apply-job', (req, res) => jobController.getApplyJob(req, res));
