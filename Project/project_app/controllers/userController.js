@@ -5,6 +5,8 @@ const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
 const getUserHomepage = async (req, res) => {
+    console.log("==session==");
+    console.log(session);
     let session = req.session;
     if (session.passport) {
         try {
