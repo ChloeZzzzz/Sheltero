@@ -201,18 +201,23 @@ const postApplyJob = async (req, res) => {
 
 //the delete method is not yet tested and finished
 const deleteJob = async (req, res) => {
-    var job = await job_data.findByIdAndRemove({"_id": req.params._id}, function (err, result) {
-        if (err) throw err;
-    });
-    //delete the image in uploads folder
-    if (job.jobImg) {
-        fs.unlinkSync(job.jobImg, (err, result) => {
+    try {
+        var job = await job_data.findByIdAndRemove({"_id": req.params._id}, function (err, result) {
             if (err) throw err;
-                console.log(result);
-            });
+        });
+        //delete the image in uploads folder
+        if (job.jobImg) {
+            fs.unlinkSync(job.jobImg, (err, result) => {
+                if (err) throw err;
+                    console.log(result);
+                });
+        }
+        res.json("job deleted");
+        return res.end();
+    } catch (e) {
+        res.json("something went wrong");
+        return res.end();
     }
-    res.json("job deleted");
-    return res.end();
 }
 
 // get job by url input id
