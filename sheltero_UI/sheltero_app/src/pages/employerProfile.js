@@ -1,7 +1,7 @@
 import React from "react";
 // @material-ui/core components
 import TextField from '@material-ui/core/TextField';
-import { withStyles } from "@material-ui/core";
+import { Link, withStyles } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "../components/Grid/GridItem.js";
@@ -12,14 +12,9 @@ import Card from "../components/Card/Card.js";
 import CardHeader from "../components/Card/CardHeader.js";
 import CardAvatar from "../components/Card/CardAvatar.js";
 import CardBody from "../components/Card/CardBody.js";
-import CardFooter from "../components/Card/CardFooter.js";
-import {
-    drawerWidth,
-    transition,
-    container
-} from "../style";
 import Welcome from 'react-welcome-page';
 import Container from "@material-ui/core/Container";
+import Nav from "../components/Nav";
 const avatar= "https://picsum.photos/id/237/400/400";
 
 
@@ -66,18 +61,19 @@ const styles = theme => ({
 });
 
 
-export default withStyles(styles) (class employer extends React.Component {
+export default withStyles(styles) (class Employer extends React.Component {
     constructor(props){
         super(props);
     }
 
     render(){
+        
         const { classes } = this.props;
         return (
 
             <section className={classes.container}>
                 <div id='container'>
-
+                    <Nav />
                     <Welcome
                         loopDuration={1000}
                         data={
@@ -92,8 +88,10 @@ export default withStyles(styles) (class employer extends React.Component {
                         }
                     />
                 </div>
+
                 <br />
                 <br />
+                
                 <Container className={classes.container}>
                     <GridContainer className={classes.container} >
                         <GridItem xs={12} sm={12} md={8}>
@@ -189,9 +187,7 @@ export default withStyles(styles) (class employer extends React.Component {
                                         </GridItem>
                                     </GridContainer>
                                 </CardBody>
-                                <CardFooter>
-                                    <Button color="primary">Update Profile</Button>
-                                </CardFooter>
+                                <Link href={'/jobpost'}><Button color="primary">Post Job</Button></Link>
                             </Card>
                         </GridItem>
                         <GridItem xs={12} sm={12} md={4}>

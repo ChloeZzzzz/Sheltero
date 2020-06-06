@@ -8,6 +8,7 @@ export default class CheckLogin extends React.Component {
         this.state = {
           loggedInStatus: "logged_in",
           // user: {},
+
           redirect: null
         };
     

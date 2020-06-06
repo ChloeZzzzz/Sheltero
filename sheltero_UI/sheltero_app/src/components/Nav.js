@@ -1,26 +1,3 @@
-
-// export function Nav (){
-//   return (
-//     <nav>
-//       <span id="functionPages">
-//         <NavLink exact to="/">
-//           Home
-//         </NavLink>
-//         <NavLink to="/job">
-//           Job Search
-//         </NavLink>
-//       </span>
-//       <span id="userPages">
-//         <NavLink to="/login">
-//           Sign In
-//         </NavLink>
-//         <NavLink to="/signup">
-//           Sign Up
-//         </NavLink>
-//       </span> 
-//     </nav>
-//   );
-// }
 import React, { Component } from "react";
 import { Link, Box, withStyles, Button } from '@material-ui/core';
 import { useStyles } from './theme';
@@ -88,19 +65,8 @@ export default withStyles(styles) (class Nav extends CheckLogin  {
       });
   }
 
-  // handleLogoutClick(e) {
-  //   this.setState({
-  //     loggedInStatus : "not_logged_in",
-  //     // redirect: "/",
-  //   });
-  // }
-
-
   render () {
     const { classes } = this.props;
-    // if (this.state.redirect) {
-    //   return <Redirect to={this.state.redirect} />
-    // } else 
     if (this.state.loggedInStatus === "not_logged_in"){
       return(
         <div className={classes.root}>
