@@ -2,6 +2,7 @@
 var job_data = require('../models/job');
 const Users = require('../models/users.js');
 const mongoose = require('mongoose');
+const fs = require('fs');
 
 //function for searching all jobs
 const getAllJob = (req, res) => {
@@ -199,22 +200,23 @@ const postApplyJob = async (req, res) => {
 }
 
 //the delete method is not yet tested and finished
-const deleteJob = (req, res) => {
-    job_data.findByIdAndRemove({"_id": req.params._id}, function (err) {
-        if (!err) {
-            res.send("successfully deleted");
-            //delete the image in uploads folder
-        }
-        else {
-            res.send(err);
-        }
+const deleteJob = async (req, res) => {
+    var job = await job_data.findByIdAndRemove({"_id": req.params._id}, function (err, result) {
+        if (err) throw err;
     });
+    //delete the image in uploads folder
+    if (job.jobImg) {
+        fs.unlinkSync(job.jobImg, (err, result) => {
+            if (err) throw err;
+                console.log(result);
+            });
+    }
+    res.json("job deleted");
+    return res.end();
 }
 
 // get job by url input id
 const getJobById = async (req, res) => {
-    console.log("=== retrieved url id ===");
-    console.log(req.params._id);
     const job = await job_data.findOne({"_id": req.params._id}, (err, result) => {
         if (err) throw err;
         console.log("== job result ==");
