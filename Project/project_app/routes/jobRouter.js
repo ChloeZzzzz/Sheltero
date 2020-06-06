@@ -45,8 +45,8 @@ jobRouter.post('/job-posting', upload.single('jobImg'), (req, res) => jobControl
 jobRouter.get('/job-deleting/:_id?', (req, res) => jobController.deleteJob(req, res));
 
 // applying for job
-jobRouter.get('/apply-job/:_id?', (req, res) => jobController.getApplyJob(req, res));
-jobRouter.post('/apply-job/:_id?', (req, res) => jobController.postApplyJob(req, res));
+jobRouter.get('/apply-job', (req, res) => jobController.getApplyJob(req, res));
+jobRouter.post('/apply-job', (req, res) => jobController.postApplyJob(req, res));
 
 //export the router
 module.exports = jobRouter;
