@@ -26,10 +26,9 @@ describe("POST User Login", function(done) {
     chai.request(app)
         .post('/login')
         .set('content-type', 'application/x-www-form-urlencoded')
-        .set('Access-Control-Allow-Origin', '*')
         .send(userInfo)
         .end(function(err, response) {
-          //console.log(response["redirects"]);
+          //console.log(response);
           expect(response).to.has.status(200);
           expect(response["redirects"][0]).to.equal(app+'/successlogin');
           done();
@@ -62,6 +61,23 @@ describe("POST User Login", function(done) {
     let userInfo = {};
     userInfo.email = 'wrongusername@test.test';
     userInfo.password = 'test';
+    chai.request(app)
+        .post('/login')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .send(userInfo)
+        .end(function(err, response) {
+          expect(response).to.has.status(200);
+          expect(response["redirects"][0]).to.equal(app+'/failurelogin');
+          done();
+        });
+  });
+
+  it("User should not able to perform noSQL injection", function(done) {
+    this.timeout(10000);
+
+    let userInfo = {};
+    userInfo.email = 'POST /login HTTP/1.1\r\nHost: example.org\r\nContent-Type: application/x-www-form-urlencoded\r\nContent-Length: 28\r\nuser=test&password[%24ne]='
+    userInfo.password = '';
     chai.request(app)
         .post('/login')
         .set('content-type', 'application/x-www-form-urlencoded')
