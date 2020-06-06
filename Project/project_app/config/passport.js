@@ -82,10 +82,11 @@ module.exports = (passport)=>{
     );
 
     passport.use("check session", new LocalStrategy({passReqToCallback:true},
-        (req,done)=>{
+        async (req,done)=>{
             let session = req.session;
             if(session.passport){
-                return done(null,user, req.flash("Session check","Checked info"));
+                let user = await Users.findById(session.passport.user);
+                return done(null, user, req.flash("Session check","Checked info"));
             }
             else{
                 return done(null, null, req.flash("Session check", "Wrong info :("))
