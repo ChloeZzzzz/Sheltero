@@ -20,7 +20,6 @@ import {
 } from "../style";
 import Welcome from 'react-welcome-page';
 import Container from "@material-ui/core/Container";
-import CheckLogin from '../components/CheckLoginStatus';
 const avatar= "https://picsum.photos/id/237/400/400";
 
 
@@ -77,7 +76,6 @@ export default withStyles(styles) (class UserProfile extends React.Component {
       password: ''};
     this.getUserInfo = this.getUserInfo.bind(this);
   }
-  //CheckLogin.componentDidMount();
   
   getUserInfo = () =>{
     console.log("INSIDE GET USER INFO");
@@ -88,7 +86,6 @@ export default withStyles(styles) (class UserProfile extends React.Component {
           console.log("above response");
           console.log(response.json);
           const res = response.data.flash["message"];
-          //console.log(res);
           if (res[res.length-1] == "User Info,") {
             this.setState({ type: response.user.type,
                             first_name: response.user.first_name,
@@ -101,11 +98,7 @@ export default withStyles(styles) (class UserProfile extends React.Component {
 
 
   render(){
-    //console.log("getuserinfo:")
-    //console.log(this.state.first_name);
     this.getUserInfo();
-    //console.log(this.state.first_name);
-      //console.log(this.getUserInfo);
     const { classes } = this.props;
   return (
 

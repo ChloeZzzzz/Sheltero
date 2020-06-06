@@ -4,6 +4,8 @@ import { useStyles } from './theme';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
+import Cookies from "js-cookie";
+
 
 const styles = theme => ({
   root: {
@@ -48,17 +50,29 @@ const styles = theme => ({
 export default withStyles(styles) (class Nav extends React.Component  {
   constructor(props) {
     super(props);
-
-    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = {
+      currentStatus: false,
+    }
+    this.handleLogout = this.handleLogout.bind();
   }
 
-  handleLogoutClick() {
-    this.props.user_signout();
+  componentDidMount(){
+    let session = window.sessionStorage.getItem("loggedIn");
+    if(!session){
+      this.setState({currentStatus:false});
+    }
+    else{
+      this.setState({currentStatus:true});
+    }
+  }
+
+  handleLogout = ()=>{
+    window.sessionStorage.setItem("loggedIn", false);
   }
 
   render () {
     const { classes } = this.props;
-    if (!this.props.getuser_info()){
+    if (!this.state.currentStatus){
       return(
         <div className={classes.root}>
           <AppBar className={classes.navBar}>
@@ -74,7 +88,7 @@ export default withStyles(styles) (class Nav extends React.Component  {
           </AppBar>
         </div>
         )
-    } else if (this.props.getuser_info()){
+    } else if (this.state.currentStatus){
       return(
         <div className={classes.root}>
           <AppBar className={classes.navBar}>
@@ -85,7 +99,7 @@ export default withStyles(styles) (class Nav extends React.Component  {
               <Button className={classes.menuButton} href="/job">Job search</Button>
               <Button className={classes.menuButton} href="/about">Work with us</Button>
               <Button className={classes.menuButton} href="/employer">My Account</Button>
-              <Button className={classes.menuButton} onClick={() => this.handleLogoutClick()}>Log Out</Button>
+              <Button className={classes.menuButton} onClick={this.handleLogout}>Log Out</Button>
             </Toolbar>
           </AppBar>
         </div>
