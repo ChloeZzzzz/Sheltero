@@ -65,6 +65,7 @@ const getUserLogout = (req, res) => {
 
 const postUpdateUser = async(req, res) => {
     let session = req.session;
+    console.log(req.body);
     if (session.passport) {
         const userData = await Users.findOne({"_id": session.passport.user}, (err, result) => {
             if (err) {
@@ -97,6 +98,7 @@ const postUpdateUser = async(req, res) => {
     }
     else {
       res.json("user haven't login");
+      return res.end();
     }
 }
 
