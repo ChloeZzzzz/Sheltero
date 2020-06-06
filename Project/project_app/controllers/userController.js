@@ -55,8 +55,6 @@ const getUserLogout = (req, res) => {
 }
 
 const postUpdateUser = async(req, res) => {
-    let session = req.session;
-    
     console.log(req.body);
     if (req.user) {
         if (req.body.contact != null) {
