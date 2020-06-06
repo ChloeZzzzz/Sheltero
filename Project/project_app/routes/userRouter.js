@@ -57,7 +57,8 @@ isAuthenticated = (req,res,next)=>{
 userRouter.get('/',
     passport.authenticate("check session", {failureFlash:true},userController.getUserHomepage));
 */
-userRouter.get('/', isAuthenticated, userController.getUserHomepage);
+//userRouter.get('/', isAuthenticated, userController.getUserHomepage);
+userRouter.get('/', userController.getUserHomepage);
 // GET user signup
 userRouter.get('/signup', userController.getUserSignup);
 
