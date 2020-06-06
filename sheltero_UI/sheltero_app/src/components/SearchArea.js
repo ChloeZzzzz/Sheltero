@@ -128,7 +128,7 @@ const Listbox = styled('ul')`
 
 
 
-export default function SearchByArea() {
+export default function SearchByArea(props) {
     const {
         getRootProps,
         getInputLabelProps,
@@ -157,7 +157,7 @@ export default function SearchByArea() {
                     </Label>
                     <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
                         {value.map((option, index) => (
-                            <Tag label={option.name} {...getTagProps({ index })} onClick={this.props.search_Area(option.name)}/>
+                            <Tag label={option.name} {...getTagProps({ index })} onClick={props.search_Area(option.name)}/>
                         ))}
 
                         <input {...getInputProps()} />

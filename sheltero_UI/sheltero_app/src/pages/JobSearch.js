@@ -44,13 +44,24 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default class Job extends Component {
-    
+    constructor(props){
+        super(props);
+        this.state={
+            tag:"",
+        }
+        this.search_Area = this.search_Area.bind(this);
+    }
+    search_Area(info){
+        console.log(info);
+        if(this.state.tag!=info){
+            this.setState({tag: info})
+        }
+    }
     render(){
-        const classes = useStyles();
+        const classes = useStyles;
         return (
             <React.Fragment>
                 <CssBaseline />
-    
                 <main>
                     <div className={classes.Box}>
                         <Grid container spacing={12}>
@@ -60,7 +71,7 @@ export default class Job extends Component {
                             </Grid>
                             <Grid xs={1} />
                             <Grid item xs={4}>
-                                <SearchByArea search_Area={this.props.search_Area}/>
+                                <SearchByArea search_Area={this.search_Area}/>
                                 {/* <SearchLocationInput onChange={() => null} /> */}
                             </Grid>
                         </Grid>
