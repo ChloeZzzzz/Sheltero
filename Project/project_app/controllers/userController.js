@@ -96,11 +96,22 @@ const postUpdateUser = async(req, res) => {
     }
 }
 
-const getUpdateUser = (req, res) => {
-    if (req.user) {
-        res.render('user-update.ejs', {useremail: req.user.email});
+const getUpdateUser = async (req, res) => {
+    let session = req.session;
+    if (session.passport) {
+        try {
+            let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+                if (err) throw err;
+                console.log(result);
+            });
+            res.render('user-update.ejs', {useremail: user.email});
+            //res.json(user);
+            return res.end();
+        } catch(e) {
+            console.log(e);
+        }
     } else {
-        res.redirect('login.ejs');
+        res.redirect('login');
     }
 }
 
@@ -114,4 +125,5 @@ module.exports = {
     failureLogin,
     successSignup,
     failureSignup,
+    getUpdateUser,
 }
