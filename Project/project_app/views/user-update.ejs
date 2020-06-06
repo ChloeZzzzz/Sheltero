@@ -3,7 +3,7 @@
 
 <H2>Signup page</H2>
 <br/>
-<form action = "updateUser" method = "POST">
+<form action = "updateUser" method = "POST" enctype="multipart/form-data">
     <div>
         <label for = "contact">Contact detail</label>
         <input type = "contact" id = "contact" name = "contact">
@@ -13,6 +13,14 @@
         <br/>
         <label for = "company_addr">Company address</label>
         <input type = "company_addr" id = "company_addr" name = "company_addr">
+        <br/>
+        <br/>
+        <label for = "description">Description</label>
+        <input type = "description" id = "description" name = "description">
+        <br/>
+        <br/>
+        <label for = "userImg"> User Image</label>
+        <input type = "file" id = "userImg" name = "userImg">
         <br/>
     </div>
     <button type = "submit">Update</button>

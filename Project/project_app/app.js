@@ -1,6 +1,6 @@
 const express = require('express');
 const flash = require('connect-flash-plus');
-//require('dotenv').config();
+require('dotenv').config();
 const session = require("express-session");
 var bodyParser = require('body-parser');
 var cors = require('cors')
@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 app.use(flash());
 
-//sessions 
+//sessions
 app.use(session({secret:"bestest_coolest_secretest_key",
                 resave:true,
                 saveUninitialized: true}));

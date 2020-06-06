@@ -82,6 +82,12 @@ const postUpdateUser = async(req, res) => {
         if (req.body.company_addr != null) {
             userData.company_addr = req.body.company_addr;
         }
+        if (req.body.userImg != null) {
+            userData.userImg = req.file.path;
+        }
+        if (req.body.description != null) {
+            userData.description = req.body.description;
+        }
         userData.save();
 
     }
