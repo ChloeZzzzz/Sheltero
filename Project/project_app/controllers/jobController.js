@@ -100,7 +100,7 @@ const getApplyJob = async (req, res) => {
             console.log("==RESULT==");
             console.log(result);
         });
-        res.json(userData);
+        res.render("applyJob");
     } else {
         // no user logged in -> redirect to login
         res.redirect('../user/login');
@@ -120,10 +120,35 @@ const postApplyJob = async (req, res) => {
             console.log("==RESULT==");
             console.log(result);
         });
-        
+        // an user logged in -> able to apply
+        const jobData = await job_data.findOne({"_id": req.body.id}, (err, result) => {
+            if (err) {
+                console.log("==ERROR==");
+                console.log(err);
+            }
+            console.log("==RESULT==");
+            console.log(result);
+        });
+        console.log("=========");
+        console.log(req.body.id);
+        console.log("t----- ype -----");
+        console.log(userData.type);
+        if (userData.type[0] == "Employee") {
+            // save applied job id to the user database
+            userData.applyingJobId.push(req.body.id);
+            userData.save();
+            // save applied employee (id, email) to the job database
+            jobData.applyingEmployee.push([userData._id, userData.email]);
+            jobData.save();
+            res.json(userData);
+            return res.end();
+        } else {
+            res.json("You can't apply a job as an employer");
+            return res.end();
+        }  
     } else {
         // no user logged in -> redirect to login
-        res.redirect('../user/login');
+        res.redirect('../');
     }
 }
 
