@@ -67,7 +67,7 @@ module.exports = (passport)=>{
                         user.password = user.generateHash(password);
                         user.save((err)=>{
                             if(err){
-                                throw err;
+                                return done(null,null);
                             }
                             return done(null, user, req.flash("signupMessage", "Signup Success"));
                         });
