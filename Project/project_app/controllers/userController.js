@@ -5,21 +5,9 @@ const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
 const getUserHomepage = async (req, res) => {
-    let session = req.session;
     console.log(req.user);
-    console.log("==session==");
-    console.log(session);
-    if (session.passport) {
-        try {
-            let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
-                if (err) throw err;
-                console.log(result);
-            });
-            res.json(user);
-            return res.end();
-        } catch(e) {
-            console.log(e);
-        }
+    if (req.user) {
+        res.json(req.user)
         return res.end();
     }
     else{
@@ -57,7 +45,7 @@ const getUserLogin = (req, res) => {
 }
 
 const getUserLogout = (req, res) => {
-    if (req.session.passport.user) {
+    if (req.session) {
         req.logOut();
         req.session.destroy();
         res.render("logout.ejs");
@@ -70,15 +58,7 @@ const postUpdateUser = async(req, res) => {
     let session = req.session;
     
     console.log(req.body);
-    if (session.passport) {
-        const userData = await Users.findOne({"_id": session.passport.user}, (err, result) => {
-            if (err) {
-                console.log("==ERROR==");
-                console.log(err);
-            }
-            console.log("==RESULT==");
-            console.log(result);
-        });
+    if (req.user) {
         if (req.body.contact != null) {
             userData.contact = req.body.contact;
         }
