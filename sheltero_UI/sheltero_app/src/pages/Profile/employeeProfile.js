@@ -13,6 +13,7 @@ import Welcome from 'react-welcome-page';
 import Container from "@material-ui/core/Container";
 import axios from 'axios';
 import { theme } from "../../components/theme.js";
+import ViewAppliedJob from "./ViewAppliedJob";
 const avatar= "https://picsum.photos/id/237/400/400";
 
 
@@ -121,37 +122,58 @@ class Employee extends React.Component {
 
                 <br />
                 <br />
-                <Container className={classes.containerColumn}>
+                <Container className={classes.paper}>
                     <GridContainer className={classes.containerColumn} >
-                        <GridItem xs={12} sm={12} md={9} style={{alignSelf:'center'}}>
+                        {/* Personal Profile Card */}
+                        <GridItem xs={12} sm={12} md={8} style={{alignSelf:'center'}}>
                             <Card>
                                 <CardHeader color="primary" className={classes.containerRow} >
-                                    <h4 className={classes.cardTitleWhite}>Employer Name</h4>
-                                    <p className={classes.cardCategoryWhite}>Rating: 4.5/5</p>
+                                    <h4 className={classes.cardTitleWhite}>{this.state.first_name}</h4>
+                                    <p className={classes.cardCategoryWhite}>{this.state.creditLevel}</p>
                                 </CardHeader>
                                 <CardBody profile className={classes.containerColumn}>
-                                    <CardAvatar profile style={{marginTop: theme.spacing(2)}}>
-                                            <a href="#pablo" onClick={e => e.preventDefault()}>
-                                                <img src={avatar} alt="..." />
-                                            </a>
-                                    </CardAvatar>
-                                    <h4 className={classes.label}>Name</h4>
-                                    <p className={classes.description}>{this.state.first_name} {this.state.last_name}</p>
-                                    <h4 className={classes.label}>email</h4>
-                                    <p className={classes.description}>{this.state.email}</p>
-                                    <h4 className={classes.label}>contact</h4>
-                                    <p className={classes.description}>{this.state.contact}</p>
-                                    <h4 className={classes.label}>gender</h4>
-                                    <p className={classes.description}>{this.state.gender}</p>
-                                    <h4 className={classes.label}>About Me</h4>
-                                    <p className={classes.description}>
-                                        {this.state.description}
-                                    </p>
-                                    <Button color="primary" round className={classes.button} href="/employeeedit">
-                                        edit my profile
-                                    </Button>
+                                    <GridContainer style={{padding: "0 0 0 10pt"}}>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <CardAvatar profile style={{marginTop: theme.spacing(2)}}>
+                                                <a href="#pablo" onClick={e => e.preventDefault()}>
+                                                    <img src={avatar} alt="..." />
+                                                </a>
+                                            </CardAvatar>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <h4 className={classes.label}>Name</h4>
+                                            <p className={classes.description}>{this.state.first_name} {this.state.last_name}</p>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <h4 className={classes.label}>Email</h4>
+                                            <p className={classes.description}>{this.state.email}</p>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <h4 className={classes.label}>Contact</h4>
+                                            <p className={classes.description}>{this.state.contact}</p>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <h4 className={classes.label}>Company Name</h4>
+                                            <p className={classes.description}>{this.state.company_name}</p>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <h4 className={classes.label}>About Me</h4>
+                                            <p className={classes.description}>
+                                                {this.state.description}
+                                            </p>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <Button color="primary" round className={classes.button} href="/employeredit">
+                                                edit my profile
+                                            </Button>
+                                        </GridItem>
+                                        </GridContainer>
                                 </CardBody>
                             </Card>
+                        </GridItem>
+                        
+                        <GridItem xs={12} sm={12} md={4} style={{alignSelf:'center'}}>
+                            <ViewAppliedJob />
                         </GridItem>
                     </GridContainer>
                 </Container>

@@ -164,7 +164,7 @@ class Employer extends React.Component {
                         <GridItem xs={12} sm={12} md={8} style={{alignSelf:'center'}}>
                             <Card>
                                 <CardHeader color="primary" className={classes.containerRow} >
-                                    <h4 className={classes.cardTitleWhite}>Employer Name</h4>
+                                    <h4 className={classes.cardTitleWhite}>{this.state.first_name}</h4>
                                     <p className={classes.cardCategoryWhite}>Rating: 4.5/5</p>
                                 </CardHeader>
                                 <CardBody profile className={classes.containerColumn}>
@@ -191,10 +191,6 @@ class Employer extends React.Component {
                                         <GridItem xs={12} sm={12} md={12}>
                                             <h4 className={classes.label}>Company Name</h4>
                                             <p className={classes.description}>{this.state.company_name}</p>
-                                        </GridItem>
-                                        <GridItem xs={12} sm={12} md={12}>
-                                            <h4 className={classes.label}>Company Address</h4>
-                                            <p className={classes.description}>{this.state.company_address}</p>
                                         </GridItem>
                                         <GridItem xs={12} sm={12} md={12}>
                                             <h4 className={classes.label}>About Me</h4>
