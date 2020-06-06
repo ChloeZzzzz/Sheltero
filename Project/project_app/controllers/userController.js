@@ -126,4 +126,5 @@ module.exports = {
     successSignup,
     failureSignup,
     getUpdateUser,
+    postUpdateUser,
 }
