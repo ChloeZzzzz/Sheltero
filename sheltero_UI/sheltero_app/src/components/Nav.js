@@ -68,6 +68,7 @@ export default withStyles(styles) (class Nav extends React.Component  {
 
   handleLogout = ()=>{
     window.sessionStorage.setItem("loggedIn", false);
+    this.setState({currentStatus:false});
   }
 
   render () {
