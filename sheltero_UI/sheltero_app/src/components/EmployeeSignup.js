@@ -219,4 +219,4 @@ class EmployeeSignup extends SignupForm {
   }
 }
 
-  export default withStyles(styles) (EmployeeSignup)
+export default withStyles(styles) (EmployeeSignup)

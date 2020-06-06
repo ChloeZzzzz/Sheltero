@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 // @material-ui/core components
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from "@material-ui/core";
@@ -80,12 +81,14 @@ class EmployerEdit extends React.Component {
             description: '',
         };
         this.renderProfile = this.renderProfile.bind(this); 
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     renderProfile() {
         const BASEURL = "https://shelteroinf.herokuapp.com/user";
         // + '/' + this.props.searchname;
         axios
-            .get(BASEURL, {withCredentials: true})
+            .get(BASEURL,{withCredentials: true})
             .then(response => {
                 let res=response.data;
                 console.log(res);
@@ -107,12 +110,45 @@ class EmployerEdit extends React.Component {
             });
     }
 
+    componentDidMount() {
+        this.renderProfile();
+    }
+
+    handleChange (e) {
+        this.setState({
+          [e.target.name] : e.target.value
+        });
+    }
+
+    async handleSubmit(event) {
+        // const { first_name, last_name, email, contact } = this.state; 
+        await axios
+            .post('https://shelteroinf.herokuapp.com/user/updateUser', 
+                    {first_name: this.state.first_name,
+                        last_name: this.state.last_name,
+                        email: this.state.email,
+                        contact: this.state.contact}, {withCredentials:true}
+                            // , crossdomain:true}
+                    )
+            .then(response => {
+                //handle success
+                console.log(response.data);
+                this.setState({redirect:"/employee"});
+            })
+            .catch(error => {
+                console.log(error);
+            });
+            event.preventDefault();
+      }
+
 
     render(){
-        
         const { classes } = this.props;
+        if (this.state.redirect) {
+            console.log("user profile updated");
+            return <Redirect to={this.state.redirect} />
+        } else {
         return (
-
             <section className={classes.container}>
                 <div id='container'>
                     <Welcome
@@ -133,7 +169,7 @@ class EmployerEdit extends React.Component {
                 <br />
                 <br />
                 
-                <Container className={classes.container}>
+                <form className={classes.container} onSubmit={this.handleSubmit}>
                     <GridContainer className={classes.container} >
                         <GridItem xs={12} sm={12} md={8}>
                             <Card>
@@ -146,7 +182,7 @@ class EmployerEdit extends React.Component {
                                         <GridItem xs={12} sm={12} md={3}>
                                             <h4 className={classes.inputLabel}>First Name</h4>
                                             <TextField
-                                                // onChange={this.handleChange}
+                                                onChange={this.handleChange}
                                                 className={classes.textField}
                                                 name="first_name"
                                                 id="first_name"
@@ -159,7 +195,7 @@ class EmployerEdit extends React.Component {
                                         <GridItem xs={12} sm={12} md={3}>
                                             <h4 className={classes.inputLabel}>Last Name</h4>
                                             <TextField
-                                                // onChange={this.handleChange}
+                                                onChange={this.handleChange}
                                                 className={classes.textField}
                                                 name="last_name"
                                                 id="last_name"
@@ -172,7 +208,7 @@ class EmployerEdit extends React.Component {
                                         <GridItem xs={12} sm={12} md={3}>
                                             <h4 className={classes.inputLabel}>gender</h4>
                                             <TextField
-                                                // onChange={this.handleChange}
+                                                onChange={this.handleChange}
                                                 className={classes.textField}
                                                 name="gender"
                                                 id="gender"
@@ -187,7 +223,7 @@ class EmployerEdit extends React.Component {
                                         <GridItem xs={12} sm={12} md={4}>
                                             <h4 className={classes.inputLabel}>Contact Number</h4>
                                             <TextField
-                                                // onChange={this.handleChange}
+                                                onChange={this.handleChange}
                                                 className={classes.textField}
                                                 name="contact"
                                                 id="contact"
@@ -199,7 +235,7 @@ class EmployerEdit extends React.Component {
                                         <GridItem xs={12} sm={12} md={4}>
                                             <h4 className={classes.inputLabel}>Email</h4>
                                             <TextField
-                                                // onChange={this.handleChange}
+                                                onChange={this.handleChange}
                                                 className={classes.textField}
                                                 id="email"
                                                 label="Email Address"
@@ -221,7 +257,7 @@ class EmployerEdit extends React.Component {
                                             <br />
                                             <h4 className={classes.inputLabel}>About me</h4>
                                             <TextField
-                                                // onChange={this.handleChange}
+                                                onChange={this.handleChange}
                                                 className={classes.textField}
                                                 id="about"
                                                 label="Add description here"
@@ -229,7 +265,7 @@ class EmployerEdit extends React.Component {
                                                 type="about"
                                                 required
                                                 fullWidth
-                                                name="about"
+                                                name="description"
                                                 multiline
                                                 rows={10}
                                                 variant="outlined"
@@ -237,16 +273,16 @@ class EmployerEdit extends React.Component {
                                         </GridItem>
                                     </GridContainer>
                                 </CardBody>
-                                <Button color="primary" style={{alignSelf:"center", marginBottom:theme.spacing(3)}}>Update My Profile</Button>
+                                <Button type="submit" color="primary" style={{alignSelf:"center", marginBottom:theme.spacing(3)}}>Update My Profile</Button>
                             </Card>
                         </GridItem>
                         <GridItem xs={12} sm={12} md={8}>
                             <ReadFile />
                         </GridItem>
                     </GridContainer>
-                </Container>
+                </form>
             </section>
         );}
-}
+}}
 
 export default withStyles(styles) (EmployerEdit);
