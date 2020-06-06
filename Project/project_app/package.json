@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "goSheltero": "nodemon app.js"
+    "goSheltero": "nodemon app.js",
+    "test": "mocha tests/**/*.js --exit"
   },
   "author": "",
   "license": "ISC",
@@ -32,10 +33,16 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.0.1",
-    "path-to-regexp": "^6.1.0"
+    "path-to-regexp": "^6.1.0",
+    "promise": "^8.1.0"
   },
   "devDependencies": {
+    "@types/chai-http": "^4.2.0",
+    "chai": "^4.2.0",
     "dotenv": "^8.2.0",
-    "nodemon": "^2.0.3"
+    "mocha": "^7.2.0",
+    "nodemon": "^2.0.3",
+    "sinon": "^9.0.2",
+    "supertest": "^4.0.2"
   }
 }
