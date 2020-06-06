@@ -13,9 +13,11 @@ userRouter.use(express.urlencoded( {extended: false}))
 // ======== GET request ========
 
 // GET homepage-authorized
+/*
 userRouter.get('/', 
     passport.authenticate("check session", {failureFlash:true},userController.getUserHomepage));
-
+*/
+userRouter.get('/', userController.getUserHomepage);
 // GET user signup
 userRouter.get('/signup', userController.getUserSignup);
 

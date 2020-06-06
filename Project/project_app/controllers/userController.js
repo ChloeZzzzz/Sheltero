@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const getUserHomepage = async (req, res) => {
     let session = req.session;
-    if (session.passport.user) {
+    if (session.passport) {
         try {
             let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
                 if (err) throw err;
@@ -20,6 +20,7 @@ const getUserHomepage = async (req, res) => {
         return res.end();
     }
     else{
+        res.json("no user session");
         return res.end()
     }
 }
