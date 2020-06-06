@@ -10,7 +10,7 @@ import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import Welcome from 'react-welcome-page';
-import Container from "@material-ui/core/Container";
+import {updateUserProfile} from '../../api';
 import Nav from "../../components/Nav";
 import ReadFile from "../../components/ReadFile";
 import { theme } from "../../components/theme.js";
@@ -38,6 +38,7 @@ const styles = theme => ({
     container: {
         marginTop: theme.spacing(3),
         marginBottom: theme.spacing(14),
+        marginLeft: theme.spacing(5),
         display: "flex",
         flexDirection: "column",
         alignItems: "center"
@@ -63,7 +64,6 @@ const styles = theme => ({
     inputLabel: {
         marginTop: theme.spacing(4),
         color: '#333',
-        textTransform: 'capitalize',
     }
 });
 
@@ -81,8 +81,10 @@ class EmployerEdit extends React.Component {
             description: '',
         };
         this.renderProfile = this.renderProfile.bind(this); 
-    }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
 
+    }
 
     renderProfile() {
         const BASEURL = "https://shelteroinf.herokuapp.com/user";
@@ -117,6 +119,26 @@ class EmployerEdit extends React.Component {
         this.renderProfile();
     }
 
+    handleChange (e) {
+        this.setState({
+          [e.target.name] : e.target.value
+        });
+    }
+    handleSubmit(event) {
+        // const { first_name, last_name, email, contact } = this.state; 
+        axios
+            .post('https://shelteroinf.herokuapp.com/user/updateUser', 
+                    this.state, {withCredentials:true, crossdomain:true})
+            .then(response => {
+                //handle success
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+                event.preventDefault();
+            });
+      }
+
     render(){
         
         const { classes } = this.props;
@@ -143,7 +165,7 @@ class EmployerEdit extends React.Component {
                 <br />
                 <br />
                 
-                <Container className={classes.container}>
+                <form className={classes.container} onSubmit={this.handleSubmit} onChange={this.handleChange}>
                     <GridContainer className={classes.container} >
                         <GridItem xs={12} sm={12} md={8}>
                             <Card>
@@ -156,7 +178,7 @@ class EmployerEdit extends React.Component {
                                         <GridItem xs={12} sm={12} md={3}>
                                             <h4 className={classes.inputLabel}>First Name</h4>
                                             <TextField
-                                                // onChange={this.handleChange}
+                                                onChange={this.handleChange}
                                                 className={classes.textField}
                                                 name="first_name"
                                                 id="first_name"
@@ -169,7 +191,7 @@ class EmployerEdit extends React.Component {
                                         <GridItem xs={12} sm={12} md={3}>
                                             <h4 className={classes.inputLabel}>Last Name</h4>
                                             <TextField
-                                                // onChange={this.handleChange}
+                                                onChange={this.handleChange}
                                                 className={classes.textField}
                                                 name="last_name"
                                                 id="last_name"
@@ -184,7 +206,7 @@ class EmployerEdit extends React.Component {
                                         <GridItem xs={12} sm={12} md={4}>
                                             <h4 className={classes.inputLabel}>Contact Number</h4>
                                             <TextField
-                                                // onChange={this.handleChange}
+                                                onChange={this.handleChange}
                                                 className={classes.textField}
                                                 name="contact"
                                                 id="contact"
@@ -250,9 +272,8 @@ class EmployerEdit extends React.Component {
                                                 label="Add self description here"
                                                 value={this.state.description}
                                                 type="about"
-                                                required
                                                 fullWidth
-                                                name="about"
+                                                name="description"
                                                 multiline
                                                 rows={10}
                                                 variant="outlined"
@@ -261,14 +282,8 @@ class EmployerEdit extends React.Component {
                                     </GridContainer>
 
 
-
-
-
-
-
-
                                 </CardBody>
-                                <Button color="primary" style={{alignSelf:"center", marginBottom:theme.spacing(3)}}>Update My Profile</Button>
+                                <Button type="submit" color="primary" style={{alignSelf:"center", marginBottom:theme.spacing(3)}}>Update My Profile</Button>
                             </Card>
                         </GridItem>
                         <GridItem xs={12} sm={12} md={8}>
@@ -294,7 +309,7 @@ class EmployerEdit extends React.Component {
                             <ReadFile />
                         </GridItem>
                     </GridContainer>
-                </Container>
+                </form>
             </section>
         );}
 }
