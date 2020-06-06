@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getJobs } from "../../api";
+import { getJobsByTag } from "../../api";
 import { Column, Row } from 'styled-grid-system-component';
 import Popup from '../Popup/Popup';
 
@@ -34,13 +34,13 @@ export class JobTable extends React.Component {
     this.setState({showPopup:!this.state.showPopup});
   }
 
-  async fetchJobs() {
-    const data = await getJobs();
+  async fetchJobsByTag(tag) {
+    const data = await getJobsByTag(tag);
     this.setState({ jobs: data, isLoaded: true });
   }
 
-  componentDidMount() {
-    this.fetchJobs();
+  componentDidMount(tag) {
+    this.fetchJobsByTag(tag);
   }
 
   updateInfo(info){
