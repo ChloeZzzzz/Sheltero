@@ -1,21 +1,51 @@
 import React, {Component} from 'react';
 import { SecButton } from './theme';
 import axios from 'axios';
-import { withStyles } from '@material-ui/core'; 
-
+import { withStyles, Button } from '@material-ui/core'; 
+// @material-ui/core components
+import TextField from '@material-ui/core/TextField';
+import InputLabel from "@material-ui/core/InputLabel";
+// core components
+import GridItem from "../components/Grid/GridItem.js";
+import GridContainer from "../components/Grid/GridContainer.js";
+import Card from "../components/Card/Card";
+import CardHeader from "../components/Card/CardHeader.js";
+import CardBody from "../components/Card/CardBody.js";
+import Welcome from 'react-welcome-page';
+import Container from "@material-ui/core/Container";
 
 const styles = theme => ({
     paper: {
         marginTop: theme.spacing(4),
-        // display: 'flex',
-        // flexDirection: 'row',
+        display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
+        justifyContent: 'center',
         width: '100%',
     },
     imgPreview: {
         width: '80%',
         height: '100%',
-    }
+        alignSelf: 'center',
+    },
+    cardCategoryWhite: {
+        color: "rgba(255,255,255,.62)",
+        margin: "0",
+        fontSize: "14px",
+        letterSpacing: 1,
+        marginTop: "0",
+        marginBottom: "0"
+    },
+    cardTitleWhite: {
+        color: "#FFFFFF",
+        marginTop: "0px",
+        minHeight: "auto",
+        fontSize: "16px",
+        fontWeight: "300",
+        letterSpacing: 1,
+        marginBottom: "3px",
+        textDecoration: "none"
+    },
 })
 
 
@@ -63,26 +93,42 @@ export default withStyles(styles) (class ReadFile extends Component {
         const {imgPreview} = this.state;
         return(
             <div>
-            <fieldset className={classes.paper}>
-                <legend>Upload Job Image</legend>
-                <div>
-                    <img src={imgPreview} alt="image preview" 
-                            className={classes.imgPreview}/>
-                </div>
-                <input type="file" name="file"
-                        style={{display: 'none'}}
-                        onChange={this.fileSelectedHandler}
-                        accept="image/png, image/jpeg"
-                        ref={fileInput => this.fileInput = fileInput} /> 
-                        {/* 'ref' provide way to get access to this input button in JSX code, 
-                            use function to bind some property of our class to a reference of this input */}
-                <div>
-                    <SecButton onClick={()=>this.fileInput.click()}>Choose File</SecButton>
-                    {/* <SecButton onClick={this.fileUploadHandler}>Upload</SecButton> */}
-                    <SecButton onClick={this.fileRemoveHandler}>Remove</SecButton>
-
-                </div>
-            </fieldset>
+                <Container className={classes.paper}>
+                    <GridContainer className={classes.paper} >
+                        <GridItem xs={12} sm={12} md={12}>
+                            <Card>
+                                <CardHeader color="primary" >
+                                    <h4 className={classes.cardTitleWhite}>Edit Profile Image</h4>
+                                    <p className={classes.cardCategoryWhite}>upload new profile image</p>
+                                </CardHeader>
+                                <CardBody className={classes.paper}>
+                                    <GridContainer>
+                                        <GridItem xs={12} sm={12} md={12} className={classes.paper}>
+                                        <img src={imgPreview} alt="image preview" className={classes.imgPreview}/>
+                                        </GridItem>
+                                    </GridContainer>
+                                    <GridContainer>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                        <input type="file" name="file"
+                                                style={{display: 'none'}}
+                                                onChange={this.fileSelectedHandler}
+                                                accept="image/png, image/jpeg"
+                                                ref={fileInput => this.fileInput = fileInput} /> 
+                                                {/* 'ref' provide way to get access to this input button in JSX code, 
+                                                    use function to bind some property of our class to a reference of this input */}
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <SecButton onClick={()=>this.fileInput.click()} round>Choose File</SecButton>
+                                            {/* <SecButton onClick={this.fileUploadHandler}>Upload</SecButton> */}
+                                            <SecButton onClick={this.fileRemoveHandler} round>Remove</SecButton>
+                                        </GridItem>
+                                    </GridContainer>
+                                </CardBody>
+                            </Card>
+                        </GridItem>
+                    </GridContainer>
+                </Container>
+            
             </div>
         )
     }

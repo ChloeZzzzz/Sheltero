@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
@@ -43,35 +43,37 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function Job() {
-    const classes = useStyles();
-
-    return (
-        <React.Fragment>
-            <CssBaseline />
-
-            <main>
-                <div className={classes.Box}>
-                    <Grid container spacing={12}>
-                        <Grid xs={1} />
-                        <Grid item xs={4}>
-                            <SearchByCategory />
+export default class Job extends Component {
+    
+    render(){
+        const classes = useStyles();
+        return (
+            <React.Fragment>
+                <CssBaseline />
+    
+                <main>
+                    <div className={classes.Box}>
+                        <Grid container spacing={12}>
+                            <Grid xs={1} />
+                            <Grid item xs={4}>
+                                <SearchByCategory />
+                            </Grid>
+                            <Grid xs={1} />
+                            <Grid item xs={4}>
+                                <SearchByArea search_Area={this.props.search_Area}/>
+                                {/* <SearchLocationInput onChange={() => null} /> */}
+                            </Grid>
                         </Grid>
-                        <Grid xs={1} />
-                        <Grid item xs={4}>
-                            <SearchByArea />
-                            {/* <SearchLocationInput onChange={() => null} /> */}
-                        </Grid>
-                    </Grid>
-                <Container flexGrow={1} >
-                    <JobTable />
-                </Container>
-                </div>
-            </main>
-
-            <Box mt={5} className={classes.box}>
-                <Copyright />
-            </Box>
-        </React.Fragment>
-    );
+                    </div>
+                    <Container flexGrow={1} >
+                        <JobTable />
+                    </Container>
+                </main>
+    
+                <Box mt={5} className={classes.box}>
+                    <Copyright />
+                </Box>
+            </React.Fragment>
+        );
+    }
 }
