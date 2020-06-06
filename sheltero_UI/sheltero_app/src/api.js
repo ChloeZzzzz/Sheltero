@@ -26,6 +26,7 @@ export default async function postUsersSignup(data) {
  * Retrieves the list of authors from API
  * @return List of Objects, each containing author data.
  */
+/*
 export function getJobs() {
     const endpoint = BASE_URL + `/job-search`;
     console.log("getJobs");
@@ -37,15 +38,28 @@ export function getJobs() {
 
 }
 
-
+*/
 
 /**
  * Retrieves a single job from API using the job ID
  * @param {string} job_id -- uniquely identifies each job
  * @return Single Objects containing author data.
  */
+/*
 export function  getJob(_id) {
     const endpoint = BASE_URL + `/job-search/${_id}`;
+
+    try{
+        return axios.get(endpoint).then(res => res.data);
+    } catch (e) {
+        return e;
+
+    }
+}
+*/
+
+export function  getJobsByTag(tag) {
+    const endpoint = BASE_URL + `/job-search/byTag/${tag}`;
 
     try{
         return axios.get(endpoint).then(res => res.data);

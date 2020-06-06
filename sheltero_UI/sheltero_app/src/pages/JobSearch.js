@@ -63,10 +63,10 @@ export default function Job() {
                             {/* <SearchLocationInput onChange={() => null} /> */}
                         </Grid>
                     </Grid>
-                </div>
                 <Container flexGrow={1} >
                     <JobTable />
                 </Container>
+                </div>
             </main>
 
             <Box mt={5} className={classes.box}>

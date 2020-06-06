@@ -5,6 +5,7 @@ import NoSsr from '@material-ui/core/NoSsr';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import styled from 'styled-components';
+import {JobTable} from './JobManagement/JobTable'; 
 
 const Label = styled('label')`
   padding: 0 0 4px;
@@ -142,6 +143,8 @@ export default function SearchByCategory() {
         defaultValue: [Jobcatergries[1]],
         getOptionLabel: (option) => option.category,
     });
+
+    //JobTable.componentDidMount(value);
 
     return (
         <NoSsr>
