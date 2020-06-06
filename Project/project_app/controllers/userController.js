@@ -48,9 +48,11 @@ const getUserLogout = (req, res) => {
     if (req.session) {
         req.logOut();
         req.session.destroy();
-        res.render("logout.ejs");
+        res.json("logged out");
+        return res.end();
     } else {
-        res.redirect('../')
+        res.json("log out failed");
+        return res.end();
     }
 }
 
