@@ -123,12 +123,7 @@ class EmployerEdit extends React.Component {
     async handleSubmit(event) {
         // const { first_name, last_name, email, contact } = this.state; 
         await axios
-            .post('https://shelteroinf.herokuapp.com/user/updateUser', 
-                    {first_name: this.state.first_name,
-                        last_name: this.state.last_name,
-                        email: this.state.email,
-                        contact: this.state.contact}, {withCredentials:true}
-                            // , crossdomain:true}
+            .post('https://shelteroinf.herokuapp.com/user/updateUser', this.state, {withCredentials:true, crossdomain:true}
                     )
             .then(response => {
                 //handle success

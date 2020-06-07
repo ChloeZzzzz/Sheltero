@@ -35,25 +35,77 @@ const styles = theme => ({
     },
 })
 export default withStyles(styles)(class Popup extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         type: '',
-    //         login_state:'',
-    //     };
-    //     this.renderProfile = this.renderProfile.bind(this);
-    // }
-    //
-    // checkLoginState() {
-    //     axios
-    //         .get("https://shelteroinf.herokuapp.com/user/postedJob",{withCredentials: true})
-    //         .then (response => {
-    //             let res=response.data;
-    //             if(res.loginMessage !== "Successful login") {
-    //
-    //             }
-    //         })
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            type: '',
+            login_state:'',
+            redirect: '',
+        };
+        this.checkLoginState = this.checkLoginState.bind(this);
+        this.checkUserType=this.checkUserType.bind(this);
+        this.applyJob=this.applyJob.bind(this);
+    }
+
+    checkUserType() {
+        axios
+            .get("https://shelteroinf.herokuapp.com/user", {withCredentials: true})
+            .then(response => {
+                let res=response.data;
+                if(res) {
+                    this.setState({
+                        type: res.type,
+                    });
+                } else if(type == "Employer") {
+                    alert('You cannot apply job as a employer type');
+                } else {
+                    console.log("You have not sign up yet");
+                }
+            })
+    }
+
+    checkLoginState() {
+        axios
+            .get("https://shelteroinf.herokuapp.com/user/postedJob",{withCredentials: true})
+            .then (response => {
+                let res=response.data;
+                if(res.loginMessage !== "Successful login") {
+                    alert("You have not login yet!");
+                    this.setState( {
+                        redirect: '/login',
+                    });
+                } else {(
+                    alert("You have successfully applied a job");
+                    this.setState({
+                        redirect: '/job',
+                    });
+                )}
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        event.preventDefault();
+    }
+
+    applyJob(){
+        axios
+            .post("https://shelteroinf.herokuapp.com/user/applyingJob", this.state, {withCredentials: true,crossdomain:true})
+            .then(response => {
+                //handle success
+                console.log(response);
+                this.setState({redirect:"/job"});
+            })
+            .catch(error => {
+                console.log(error);
+            });
+            event.preventDefault();
+    }
+
+    handleApply(){
+        this.checkLoginState();
+        this.checkUserType();
+        this.applyJob();
+    }
 
     render() {
         const { classes } = this.props;
