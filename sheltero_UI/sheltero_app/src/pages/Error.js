@@ -1,5 +1,4 @@
 /** @jsx jsx */
-import React from "react";
 import { jsx, css } from "@emotion/core";
 import Typist from "react-typist";
 
@@ -22,6 +21,16 @@ const mainStyles = css`
   font-family: "avenir";
   font-size: 3em;
 `;
+const Emoji = props => (
+  <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ""}
+      aria-hidden={props.label ? "false" : "true"}
+  >
+      oops! {props.symbol}
+  </span>
+);
 
 const error = () => (
     <div css={mainStyles}>
@@ -29,7 +38,7 @@ const error = () => (
             cursor={{ hideWhenDone: true, hideWhenDoneDelay: 0 }}
             startDelay={750}
         >
-            <span>oops! 😯</span>
+            <Emoji symbol="😯" label="oops"/>
             <Typist.Delay ms={700} />
             <br />
             <span>Something went wrong</span>

@@ -47,28 +47,21 @@ export class JobTable extends React.Component {
   }
 
   async fetchJobs(){
-    this.setState({jobs:[]});
-    for(let i=0; i<this.state.area_tags.length; i++){
-      let job = await this.fetchJobsByArea(this.state.area_tags[i]);
-      this.setState({jobs:[...this.state.jobs, job]});
-    }
-    for(let i=0; i<this.state.cat_tags.length; i++){
-      let job = await this.fetchJobsByTag(this.state.cat_tags[i]);
-      this.setState({jobs:[...this.state.jobs, job]});
-    }
+    // this.setState({jobs:[]});
+    // for(let i=0; i<this.state.area_tags.length; i++){
+    //   let job = await this.fetchJobsByArea(this.state.area_tags[i]);
+    //   this.setState({jobs:[...this.state.jobs, job]});
+    // }
+    // for(let i=0; i<this.state.cat_tags.length; i++){
+    //   let job = await this.fetchJobsByTag(this.state.cat_tags[i]);
+    //   this.setState({jobs:[...this.state.jobs, job]});
+    // }
+    let job = this.fetchJobsByArea("");
+    this.setState({jobs:job});
     this.setState({isLoaded:true});
   }
 
-  componentDidUpdate(){
-    if(this.state.area_tags!=this.props.area_tag){
-      this.setState({area_tags:this.props.area_tag});
-    }
-    if(this.state.cat_tags!=this.props.cat_tag){
-      this.setState({cat_tags:this.props.cat_tag});
-    }
-    if(!this.state.area_tags || !this.state.cat_tags){
-      return
-    }
+  componentDidMount(){
     this.fetchJobs();
   }
 

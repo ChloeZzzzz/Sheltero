@@ -1,9 +1,7 @@
 /** @jsx jsx */
-import React from "react";
 import { jsx, css } from "@emotion/core";
 import Typist from "react-typist";
 import {Link} from '@material-ui/core';
-import Button from '../components/CustomButtons/Button'
 
 const mainStyles = css`
   display: flex;

@@ -1,6 +1,5 @@
 import React from "react";
-// import "../styles.css";
-import { Box, Link } from "@material-ui/core";
+import { Box} from "@material-ui/core";
 import Copyright from "../../components/Copyright";
 import { useStyles } from "../../components/theme";
 import JobCategories from "./Sections/JobCategories";

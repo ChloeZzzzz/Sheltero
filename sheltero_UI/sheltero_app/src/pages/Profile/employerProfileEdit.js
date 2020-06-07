@@ -9,9 +9,7 @@ import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import Welcome from "react-welcome-page";
-import { updateUserProfile } from "../../api";
 import Nav from "../../components/Nav";
-import ReadFile from "../../components/ReadFile";
 import { theme, SecButton } from "../../components/theme.js";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
@@ -136,8 +134,7 @@ class EmployerEdit extends React.Component {
       })
       .then(response => {
         //handle success
-        console.log(response.data);
-        if (response.data == "user profile updated") {
+        if (response.data === "user profile updated") {
           this.setState({ redirect: "/profileRedirect" });
         } else {
           console.log("?");
@@ -356,7 +353,7 @@ class EmployerEdit extends React.Component {
                       >
                         <img
                           src={imgPreview}
-                          alt="image preview"
+                          alt="Home screen display"
                           className={classes.imgPreview}
                         />
                       </GridItem>

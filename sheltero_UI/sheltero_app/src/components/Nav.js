@@ -1,14 +1,10 @@
-import React, { Component } from "react";
+import React, {Component} from "react"; 
 import { Link, Box, withStyles, Button } from "@material-ui/core";
 import { useStyles } from "./theme";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import axios from "axios";
 import Welcome from "react-welcome-page";
-import { updateUserState } from "../api";
-import { Redirect } from "react-router-dom";
-
-//import Cookies from "js-cookie";
 
 const styles = theme => ({
   root: {
@@ -43,7 +39,7 @@ const styles = theme => ({
 });
 
 export default withStyles(styles)(
-  class Nav extends React.Component {
+  class Nav extends Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -59,10 +55,10 @@ export default withStyles(styles)(
       axios
         .get(url, { withCredentials: true, crossdomain: true })
         .then(response => {
-          if (response.data == "logged out") {
+          if (response.data === "logged out") {
             console.log("change isLogIn state to false");
             this.setState({ loading: false });
-          } else if (response.data == "log out failed") {
+          } else if (response.data === "log out failed") {
             console.log("change isLogIn state to true");
             this.setState({ loading: false });
           } else {
@@ -78,30 +74,20 @@ export default withStyles(styles)(
       window.sessionStorage.setItem("loggedIn", false);
     };
 
-    UNSAFE_componentWillMount() {
-      console.log(window.sessionStorage.getItem("loggedIn"));
+    componentDidMount() {
       if (
-        window.sessionStorage.getItem("loggedIn") == "true" &&
+        window.sessionStorage.getItem("loggedIn") === "true" &&
         !this.state.currentStatus
       ) {
         this.setState({ currentStatus: true });
       }
       if (
-        window.sessionStorage.getItem("loggedIn") == "false" &&
+        window.sessionStorage.getItem("loggedIn") === "false" &&
         this.state.currentStatus
       ) {
         this.setState({ currentStatus: false });
       }
     }
-/*
-    componentDidMount() {
-      if (window.sessionStorage.getItem("loggedIn") == "false") {
-        this.setState({ currentStatus: false });
-      } else if (window.sessionStorage.getItem("loggedIn") == "true") {
-        this.setState({ currentStatus: true });
-      }
-    }
-*/
     render() {
       const { classes } = this.props;
       if (this.state.loading) {

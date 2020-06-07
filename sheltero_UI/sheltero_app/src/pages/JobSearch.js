@@ -93,7 +93,7 @@ export default class Job extends Component {
                     </div>
                     {this.state.showtable?
                         <Container flexGrow={1} >
-                            <JobTable area_tag={this.state.area_tag} cat_tag={this.state.cat_tag}/>
+                            <JobTable/>
                         </Container>
                         : null
                     }
