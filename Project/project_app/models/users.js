@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 //const passportLocalMongoose = require('passport-local-mongoose');
 
 const User = new Schema({
     _id : {
         type: String,
         require: true},
-    role: ['employee', 'employer'],
-    gender: ['Male', 'Female', 'X'],
+    type: ['Employee', 'Employer'],
+    gender: ['m', 'f', 'x'],
     first_name : {
         type: String,
         require: true},
@@ -22,15 +23,38 @@ const User = new Schema({
         require: true},
     contact: {
         type: String,
-        require: true},
+        require: false},
     company_name: {
         type: String,
-        require: true},
+        require: false},
     company_addr: {
         type: String,
-        require: true},
-    resume: {jobs: String},
+        require: false},
+    description: {
+        type: String,
+        require: false},
+    applyingJobId: {
+        type: Array,
+        "default": []},
+    userImg: {
+        type: String,
+        require: false},
+    postedJob: {
+        type: Array,
+        "default": []},
+    approvedJobId: {
+        type: Array,
+        "default": [],
+    },
 });
+
+User.methods.generateHash = function(pass){
+    return bcrypt.hashSync(pass, bcrypt.genSaltSync(10));
+}
+
+User.methods.validatePassword = function(pass){
+    return bcrypt.compareSync(pass, this.password);
+}
 
 
 //User.plugin(passportLocalMongoose);

@@ -1,50 +1,92 @@
-// reference: https://www.youtube.com/watch?v=-RCnNyD0L-s
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const Users = require('../models/users.js');
+const mongoose = require('mongoose');
 
-const initializePassport = (passport) => {
-    // initial set up for using passport
-    const authenticateUser = async (email, password, done) => {
-        const user = await Users.findOne({'email': email}, (err, result) => {
-            console.log("== INSIDE PASSPORT ==")
-            if (err) {
-                console.log("==ERROR==")
-                console.log(err)
+module.exports = (passport)=>{
+    passport.use("cookie-login", new LocalStrategy({
+        usernameField: "email",
+        passwordField: "password",
+        passReqToCallback: true},
+        async (req, email, password, done)=>{
+            let session = req.session;
+            if(session.passport) {
+                console.log("user already logged in");
+                let user = await Users.findById(session.passport.user);
+                return done(null, user, req.flash("loginMessage", "User already logged in"));
             }
-            console.log("==RESULT==")
-            console.log(result)
-        });
-        console.log(user);
-        if (!user) { // invalid email address
-            console.log("Can't find email address")
-            return done(null, false, { message: "Can't find email address"});
-        }
-        try {
-            console.log("===user._id===");
-            console.log(user._id);
-            // valid email address -> check password
-            if (await !bcrypt.compare(password, user.password)) {
-                console.log("Wrong password");
-                return done(null, false, { message: "Wrong password"});
-            } else {
-                console.log("Log in success");
-                return done(null, user);
+            try{
+                await Users.findOne({'email':email}).then((user)=>{
+                    if(!user){
+                        return done(null, false, req.flash("loginMessage", "No user found"));
+                    }
+                    else if(!user.validatePassword(password)){
+                        return done(null, false, req.flash("loginMessage", "Wrong password"));
+                    }
+                    else{
+                        req.session.email = email;
+                        return done(null, user, req.flash("loginMessage", "Successful login"));
+                    }
+                });
             }
-        } catch (e) {
-            return done(e);
+            catch(err){
+                return done(err);
+            }
         }
-        
-    }
+    ));
 
-    passport.use(new LocalStrategy({usernameField : 'email'}, authenticateUser));
+    passport.use("local-signup", new LocalStrategy({
+        usernameField: "email",
+        passwordField: "password",
+        passReqToCallback: true},
+       async  (req, email, password, done)=>{
+            let session = req.session;
+            if (session.passport) {
+               console.log("user already logged in");
+               let user = await Users.findById(session.passport.user);
+               return done(null, user, req.flash("signupMessage", "User already logged in"));
+            }
+            try{
+                await Users.findOne({'email': email}).then((existsuser)=>{
+                    if(existsuser){
+                        return done(null, false, req.flash("signupMessage", "Email already taken"));
+                    }
+                    else{
+                        var user = new Users({
+                            "_id" : new mongoose.Types.ObjectId(),
+                            "gender" : req.body.gender,
+                            "first_name" : req.body.first_name,
+                            "last_name": req.body.last_name,
+                            "contact": req.body.contact,
+                            "company_name": req.body.company_name,
+                            "company_addr": req.body.company_addr,
+                            "type" : req.body.type,
+                            "resume": {job: 'programmer'}
+                        });
+                        user.email = email;
+                        user.password = user.generateHash(password);
+                        user.save((err)=>{
+                            if(err){
+                                return done(null,null);
+                            }
+                            return done(null, user, req.flash("signupMessage", "Signup Success"));
+                        });
+                        req.session.email=email;
+                    }
+                });
+            }
+            catch(err){
+                done(err);
+            }
+        })
+    );
+    
     passport.serializeUser((user, done) => {
-        done(null, user);
+        done(null, user._id);
     });
     passport.deserializeUser(async (_id, done) => {
-        const user = await Users.findById(_id);
-        done(null, user);
+        Users.findById(_id, (err,user) =>{
+            done(null, user);
+        })
     });
 }
-
-module.exports = initializePassport;
