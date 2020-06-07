@@ -79,6 +79,17 @@ export default withStyles(styles) (class Nav extends React.Component  {
     window.sessionStorage.setItem("loggedIn", false);
   }
 
+  UNSAFE_componentWillMount() {
+    console.log(window.sessionStorage.getItem("loggedIn"));
+    if((window.sessionStorage.getItem("loggedIn") == "true") && !this.state.currentStatus) {
+      this.setState({currentStatus: true});
+    }
+    if((window.sessionStorage.getItem("loggedIn") == "false") && this.state.currentStatus) {
+      this.setState({currentStatus: false});
+    }
+  }
+  
+  /*
   componentDidMount(){
     if(window.sessionStorage.getItem("loggedIn") == "false"){
       this.setState({currentStatus:false});
@@ -87,7 +98,7 @@ export default withStyles(styles) (class Nav extends React.Component  {
       this.setState({currentStatus:true});
     }
   }
-
+*/
   render () {
     const { classes } = this.props;
     if (!this.state.currentStatus){
