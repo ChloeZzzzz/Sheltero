@@ -1,6 +1,6 @@
 import React from "react";
 // @material-ui/core components
-import { Link, withStyles } from "@material-ui/core";
+import { withStyles } from "@material-ui/core";
 // core components
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
@@ -215,7 +215,7 @@ class ViewPostedJob extends React.Component {
         />
       );
     } else {
-      if (posted_job.length == 0) {
+      if (posted_job.length === 0) {
         return (
           <Card>
             <CardHeader color="primary" className={classes.containerRow}>

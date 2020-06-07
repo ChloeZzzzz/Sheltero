@@ -83,10 +83,6 @@ const styles = theme => ({
     }
 });
 
-function handleClick(title) {
-    window.sessionStorage.setItem("searchingArea", title);
-}
-
 function JobCategories(props) {
     const { classes } = props;
 

@@ -59,7 +59,7 @@ export class JobTable extends React.Component {
   }
 
   componentDidMount(){
-    if (window.sessionStorage.getItem("searchingArea") == "false") {
+    if (window.sessionStorage.getItem("searchingArea") === "false") {
       this.fetchJobs();
     } else {
       this.fetchJobsByArea(window.sessionStorage.getItem("searchingArea"));

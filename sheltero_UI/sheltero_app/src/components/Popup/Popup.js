@@ -45,6 +45,32 @@ export default withStyles(styles)(
         loading: false,
         applying: false
       };
+<<<<<<< HEAD
+=======
+      this.checkLoginState = this.checkLoginState.bind(this);
+      this.checkUserType = this.checkUserType.bind(this);
+      this.applyJob = this.applyJob.bind(this);
+    }
+
+    checkUserType() {
+      axios
+        .get("https://shelteroinf.herokuapp.com/user", {
+          withCredentials: true
+        })
+        .then(response => {
+          let res = response.data;
+          if (res === "no user session") {
+            console.log("user not logged in!");
+          } else {
+            console.log("user is logged in");
+            console.log(response.data.type[0]);
+            if (res.type[0] === "Employer") {
+                alert('You cannot apply job as a employer type');
+            } 
+          }
+        });
+    }
+>>>>>>> 0024b52b9a2d27341e1eccdd856bca2f49ff294a
 
       this.getUser = this.getUser.bind(this);
       this.applyJob = this.applyJob.bind(this);
@@ -136,6 +162,7 @@ export default withStyles(styles)(
 
     render() {
       const { classes } = this.props;
+<<<<<<< HEAD
       if (this.state.loading) {
         return (
           <Welcome
@@ -148,6 +175,15 @@ export default withStyles(styles)(
                 image: require("../../img/seedling.png")
               }
             ]}
+=======
+      return (
+        <div className={classes.root} flexGrow="1">
+          <img 
+            alt="Job-Image"
+            style={{ height: "45%", width: "100%", display: "block" }}
+            className={classes.imgRaised}
+            src={this.props.img}
+>>>>>>> 0024b52b9a2d27341e1eccdd856bca2f49ff294a
           />
         );
       } else {

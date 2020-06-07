@@ -6,8 +6,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import Copyright from "../../components/Copyright";
-import Job from "../JobSearch";
-
 // import {JobCategories} from "./Sections/JobCategories";
 
 const useStyles = makeStyles(theme => ({
