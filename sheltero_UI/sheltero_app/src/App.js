@@ -21,6 +21,7 @@ import Employee from "./pages/Profile/employeeProfile";
 import EmployerEdit from"./pages/Profile/employerProfileEdit";
 import EmployeeEdit from"./pages/Profile/employeeProfileEdit";
 import Employer from"./pages/Profile/employerProfile";
+
 export default class App extends Component {
   constructor(props){
     super(props);

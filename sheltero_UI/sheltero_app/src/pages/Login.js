@@ -10,7 +10,7 @@ import { Avatar,
          Grid,
          withStyles,
          Container } from '@material-ui/core';
-
+import {updateUserState} from '../api';
 import axios from 'axios';
 import Nav from "../components/Nav";
 
@@ -88,6 +88,7 @@ export default withStyles(styles) (class Login extends React.Component {
         else{
           alert("beep beep boop something went really wrong");
         }
+        updateUserState();
       }).catch((error) => {
         console.log(error)});
         event.preventDefault();

@@ -17,11 +17,20 @@ import Container from "@material-ui/core/Container";
 import Nav from "../../components/Nav";
 import axios from "axios";
 import { theme } from "../../components/theme.js";
+import ViewPostedJob from "./ViewPostedJobs";
 
 
 const avatar= "https://picsum.photos/id/237/400/400";
 const styles = theme => ({
+    paper: {
+        marginTop: theme.spacing(4),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '80vw',
+    },
     containerColumn: {
+        width: "100%",
         marginTop: theme.spacing(3),
         marginBottom: theme.spacing(14),
         display: "flex",
@@ -29,6 +38,7 @@ const styles = theme => ({
         alignItems: "flex-start"
     },
     containerRow: {
+        // width: "100%",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
@@ -63,6 +73,7 @@ const styles = theme => ({
         marginBottom: "0px",
     },
     description: {
+        width: "100%",
         fontFamily: [
             'avenir',
             'roboto',
@@ -106,7 +117,7 @@ class Employer extends React.Component {
                         contact: res.contact,
                         company_name: res.company_name,
                         company_address:res.company_address,
-                        about: res.about,
+                        description: res.description,
                     });
                 }
                 else{
@@ -126,7 +137,7 @@ class Employer extends React.Component {
         
         const { classes } = this.props;
         return (
-            <section className={classes.containerColumn}>
+            <section className={classes.paper}>
                 <div id='container'>
                     <Nav />
                     <Welcome
@@ -147,64 +158,60 @@ class Employer extends React.Component {
                 <br />
                 <br />
                 
-                <Container className={classes.containerColumn}>
+                <Container className={classes.paper}>
                     <GridContainer className={classes.containerColumn} >
-                        <GridItem xs={12} sm={12} md={9} style={{alignSelf:'center'}}>
+                        {/* Personal Profile Card */}
+                        <GridItem xs={12} sm={12} md={8} style={{alignSelf:'center'}}>
                             <Card>
                                 <CardHeader color="primary" className={classes.containerRow} >
-                                    <h4 className={classes.cardTitleWhite}>Employer Name</h4>
+                                    <h4 className={classes.cardTitleWhite}>{this.state.first_name}</h4>
                                     <p className={classes.cardCategoryWhite}>Rating: 4.5/5</p>
                                 </CardHeader>
                                 <CardBody profile className={classes.containerColumn}>
-                                    <CardAvatar profile style={{marginTop: theme.spacing(2)}}>
-                                            <a href="#pablo" onClick={e => e.preventDefault()}>
-                                                <img src={avatar} alt="..." />
-                                            </a>
-                                    </CardAvatar>
-                                    <h4 className={classes.label}>Name</h4>
-                                    <p className={classes.description}>{this.state.first_name} {this.state.last_name}</p>
-                                    <h4 className={classes.label}>Email</h4>
-                                    <p className={classes.description}>{this.state.email}</p>
-                                    <h4 className={classes.label}>Contact</h4>
-                                    <p className={classes.description}>{this.state.contact}</p>
-                                    <h4 className={classes.label}>Company Name</h4>
-                                    <p className={classes.description}>{this.state.company_name}</p>
-                                    <h4 className={classes.label}>Company Address</h4>
-                                    <p className={classes.description}>{this.state.company_address}</p>
-                                    <h4 className={classes.label}>About Me</h4>
-                                    <p className={classes.description}>
-                                        Don{"'"}t be scared of the truth because we need to restart the
-                                        human foundation in truth And I love you like Kanye loves Kanye
-                                        I love Rick Owens’ bed design but the back is...
-                                    </p>
-                                    <Button color="primary" round className={classes.button} href="/employeredit">
-                                        edit my profile
-                                    </Button>
+                                    <GridContainer style={{padding: "0 0 0 10pt"}}>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <CardAvatar profile style={{marginTop: theme.spacing(2)}}>
+                                                <a href="#pablo" onClick={e => e.preventDefault()}>
+                                                    <img src={avatar} alt="..." />
+                                                </a>
+                                            </CardAvatar>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <h4 className={classes.label}>Name</h4>
+                                            <p className={classes.description}>{this.state.first_name} {this.state.last_name}</p>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <h4 className={classes.label}>Email</h4>
+                                            <p className={classes.description}>{this.state.email}</p>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <h4 className={classes.label}>Contact</h4>
+                                            <p className={classes.description}>{this.state.contact}</p>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <h4 className={classes.label}>Company Name</h4>
+                                            <p className={classes.description}>{this.state.company_name}</p>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <h4 className={classes.label}>About Me</h4>
+                                            <p className={classes.description}>
+                                                {this.state.description}
+                                            </p>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <Button color="primary" round className={classes.button} href="/employeredit">
+                                                edit my profile
+                                            </Button>
+                                        </GridItem>
+                                        </GridContainer>
                                 </CardBody>
                             </Card>
                         </GridItem>
                         
-                        {/* <GridItem xs={12} sm={12} md={4}>
-                            <Card profile>
-                                <CardAvatar profile>
-                                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                                        <img src={avatar} alt="..." />
-                                    </a>
-                                </CardAvatar>
-                                <CardBody profile>
-                                    <h6 className={classes.cardCategory}>Credit level：</h6>
-                                    <h4 className={classes.cardTitle}>UserName</h4>
-                                    <p className={classes.description}>
-                                        Don{"'"}t be scared of the truth because we need to restart the
-                                        human foundation in truth And I love you like Kanye loves Kanye
-                                        I love Rick Owens’ bed design but the back is...
-                                    </p>
-                                    <Button color="primary" round>
-                                        update Profile picture
-                                    </Button>
-                                </CardBody>
-                            </Card>
-                        </GridItem> */}
+                        {/* Posted Job Card */}
+                        <GridItem xs={12} sm={12} md={4} style={{alignSelf:'center'}}>
+                            <ViewPostedJob />
+                        </GridItem>
                     </GridContainer>
                 </Container>
             </section>

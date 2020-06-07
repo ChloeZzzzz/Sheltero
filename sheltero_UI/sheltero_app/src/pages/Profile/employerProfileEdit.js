@@ -1,6 +1,6 @@
 import React from "react";
 import TextField from '@material-ui/core/TextField';
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
@@ -12,8 +12,9 @@ import Welcome from 'react-welcome-page';
 import {updateUserProfile} from '../../api';
 import Nav from "../../components/Nav";
 import ReadFile from "../../components/ReadFile";
-import { theme } from "../../components/theme.js";
+import { theme, SecButton } from "../../components/theme.js";
 import axios from 'axios';
+
 
 
 
@@ -63,7 +64,12 @@ const styles = theme => ({
     inputLabel: {
         marginTop: theme.spacing(4),
         color: '#333',
-    }
+    },
+    imgPreview: {
+        width: '100%',
+        height: '100%',
+        alignSelf: 'center',
+    },
 });
 
 
@@ -78,7 +84,9 @@ class EmployerEdit extends React.Component {
             company_name: '',
             company_address: '',
             description: '',
-            redirect: null,
+            userImg: null,
+            imgPreview: 'http://www.sangathipl.com/wp-content/uploads/2016/07/no-image-avaliable.jpg',
+            // redirect: null,
         };
         this.renderProfile = this.renderProfile.bind(this); 
         this.handleChange = this.handleChange.bind(this);
@@ -123,15 +131,9 @@ class EmployerEdit extends React.Component {
           [e.target.name] : e.target.value
         });
     }
-    async handleSubmit(event) {
-        await axios
-            .post('https://shelteroinf.herokuapp.com/user/updateUser', 
-                    {first_name: this.state.first_name,
-                        last_name: this.state.last_name,
-                        contact: this.state.contact,
-                        description: this.state.description}, {withCredentials:true}
-                            // , crossdomain:true}
-                    )
+    handleSubmit(event) {
+        axios
+            .post('https://shelteroinf.herokuapp.com/user/updateUser', this.state, {withCredentials:true, crossdomain:true})
             .then(response => {
                 //handle success
                 console.log(response.data);
@@ -147,12 +149,48 @@ class EmployerEdit extends React.Component {
             event.preventDefault();
       }
 
+
+      fileSelectedHandler = event => {
+        this.setState({
+            userImg: event.target.files[0]
+        })
+        console.log(event.target.files[0]); //log the file information (e.g., name, size...) in the console
+
+        //to set up a image preview before uploading
+        const reader = new FileReader();
+        reader.onload = () => {
+            if(reader.readyState === 2){ //readyState provides the current state of the reading operation, if file upload is complete
+                this.setState({imgPreview: reader.result}) 
+            }
+        }
+        reader.readAsDataURL(event.target.files[0]);
+    }
+    
+    fileUploadHandler = () =>{
+        //construct form data
+        const formData = new FormData();
+        formData.append('image', this.state.userImg.name);
+        axios.post('https://shelteroinf.herokuapp.com/user/updateUser', formData)
+            .then(res => {
+                console.log(res);
+            })
+    }
+
+    fileRemoveHandler = (event) =>{
+        //set handler to remove selected file 
+        this.setState({
+            userImg: event.target.value=null,
+            imgPreview: 'http://www.sangathipl.com/wp-content/uploads/2016/07/no-image-avaliable.jpg',
+        })
+    }
+
     render(){
+        const {imgPreview} = this.state;
         const { classes } = this.props;
-        if (this.state.redirect) {
-            console.log("user profile updated");
-            return <Redirect to={this.state.redirect} />
-        } else {
+        // if (this.state.redirect) {
+        //     console.log("user profile updated");
+        //     return <Redirect to={this.state.redirect} />
+        // } else {
         return (
             <section className={classes.container}>
                 <div id='container'>
@@ -228,7 +266,7 @@ class EmployerEdit extends React.Component {
                                         <GridItem xs={12} sm={12} md={4}>
                                             <h4 className={classes.inputLabel}>Email</h4>
                                             <TextField
-                                                // onChange={this.handleChange}
+                                                onChange={this.handleChange}
                                                 className={classes.textField}
                                                 id="email"
                                                 label="Email Address"
@@ -246,25 +284,13 @@ class EmployerEdit extends React.Component {
                                         <GridItem xs={12} sm={12} md={4}>
                                             <h4 className={classes.inputLabel}>Company Name</h4>
                                             <TextField
-                                                // onChange={this.handleChange}
+                                                onChange={this.handleChange}
                                                 className={classes.textField}
                                                 name="company_name"
                                                 id="company_name"
                                                 label="Company Name"
                                                 value={this.state.company_name}
                                                 fullWidth
-                                                />
-                                        </GridItem>
-                                        <GridItem xs={12} sm={12} md={4}>
-                                            <h4 className={classes.inputLabel}>Company Address</h4>
-                                            <TextField
-                                                // onChange={this.handleChange}
-                                                className={classes.textField}
-                                                id="company_address"
-                                                label="Company Address"
-                                                value={this.state.company_address}
-                                                fullWidth
-                                                name="company_address"
                                                 />
                                         </GridItem>
                                     </GridContainer>
@@ -276,7 +302,7 @@ class EmployerEdit extends React.Component {
                                             <br />
                                             <h4 className={classes.inputLabel}>About me</h4>
                                             <TextField
-                                                // onChange={this.handleChange}
+                                                onChange={this.handleChange}
                                                 className={classes.textField}
                                                 id="about"
                                                 label="Add self description here"
@@ -297,32 +323,42 @@ class EmployerEdit extends React.Component {
                             </Card>
                         </GridItem>
                         <GridItem xs={12} sm={12} md={8}>
-                            {/* <Card profile>
-                                <CardAvatar profile>
-                                    <a href="#pablo" onClick={e => e.preventDefault()}>
-                                        <img src={avatar} alt="..." />
-                                    </a>
-                                </CardAvatar>
-                                <CardBody profile>
-                                    <h6 className={classes.cardCategory}>Credit level：</h6>
-                                    <h4 className={classes.cardTitle}>UserName</h4>
-                                    <p className={classes.description}>
-                                        Don{"'"}t be scared of the truth because we need to restart the
-                                        human foundation in truth And I love you like Kanye loves Kanye
-                                        I love Rick Owens’ bed design but the back is...
-                                    </p>
-                                    <Button color="primary" round>
-                                        update Profile picture
-                                    </Button>
+                            {/* <ReadFile /> */}
+                            <Card>
+                                <CardHeader color="primary" >
+                                    <h4 className={classes.cardTitleWhite}>Edit Profile Image</h4>
+                                    <p className={classes.cardCategoryWhite}>upload new profile image</p>
+                                </CardHeader>
+                                <CardBody className={classes.paper}>
+                                    <GridContainer>
+                                        <GridItem xs={12} sm={12} md={12} className={classes.paper}>
+                                        <img src={imgPreview} alt="image preview" className={classes.imgPreview}/>
+                                        </GridItem>
+                                    </GridContainer>
+                                    <GridContainer>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                        <input type="file" name="file"
+                                                style={{display: 'none'}}
+                                                onChange={this.fileSelectedHandler}
+                                                accept="image/png, image/jpeg"
+                                                ref={fileInput => this.fileInput = fileInput} /> 
+                                                {/* 'ref' provide way to get access to this input button in JSX code, 
+                                                    use function to bind some property of our class to a reference of this input */}
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
+                                            <SecButton onClick={()=>this.fileInput.click()} round>Choose File</SecButton>
+                                            <SecButton onClick={this.fileUploadHandler}>Upload</SecButton>
+                                            <SecButton onClick={this.fileRemoveHandler} round>Remove</SecButton>
+                                        </GridItem>
+                                    </GridContainer>
                                 </CardBody>
-                            </Card> */}
-                            <ReadFile />
+                            </Card>
                         </GridItem>
                     </GridContainer>
                 </form>
             </section>
         )
     }
-}}
+}
 
 export default withStyles(styles) (EmployerEdit)

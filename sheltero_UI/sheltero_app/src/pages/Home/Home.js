@@ -9,6 +9,8 @@ import Nav from "../../components/Nav";
 
 export default function Home() {
   const classes = useStyles();
+  console.log(window.sessionStorage);
+  window.sessionStorage.setItem("navBarRedirect", '');
   return (
     <div >
         <Nav />
