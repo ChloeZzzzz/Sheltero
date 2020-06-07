@@ -83,6 +83,10 @@ const styles = theme => ({
     }
 });
 
+function handleClick(title) {
+    window.sessionStorage.setItem("searchingArea", title);
+}
+
 function JobCategories(props) {
     const { classes } = props;
 
@@ -156,6 +160,9 @@ function JobCategories(props) {
                         className={classes.imageWrapper}
                         style={{
                             width: image.width
+                        }}
+                        onClick = {() => {
+                            window.sessionStorage.setItem("searchingArea", image.title)
                         }}
                     >
                         <div
