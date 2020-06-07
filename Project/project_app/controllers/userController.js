@@ -5,7 +5,6 @@ const Users = require('../models/users.js');
 const mongoose = require('mongoose');
 
 const getUserHomepage = async (req, res) => {
-    console.log(req.user);
     if (req.user) {
         res.json(req.user)
         return res.end();
@@ -91,15 +90,13 @@ const postUpdateUser = async(req, res) => {
 }
 
 const getUpdateUser = async (req, res) => {
-    let session = req.session;
-    if (session.passport) {
+    if (req.user) {
         try {
-            let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+            let user = await Users.findOne({"_id": req.session.passport.user}, (err, result) => {
                 if (err) throw err;
                 console.log(result);
             });
             res.render('user-update.ejs', {useremail: user.email});
-            //res.json(user);
             return res.end();
         } catch(e) {
             console.log(e);
@@ -110,10 +107,9 @@ const getUpdateUser = async (req, res) => {
 }
 
 const getPostedJob = async (req, res) => {
-    let session = req.session;
-    if (session.passport) {
+    if (req.user) {
         try {
-            let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+            let user = await Users.findOne({"_id": req.session.passport.user}, (err, result) => {
                 if (err) throw err;
                 console.log(result);
             });
@@ -143,10 +139,9 @@ const getPostedJob = async (req, res) => {
 }
 
 const getApplyingJob = async (req, res) => {
-    let session = req.session;
-    if (session.passport) {
+    if (req.user) {
         try {
-            let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+            let user = await Users.findOne({"_id": req.session.passport.user}, (err, result) => {
                 if (err) throw err;
                 console.log(result);
             });
@@ -177,8 +172,7 @@ const getApplyingJob = async (req, res) => {
 }
 
 const getApproveApplication = async (req, res) => {
-    let session = req.session;
-    if (session.passport) {
+    if (req.user) {
         // user logged in (only Employer could do this) -> add 
         try {
             let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
@@ -202,8 +196,7 @@ const getApproveApplication = async (req, res) => {
 }
 
 const postApproveApplication = async (req, res) => {
-    let session = req.session;
-    if (session.passport) {
+    if (req.user) {
         // user logged in -> add 
         try {
             let user = await Users.findOne({"_id": req.body.employeeid}, (err, result) => {
@@ -238,11 +231,10 @@ const postApproveApplication = async (req, res) => {
 }
 
 const getJobNotification = async (req, res) => {
-    let session = req.session;
     // if this user is logged in
-    if (session.passport) {
+    if (req.user) {
         try {
-            let user = await Users.findOne({"_id": session.passport.user}, (err, result) => {
+            let user = await Users.findOne({"_id": req.session.passport.user}, (err, result) => {
                 if (err) throw err;
                 console.log(result);
             });
