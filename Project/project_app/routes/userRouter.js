@@ -30,10 +30,8 @@ const upload = multer({
     fileFilter: fileFilter,
 });
 
-//const flash = require('connect-flash');
 const passport = require('passport');
 
-//userRouter.use(flash())
 
 const userController = require('../controllers/userController')
 
@@ -53,10 +51,6 @@ isAuthenticated = (req,res,next)=>{
 // ======== GET request ========
 
 // GET homepage-authorized
-/*
-userRouter.get('/',
-    passport.authenticate("check session", {failureFlash:true},userController.getUserHomepage));
-*/
 //userRouter.get('/', isAuthenticated, userController.getUserHomepage);
 userRouter.get('/', userController.getUserHomepage);
 // GET user signup
