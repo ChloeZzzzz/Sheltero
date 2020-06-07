@@ -4,20 +4,21 @@ import { Redirect } from "react-router-dom";
 class ProfileRedirect extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { userType: "Employer" };
+    this.state = { userType: "" };
     this.getUserInfo = this.getUserInfo.bind(this); 
   }
 
-  getUserInfo() {
+  async getUserInfo() {
     console.log("inside getuser info");
     const url = "https://shelteroinf.herokuapp.com/user";
     try {
-      axios
+      await axios
         .get(url, { withCredentials: true, crossdomain: true })
         .then(response => {
           console.log(response.data);
           if (response.data == "no user session") {
             console.log("user not logged in!");
+            this.setState({userType: ""});
           } else {
             console.log("user is logged in");
             console.log(response.data.type[0]);
@@ -42,10 +43,14 @@ class ProfileRedirect extends React.Component {
 
 
   render() {
+      console.log("===user type===");
+      console.log(this.state.userType);
     if (this.state.userType == "Employer") {
       return <Redirect to={"/employer"} />;
-    } else {
+    } else if (this.state.userType == "Employee") {
       return <Redirect to={"/employee"} />;
+    } else if (this.state.userType == "") {
+      return <Redirect to={"/"} />;
     }
   }
 }

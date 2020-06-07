@@ -77,12 +77,12 @@ export default withStyles(styles) (class Login extends React.Component {
         else if (res[res.length-1] == "Successful login") {
           window.sessionStorage.setItem("loggedIn", true);
           alert('Hi ' + this.state.email + ', you have successfully logged in!');
-          this.setState({redirect:'/employer'})
+          this.setState({redirect:'/profileRedirect'})
         }
         else if (res[res.length-1]=="User already logged in"){
           window.sessionStorage.setItem("loggedIn", true);
           alert('Hi ' + this.state.email + ', you are already logged in');
-          this.setState({redirect:'/employer'})
+          this.setState({redirect:'/profileRedirect'})
         }
         else{
           window.sessionStorage.setItem("loggedIn", false);
