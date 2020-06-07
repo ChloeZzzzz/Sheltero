@@ -2,7 +2,6 @@ import React from 'react';
 import EmployeeSignup from '../components/EmployeeSignup';
 import EmployerSignup from '../components/EmployerSignup';
 import { makeStyles, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, createStyles } from '@material-ui/core';
-import { FullscreenExit } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => createStyles({
   formControl: {
@@ -32,53 +31,49 @@ export default function Register () {
   const classes = useStyles(); /* to implement styles */
   const [value, setValue] = React.useState('');
 
-
   const handleRadioChange = (event) => {
     setValue(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
-        return (
-          <div>
-            <br/>
-          <form className={classes.form}>
-            <FormControl component="fieldset" className={classes.formControl}>
-              <FormLabel component="legend" className={classes.formLabel} >Select Your User Type</FormLabel>
-              <RadioGroup row name="userType" onChange={handleRadioChange} className={classes.container}>
-                <FormControlLabel
-                  className={classes.formControl}
-                  // onChange={this.handleChange}
-                  name="type"
-                  value="Employee"
-                  control={<Radio color="primary" />}
-                  label="Employee"
-                  labelPlacement="end"
-                />
-                <FormControlLabel
-                  className={classes.formControl}
-                  // onChange={this.handleChange}
-                  name="type"
-                  value="Employer"
-                  control={<Radio color="primary" />}
-                  label="Employer"
-                  labelPlacement="end"
-                />
-              </RadioGroup>
-            </FormControl>
-          </form>
-          <div>
-            {(() => {
-            if (value === 'Employer') {
-              return(<EmployerSignup workType="Employer"/>)
-            } else if (value === 'Employee') {
-              return(<EmployeeSignup workType="Employee"/>)
-            } 
-          })()}
-          </div>
-          </div>
-        );
+  return (
+    <div>
+      <br/>
+    <form className={classes.form}>
+      <FormControl component="fieldset" className={classes.formControl}>
+        <FormLabel component="legend" className={classes.formLabel} >Select Your User Type</FormLabel>
+        <RadioGroup row name="userType" onChange={handleRadioChange} className={classes.container}>
+          <FormControlLabel
+            className={classes.formControl}
+            // onChange={this.handleChange}
+            name="type"
+            value="Employee"
+            control={<Radio color="primary" />}
+            label="Employee"
+            labelPlacement="end"
+          />
+          <FormControlLabel
+            className={classes.formControl}
+            // onChange={this.handleChange}
+            name="type"
+            value="Employer"
+            control={<Radio color="primary" />}
+            label="Employer"
+            labelPlacement="end"
+          />
+        </RadioGroup>
+      </FormControl>
+    </form>
+    <div>
+      {(() => {
+      if (value === 'Employer') {
+        return(<EmployerSignup workType="Employer"/>)
+      } else if (value === 'Employee') {
+        return(<EmployeeSignup workType="Employee"/>)
+      } 
+    })()}
+    </div>
+    </div>
+  );
 
   }
 

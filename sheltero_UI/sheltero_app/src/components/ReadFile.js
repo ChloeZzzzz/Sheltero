@@ -1,17 +1,14 @@
 import React, {Component} from 'react';
 import { SecButton } from './theme';
 import axios from 'axios';
-import { withStyles, Button } from '@material-ui/core'; 
+import { withStyles} from '@material-ui/core'; 
 // @material-ui/core components
-import TextField from '@material-ui/core/TextField';
-import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "../components/Grid/GridItem.js";
 import GridContainer from "../components/Grid/GridContainer.js";
 import Card from "../components/Card/Card";
 import CardHeader from "../components/Card/CardHeader.js";
 import CardBody from "../components/Card/CardBody.js";
-import Welcome from 'react-welcome-page';
 import Container from "@material-ui/core/Container";
 
 const styles = theme => ({
@@ -104,7 +101,7 @@ export default withStyles(styles) (class ReadFile extends Component {
                                 <CardBody className={classes.paper}>
                                     <GridContainer>
                                         <GridItem xs={12} sm={12} md={12} className={classes.paper}>
-                                        <img src={imgPreview} alt="image preview" className={classes.imgPreview}/>
+                                        <img src={imgPreview} alt="readme" className={classes.imgPreview}/>
                                         </GridItem>
                                     </GridContainer>
                                     <GridContainer>

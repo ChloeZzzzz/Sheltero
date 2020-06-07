@@ -24,13 +24,24 @@ const mainStyles = css`
   font-size: 3em;
 `;
 
+const Emoji = props => (
+  <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ""}
+      aria-hidden={props.label ? "false" : "true"}
+  >
+      Welcome {props.symbol}
+  </span>
+);
+
 const Welcome = () => (
     <div css={mainStyles}>
         <Typist
             cursor={{ hideWhenDone: true, hideWhenDoneDelay: 0 }}
             startDelay={750}
         >
-            <span>Welcome 😀</span>
+            <Emoji symbol="😀" label="Welcome"/>
             <Typist.Delay ms={500} />
             <br />
             <span>New User!</span>

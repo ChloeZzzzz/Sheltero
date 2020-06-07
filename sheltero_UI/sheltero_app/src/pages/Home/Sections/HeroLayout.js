@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { ArrowDownwardIcon } from "@material-ui/icons";
 
 const styles = theme => ({
     root: {

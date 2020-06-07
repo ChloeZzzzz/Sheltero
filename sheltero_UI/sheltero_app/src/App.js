@@ -1,18 +1,14 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import axios from 'axios';
 import { Header } from "./components/Nav";
 import Nav from "./components/Nav";
-import Hero from "./pages/Home/Sections/Hero";
 import Home from "./pages/Home/Home";
 import ViewArea from "./pages/Home/ViewJobByArea";
 import Login from "./pages/Login";
-import Logout from "./pages/Logout";
 import Register from "./pages/Register";
 import Job from "./pages/JobSearch";
 import "./styles.css";
 import JobPost from "./components/JobPost";
-import Main from "./pages/Error";
 import User from "./pages/Profile/UserProfile";
 import Welcome from "./pages/Welcome";
 //the page of profile page should be shown after the user sign in. I have not done yet.
@@ -29,7 +25,6 @@ export default class App extends Component {
     this.state={
       searchname: 'first_name',
       search_Area: '',
-      searchname: 'email',
     }
     this.search_Area=this.search_Area.bind();
   }

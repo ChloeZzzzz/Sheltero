@@ -1,12 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import { ArrowDownwardIcon } from "@material-ui/icons";
 import HeroLayout from "./HeroLayout";
-import { Box} from "@material-ui/core";
-import Copyright from "../../../components/Copyright";
-import { useStyles, H1, PrimButton} from "../../../components/theme";
-import JobCategories from "./JobCategories";
+import { Box } from "@material-ui/core";
+import { H1 } from "../../../components/theme";
 import classNames from "classnames";
 
 

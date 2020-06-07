@@ -45,11 +45,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default class JobByArea extends Job {
-  constructor(props) {
-    super(props);
-
-  }
-
   render() {
     const classes = useStyles;
     return (

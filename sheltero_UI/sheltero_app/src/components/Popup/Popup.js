@@ -53,27 +53,13 @@ export default withStyles(styles)(
           withCredentials: true
         })
         .then(response => {
-          console.log("pop up");
-          console.log(response.data);
           let res = response.data;
-          /*
-                if(res) {
-                    this.setState({
-                        type: res.type,
-                    });
-                } else if(type == "Employer") {
-                    alert('You cannot apply job as a employer type');
-                } else {
-                    console.log("You have not sign up yet");
-                }
-                */
-          console.log(res);
-          if (res == "no user session") {
+          if (res === "no user session") {
             console.log("user not logged in!");
           } else {
             console.log("user is logged in");
             console.log(response.data.type[0]);
-            if (res.type[0] == "Employer") {
+            if (res.type[0] === "Employer") {
                 alert('You cannot apply job as a employer type');
             } 
           }
@@ -133,9 +119,9 @@ export default withStyles(styles)(
       const { classes } = this.props;
       return (
         <div className={classes.root} flexGrow="1">
-          <img
+          <img 
+            alt="Job-Image"
             style={{ height: "45%", width: "100%", display: "block" }}
-            className={classes.imgRaised}
             className={classes.imgRaised}
             src={this.props.img}
           />

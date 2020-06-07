@@ -46,7 +46,7 @@ export async function updateUserState() {
             .get(url, { withCredentials: true, crossdomain: true })
             .then(response => {
                 console.log(response.data);
-                if (response.data == "no user session") {
+                if (response.data === "no user session") {
                     console.log("change isLogIn state to false");
                     window.sessionStorage.setItem("isLogIn", false);
                 } else {
@@ -91,7 +91,7 @@ export function  getJobsByTag(tag) {
 }
 
 export function  getJobsByArea(area) {
-    let sanitize_area= area.replace(' ', '_').replace('/','').replace(',', '');
+    // let sanitize_area= area.replace(' ', '_').replace('/','').replace(',', '');
     // const endpoint = BASE_URL + `/job-search/byArea/${sanitize_area}`;
     const endpoint = BASE_URL + `/job-search`
 
