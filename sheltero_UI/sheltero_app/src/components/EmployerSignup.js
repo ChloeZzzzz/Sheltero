@@ -1,8 +1,10 @@
 import React from 'react';
+import SignupForm from './SignupForm';
+import { Redirect } from "react-router-dom";
 import CreateIcon from '@material-ui/icons/Create';
 import { PrimButton, H2, TextLink } from './theme';
 import Copyright from './Copyright';
-import {  
+import {
          Avatar,
          CssBaseline,
          TextField,
@@ -22,8 +24,8 @@ const styles = theme => ({
       width: '100%',
     },
     avatar: {
-      marginBottom: theme.spacing(1.5),
-      backgroundColor: '#99C015',
+      marginBottom: theme.spacing(2),
+      backgroundColor: '#99C040',
     },
     box: {
       margin: theme.spacing(8,0,2,0),
@@ -42,40 +44,27 @@ const styles = theme => ({
       display: 'flex',
       alignItems: 'flex-start',
     },
-    
-    })
-  
-  
-  
-  export default withStyles(styles) (class EmployerSignup extends React.Component {
-    /* implement constructor() to bind event handler*/
-    constructor(props) { 
-      super(props);
-      this.state = {employerRegister: 
-                      { fname: '', 
-                        lname: '', 
-                        email: '', 
-                        contactNum: '',
-                        companyName: '',
-                        password: '' }};
+    formControl: {
+      minWidth: 120,
+    },
+  }
+)
 
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-    }
+class EmployerSignup extends SignupForm {
+  constructor(props) {
+    super(props);
+    this.state = {
+      contact: '',
+      company_name: '',
+   }
+ }
 
-    /* getting values from form*/
-    handleChange(event) {
-      this.setState({value: event.target.value});
-    }
-    handleSubmit(event) {
-      alert('Hi' + this.state.fname + ', you have successfully signed up as an employer!');
-      event.preventDefault();
-    }
-    
-    render() {
-        const { classes } = this.props; //receive classes styles
-        const { open, employerRegister: {fname, lname, email, contactNum, companyName, password } } = this.state
-
+ render() {
+   const { classes } = this.props;
+   if (this.state.redirect) {
+    console.log("signup in redirect"+this.state.redirect);
+    return <Redirect to={this.state.redirect} />
+  } else {
     return (
       <Container component="main" maxWidth="xs" >
         <CssBaseline />
@@ -83,49 +72,53 @@ const styles = theme => ({
           <Avatar className={classes.avatar}>
               <CreateIcon />
           </Avatar>
-          <H2 component="h1" variant="h5">
+          <H2>
             Employer Sign Up
           </H2>
-          
-          <form className={classes.form} onSubmit={this.handleSubmit}>
-  
-            
+
+          <form className={classes.form} onSubmit={this.handleSubmit} onChange={this.handleChange}>
+          <div>
+            <p>{this.state.msg}</p>
+          </div>
             <Grid container spacing={2}>
-  
               <Grid item xs={12} sm={6}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
-                  id="fname"
+                  name="first_name"
+                  id="first_name"
                   label="First Name"
-                  value={this.state.fname}
-                  autoComplete="fname"
-                  name="fname"
+                  value={this.state.first_name}
+                  autoComplete="first_name"
                   variant="outlined" //add border to text field
                   required
                   fullWidth
-                />
+                  />
               </Grid>
-  
+
               <Grid item xs={12} sm={6}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
-                  id="lname"
+                  id="last_name"
                   label="Last Name"
-                  value={this.state.lname}
+                  value={this.state.last_name}
                   variant="outlined"
-                  name="lname"
-                  autoComplete="lname"
+                  name="last_name"
+                  autoComplete="last_name"
                   required
                   fullWidth
                 />
               </Grid>
-  
+
               <Grid item xs={12}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
                   id="email"
                   label="Email Address"
                   value={this.state.email}
+                  type="email"
                   variant="outlined"
                   required
                   fullWidth
@@ -136,13 +129,28 @@ const styles = theme => ({
 
               <Grid item xs={12}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
-                  id="contactNum"
+                  id="contact"
                   label="Contact Number"
-                  value={this.state.email}
+                  value={this.state.contact}
                   variant="outlined"
-                  name="contactNum"
-                  autoComplete="contactNum"
+                  name="contact"
+                  autoComplete="contact"
+                  required
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  onChange={this.handleChange}
+                  className={classes.textField}
+                  id="company"
+                  label="Company/Institution Name"
+                  value={this.state.company_name}
+                  name="company_name"
+                  autoComplete="company_name"
+                  variant="outlined"
                   required
                   fullWidth
                 />
@@ -150,20 +158,7 @@ const styles = theme => ({
 
               <Grid item xs={12}>
                 <TextField
-                  className={classes.textField}
-                  id="company"
-                  label="Company/Institution Name"
-                  value={this.state.companyName}
-                  name="companyName"
-                  autoComplete="companyName"
-                  variant="outlined"
-                  required
-                  fullWidth
-                />
-              </Grid>
-  
-              <Grid item xs={12}>
-                <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
                   id="password"
                   label="Create Password"
@@ -175,31 +170,32 @@ const styles = theme => ({
                   fullWidth
                   name="password"
                 />
-                </Grid>
-  
+              </Grid>
+
                 <Grid item xs={12}>
                 <TextField
+                  onChange={this.handleChange}
                   className={classes.textField}
                   variant="outlined"
                   required
                   fullWidth
-                  name="password"
+                  name="confirmpw"
                   label="Confirm Password"
                   type="password"
-                  id="createPassword"
+                  id="confirmpw"
                   autoComplete="current-password"
                 />
               </Grid>
-  
+
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox className={classes.checkbox} value="allowExtraEmails" color="primary"/>}
                   label="I want to receive updates via email."
                 />
               </Grid>
-  
+
             </Grid>
-  
+
             <PrimButton
               type="submit"
               fullWidth
@@ -207,7 +203,7 @@ const styles = theme => ({
               className={classes.submit}>
               Sign Up
             </PrimButton>
-  
+
             <Grid container justify="flex-end">
               <Grid item>
                   <TextLink variant="body2" href="/login">
@@ -215,15 +211,18 @@ const styles = theme => ({
                   </TextLink>
               </Grid>
             </Grid>
-  
+
           </form>
         </div>
-  
+
         <Box mt={5} className={classes.box}>
           <Copyright />
         </Box>
-  
+
       </Container>
-    );
-   }
-})
+    )
+  }
+ }
+}
+
+export default withStyles(styles) (EmployerSignup);

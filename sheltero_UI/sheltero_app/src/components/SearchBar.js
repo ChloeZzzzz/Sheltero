@@ -5,6 +5,7 @@ import NoSsr from '@material-ui/core/NoSsr';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import styled from 'styled-components';
+import {JobTable} from './JobManagement/JobTable'; 
 
 const Label = styled('label')`
   padding: 0 0 4px;
@@ -21,7 +22,6 @@ const InputWrapper = styled('div')`
   display: flex;
   flex-wrap: wrap;
   color: white;
-  
   
   &:hover {
     border-color: #343078;
@@ -41,7 +41,9 @@ const InputWrapper = styled('div')`
     border: 0;
     margin: 0;
     outline: 0;
-    
+    text-align:left;
+    flex-Grow:1;
+    color:grey;
   }
 `;
 
@@ -122,7 +124,7 @@ const Listbox = styled('ul')`
   }
 `;
 
-export default function SearchByCategory() {
+export default function SearchByCategory(props) {
     const {
         getRootProps,
         getInputLabelProps,
@@ -136,11 +138,13 @@ export default function SearchByCategory() {
         setAnchorEl,
     } = useAutocomplete({
         id: 'customized-hook-demo',
-        defaultValue: [Jobcatergries[1]],
         multiple: true,
-        options: Jobcatergries,
+        options:Jobcatergries,
+        defaultValue: [Jobcatergries[1]],
         getOptionLabel: (option) => option.category,
     });
+
+    //JobTable.componentDidMount(value);
 
     return (
         <NoSsr>
@@ -151,7 +155,7 @@ export default function SearchByCategory() {
                     </Label>
                     <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
                         {value.map((option, index) => (
-                            <Tag label={option.category} {...getTagProps({ index })} />
+                            <Tag label={option.category} {...getTagProps({ index })} onClick={props.search_Cat(option.category)} />
                         ))}
 
                         <input {...getInputProps()} />

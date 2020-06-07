@@ -4,6 +4,7 @@ import NoSsr from '@material-ui/core/NoSsr';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import styled from 'styled-components';
+import { getJobs } from "../api";
 
 const Label = styled('label')`
   padding: 0 0 4px;
@@ -40,6 +41,9 @@ const InputWrapper = styled('div')`
     border: 0;
     margin: 0;
     outline: 0;
+    text-align:left;
+    flex-Grow:1;
+    color:grey;
     
   }
 `;
@@ -122,7 +126,9 @@ const Listbox = styled('ul')`
 `;
 
 
-export default function SearchByArea() {
+
+
+export default function SearchByArea(props) {
     const {
         getRootProps,
         getInputLabelProps,
@@ -151,7 +157,7 @@ export default function SearchByArea() {
                     </Label>
                     <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
                         {value.map((option, index) => (
-                            <Tag label={option.name} {...getTagProps({ index })} />
+                            <Tag label={option.name} {...getTagProps({ index })} onClick={props.search_Area(option.name)}/>
                         ))}
 
                         <input {...getInputProps()} />

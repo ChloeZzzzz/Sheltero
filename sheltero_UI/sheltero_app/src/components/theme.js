@@ -1,8 +1,20 @@
-import { styled, createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { styled, createMuiTheme, makeStyles, withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
-
+import {
+    Avatar,
+    CssBaseline,
+    TextField,
+    FormControlLabel,
+    Checkbox,
+    Grid,
+    Box,
+    Container,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,} from '@material-ui/core';
 
 // ***************************CREATE THEME**************************** //
 
@@ -15,7 +27,7 @@ export const theme = createMuiTheme({
             light: '#E8F2D8',
             dark: '#638709',
         },
-        secondary: 
+        secondary:
         {
             main: '#FBDF3D',
         },
@@ -38,11 +50,12 @@ export const theme = createMuiTheme({
 // ***************************EXPORT STYLES FOR CLASSES**************************** //
 
 export const useStyles = makeStyles((theme) => ({
-    
+
     copyright: {
       margin: theme.spacing(20,0,5),
       width: '100%',
     },
+
 
     titlePage: {
       width: '100%',
@@ -56,36 +69,69 @@ export const useStyles = makeStyles((theme) => ({
     header: {
         /* set header space under nav bar */
         height: '8vh',
-    }
+    },
+
+    titleAnimation: {
+      animation: `$titleAnimation 5s 1`
+    },
+
+    '@keyframes titleAnimation': {
+      '0%': {
+        color: "#fff",
+      },
+      '100%': {
+        color: "#002E18",
+      }
+    },
 })
 )
-
 
 
 
 // ***************************STYLED COMPONENTS**************************** //
 
 export const PrimButton = styled(Button)({
-    background: '#99C015',
-    border: 0,
+    background: 'transparent',
+    border: '2px solid',
+    borderColor:'#99C015',
     borderRadius: 3,
-    color: 'white',
+    color: '#99C015',
     height: 48,
     padding: '0 30px',
     fontFamily: [
-        'futura',
-        'serif',
+        'avenir',
+        'roboto',
     ].join(','),
     margin: theme.spacing(2,4,2,4),
+    letterSpacing: 3,
+    fontSize:18,
+    fontWeight: 'bold',
     '&:hover': {
         background: "#638709",
+        color: '#fff',
     },
-    
+});
 
+export const SecButton = styled(Button)({
+    background: '#99C015',
+    border: 0,
+    borderRadius: 5,
+    color: '#fff',
+    height: 30,
+    fontSize: 12,
+    padding: '0 30px',
+    fontFamily: [
+        'avenir',
+        'roboto',
+    ].join(','),
+    margin: theme.spacing(2,2,2,2),
+    '&:hover': {
+        background: "#638709",
+        color: "#fff",
+    },
 });
 
 export const H1 = styled(Typography)({
-    color: "002E18",
     fontFamily: [
         'futura',
         'serif',
@@ -103,6 +149,7 @@ export const H2 = styled(Typography)({
         'serif',
     ].join(','),
     fontSize: 28,
+    fontWeight: 'bold',
     letterSpacing: 3,
 })
 
@@ -125,3 +172,20 @@ export const TextLink = styled(Link)({
     letterSpacing: 0,
 })
 
+// ***************************CLASS STYLE COMPONENTS**************************** //
+// export const Paper = withStyles({
+//     root: {
+//       marginTop: theme.spacing(4),
+//       display: 'flex',
+//       flexDirection: 'column',
+//       alignItems: 'center',
+//       width: '100%',
+//     },
+// })(Container)
+// export const StyledSelect = withStyles({
+//     root: {
+//         display: 'flex',
+//         alignItems: 'flex-start',
+//     }
+// }
+// )
