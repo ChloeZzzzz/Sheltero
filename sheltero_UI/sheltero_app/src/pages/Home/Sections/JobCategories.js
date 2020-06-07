@@ -91,54 +91,63 @@ function JobCategories(props) {
             url:
                 "https://images.unsplash.com/photo-1514395462725-fb4566210144?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80",
             title: "Melbourne - CBD",
+            value: "CBD",
             width: "40%"
         },
         {
             url:
                 "https://images.unsplash.com/photo-1531299204812-e6d44d9a185c?auto=format&fit=crop&w=400&q=80",
             title: "St Kilda",
+            value: "st_kilda",
             width: "20%"
         },
         {
             url:
                 "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=400&q=80",
             title: "North Melbourne",
+            value: "north_melbourne",
             width: "40%"
         },
         {
             url:
                 "https://images.unsplash.com/photo-1472208263336-2d058997c9eb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
             title: "Docklands",
+            value: "docklands",
             width: "38%"
         },
         {
             url:
                 "https://images.unsplash.com/photo-1523309996740-d5315f9cc28b?auto=format&fit=crop&w=400&q=80",
             title: "East Melbourne",
+            value: "east_melbourne",
             width: "38%"
         },
         {
             url:
                 "https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?auto=format&fit=crop&w=400&q=80",
             title: "Carlton",
+            value: "carlton",
             width: "24%"
         },
         {
             url:
                 "https://images.unsplash.com/photo-1506941433945-99a2aa4bd50a?auto=format&fit=crop&w=400&q=80",
             title: "Parkville",
+            value: "parkville",
             width: "40%"
         },
         {
             url:
                 "https://images.unsplash.com/photo-1533727937480-da3a97967e95?auto=format&fit=crop&w=400&q=80",
             title: "Southbank",
+            value: "southbank",
             width: "20%"
         },
         {
             url:
                 "https://images.unsplash.com/photo-1518136247453-74e7b5265980?auto=format&fit=crop&w=400&q=80",
             title: "South Yarra",
+            value: "south_yarra",
             width: "40%"
         }
     ];
@@ -158,7 +167,7 @@ function JobCategories(props) {
                             width: image.width
                         }}
                         onClick = {() => {
-                            window.sessionStorage.setItem("searchingArea", image.title)
+                            window.sessionStorage.setItem("searchingArea", image.value)
                         }}
                     >
                         <div

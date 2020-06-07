@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getJobsByTag , getJobsByArea} from "../../api";
+import { getJobsByTag , getJobsByArea, getAllJobs} from "../../api";
 import { Column, Row } from 'styled-grid-system-component';
 import Popup from '../Popup/Popup';
 
@@ -42,18 +42,24 @@ export class JobTable extends React.Component {
   }
 
   async fetchJobsByArea(area){
-    const data = await getJobsByArea(area);
-    return data
+    let job = await getJobsByArea(area);
+    this.setState({jobs:job});
+    this.setState({isLoaded:true});
   }
 
   async fetchJobs(){
-    let job = await this.fetchJobsByArea("");
+    let job = await getAllJobs();
     this.setState({jobs:job});
     this.setState({isLoaded:true});
   }
 
   componentDidMount(){
-    this.fetchJobs();
+    if (window.sessionStorage.getItem("searchingArea") == "false") {
+      this.fetchJobs();
+    } else {
+      this.fetchJobsByArea(window.sessionStorage.getItem("searchingArea"));
+    }
+
   }
 
   updateInfo(info){

@@ -6,8 +6,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box } from "@material-ui/core";
 import Copyright from "../../components/Copyright";
-import Job from "../JobSearch";
-
 // import {JobCategories} from "./Sections/JobCategories";
 
 const useStyles = makeStyles(theme => ({
@@ -44,31 +42,22 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default class JobByArea extends Job {
-  render() {
-    const classes = useStyles;
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <Container>
-          <br />
-          <H2>{window.sessionStorage.getItem("searchingArea")}</H2>
-          <JobTable />
-        </Container>
-        <main>
-          {this.state.showtable ? (
-            <Container flexGrow={1}>
-              <JobTable
-                area_tag={window.sessionStorage.getItem("searchingArea")}
-              />
-            </Container>
-          ) : null}
-        </main>
+function ViewArea() {
+  const classes = useStyles;
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Container>
+        <br />
+        <H2>{window.sessionStorage.getItem("searchingArea")}</H2>
+        <JobTable />
+      </Container>
 
-        <Box mt={5} className={classes.box}>
-          <Copyright />
-        </Box>
-      </React.Fragment>
-    );
-  }
+      <Box mt={5} className={classes.box}>
+        <Copyright />
+      </Box>
+    </React.Fragment>
+  );
 }
+
+export default ViewArea;

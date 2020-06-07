@@ -63,13 +63,19 @@ export async function updateUserState() {
     }
 }
 
-export function getJobs() {
+export function getAllJobs() {
     const endpoint = BASE_URL + `/job-search`;
     console.log("getJobs");
     try{
-        return axios.get(endpoint).then(res => res.data);
+        return axios.get(endpoint).then(res => {
+            if(!res.data){
+                return null
+            }
+            return res.data;
+        });
     } catch (e) {
         return e;
+
     }
 
 }
@@ -93,7 +99,8 @@ export function  getJobsByTag(tag) {
 export function  getJobsByArea(area) {
     // let sanitize_area= area.replace(' ', '_').replace('/','').replace(',', '');
     // const endpoint = BASE_URL + `/job-search/byArea/${sanitize_area}`;
-    const endpoint = BASE_URL + `/job-search`
+    const endpoint = BASE_URL + `/job-search/byArea/` + area;
+    console.log(endpoint);
 
     try{
         return axios.get(endpoint).then(res => {
