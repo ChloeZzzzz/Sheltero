@@ -1,0 +1,55 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "keywords": [
+    "react",
+    "starter"
+  ],
+  "main": "src/index.js",
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@material-ui/core": "^4.9.14",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.53",
+    "antd": "^4.2.2",
+    "axios": "^0.19.2",
+    "bootstrap": "^3.4.1",
+    "classnames": "^2.2.6",
+    "clsx": "^1.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "8.2.0",
+    "history": "^4.10.1",
+    "js-cookie": "^2.2.1",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-router-dom": "5.1.2",
+    "react-scripts": "^3.4.1",
+    "react-typist": "^2.0.5",
+    "react-welcome-page": "^0.2.1",
+    "store": "^2.0.12",
+    "styled-button-component": "^4.0.0",
+    "styled-card-component": "^4.0.0",
+    "styled-components": "^5.1.0",
+    "styled-grid-system-component": "^4.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^7.1.2",
+    "sinon": "^9.0.2",
+    "supertest": "^4.0.2",
+    "typescript": "3.8.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "proxy": "https://5ebe69c3ec800c00160438fc.mockapi.io/"
+}

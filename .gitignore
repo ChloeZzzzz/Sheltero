@@ -1,3 +1,6 @@
 Project/project_app/node_modules
 sheltero_UI
 node_modules
+Project
+sheltero_UI/sheltero_app/node_modules
+sheltero_UI/sheltero_app/src/.DS_Store
