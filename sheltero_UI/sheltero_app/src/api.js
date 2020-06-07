@@ -79,10 +79,13 @@ export function  getJob(_id) {
 export function  getJobsByTag(tag) {
     let sanitize_tag= tag.replace(' ', '_').replace('/','').replace(',', '');
     const endpoint = BASE_URL + `/job-search/byTag/${sanitize_tag}`;
-    console.log(endpoint);
 
     try{
-        return axios.get(endpoint).then(res => res.data).catch((e)=>{});
+        return axios.get(endpoint).then(res => {
+            if(!res.data){
+                return null
+            }
+            return res.data});
     } catch (e) {
         return e;
 
@@ -95,7 +98,11 @@ export function  getJobsByArea(area) {
     console.log(endpoint);
 
     try{
-        return axios.get(endpoint).then(res => res.data).catch((e)=>{});
+        return axios.get(endpoint).then(res => {
+            if(!res.data){
+                return null
+            }
+            return res.data});
     } catch (e) {
         return e;
 

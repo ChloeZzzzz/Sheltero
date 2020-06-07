@@ -56,13 +56,17 @@ export default class Job extends Component {
     }
     search_Area(info){
         if(this.state.area_tag.indexOf(info)<0){
+            this.setState({showtable:false})
             this.setState({area_tag:[...this.state.area_tag, info]});
+            this.setState({showtable:true});
         }
     }
 
     search_Cat(info){
         if(this.state.cat_tag.indexOf(info)<0){
+            this.setState({showtable:false})
             this.setState({cat_tag:[...this.state.cat_tag, info]});
+            this.setState({showtable:true});
         }
     }
 
@@ -85,9 +89,13 @@ export default class Job extends Component {
                             </Grid>
                         </Grid>
                     </div>
-                    <Container flexGrow={1} >
-                        <JobTable area_tag={this.state.area_tag} cat_tag={this.state.cat_tag}/>
-                    </Container>
+                    {this.state.showtable?
+                        <Container flexGrow={1} >
+                            <JobTable area_tag={this.state.area_tag} cat_tag={this.state.cat_tag}/>
+                        </Container>
+                        : null
+                    }
+                    
                 </main>
     
                 <Box mt={5} className={classes.box}>
