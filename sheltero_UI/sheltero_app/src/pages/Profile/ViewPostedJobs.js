@@ -104,8 +104,10 @@ class ViewPostedJob extends React.Component {
           this.state.posted_job[i][0].jobTitle,
           this.state.posted_job[i][0].jobTag,
           this.state.posted_job[i][0].salary,
-          this.state.posted_job[i][0]._id
+          this.state.posted_job[i][0]._id,
         ]);
+        console.log("===getjobsliced===")
+        console.log(this.state.posted_job[i][0]._id);
       }
     }
     console.log(arr);
@@ -124,7 +126,6 @@ class ViewPostedJob extends React.Component {
           this.setState({
             posted_job: res,
             loading: false,
-            needRerender: false,
           });
           this.getJobSliced();
         } else {
@@ -149,7 +150,7 @@ class ViewPostedJob extends React.Component {
               <p>Job Tag: {this.state.slicedJobs[i][1]}</p>
               <p>Salary: {this.state.slicedJobs[i][2]}</p>
             </li>
-            <Button className={this.props.button} onClick={this.handleDeleteClick.bind(this.state.slicedJobs[i][3])}>Delete Job</Button>
+            <Button className={this.props.button} onClick={this.handleDeleteClick.bind(this, this.state.slicedJobs[i][3])}>Delete Job</Button>
           </h4>
           <br />
         </div>
@@ -158,17 +159,14 @@ class ViewPostedJob extends React.Component {
     return jobsToRender;
   };
 
-  componentDidMount() {
-    this.getPostedJob();
-  }
-
   deleteJob(id) {
+      this.setState({loading: true});
       const url = "https://shelteroinf.herokuapp.com/job-search/job-deleting/";
       console.log("job id to delte");
       console.log(id);
       if (id) {
         axios
-        .delete(url + id)
+        .delete(url + id, {withCredentials: true})
         .then(res => {
             console.log("delteing...")
             console.log(res);
@@ -183,7 +181,7 @@ class ViewPostedJob extends React.Component {
                 res.data._id
               ])
             */
-           this.setState({needRerender: true});
+           this.setState({loading: false});
           } else {
             console.log(res);
           }
@@ -195,6 +193,12 @@ class ViewPostedJob extends React.Component {
           console.log("has to input job id to delete!");
       }
   }
+
+
+  componentDidMount() {
+    this.getPostedJob();
+  }
+
 
   handleDeleteClick(id) {
     this.deleteJob(id);

@@ -51,7 +51,7 @@ const styles = theme => ({
 
 export default withStyles(styles) (class ReadFile extends Component {
     state = {
-        userImg: null,
+        userImg: "",
         imgPreview: 'http://www.sangathipl.com/wp-content/uploads/2016/07/no-image-avaliable.jpg',
     }
     fileSelectedHandler = event => {
