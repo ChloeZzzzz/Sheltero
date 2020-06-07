@@ -100,7 +100,8 @@ class ViewAppliedJob extends React.Component {
         arr.push([
           this.state.applied_job[i][0].jobTitle,
           this.state.applied_job[i][0].jobTag,
-          this.state.applied_job[i][0].salary
+          this.state.applied_job[i][0].salary,
+          this.state.applied_job[i][0]._id,
         ]);
       }
     }
