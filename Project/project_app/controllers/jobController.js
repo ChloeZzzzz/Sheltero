@@ -201,6 +201,8 @@ const postApplyJob = async (req, res) => {
 
 //the delete method is not yet tested and finished
 const deleteJob = async (req, res) => {
+    console.log("==delete job by id ==")
+    console.log(req.params._id);
     try {
         var job = await job_data.findByIdAndRemove({"_id": req.params._id}, function (err, result) {
             if (err) throw err;
@@ -212,6 +214,7 @@ const deleteJob = async (req, res) => {
                     console.log(result);
                 });
         }
+        console.log(job);
         res.json(job);
         return res.end();
     } catch (e) {
