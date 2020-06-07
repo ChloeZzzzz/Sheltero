@@ -212,7 +212,7 @@ const deleteJob = async (req, res) => {
                     console.log(result);
                 });
         }
-        res.json("job deleted");
+        res.json(job);
         return res.end();
     } catch (e) {
         res.json("something went wrong");
