@@ -56,7 +56,7 @@ export default withStyles(styles) (class Nav extends React.Component  {
     this.state = {
       currentStatus: false,
     }
-    this.handleLogout = this.handleLogout.bind();
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleLogout = async ()=>{
@@ -72,46 +72,35 @@ export default withStyles(styles) (class Nav extends React.Component  {
               console.log("something wrong happended");
             }
             console.log("log out");
-            updateUserState();
-            //this.setState({redirect: '/'});
-            window.sessionStorage.setItem("navBarRedirect", "/");
+            
           }).catch((error) => {
             console.log(error)});
+    this.setState({currentStatus:false});
+    window.sessionStorage.setItem("loggedIn", false);
   }
 
+  UNSAFE_componentWillMount() {
+    console.log(window.sessionStorage.getItem("loggedIn"));
+    if((window.sessionStorage.getItem("loggedIn") == "true") && !this.state.currentStatus) {
+      this.setState({currentStatus: true});
+    }
+    if((window.sessionStorage.getItem("loggedIn") == "false") && this.state.currentStatus) {
+      this.setState({currentStatus: false});
+    }
+  }
+  
+  /*
   componentDidMount(){
-    if(window.sessionStorage.getItem("isLogIn") == "false"){
+    if(window.sessionStorage.getItem("loggedIn") == "false"){
       this.setState({currentStatus:false});
     }
-    else if (window.sessionStorage.getItem("isLogIn") == "true") {
+    else if (window.sessionStorage.getItem("loggedIn") == "true") {
       this.setState({currentStatus:true});
     }
-    console.log(this.state.currentStatus);
   }
-
+*/
   render () {
     const { classes } = this.props;
-    console.log("window.sessionStorage redirect");
-    console.log(window.sessionStorage);
-    if (window.sessionStorage.getItem("navBarRedirect") == '/') {
-      console.log("nav bar redirect"+window.sessionStorage.getItem("navBarRedirect"));
-      return (
-        <div className={classes.root}>
-          <AppBar className={classes.navBar}>
-            <Toolbar>
-              <Link className={classes.logo} href="/">
-                Sheltero.
-              </Link>
-              <Button className={classes.menuButton} href="/job">Job search</Button>
-              <Button className={classes.menuButton} href="/about">Work with us</Button>
-              <Button className={classes.menuButton} href="/login">Login</Button>
-              <Button className={classes.menuButton} href="/signup">Sign up</Button>
-            </Toolbar>
-          </AppBar>
-        <Redirect to={window.sessionStorage.getItem("navBarRedirect")} />
-        </div>
-        )
-    } else {
     if (!this.state.currentStatus){
       return(
         <div className={classes.root}>
@@ -139,13 +128,12 @@ export default withStyles(styles) (class Nav extends React.Component  {
               <Button className={classes.menuButton} href="/job">Job search</Button>
               <Button className={classes.menuButton} href="/about">Work with us</Button>
               <Button className={classes.menuButton} href="/employer">My Account</Button>
-              <Button className={classes.menuButton} onClick={this.handleLogout}>Log Out</Button>
+              <Button className={classes.menuButton} href="/" onClick={this.handleLogout}>Log Out</Button>
             </Toolbar>
           </AppBar>
         </div>
       )
     }}
-    };
 })
 
 export function Header () {

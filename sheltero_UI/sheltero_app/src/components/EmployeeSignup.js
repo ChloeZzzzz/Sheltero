@@ -57,6 +57,7 @@ class EmployeeSignup extends SignupForm {
   constructor(props) {
     super(props);
     this.state = {
+      type: 'Employee',
       gender: '',
     }
   }

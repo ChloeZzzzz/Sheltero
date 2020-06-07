@@ -106,5 +106,4 @@ export default class Job extends Component {
             </React.Fragment>
         );
     }
-
 }
