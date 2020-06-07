@@ -16,6 +16,7 @@ export class JobTable extends React.Component {
       jobs: [],
       showPopup:false,
       values: {
+        _id:"",
         jobTitle:"",
         salary:"",
         creditLevel:"",
@@ -48,7 +49,11 @@ export class JobTable extends React.Component {
   }
 
   async fetchJobs(){
+    console.log("+==jobs)");
     let job = await getAllJobs();
+    console.log(job);
+    console.log("==== job _id ===");
+    console.log(this.state.values._id);
     this.setState({jobs:job});
     this.setState({isLoaded:true});
   }
@@ -65,6 +70,7 @@ export class JobTable extends React.Component {
   updateInfo(info){
     this.setState({
       values:{
+        _id:info._id,
         jobTitle:info.jobTitle,
         salary:info.salary,
         creditLevel:info.creditLevel,

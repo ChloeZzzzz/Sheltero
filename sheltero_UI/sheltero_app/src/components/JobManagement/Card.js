@@ -17,6 +17,7 @@ export default class CardSaint extends React.Component{
 
     updateInfo(){
         let values = {
+            _id:this.props.value._id,
             jobTitle:this.props.value.jobTitle,
             salary:this.props.value.salary,
             creditLevel:this.props.value.creditLevel,

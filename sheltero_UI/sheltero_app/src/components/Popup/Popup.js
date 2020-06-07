@@ -6,6 +6,7 @@ import Card from "../Card/Card";
 import Button from "../CustomButtons/Button.js";
 import CardBody from "../Card/CardBody";
 import axios from "axios";
+import Welcome from "react-welcome-page";
 const styles = theme => ({
   root: {
     // marginTop: theme.spacing(8) ,
@@ -40,82 +41,37 @@ export default withStyles(styles)(
       this.state = {
         type: "",
         login_state: "",
-        redirect: ""
+        redirect: "",
+        loading: false,
+        applying: false
       };
-      this.checkLoginState = this.checkLoginState.bind(this);
-      this.checkUserType = this.checkUserType.bind(this);
+
+      this.getUser = this.getUser.bind(this);
       this.applyJob = this.applyJob.bind(this);
     }
 
-    checkUserType() {
-      axios
-        .get("https://shelteroinf.herokuapp.com/user", {
-          withCredentials: true
-        })
-        .then(response => {
-          console.log("pop up");
-          console.log(response.data);
-          let res = response.data;
-          /*
-                if(res) {
-                    this.setState({
-                        type: res.type,
-                    });
-                } else if(type == "Employer") {
-                    alert('You cannot apply job as a employer type');
-                } else {
-                    console.log("You have not sign up yet");
-                }
-                */
-          console.log(res);
-          if (res == "no user session") {
-            console.log("user not logged in!");
-          } else {
-            console.log("user is logged in");
-            console.log(response.data.type[0]);
-            if (res.type[0] == "Employer") {
-                alert('You cannot apply job as a employer type');
-            } 
-          }
-        });
-    }
-
-    checkLoginState() {
-      axios
-        .get("https://shelteroinf.herokuapp.com/user/postedJob", {
-          withCredentials: true
-        })
-        .then(response => {
-          let res = response.data;
-          if (res.loginMessage !== "Successful login") {
-            alert("You have not login yet!");
-            this.setState({
-              redirect: "/login"
-            });
-          } else {
-            alert("You have successfully applied a job");
-            this.setState({
-              redirect: "/job"
-            });
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
-      //event.preventDefault();
-    }
-
     applyJob() {
+      this.setState({ loading: true });
+      console.log("applying..?");
+      console.log(this.props._id);
       axios
         .post(
-          "https://shelteroinf.herokuapp.com/user/applyingJob",
-          this.state,
+          "https://shelteroinf.herokuapp.com/job-search/apply-job",
+          { id: this.props._id },
           { withCredentials: true, crossdomain: true }
         )
         .then(response => {
           //handle success
-          console.log(response);
-          this.setState({ redirect: "/job" });
+          if (response.data) {
+            alert(
+              "Hi " +
+                response.data.email +
+                " you have successfully applied for this job!"
+            );
+          } else {
+            console.log("failed to apply");
+          }
+          this.setState({ applying: false, loading: false});
         })
         .catch(error => {
           console.log(error);
@@ -123,48 +79,121 @@ export default withStyles(styles)(
       //event.preventDefault();
     }
 
+    getUser() {
+      this.setState({ loading: true }); //start loading
+      const url = "https://shelteroinf.herokuapp.com/user";
+      try {
+        axios
+          .get(url, { withCredentials: true, crossdomain: true })
+          .then(response => {
+            console.log(response.data);
+            if (response.data == "no user session") {
+              console.log("change isLogIn state to false");
+              this.setState({ login_state: false, loading: false });
+            } else {
+              console.log("change isLogIn state to true");
+              console.log(response.data);
+              this.setState({
+                type: response.data.type,
+                login_state: true,
+                loading: false
+              });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
     handleApply() {
-      this.checkLoginState();
-      this.checkUserType();
+      this.setState({ applying: true });
+      this.getUser();
       this.applyJob();
+    }
+
+    componentDidMount() {
+      if (
+        this.state.applying &&
+        this.state.type == "Employee" &&
+        !this.state.loading
+      ) {
+        this.applyJob();
+      } else if (
+        this.state.applying &&
+        this.state.type == "Employer" &&
+        !this.state.loading
+      ) {
+        console.log("employer can't apply for job");
+        alert("You are an employer! can't apply for job");
+        this.setState({ applying: false });
+      } else {
+        console.log("loading...");
+      }
     }
 
     render() {
       const { classes } = this.props;
-      return (
-        <div className={classes.root} flexGrow="1">
-          <img
-            style={{ height: "45%", width: "100%", display: "block" }}
-            className={classes.imgRaised}
-            className={classes.imgRaised}
-            src={this.props.img}
+      if (this.state.loading) {
+        return (
+          <Welcome
+            loopDuration={1000}
+            data={[
+              {
+                backgroundColor: "#638709",
+                textColor: "#FFFFFF",
+                text: "Welcome to Sheltero!",
+                image: require("../../img/seedling.png")
+              }
+            ]}
           />
-          <GridContainer
-            className={classes.container}
-            style={{ paddingTop: "10pt", paddingRight: "20pt" }}
-          >
-            <GridItem xs={6} sm={6} md={6} align="center">
-              <h1>{this.props.Title}</h1>
-              <Button color="primary" onClick={this.props.closePopup}>
-                close
-              </Button>
-              <Button color="rose">apply</Button>
-            </GridItem>
-            <GridItem xs={6} sm={6} md={6}>
-              <Card>
-                <CardBody>
-                  <h3>{this.props.salary}</h3>
-                  <h3>{this.props.credit_level}</h3>
-                  <h3>{this.props.jobTag}</h3>
-                  <h3>{this.props.contact}</h3>
-                  <h3>{this.props.jobArea}</h3>
-                  <p>{this.props.jobDetails}</p>
-                </CardBody>
-              </Card>
-            </GridItem>
-          </GridContainer>
-        </div>
-      );
+        );
+      } else {
+        return (
+          <div className={classes.root} flexGrow="1">
+            <img
+              style={{ height: "45%", width: "100%", display: "block" }}
+              className={classes.imgRaised}
+              className={classes.imgRaised}
+              src={this.props.img}
+            />
+            <GridContainer
+              className={classes.container}
+              style={{ paddingTop: "10pt", paddingRight: "20pt" }}
+            >
+              <GridItem xs={6} sm={6} md={6} align="center">
+                <h1>{this.props.Title}</h1>
+                <Button color="primary" onClick={this.props.closePopup}>
+                  back
+                </Button>
+                <Button
+                  color="rose"
+                  onClick={() => {
+                    this.handleApply();
+                  }}
+                >
+                  apply
+                </Button>
+              </GridItem>
+              <GridItem xs={6} sm={6} md={6}>
+                <Card>
+                  <CardBody>
+                    <h3>{this.props._id}</h3>
+                    <h3>{this.props.salary}</h3>
+                    <h3>{this.props.credit_level}</h3>
+                    <h3>{this.props.jobTag}</h3>
+                    <h3>{this.props.contact}</h3>
+                    <h3>{this.props.jobArea}</h3>
+                    <p>{this.props.jobDetails}</p>
+                  </CardBody>
+                </Card>
+              </GridItem>
+            </GridContainer>
+          </div>
+        );
+      }
     }
   }
 );
