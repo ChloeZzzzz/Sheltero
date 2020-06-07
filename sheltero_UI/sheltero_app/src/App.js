@@ -21,6 +21,7 @@ import Employee from "./pages/Profile/employeeProfile";
 import EmployerEdit from"./pages/Profile/employerProfileEdit";
 import EmployeeEdit from"./pages/Profile/employeeProfileEdit";
 import Employer from"./pages/Profile/employerProfile";
+import ProfileRedirect from"./pages/Profile/profileRedirect";
 
 export default class App extends Component {
   constructor(props){
@@ -66,6 +67,7 @@ export default class App extends Component {
             <Route exact path="/employeeedit" render={props => <EmployeeEdit {...props} />} />
             <Route exact path="/about" render={props => <About {...props} />} />
             <Route exact path="/viewarea" render={props => <ViewArea {...props} />} />
+            <Route exact path="/profileRedirect" render={props => <ProfileRedirect {...props} />} />
           </Switch>
       </div>
     </Router>
