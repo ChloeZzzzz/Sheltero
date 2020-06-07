@@ -56,7 +56,7 @@ export class JobTable extends React.Component {
     //   let job = await this.fetchJobsByTag(this.state.cat_tags[i]);
     //   this.setState({jobs:[...this.state.jobs, job]});
     // }
-    let job = this.fetchJobsByArea("");
+    let job = await this.fetchJobsByArea("");
     this.setState({jobs:job});
     this.setState({isLoaded:true});
   }

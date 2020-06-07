@@ -81,11 +81,9 @@ export function  getJobsByTag(tag) {
 }
 
 export function  getJobsByArea(area) {
-    console.log("AREA!")
-    console.log(area);
     let sanitize_area= area.replace(' ', '_').replace('/','').replace(',', '');
-    const endpoint = BASE_URL + `/job-search/byArea/${sanitize_area}`;
-    console.log(endpoint);
+    // const endpoint = BASE_URL + `/job-search/byArea/${sanitize_area}`;
+    const endpoint = BASE_URL + `/job-search`
 
     try{
         return axios.get(endpoint).then(res => {
