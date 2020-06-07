@@ -10,9 +10,7 @@ import { Avatar,
          Grid,
          withStyles,
          Container } from '@material-ui/core';
-import {updateUserState} from '../api';
 import axios from 'axios';
-import Nav from "../components/Nav";
 
 
 const styles = theme => ({

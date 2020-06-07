@@ -128,7 +128,7 @@ class EmployerEdit extends React.Component {
             .then(response => {
                 //handle success
                 console.log(response.data);
-                this.setState({redirect:"/employee"});
+                this.setState({redirect:"'/profileRedirect'"});
             })
             .catch(error => {
                 console.log(error);
