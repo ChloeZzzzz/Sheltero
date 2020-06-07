@@ -63,6 +63,31 @@ export async function updateUserProfile(data) {
   return response.json();
 }
 
+export async function getUserInfo() {
+    console.log("inside getuser info");
+    const url = "https://shelteroinf.herokuapp.com/user";
+    try {
+      axios
+        .get(url, { withCredentials: true, crossdomain: true })
+        .then(response => {
+          console.log(response.data);
+          if (response.data == "no user session") {
+            console.log("user not logged in!");
+            return response.data;
+          } else {
+            console.log("user is logged in");
+            console.log(response.data);
+            return response.data;
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
 /**
  * Retrieves the list of authors from API
  * @return List of Objects, each containing author data.
