@@ -14,6 +14,7 @@ import Container from "@material-ui/core/Container";
 import axios from 'axios';
 import { theme } from "../../components/theme.js";
 import ViewAppliedJob from "./ViewAppliedJob";
+import ViewIncomingJobs from "./ViewIncomingJobs";
 const avatar= "https://picsum.photos/id/237/400/400";
 
 
@@ -145,16 +146,16 @@ class Employee extends React.Component {
                                             <p className={classes.description}>{this.state.first_name} {this.state.last_name}</p>
                                         </GridItem>
                                         <GridItem xs={12} sm={12} md={12}>
+                                            <h4 className={classes.label}>Gender</h4>
+                                            <p className={classes.description}>{this.state.gender}</p>
+                                        </GridItem>
+                                        <GridItem xs={12} sm={12} md={12}>
                                             <h4 className={classes.label}>Email</h4>
                                             <p className={classes.description}>{this.state.email}</p>
                                         </GridItem>
                                         <GridItem xs={12} sm={12} md={12}>
                                             <h4 className={classes.label}>Contact</h4>
                                             <p className={classes.description}>{this.state.contact}</p>
-                                        </GridItem>
-                                        <GridItem xs={12} sm={12} md={12}>
-                                            <h4 className={classes.label}>Company Name</h4>
-                                            <p className={classes.description}>{this.state.company_name}</p>
                                         </GridItem>
                                         <GridItem xs={12} sm={12} md={12}>
                                             <h4 className={classes.label}>About Me</h4>
@@ -171,9 +172,13 @@ class Employee extends React.Component {
                                 </CardBody>
                             </Card>
                         </GridItem>
-                        
+                    </GridContainer>
+                        <GridContainer>
                         <GridItem xs={12} sm={12} md={4} style={{alignSelf:'center'}}>
                             <ViewAppliedJob />
+                        </GridItem>
+                        <GridItem xs={12} sm={12} md={4} style={{alignSelf:'center'}}>
+                            <ViewIncomingJobs />
                         </GridItem>
                     </GridContainer>
                 </Container>

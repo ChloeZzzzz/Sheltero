@@ -74,11 +74,32 @@ export default withStyles(styles)(
         jobDetail: "",
         jobTag: "",
         jobArea: "",
-        redirect: ""
+        redirect: "",
+        // type: [0],
       };
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    // getUserInformation() {
+    //   axios
+    //       .get("https://shelteroinf.herokuapp.com/user", {withCredentials: true})
+    //       .then(response => {
+    //         let res=response.data;
+    //         console.log(res);
+    //         if(!res) {
+    //           console.log("you have not login yet");
+    //         } else {
+    //             console.log(res.type);
+    //             this.setState({
+    //               type: res.type[0],
+    //             });
+    //         }
+    //       }).catch(error => {
+    //           console.log("check fetch data error", error);
+    //       });
+    //       event.preventDefault();
+    // }
 
     handleChange(e) {
       this.setState({

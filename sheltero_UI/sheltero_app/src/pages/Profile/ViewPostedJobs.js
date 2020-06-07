@@ -91,6 +91,8 @@ class ViewPostedJob extends React.Component {
             posted_job: [],
         };
         this.getPostedJob = this.getPostedJob.bind(this);
+        this.deleteJob = this.deleteJob.bind(this);
+        this.handleDeleteClick = this.handleDeleteClick.bind(this);
     }
 
     getPostedJob() {
@@ -100,6 +102,8 @@ class ViewPostedJob extends React.Component {
                 let res=response.data;
                 console.log(res);
                 if(res) {
+                    console.log(res);
+                    console.log("successfully get posted job");
                     this.setState({
                         posted_job: res.postedJob,
                     });
@@ -113,6 +117,27 @@ class ViewPostedJob extends React.Component {
 
     componentDidMount() {
         this.getPostedJob();
+    }
+
+    deleteJob() {
+        axios
+            .delete("https://shelteroinf.herokuapp.com/user/postedJob")
+            .then(res => {
+                if(res) {
+                    console.log(res);
+                    console.log("job deleted successfully");
+                    this.setState({
+                        posted_job:res.ostedJob,
+                    });
+                } else {
+                    console.log(res);
+                }
+            }).catch(error => {
+                console.log("something went wrong", error);
+        });
+    }
+    handleDeleteClick() {
+        this.deleteJob();
     }
 
     render() {
@@ -150,7 +175,9 @@ class ViewPostedJob extends React.Component {
                     <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
                             {posted_job.map((value, index) => (
-                                <h4 key={value.jobTitle}></h4>
+                                <h4 key={value.jobTitle}></h4>,
+                                <Button onClick={this.handleDeleteClick()}>Delete Job</Button>
+
                             ))}
                         </GridItem>
                     </GridContainer>

@@ -5,6 +5,7 @@ import GridItem from "../Grid/GridItem";
 import Card from "../Card/Card";
 import Button from "../CustomButtons/Button.js";
 import CardBody from "../Card/CardBody";
+import axios from "axios";
 const styles = theme => ({
     root:{
         // marginTop: theme.spacing(8) ,
@@ -34,6 +35,26 @@ const styles = theme => ({
     },
 })
 export default withStyles(styles)(class Popup extends React.Component {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         type: '',
+    //         login_state:'',
+    //     };
+    //     this.renderProfile = this.renderProfile.bind(this);
+    // }
+    //
+    // checkLoginState() {
+    //     axios
+    //         .get("https://shelteroinf.herokuapp.com/user/postedJob",{withCredentials: true})
+    //         .then (response => {
+    //             let res=response.data;
+    //             if(res.loginMessage !== "Successful login") {
+    //
+    //             }
+    //         })
+    // }
+
     render() {
         const { classes } = this.props;
         return (

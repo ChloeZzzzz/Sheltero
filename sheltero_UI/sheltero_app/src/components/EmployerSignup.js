@@ -54,8 +54,10 @@ class EmployerSignup extends SignupForm {
   constructor(props) {
     super(props);
     this.state = {
+        type: 'employer',
       contact: '',
       company_name: '',
+
    }
  }
 

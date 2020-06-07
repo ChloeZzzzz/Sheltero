@@ -1,11 +1,10 @@
 import React from 'react';
 import EmployeeSignup from '../components/EmployeeSignup';
 import EmployerSignup from '../components/EmployerSignup';
-import { makeStyles, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@material-ui/core';
+import { makeStyles, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, createStyles } from '@material-ui/core';
 import { FullscreenExit } from '@material-ui/icons';
 
-const useStyles = makeStyles((theme) => ({
-
+const useStyles = makeStyles((theme: Theme) => createStyles({
   formControl: {
     minWidth: 200,
     display: 'flex',
@@ -28,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+
 export default function Register () {
   const classes = useStyles(); /* to implement styles */
   const [value, setValue] = React.useState('');
@@ -43,12 +43,14 @@ export default function Register () {
         return (
           <div>
             <br/>
-          <form onSubmit={handleSubmit} className={classes.form}>
+          <form className={classes.form}>
             <FormControl component="fieldset" className={classes.formControl}>
               <FormLabel component="legend" className={classes.formLabel} >Select Your User Type</FormLabel>
               <RadioGroup row name="userType" onChange={handleRadioChange} className={classes.container}>
                 <FormControlLabel
                   className={classes.formControl}
+                  // onChange={this.handleChange}
+                  name="type"
                   value="employee"
                   control={<Radio color="primary" />}
                   label="Employee"
@@ -56,6 +58,8 @@ export default function Register () {
                 />
                 <FormControlLabel
                   className={classes.formControl}
+                  // onChange={this.handleChange}
+                  name="type"
                   value="employer"
                   control={<Radio color="primary" />}
                   label="Employer"
