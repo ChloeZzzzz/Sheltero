@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 class ProfileRedirect extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { userType: "" };
+    this.state = { userType: "Employer" };
     this.getUserInfo = this.getUserInfo.bind(this); 
   }
 
