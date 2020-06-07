@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-const BASE_URL = "https://5ebe69c3ec800c00160438fc.mockapi.io/api";
-=======
 const BASE_URL = "https://shelteroinf.herokuapp.com";
->>>>>>> afac9eb460ab4ff7100087019e7061d0c0f4937f
 
 // using axios to interact with API
 const axios = require("axios");
@@ -73,11 +69,7 @@ export async function updateUserProfile(data) {
  */
 /*
 export function getJobs() {
-<<<<<<< HEAD
-    const endpoint = BASE_URL + `/job`;
-=======
     const endpoint = BASE_URL + `/job-search`;
->>>>>>> afac9eb460ab4ff7100087019e7061d0c0f4937f
     console.log("getJobs");
     try{
         return axios.get(endpoint).then(res => res.data);
@@ -94,14 +86,9 @@ export function getJobs() {
  * @param {string} job_id -- uniquely identifies each job
  * @return Single Objects containing author data.
  */
-<<<<<<< HEAD
-export function  getJob(jobID) {
-    const endpoint = BASE_URL + `/job/${jobID}`;
-=======
 /*
 export function  getJob(_id) {
     const endpoint = BASE_URL + `/job-search/${_id}`;
->>>>>>> afac9eb460ab4ff7100087019e7061d0c0f4937f
 
     try{
         return axios.get(endpoint).then(res => res.data);
@@ -112,40 +99,6 @@ export function  getJob(_id) {
 }
 */
 
-<<<<<<< HEAD
-/**
- * Updates the details of an author; changes only the first and last name
- * @param {object} Job {jobID,jobTitle,salary,credit_level,jobDetail,companyID,jobTag,contact,jobArea}
- */
-export function updateJob(job) {
-    const { jobID,jobTitle,salary,credit_level,jobTag,contact,jobArea,companyID,jobDetail} = job;
-    const endpoint = BASE_URL + `/job/${jobID}`;
-    // check the author id is present
-    if (!jobID & jobTitle & jobArea) {
-        alert("must include jobid, title and jobArea");
-        return;
-    }
-    // check that both contain some text
-    if (!companyID || !credit_level) {
-        alert("must include a credit_level or companyID to update");
-        return;
-    }
-
-    console.log({
-        jobID,
-        jobTitle,
-        salary,
-        credit_level,
-        jobDetail,
-        companyID,
-        jobTag,
-        contact,
-        jobArea
-    });
-
-
-    console.log("updateJob");
-=======
 export function getJobsByTag(tag) {
   let sanitize_tag = tag
     .replace(" ", "_")
@@ -163,7 +116,6 @@ export function getJobsByTag(tag) {
     return e;
   }
 }
->>>>>>> afac9eb460ab4ff7100087019e7061d0c0f4937f
 
 export function getJobsByArea(area) {
   let sanitize_area = area
