@@ -47,7 +47,6 @@ export class JobTable extends React.Component {
   }
 
   async fetchJobs(){
-    this.setState({jobs:[]});
     for(let i=0; i<this.state.area_tags.length; i++){
       let job = await this.fetchJobsByArea(this.state.area_tags[i]);
       this.setState({jobs:[...this.state.jobs, job]});

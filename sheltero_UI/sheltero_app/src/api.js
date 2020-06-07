@@ -34,11 +34,11 @@ export async function updateUserState() {
         console.log(response.data);
         if (response.data == "no user session") {
           console.log("change isLogIn state to false");
-          window.sessionStorage.setItem("loggedIn", false);
+          window.sessionStorage.setItem("isLogIn", false);
         } else {
           console.log("change isLogIn state to true");
           console.log(response.data);
-          window.sessionStorage.setItem("loggedIn", true);
+          window.sessionStorage.setItem("isLogIn", true);
         }
       })
       .catch(error => {
