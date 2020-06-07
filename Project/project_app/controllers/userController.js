@@ -113,6 +113,8 @@ const getPostedJob = async (req, res) => {
                 if (err) throw err;
                 console.log(result);
             });
+            console.log("user type in getPostedJob")
+            console.log(user.type[0]);
             if (user.type[0] == 'Employer') {
                 console.log(user.postedJob);
                 var jobs = [];
