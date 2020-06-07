@@ -1,6 +1,6 @@
 import React from "react";
 // @material-ui/core components
-import { withStyles, Link  } from "@material-ui/core";
+import { withStyles } from "@material-ui/core";
 // core components
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
@@ -101,7 +101,7 @@ class Employee extends React.Component {
     }
 
     render(){
-        const { classes,routeChange } = this.props;
+        const { classes} = this.props;
         return (
 
             <section className={classes.container}>

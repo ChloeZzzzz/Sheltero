@@ -1,21 +1,15 @@
 import React from "react";
 // @material-ui/core components
-import TextField from "@material-ui/core/TextField";
-import { Link, withStyles } from "@material-ui/core";
-import InputLabel from "@material-ui/core/InputLabel";
+import { withStyles } from "@material-ui/core";
 // core components
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
-import CustomInput from "../../components/CustomInput/CustomInput.js";
 import Button from "../../components/CustomButtons/Button.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import Welcome from "react-welcome-page";
-import Container from "@material-ui/core/Container";
-import Nav from "../../components/Nav";
 import axios from "axios";
-import { theme } from "../../components/theme.js";
 
 const styles = theme => ({
   paper: {
@@ -175,7 +169,7 @@ class ViewIncomingJobs extends React.Component {
         />
       );
     } else {
-      if (your_job.length == 0) {
+      if (your_job.length === 0) {
         return (
           <Card>
             <CardHeader color="primary" className={classes.containerRow}>

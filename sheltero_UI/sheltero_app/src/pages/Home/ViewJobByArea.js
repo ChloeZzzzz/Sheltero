@@ -1,7 +1,7 @@
+import React from "react";
 import Container from "@material-ui/core/Container";
 import { H2 } from "../../components/theme";
 import { JobTable } from "../../components/JobManagement/JobTable";
-import React, { Component } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";

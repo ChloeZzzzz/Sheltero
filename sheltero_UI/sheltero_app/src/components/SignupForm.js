@@ -1,8 +1,6 @@
 
 import React from 'react';
-import postUsersSignup from '../api';
 import axios from 'axios';
-import {updateUserState} from '../api';
 class SignupForm extends React.Component {
     constructor(props) {
         super(props);
@@ -29,7 +27,7 @@ class SignupForm extends React.Component {
     }
 
     handleSubmit(event) {
-        if (this.state.confirmpw != this.state.password) {
+        if (this.state.confirmpw !== this.state.password) {
             //alert('Oops, you are typing different password in the confirm password section');
             this.setState({ msg: 'Oops, you are typing different password in the confirm password section'});
         } else {
@@ -37,12 +35,12 @@ class SignupForm extends React.Component {
                 .then((response) => {
                     let res = response.data.flash['signupMessage'];
                     console.log(res);
-                    if(res[res.length-1] == "User already logged in"){
+                    if(res[res.length-1] === "User already logged in"){
                         window.sessionStorage.setItem("loggedIn", true);
                         alert("Oops, you have already logged in. You have to log out first before sign!");
                         this.setState({ redirect: "/profileRedirect" });
                     }
-                    else if (res[res.length-1] == "Signup Success") {
+                    else if (res[res.length-1] === "Signup Success") {
                         window.sessionStorage.setItem("loggedIn", true);
                         alert('Hi ' + this.state.first_name + ', you have successfully signed up as an '+this.state.type+'!');
                         this.setState({ redirect: "/profileRedirect" });

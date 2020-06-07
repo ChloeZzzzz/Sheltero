@@ -9,12 +9,7 @@ import { Redirect } from "react-router-dom";
 import {
   CssBaseline,
   TextField,
-  FormControlLabel,
-  FormGroup,
   Box,
-  FormLabel,
-  Radio,
-  RadioGroup,
   Grid,
   withStyles,
   Container,
@@ -23,7 +18,6 @@ import {
   Select,
   MenuItem
 } from "@material-ui/core";
-import GridContainer from "./Grid/GridContainer";
 
 const styles = theme => ({
   paper: {
@@ -75,31 +69,10 @@ export default withStyles(styles)(
         jobTag: "",
         jobArea: "",
         redirect: "",
-        // type: [0],
       };
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-    // getUserInformation() {
-    //   axios
-    //       .get("https://shelteroinf.herokuapp.com/user", {withCredentials: true})
-    //       .then(response => {
-    //         let res=response.data;
-    //         console.log(res);
-    //         if(!res) {
-    //           console.log("you have not login yet");
-    //         } else {
-    //             console.log(res.type);
-    //             this.setState({
-    //               type: res.type[0],
-    //             });
-    //         }
-    //       }).catch(error => {
-    //           console.log("check fetch data error", error);
-    //       });
-    //       event.preventDefault();
-    // }
 
     handleChange(e) {
       this.setState({
@@ -116,7 +89,7 @@ export default withStyles(styles)(
         )
         .then(response => {
           console.log(response);
-          if (response == "you can't post a job as an employee") {
+          if (response === "you can't post a job as an employee") {
             alert("you can't post a job as an employee");
           } else if (response) {
             alert(

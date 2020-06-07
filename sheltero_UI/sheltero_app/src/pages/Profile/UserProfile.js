@@ -13,11 +13,6 @@ import CardAvatar from "../../components/Card/CardAvatar.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 import axios from 'axios';
-import {
-  drawerWidth,
-  transition,
-  container
-} from "../../style";
 import Welcome from 'react-welcome-page';
 import Container from "@material-ui/core/Container";
 const avatar= "https://picsum.photos/id/237/400/400";
@@ -86,7 +81,7 @@ export default withStyles(styles) (class UserProfile extends React.Component {
           console.log("above response");
           console.log(response.json);
           const res = response.data.flash["message"];
-          if (res[res.length-1] == "User Info,") {
+          if (res[res.length-1] === "User Info,") {
             this.setState({ type: response.user.type,
                             first_name: response.user.first_name,
                             last_name: response.user.last_name,

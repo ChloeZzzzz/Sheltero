@@ -16,13 +16,13 @@ class ProfileRedirect extends React.Component {
         .get(url, { withCredentials: true, crossdomain: true })
         .then(response => {
           console.log(response.data);
-          if (response.data == "no user session") {
+          if (response.data === "no user session") {
             console.log("user not logged in!");
             this.setState({ userType: "", loading: false });
           } else {
             console.log("user is logged in");
             console.log(response.data.type[0]);
-            if (response.data.type[0] == "Employee") {
+            if (response.data.type[0] === "Employee") {
               this.setState({ userType: "Employee", loading: false });
             } else {
               this.setState({ userType: "Employer", loading: false });
@@ -51,11 +51,11 @@ class ProfileRedirect extends React.Component {
   render() {
     console.log("===user type===");
     console.log(this.state.userType);
-    if (this.state.userType == "Employer" && this.state.loading == false) {
+    if (this.state.userType === "Employer" && this.state.loading === false) {
       return <Redirect to={"/employer"} />;
-    } else if (this.state.userType == "Employee" && this.state.loading == false) {
+    } else if (this.state.userType === "Employee" && this.state.loading === false) {
       return <Redirect to={"/employee"} />;
-    } else if (this.state.userType == "" && this.state.loading == false) {
+    } else if (this.state.userType === "" && this.state.loading === false) {
       return <Redirect to={"/"} />;
     } else {
         return (

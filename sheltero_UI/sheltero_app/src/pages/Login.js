@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect,Link } from "react-router-dom";
+import { Redirect} from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
 import { PrimButton, H2, TextLink } from '../components/theme';
 import Copyright from '../components/Copyright';
@@ -72,12 +72,12 @@ export default withStyles(styles) (class Login extends React.Component {
           alert('Opps, something went wrong so that u failed to log in!');
           console.log("failed to login");
         }
-        else if (res[res.length-1] == "Successful login") {
+        else if (res[res.length-1] === "Successful login") {
           window.sessionStorage.setItem("loggedIn", true);
           alert('Hi ' + this.state.email + ', you have successfully logged in!');
           this.setState({redirect:'/profileRedirect'})
         }
-        else if (res[res.length-1]=="User already logged in"){
+        else if (res[res.length-1] === "User already logged in"){
           window.sessionStorage.setItem("loggedIn", true);
           alert('Hi ' + this.state.email + ', you are already logged in');
           this.setState({redirect:'/profileRedirect'})
@@ -93,7 +93,7 @@ export default withStyles(styles) (class Login extends React.Component {
     
   render() {
     const { classes } = this.props;
-    const {email, password, error} = this.state;
+    const {error} = this.state;
   if (this.state.redirect) {
     return <Redirect to={this.state.redirect} />
   } else if (error) {

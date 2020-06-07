@@ -1,20 +1,8 @@
-import { styled, createMuiTheme, makeStyles, withStyles } from '@material-ui/core/styles';
+import { styled, createMuiTheme, makeStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
-import {
-    Avatar,
-    CssBaseline,
-    TextField,
-    FormControlLabel,
-    Checkbox,
-    Grid,
-    Box,
-    Container,
-    FormControl,
-    InputLabel,
-    Select,
-    MenuItem,} from '@material-ui/core';
+
 
 // ***************************CREATE THEME**************************** //
 
@@ -171,21 +159,3 @@ export const TextLink = styled(Link)({
     fontSize: 14,
     letterSpacing: 0,
 })
-
-// ***************************CLASS STYLE COMPONENTS**************************** //
-// export const Paper = withStyles({
-//     root: {
-//       marginTop: theme.spacing(4),
-//       display: 'flex',
-//       flexDirection: 'column',
-//       alignItems: 'center',
-//       width: '100%',
-//     },
-// })(Container)
-// export const StyledSelect = withStyles({
-//     root: {
-//         display: 'flex',
-//         alignItems: 'flex-start',
-//     }
-// }
-// )

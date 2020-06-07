@@ -10,7 +10,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Copyright from "../../components/Copyright";
 import GridContainer from "../../components/Grid/GridContainer.js";
 import GridItem from "../../components/Grid/GridItem.js";
-import Button from "../../components/CustomButtons/Button.js";
 import Parallax from "../../components/Parallax/Parallax.js";
 
 import styles from "./AboutPageLayout.js";

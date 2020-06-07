@@ -1,17 +1,14 @@
 import React from "react";
-import { Redirect,Link } from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
-import { PrimButton, H2, TextLink } from '../components/theme';
+import {H2} from '../components/theme';
 import Copyright from '../components/Copyright';
 import { Avatar,
          CssBaseline,
-         TextField,
          Box,
          Grid,
          withStyles,
          Container } from '@material-ui/core';
 
-import axios from 'axios';
 const styles = theme => ({
   paper: {
     marginTop: theme.spacing(8),
