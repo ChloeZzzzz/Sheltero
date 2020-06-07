@@ -175,9 +175,10 @@ export default withStyles(styles)(
                         name="salary"
                         variant="outlined" //add border to text field
                         fullWidth
-                        id="salary" //需要设置定义域
+                        id="salary"
                         label="Salary: $ per day"
                         type="number"
+                        InputProps={{inputProps: {min: 1}}}
                       />
                     </Grid>
                   </Grid>
