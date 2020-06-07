@@ -63,6 +63,16 @@ export async function updateUserState() {
     }
 }
 
+export function getJobs() {
+    const endpoint = BASE_URL + `/job-search`;
+    console.log("getJobs");
+    try{
+        return axios.get(endpoint).then(res => res.data);
+    } catch (e) {
+        return e;
+    }
+
+}
 
 export function  getJobsByTag(tag) {
     let sanitize_tag= tag.replace(' ', '_').replace('/','').replace(',', '');

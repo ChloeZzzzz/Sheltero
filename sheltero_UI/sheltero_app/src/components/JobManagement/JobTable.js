@@ -1,6 +1,6 @@
 import React from "react";
 
-import { getJobsByTag , getJobsByArea} from "../../api";
+import { getJobs } from "../../api";
 import { Column, Row } from 'styled-grid-system-component';
 import Popup from '../Popup/Popup';
 
@@ -24,9 +24,7 @@ export class JobTable extends React.Component {
         contactEmail:"",
         imgUrl:"",
         jobArea:""
-      },
-      area_tags:[],
-      cat_tags:[],
+      }
     };
     this.togglePopup=this.togglePopup.bind(this);
     this.updateInfo= this.updateInfo.bind(this);
@@ -36,14 +34,9 @@ export class JobTable extends React.Component {
     this.setState({showPopup:!this.state.showPopup});
   }
 
-  async fetchJobsByTag(tag) {
-    const data = await getJobsByTag(tag);
-    return data;
-  }
-
-  async fetchJobsByArea(area){
-    const data = await getJobsByArea(area);
-    return data
+  async fetchJobs() {
+    const data = await getJobs();
+    this.setState({ jobs: data, isLoaded: true });
   }
 
   async fetchJobs(){
@@ -82,22 +75,19 @@ export class JobTable extends React.Component {
   }
 
   render() {
-
     const { error, isLoaded, jobs } = this.state;
     if (error) {
       return <div> ERROR:{error.message}</div>;
-    } 
-    else if (!isLoaded) {
-      return <div style = {{textAlign: "center"}}>Loading..</div>;
-    } 
-    else {
+    } else if (!isLoaded) {
+      return <div>Loading..</div>;
+    } else {
       return (
         <div>
           <Row >
           {jobs.map((value, index) => {
-            value.imgUrl ="https://picsum.photos/1080/400";
+            value.imgUrl ="https://picsum.photos/350/200";
             return (
-              <Column xl={4} xs={12} sm={12} md={6} style={{paddingTop: "10pt", paddingBottom: "10pt"}}>
+              <Column xl={4} style={{paddingTop: "10pt", paddingBottom: "10pt"}}>
                 <Card value={value} style = {{height: "100%", flexDirection: "column"}} updateInfo={this.updateInfo}/>
                     {this.state.showPopup ?
                         <Popup
@@ -107,7 +97,7 @@ export class JobTable extends React.Component {
                             jobTag={"Tag:"+this.state.values.jobTag}
                             jobDetails={"Details:"+this.state.values.jobDetail}
                             contact={"company contact:"+this.state.values.contactEmail}
-                            img={this.state.values.imgUrl}
+                            img={"https://picsum.photos/350/200"}
                             jobArea={"Area:"+value.jobArea}
                             closePopup={this.togglePopup}
                         />

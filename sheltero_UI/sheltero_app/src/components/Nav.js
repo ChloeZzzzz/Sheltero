@@ -114,7 +114,7 @@ export default withStyles(styles)(
                     Sheltero.
                   </Link>
                   <Button className={classes.menuButton} href="/job">
-                    Job search
+                    Find Job
                   </Button>
                   <Button className={classes.menuButton} href="/about">
                     Work with us
@@ -138,7 +138,7 @@ export default withStyles(styles)(
                     Sheltero.
                   </Link>
                   <Button className={classes.menuButton} href="/job">
-                    Job search
+                    Find Job
                   </Button>
                   <Button className={classes.menuButton} href="/about">
                     Work with us
