@@ -83,7 +83,8 @@ class ViewIncomingJobs extends React.Component {
     super(props);
     this.state = {
       your_job: [],
-      slicedJobs: []
+      slicedJobs: [],
+      loading: false
     };
 
     this.getJobSliced = this.getJobSliced.bind(this);
