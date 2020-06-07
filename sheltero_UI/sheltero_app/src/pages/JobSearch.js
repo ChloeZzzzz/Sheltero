@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Job() {
   const classes = useStyles();
+  window.sessionStorage.setItem("searchingArea", "false");
   return (
     <React.Fragment>
       <CssBaseline />

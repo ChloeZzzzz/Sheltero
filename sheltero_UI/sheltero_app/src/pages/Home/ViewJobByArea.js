@@ -44,36 +44,22 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default class JobByArea extends Job {
-  constructor(props) {
-    super(props);
+function ViewArea() {
+  const classes = useStyles;
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Container>
+        <br />
+        <H2>{window.sessionStorage.getItem("searchingArea")}</H2>
+        <JobTable />
+      </Container>
 
-  }
-
-  render() {
-    const classes = useStyles;
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <Container>
-          <br />
-          <H2>{window.sessionStorage.getItem("searchingArea")}</H2>
-          <JobTable />
-        </Container>
-        <main>
-          {this.state.showtable ? (
-            <Container flexGrow={1}>
-              <JobTable
-                area_tag={window.sessionStorage.getItem("searchingArea")}
-              />
-            </Container>
-          ) : null}
-        </main>
-
-        <Box mt={5} className={classes.box}>
-          <Copyright />
-        </Box>
-      </React.Fragment>
-    );
-  }
+      <Box mt={5} className={classes.box}>
+        <Copyright />
+      </Box>
+    </React.Fragment>
+  );
 }
+
+export default ViewArea;
