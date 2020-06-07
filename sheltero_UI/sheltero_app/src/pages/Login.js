@@ -68,7 +68,6 @@ export default withStyles(styles) (class Login extends React.Component {
     axios.post('https://shelteroinf.herokuapp.com/user/login', {"email":email,"password":password},{withCredentials:true,crossdomain:true})
       .then((response) => {
         let res = response.data.flash["loginMessage"];
-        this.setState({loggingIn:false});
         console.log(res);
         if(!res){
           window.sessionStorage.setItem("loggedIn", false);
@@ -86,12 +85,12 @@ export default withStyles(styles) (class Login extends React.Component {
           this.setState({redirect:'/employer'})
         }
         else{
+          window.sessionStorage.setItem("loggedIn", false);
           alert("beep beep boop something went really wrong");
         }
-        updateUserState();
       }).catch((error) => {
         console.log(error)});
-        event.preventDefault();
+      event.preventDefault();
     }
     
   render() {
