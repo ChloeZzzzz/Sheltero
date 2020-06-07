@@ -86,7 +86,7 @@ class ViewIncomingJobs extends React.Component {
       slicedJobs: [],
       loading: false
     };
-
+    this.listJobs = this.listJobs.bind(this);
     this.getJobSliced = this.getJobSliced.bind(this);
     this.getApprovedJob = this.getApprovedJob.bind(this);
   }
@@ -120,7 +120,7 @@ class ViewIncomingJobs extends React.Component {
         if (res.length > 0) {
           this.setState({
             your_job: res,
-            loading: false,
+            loading: false
           });
           this.getJobSliced();
         } else {
@@ -161,19 +161,19 @@ class ViewIncomingJobs extends React.Component {
     const { classes } = this.props;
     const { your_job } = this.state;
     if (this.state.loading) {
-        return (
-            <Welcome
-              loopDuration={1000}
-              data={[
-                {
-                  backgroundColor: "#638709",
-                  textColor: "#FFFFFF",
-                  text: "Welcome to Sheltero!",
-                  image: require("../../img/seedling.png")
-                }
-              ]}
-            />
-          );
+      return (
+        <Welcome
+          loopDuration={1000}
+          data={[
+            {
+              backgroundColor: "#638709",
+              textColor: "#FFFFFF",
+              text: "Welcome to Sheltero!",
+              image: require("../../img/seedling.png")
+            }
+          ]}
+        />
+      );
     } else {
       if (your_job.length == 0) {
         return (

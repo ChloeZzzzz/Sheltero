@@ -51,7 +51,7 @@ export default function Register () {
                   className={classes.formControl}
                   // onChange={this.handleChange}
                   name="type"
-                  value="employee"
+                  value="Employee"
                   control={<Radio color="primary" />}
                   label="Employee"
                   labelPlacement="end"
@@ -60,7 +60,7 @@ export default function Register () {
                   className={classes.formControl}
                   // onChange={this.handleChange}
                   name="type"
-                  value="employer"
+                  value="Employer"
                   control={<Radio color="primary" />}
                   label="Employer"
                   labelPlacement="end"
@@ -70,9 +70,9 @@ export default function Register () {
           </form>
           <div>
             {(() => {
-            if (value === 'employer') {
+            if (value === 'Employer') {
               return(<EmployerSignup workType="Employer"/>)
-            } else if (value === 'employee') {
+            } else if (value === 'Employee') {
               return(<EmployeeSignup workType="Employee"/>)
             } 
           })()}

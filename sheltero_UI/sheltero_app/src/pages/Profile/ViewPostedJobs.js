@@ -85,7 +85,8 @@ class ViewPostedJob extends React.Component {
     this.state = {
       posted_job: [],
       slicedJobs: [],
-      loading: false
+      loading: false,
+      needRerender: false,
     };
     this.listJobs = this.listJobs.bind(this);
     this.getJobSliced = this.getJobSliced.bind(this);
@@ -122,7 +123,8 @@ class ViewPostedJob extends React.Component {
         if (res.length > 0) {
           this.setState({
             posted_job: res,
-            loading: false
+            loading: false,
+            needRerender: false,
           });
           this.getJobSliced();
         } else {
@@ -147,7 +149,7 @@ class ViewPostedJob extends React.Component {
               <p>Job Tag: {this.state.slicedJobs[i][1]}</p>
               <p>Salary: {this.state.slicedJobs[i][2]}</p>
             </li>
-            <Button className={this.props.button} onClick={this.handleDeleteClick(this.state.slicedJobs[i][3])}>Delete Job</Button>
+            <Button className={this.props.button} onClick={this.handleDeleteClick.bind(this.state.slicedJobs[i][3])}>Delete Job</Button>
           </h4>
           <br />
         </div>
@@ -168,15 +170,20 @@ class ViewPostedJob extends React.Component {
         axios
         .delete(url + id)
         .then(res => {
-          if (res.data._id == id) {
+            console.log("delteing...")
+            console.log(res);
+          if (res.data) {
             console.log(res);
             console.log("job deleted successfully");
+            /*
             this.posted_job.pull([
                 res.data.jobTitle,
                 res.data.jobTag,
                 res.data.salary,
                 res.data._id
               ])
+            */
+           this.setState({needRerender: true});
           } else {
             console.log(res);
           }
