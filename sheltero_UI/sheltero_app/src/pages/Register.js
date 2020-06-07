@@ -4,7 +4,7 @@ import EmployerSignup from '../components/EmployerSignup';
 import { makeStyles, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, createStyles } from '@material-ui/core';
 import { FullscreenExit } from '@material-ui/icons';
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
+const useStyles = makeStyles((theme) => createStyles({
   formControl: {
     minWidth: 200,
     display: 'flex',
