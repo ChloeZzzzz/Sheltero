@@ -46,13 +46,13 @@ export async function updateUserState() {
             .get(url, { withCredentials: true, crossdomain: true })
             .then(response => {
                 console.log(response.data);
-                if (response.data === "no user session") {
+                if (response.data == "no user session") {
                     console.log("change isLogIn state to false");
-                    window.sessionStorage.setItem("isLogIn", false);
+                    window.sessionStorage.setItem("loggedIn", false);
                 } else {
                     console.log("change isLogIn state to true");
                     console.log(response.data);
-                    window.sessionStorage.setItem("isLogIn", true);
+                    window.sessionStorage.setItem("loggedIn", true);
                 }
             })
             .catch(error => {

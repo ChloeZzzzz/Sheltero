@@ -55,10 +55,10 @@ export default withStyles(styles)(
       axios
         .get(url, { withCredentials: true, crossdomain: true })
         .then(response => {
-          if (response.data === "logged out") {
+          if (response.data == "logged out") {
             console.log("change isLogIn state to false");
             this.setState({ loading: false });
-          } else if (response.data === "log out failed") {
+          } else if (response.data == "log out failed") {
             console.log("change isLogIn state to true");
             this.setState({ loading: false });
           } else {
@@ -76,13 +76,13 @@ export default withStyles(styles)(
 
     componentDidMount() {
       if (
-        window.sessionStorage.getItem("loggedIn") === "true" &&
+        window.sessionStorage.getItem("loggedIn") == "true" &&
         !this.state.currentStatus
       ) {
         this.setState({ currentStatus: true });
       }
       if (
-        window.sessionStorage.getItem("loggedIn") === "false" &&
+        window.sessionStorage.getItem("loggedIn") == "false" &&
         this.state.currentStatus
       ) {
         this.setState({ currentStatus: false });

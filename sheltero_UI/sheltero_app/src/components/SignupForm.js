@@ -42,7 +42,6 @@ class SignupForm extends React.Component {
                     }
                     else if (res[res.length-1] === "Signup Success") {
                         window.sessionStorage.setItem("loggedIn", true);
-                        alert('Hi ' + this.state.first_name + ', you have successfully signed up as an '+this.state.type+'!');
                         this.setState({ redirect: "/profileRedirect" });
                     }
                     else {
