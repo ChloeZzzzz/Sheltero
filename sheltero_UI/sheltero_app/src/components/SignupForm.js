@@ -21,6 +21,7 @@ class SignupForm extends React.Component {
     }
 
     handleChange (e) {
+      this.setState({msg : ''});
       this.setState({
         [e.target.name] : e.target.value
       });
@@ -36,17 +37,19 @@ class SignupForm extends React.Component {
             let res = response.data.flash['signupMessage'];
             console.log(res);
             if(res[res.length-1] == "User already logged in"){
+              window.sessionStorage.setItem("loggedIn", true);
               alert("Oops, you have already logged in. You have to log out first before sign!");
             }
             else if (res[res.length-1] == "Signup Success") {
+              window.sessionStorage.setItem("loggedIn", true);
               alert('Hi ' + this.state.first_name + ', you have successfully signed up as an '+this.state.type+'!');
               this.setState({ redirect: "/user" });
             }
-            else{
+            else {
               //alert("This email address is already taken. Please choose another one :)");
+              window.sessionStorage.setItem("loggedIn", false);
               this.setState({ msg: "This email address is already taken. Please choose another one :)"});
             }
-            updateUserState();
           }).catch((error) => {
             console.log(error)});
       }
