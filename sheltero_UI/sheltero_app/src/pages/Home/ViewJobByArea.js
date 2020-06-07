@@ -13,7 +13,7 @@ function ViewArea() {
         <Container>
             <br/>
             <H2>
-                Melbourne - CBD
+                {window.sessionStorage.getItem("searchingArea")}
             </H2>
             <JobTable />
         </Container>

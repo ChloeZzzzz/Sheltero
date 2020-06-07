@@ -81,6 +81,8 @@ export function  getJobsByTag(tag) {
 }
 
 export function  getJobsByArea(area) {
+    console.log("AREA!")
+    console.log(area);
     let sanitize_area= area.replace(' ', '_').replace('/','').replace(',', '');
     const endpoint = BASE_URL + `/job-search/byArea/${sanitize_area}`;
     console.log(endpoint);
@@ -90,7 +92,8 @@ export function  getJobsByArea(area) {
             if(!res.data){
                 return null
             }
-            return res.data});
+            return res.data;
+        });
     } catch (e) {
         return e;
 
