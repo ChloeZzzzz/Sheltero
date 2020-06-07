@@ -1,3 +1,5 @@
 Project
 sheltero_UI/sheltero_app/node_modules
 sheltero_UI/sheltero_app/src/.DS_Store
+.idea/workspace.xml
+sheltero_UI/sheltero_app/.idea/workspace.xml
