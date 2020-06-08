@@ -63,14 +63,16 @@ export default withStyles(styles)(
         )
         .then(response => {
           //handle success
-          if (response.data) {
+          if (response.data === "job already applied") {
+            alert("You have applied for this job already!");
+          } else if (response.data) {
             alert(
               "Hi " +
                 response.data.email +
                 " you have successfully applied for this job!"
             );
           } else {
-            console.log("failed to apply");
+            alert("something went wrong...");
           }
           this.setState({ applying: false, loading: false});
         })
