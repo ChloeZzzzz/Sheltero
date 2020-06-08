@@ -181,13 +181,18 @@ const postApplyJob = async (req, res) => {
             console.log(result);
         });
         if (userData.type[0] == "Employee") {
-            // save applied job id to the user database
-            userData.applyingJobId.push(req.body.id);
-            userData.save();
-            // save applied employee (id, email) to the job database
-            jobData.applyingEmployee.push([userData._id, userData.email]);
-            jobData.save();
-            res.json(userData);
+            if (userData.applyingJobId.includes(req.body.id)) {
+                console.log("job id exists");
+                res.json("job already applied")
+            } else {
+                // save applied job id to the user database
+                userData.applyingJobId.push(req.body.id);
+                userData.save();
+                // save applied employee (id, email) to the job database
+                jobData.applyingEmployee.push([userData._id, userData.email]);
+                jobData.save();
+                res.json(userData);
+            }
             return res.end();
         } else {
             res.json("You can't apply a job as an employer");
