@@ -15,6 +15,7 @@ export default class CardSaint extends React.Component{
     }
 
     updateInfo(){
+        console.log("_id " + this.props.value._id);
         let values = {
             _id:this.props.value._id,
             jobTitle:this.props.value.jobTitle,

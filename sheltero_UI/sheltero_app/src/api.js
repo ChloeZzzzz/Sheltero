@@ -71,6 +71,8 @@ export function getAllJobs() {
             if(!res.data){
                 return null
             }
+            console.log("get all jobs");
+            console.log(res.data);
             return res.data;
         });
     } catch (e) {

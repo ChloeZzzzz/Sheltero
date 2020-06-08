@@ -39,6 +39,7 @@ export default withStyles(styles)(
     constructor(props) {
       super(props);
       this.state = {
+        _id:"",
         type: "",
         login_state: "",
         redirect: "",
@@ -180,7 +181,6 @@ export default withStyles(styles)(
               <GridItem xs={6} sm={6} md={6}>
                 <Card>
                   <CardBody>
-                    <h3>{this.props._id}</h3>
                     <h3>{this.props.salary}</h3>
                     <h3>{this.props.credit_level}</h3>
                     <h3>{this.props.jobTag}</h3>

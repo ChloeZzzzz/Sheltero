@@ -5,6 +5,7 @@ import { Column, Row } from 'styled-grid-system-component';
 import Popup from '../Popup/Popup';
 
 import Card from "./Card";
+import { ContactsOutlined } from "@ant-design/icons";
 
 
 export class JobTable extends React.Component {
@@ -53,8 +54,8 @@ export class JobTable extends React.Component {
     let job = await getAllJobs();
     console.log(job);
     console.log("==== job _id ===");
-    console.log(this.state.values._id);
     this.setState({jobs:job});
+    console.log(this.state.jobs[0]._id);
     this.setState({isLoaded:true});
   }
 
@@ -68,6 +69,9 @@ export class JobTable extends React.Component {
   }
 
   updateInfo(info){
+    console.log("==info");
+    console.log(info);
+    console.log(info._id)
     this.setState({
       values:{
         _id:info._id,
@@ -81,6 +85,8 @@ export class JobTable extends React.Component {
         jobArea:info.jobArea
       }
     });
+    console.log("values")
+    console.log(this.state.values)
     this.togglePopup();
   }
 
@@ -104,6 +110,7 @@ export class JobTable extends React.Component {
                 <Card value={value} style = {{height: "100%", flexDirection: "column"}} updateInfo={this.updateInfo}/>
                     {this.state.showPopup ?
                         <Popup
+                            _id={this.state.values._id}
                             Title={this.state.values.jobTitle}
                             salary={"salary:"+this.state.values.salary}
                             credit_level={"credit_level:"+this.state.values.creditLevel}
