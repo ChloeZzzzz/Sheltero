@@ -111,7 +111,12 @@ class ViewIncomingJobs extends React.Component {
       .then(response => {
         let res = response.data;
         console.log(res);
-        if (res.length > 0) {
+        if (res === "no job to notify") {
+          console.log("no job to notify");
+          this.setState({
+            loading: false
+          });
+        } else if (res.length > 0) {
           this.setState({
             your_job: res,
             loading: false
@@ -119,6 +124,9 @@ class ViewIncomingJobs extends React.Component {
           this.getJobSliced();
         } else {
           console.log("no approved job");
+          this.setState({
+            loading: false
+          });
         }
       })
       .catch(error => {

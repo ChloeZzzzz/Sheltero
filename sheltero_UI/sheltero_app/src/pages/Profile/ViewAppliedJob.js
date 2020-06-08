@@ -119,6 +119,9 @@ class ViewAppliedJob extends React.Component {
           });
           this.getJobSliced();
         } else {
+          this.setState({
+            loading: false
+          });
           console.log("no applied job");
         }
       })
