@@ -123,6 +123,7 @@ class ViewPostedJob extends React.Component {
           this.getJobSliced();
         } else {
           console.log("no job posted");
+          this.setState({loading: false});
         }
       })
       .catch(error => {
@@ -177,6 +178,7 @@ class ViewPostedJob extends React.Component {
            this.setState({loading: false});
           } else {
             console.log(res);
+            this.setState({loading: false});
           }
         })
         .catch(error => {
